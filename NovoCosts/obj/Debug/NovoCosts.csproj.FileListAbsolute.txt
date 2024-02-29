@@ -1,0 +1,11 @@
+C:\Users\Jeison\Documents\CODE'S\.NET\NovoCosts\NovoCosts\bin\Debug\NovoCosts.exe.config
+C:\Users\Jeison\Documents\CODE'S\.NET\NovoCosts\NovoCosts\bin\Debug\NovoCosts.exe
+C:\Users\Jeison\Documents\CODE'S\.NET\NovoCosts\NovoCosts\bin\Debug\NovoCosts.pdb
+C:\Users\Jeison\Documents\CODE'S\.NET\NovoCosts\NovoCosts\obj\Debug\NovoCosts.csproj.AssemblyReference.cache
+C:\Users\Jeison\Documents\CODE'S\.NET\NovoCosts\NovoCosts\obj\Debug\NovoCosts.Properties.Resources.resources
+C:\Users\Jeison\Documents\CODE'S\.NET\NovoCosts\NovoCosts\obj\Debug\NovoCosts.csproj.GenerateResource.cache
+C:\Users\Jeison\Documents\CODE'S\.NET\NovoCosts\NovoCosts\obj\Debug\NovoCosts.csproj.CoreCompileInputs.cache
+C:\Users\Jeison\Documents\CODE'S\.NET\NovoCosts\NovoCosts\obj\Debug\NovoCosts.exe
+C:\Users\Jeison\Documents\CODE'S\.NET\NovoCosts\NovoCosts\obj\Debug\NovoCosts.pdb
+C:\Users\Jeison\Documents\CODE'S\.NET\NovoCosts\NovoCosts\obj\Debug\NovoCosts.Forms.FRegistroMateriaPrima.resources
+C:\Users\Jeison\Documents\CODE'S\.NET\NovoCosts\NovoCosts\obj\Debug\NovoCosts.Forms.FRegistroUnidadMedida.resources
