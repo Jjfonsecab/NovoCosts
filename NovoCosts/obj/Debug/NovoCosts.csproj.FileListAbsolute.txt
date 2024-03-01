@@ -9,3 +9,5 @@ C:\Users\Jeison\Documents\CODE'S\.NET\NovoCosts\NovoCosts\obj\Debug\NovoCosts.ex
 C:\Users\Jeison\Documents\CODE'S\.NET\NovoCosts\NovoCosts\obj\Debug\NovoCosts.pdb
 C:\Users\Jeison\Documents\CODE'S\.NET\NovoCosts\NovoCosts\obj\Debug\NovoCosts.Forms.FRegistroMateriaPrima.resources
 C:\Users\Jeison\Documents\CODE'S\.NET\NovoCosts\NovoCosts\obj\Debug\NovoCosts.Forms.FRegistroUnidadMedida.resources
+C:\Users\Jeison\Documents\CODE'S\.NET\NovoCosts\NovoCosts\obj\Debug\NovoCosts.Forms.FInicio.resources
+C:\Users\Jeison\Documents\CODE'S\.NET\NovoCosts\NovoCosts\obj\Debug\NovoCosts.Forms.FRegistroProductos.resources

@@ -266,8 +266,7 @@ namespace NovoCosts.Forms
             columna.HeaderCell.Style.Font = new Font(columna.DataGridView.Font, FontStyle.Bold);
         }
 
-        private System.Windows.Forms.TextBox ultimoTextBoxModificado = null;
-       
+        private System.Windows.Forms.TextBox ultimoTextBoxModificado = null;       
         private void BuscarYMostrarResultados(string nombreProcedimiento, System.Windows.Forms.TextBox textBox, ListBox listBox, string parametroNombre, string nombreColumna)
         {
             string searchText = textBox.Text;

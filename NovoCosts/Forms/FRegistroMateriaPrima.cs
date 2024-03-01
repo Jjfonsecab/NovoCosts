@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static NovoCosts.Forms.FRegistroMateriaPrima;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace NovoCosts.Forms
 {
@@ -27,19 +29,38 @@ namespace NovoCosts.Forms
         }
 
         bool Editar;
-        int IdMateriaPrimas;
-        int ResultadoMedida;
         bool Modificar;
+        int IdMateriaPrima;
         int IdUnidadMedida;
+        int NumeroParametros;
+        decimal ResultadoMedida;
 
+        private void btnInicio_Click(object sender, EventArgs e)
+        {
+            FInicio fInicio = Application.OpenForms.OfType<FInicio>().FirstOrDefault();
+
+            if (fInicio == null)
+            {
+                fInicio = new FInicio();
+                fInicio.Show();
+            }
+            else
+                fInicio.BringToFront();
+
+            if (Application.OpenForms.Count > 1)
+                this.Close();
+            else
+                this.Hide();
+        }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            RealizarCalculoYEnviar();
             if (!ValidarCampos(txtDetalle, comboBoxUnidadMedida, txtValorUnitario, txtProveedor, txtFecha))
                 return;
             if (Modificar)
             {
                 if (!GuardarEditado())
-                return;
+                    return;
             }
             else
                 if (!Guardar()) return;
@@ -48,7 +69,20 @@ namespace NovoCosts.Forms
         }
         private void btnEliminar_Click(object sender, EventArgs e)//ToDo
         {
+            if (dgvMateriaPrima.SelectedRows.Count == 0 || dgvMateriaPrima.CurrentRow == null)
+            {
+                MessageBox.Show("Selecciona una fila antes de eliminar.");
+                return;
+            }
 
+            if (dgvMateriaPrima.SelectedRows.Count > 0)
+            {
+                DataGridViewCell cell = dgvMateriaPrima.CurrentRow.Cells["id_producto"];
+                int id_producto = Convert.ToInt32(cell.Value);
+                IdMateriaPrima = id_producto;
+                Eliminar();
+                Finalizar();
+            }
         }
         private void btnRegistroUnidades_Click(object sender, EventArgs e)//ToDo
         {
@@ -68,8 +102,19 @@ namespace NovoCosts.Forms
         }
         private void comboBoxUnidadMedida_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ActivarControlesSegunParametros();
-            RealizarCalculoYEnviar();
+            DataRowView selectedRow = (DataRowView)comboBoxUnidadMedida.SelectedItem;
+
+            if (selectedRow != null)
+            {
+                IdUnidadMedida = Convert.ToInt32(selectedRow["id_unidad_medida"]);
+                NumeroParametros = Convert.ToInt32(selectedRow["cantidad_parametros"]);
+
+                Console.WriteLine("IdUnidadMedida: " + IdUnidadMedida);
+                Console.WriteLine("NumeroParametros: " + NumeroParametros);
+
+                ActivarControlesSegunParametros();
+            }
+
         }
 
         private System.Windows.Forms.TextBox campoSeleccionado;
@@ -79,19 +124,25 @@ namespace NovoCosts.Forms
 
             txtFecha.Text = fechaSeleccionada.ToString("yyyy-MM-dd");
         }
-
-        private void monthCalendar_DateChanged_1(object sender, DateRangeEventArgs e)
+        private void txtDetalle_TextChanged(object sender, EventArgs e)
         {
-            DateTime fechaSeleccionada = monthCalendar.SelectionStart;
+            string searchText = txtDetalle.Text;
 
-            txtFecha.Text = fechaSeleccionada.ToString("yyyy-MM-dd");
+            BuscarYMostrarResultados("RetornarMateriaPrimaPorDetalle", txtDetalle, listBox1, "@NombreBuscado", "detalle_mp");
         }
-        //Metodos
+        private void txtProveedor_TextChanged(object sender, EventArgs e)
+        {
+            string searchText = txtProveedor.Text;
+
+            BuscarYMostrarResultados("RetornarMateriaPrimaPorProveedor", txtProveedor, listBox1, "@NombreBuscado", "proveedor");
+        }    
+               
+        //Metodos       
         private bool Guardar()
         {
+            //Console.WriteLine("Antes de asignar IdMateriaPrima: " + IdMateriaPrima);
             MateriasPrimas materiasPrimas = new MateriasPrimas()
             {
-                IdMateriaPrima = IdMateriaPrimas,
                 DetalleMateriaPrima = txtDetalle.Text,
                 IdUnidadMedida = IdUnidadMedida,
                 Medida = ResultadoMedida,
@@ -99,20 +150,30 @@ namespace NovoCosts.Forms
                 Proveedor = txtProveedor.Text,
                 Fecha = DateTime.Parse(txtFecha.Text),
                 Comentarios = txtComentarios.Text,
+                IdMateriaPrima = IdMateriaPrima,
             };
+
+            Console.WriteLine("IdMateriaPrima: " + materiasPrimas.IdMateriaPrima);
+            Console.WriteLine("DetalleMateriaPrima: " + materiasPrimas.DetalleMateriaPrima);
+            Console.WriteLine("IdUnidadMedida: " + materiasPrimas.IdUnidadMedida);
+            Console.WriteLine("Medida: " + materiasPrimas.Medida);
+            Console.WriteLine("Valor: " + materiasPrimas.Valor);
+            Console.WriteLine("Proveedor: " + materiasPrimas.Proveedor);
+            Console.WriteLine("Fecha: " + materiasPrimas.Fecha);
+            Console.WriteLine("Comentarios: " + materiasPrimas.Comentarios);
 
             return MateriasPrimas.Guardar(materiasPrimas, Editar);
         }
         private bool GuardarEditado()
         {
-            if (IdMateriaPrimas > 0)
+            if (IdMateriaPrima > 0)
             {
                 // Obtén la fecha original almacenada
                 DateTime fechaOriginal = DateTime.Parse(dgvMateriaPrima.CurrentRow.Cells["fecha"].Value.ToString());
 
                 MateriasPrimas materiasPrimasEditado = new MateriasPrimas()
                 {
-                    IdMateriaPrima = IdMateriaPrimas,
+                    IdMateriaPrima = IdMateriaPrima,
                     DetalleMateriaPrima = txtDetalle.Text,
                     IdUnidadMedida = IdUnidadMedida,
                     Medida = ResultadoMedida,
@@ -122,13 +183,46 @@ namespace NovoCosts.Forms
                     Comentarios = txtComentarios.Text,
                 };
 
-                return MateriasPrimas.Guardar(materiasPrimasEditado, true);  
+                return MateriasPrimas.Guardar(materiasPrimasEditado, true);
             }
             else
             {
                 MessageBox.Show("Selecciona una materia prima antes de guardar editado.", "Materia prima no seleccionada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
+        }
+        private bool Eliminar()
+        {
+            try
+            {
+                if (IdMateriaPrima > 0)
+                {
+                    DialogResult resultado = MessageBox.Show("¿Estás seguro de que deseas eliminar esta materia prima?", "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (resultado == DialogResult.Yes)
+                        return MateriasPrimas.Eliminar(IdMateriaPrima);
+                    else
+                        return false;
+                }
+                else
+                {
+                    MessageBox.Show("Selecciona una materia prima antes de eliminar.", "Materia prima no seleccionada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+            }
+            catch (System.Data.SqlClient.SqlException)
+            {
+                MessageBox.Show("No se puede eliminar esta materia prima porque tiene registros relacionados .", "Error de eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return false;
+            }
+            catch (Exception)
+            {
+                // Mensaje genérico para otras excepciones
+                MessageBox.Show($"Se produjo un error al intentar eliminar la amteria prima. Consulta los detalles en la consola.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
         }
         private void Finalizar()
         {
@@ -171,9 +265,10 @@ namespace NovoCosts.Forms
         {
             DataTable dataTable = UnidadesMedida.Listar();
 
+
             comboBoxUnidadMedida.DataSource = dataTable;
             comboBoxUnidadMedida.DisplayMember = "nombre";
-            comboBoxUnidadMedida.ValueMember = "cantidad_parametros"; 
+            comboBoxUnidadMedida.ValueMember = "cantidad_parametros";
         }
         private void MostrarFechaActual()
         {
@@ -224,6 +319,10 @@ namespace NovoCosts.Forms
             txtDetalle.Click += TextBox_Click;
             txtProveedor.CharacterCasing = CharacterCasing.Upper;
             txtProveedor.Click += TextBox_Click;
+            txtComentarios.CharacterCasing = CharacterCasing.Upper;
+            txtComentarios.Click += TextBox_Click;
+            txtBuscar.CharacterCasing = CharacterCasing.Upper;
+            txtBuscar.Click += TextBox_Click;
 
             txtFecha.CharacterCasing = CharacterCasing.Upper;
         }
@@ -231,65 +330,149 @@ namespace NovoCosts.Forms
         {
             if (sender is System.Windows.Forms.TextBox textBox)
                 textBox.SelectAll();
-        }             
+        }
         private void ActivarControlesSegunParametros()
         {
-            if (comboBoxUnidadMedida.SelectedIndex != -1)
+            int cantidadParametros = NumeroParametros;
+
+            txtOtros.Enabled = false;
+            txtLargo.Enabled = false;
+            txtAncho.Enabled = false;
+            txtAlto.Enabled = false;
+
+            switch (cantidadParametros)
             {
-                // Obtener el valor de cantidad_parametros como cadena
-                string cantidadParametrosString = comboBoxUnidadMedida.SelectedValue.ToString();
-
-                if (int.TryParse(comboBoxUnidadMedida.SelectedValue.ToString(), out int cantidadParametros))
-                {
-                    txtOtros.Enabled = false;
-                    txtLargo.Enabled = false;
-                    txtAncho.Enabled = false;
-                    txtAlto.Enabled = false;
-
-                    switch (cantidadParametros)
-                    {
-                        case 1:
-                            txtOtros.Enabled = true;
-                            break;
-                        case 2:
-                            txtLargo.Enabled = true;
-                            txtAncho.Enabled = true;
-                            break;
-                        case 3:
-                            txtLargo.Enabled = true;
-                            txtAncho.Enabled = true;
-                            txtAlto.Enabled = true;
-                            break;
-                            // Agrega más casos según sea necesario
-                    }
-
-                }
+                case 1:
+                    txtOtros.Enabled = true;
+                    break;
+                case 2:
+                    txtLargo.Enabled = true;
+                    txtAncho.Enabled = true;
+                    break;
+                case 3:
+                    txtLargo.Enabled = true;
+                    txtAncho.Enabled = true;
+                    txtAlto.Enabled = true;
+                    break;
             }
         }
         private void RealizarCalculoYEnviar()
         {
-            if(txtOtros.Enabled)
+            if (txtOtros.Enabled && txtOtros != null)
             {
-                double.TryParse(txtOtros.Text, out double otro);
-                otro = ResultadoMedida;
-            }
-            else if (txtLargo.Enabled && txtAncho.Enabled)
-            {
-                if (double.TryParse(txtLargo.Text, out double largo) && double.TryParse(txtAncho.Text, out double ancho))
+                if (decimal.TryParse(txtOtros.Text, out decimal otro))
                 {
-                    double resultado = largo * ancho;
-                    resultado = ResultadoMedida;
-                 }
+                    ResultadoMedida = otro;
+                }
             }
-            else if(txtLargo.Enabled && txtAncho.Enabled && txtAlto.Enabled)
+            else if (txtLargo.Enabled && txtLargo != null && txtAncho.Enabled && txtAncho != null)
             {
-                if (double.TryParse(txtLargo.Text, out double largo) && double.TryParse(txtAncho.Text, out double ancho) && double.TryParse(txtAlto.Text, out double alto))
+                if (decimal.TryParse(txtLargo.Text, out decimal largo) && decimal.TryParse(txtAncho.Text, out decimal ancho))
                 {
-                    double resultado = largo * ancho * alto;
-                    resultado = ResultadoMedida; 
+                    ResultadoMedida = largo * ancho;
+                }
+            }
+            else if (txtLargo.Enabled && txtLargo != null && txtAncho.Enabled && txtAncho != null && txtAlto.Enabled && txtAlto != null)
+            {
+                if (decimal.TryParse(txtLargo.Text, out decimal largo) && decimal.TryParse(txtAncho.Text, out decimal ancho) && decimal.TryParse(txtAlto.Text, out decimal alto))
+                {
+                    ResultadoMedida = largo * ancho * alto;
+                }
+            }
+            Console.WriteLine("ResultadoMedida: " + ResultadoMedida);
+        }
+        private System.Windows.Forms.TextBox ultimoTextBoxModificado = null;
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex != -1 && ultimoTextBoxModificado != null)
+            {
+                string selectedText = listBox1.SelectedItem.ToString();
+                ultimoTextBoxModificado.Text = selectedText;
+            }
+            else
+                MessageBox.Show("No se pudo determinar el TextBox correspondiente.");
+
+        }
+        private void BuscarYMostrarResultados(string nombreProcedimiento, System.Windows.Forms.TextBox textBox, ListBox listBox, string parametroNombre, string nombreColumna)
+        {
+            string searchText = textBox.Text;
+
+            List<Parametro> parametros = new List<Parametro>
+            {
+                new Parametro(parametroNombre, searchText)
+            };
+
+            DataTable result = DbDatos.Listar(nombreProcedimiento, parametros);
+
+            listBox.Items.Clear();
+
+            if (result != null && result.Rows.Count > 0)
+            {
+                foreach (DataRow row in result.Rows)
+                    listBox.Items.Add(row[nombreColumna].ToString());
+            }
+        }
+        string opcionSeleccionada;       
+        private void txtBuscar_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (comboBoxBuscar.SelectedIndex == -1)
+            {
+                MessageBox.Show("Por favor seleccione una opción de búsqueda.");
+                return;
+            }
+
+            string opcionCombo = comboBoxBuscar.SelectedItem.ToString();
+
+            switch (opcionCombo)
+            {
+                case "DETALLE":
+                    opcionSeleccionada = "detalle_mp";
+                    break;
+                case "MEDIDA":
+                    opcionSeleccionada = "medida";
+                    break;
+                case "VALOR":
+                    opcionSeleccionada = "valor";
+                    break;
+                case "PROVEEDOR":
+                    opcionSeleccionada = "proveedor";
+                    break;
+                case "FECHA":
+                    opcionSeleccionada = "fecha";
+                    break;
+            }
+
+            ultimoTextBoxModificado = txtBuscar;
+            MostrarResultados("BuscarMateriaPrimaPorColumnaYValor", txtBuscar, listBox1, opcionSeleccionada, "@ValorBuscado", opcionSeleccionada);
+        }
+        private void MostrarResultados(string nombreProcedimiento, System.Windows.Forms.TextBox textBox, ListBox listBox,string columna, string parametroNombre, string nombreColumna)
+        {            
+            string searchText = textBox.Text;
+
+            List<Parametro> parametros = new List<Parametro>
+            {
+                new Parametro(parametroNombre, searchText),
+                new Parametro("@NombreColumna", columna)  // Asegúrate de agregar este parámetro
+            };
+
+            Console.WriteLine($"Valor de {parametroNombre}: {searchText}");
+            Console.WriteLine($"Valor de @NombreColumna: {columna}");
+
+            // Llama al método Listar para obtener los resultados de la consulta
+            DataTable result = DbDatos.Listar(nombreProcedimiento, parametros);
+
+            // Limpia el ListBox antes de agregar nuevos elementos
+            listBox.Items.Clear();
+
+            // Verifica si hay resultados y llena el ListBox
+            if (result != null && result.Rows.Count > 0)
+            {
+                foreach (DataRow row in result.Rows)
+                {
+                    // Agrega los elementos al ListBox
+                    listBox.Items.Add(row[nombreColumna].ToString());
                 }
             }
         }
-
     }
 }

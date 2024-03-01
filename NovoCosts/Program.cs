@@ -17,7 +17,7 @@ namespace NovoCosts
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FRegistroMateriaPrima());
+            Application.Run(new FInicio());
         }
     }
 }

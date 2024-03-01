@@ -50,11 +50,23 @@
   <ItemGroup>
     <Compile Include="Class\DbDatos.cs" />
     <Compile Include="Class\Parametro.cs" />
+    <Compile Include="Forms\FInicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FInicio.Designer.cs">
+      <DependentUpon>FInicio.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FRegistroMateriaPrima.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FRegistroMateriaPrima.Designer.cs">
       <DependentUpon>FRegistroMateriaPrima.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FRegistroProductos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FRegistroProductos.Designer.cs">
+      <DependentUpon>FRegistroProductos.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FRegistroUnidadMedida.cs">
       <SubType>Form</SubType>
@@ -63,11 +75,18 @@
       <DependentUpon>FRegistroUnidadMedida.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\MateriasPrimas.cs" />
+    <Compile Include="Models\Producto.cs" />
     <Compile Include="Models\UnidadesMedida.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\FInicio.resx">
+      <DependentUpon>FInicio.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FRegistroMateriaPrima.resx">
       <DependentUpon>FRegistroMateriaPrima.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FRegistroProductos.resx">
+      <DependentUpon>FRegistroProductos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FRegistroUnidadMedida.resx">
       <DependentUpon>FRegistroUnidadMedida.cs</DependentUpon>
