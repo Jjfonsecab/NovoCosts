@@ -43,5 +43,18 @@ namespace NovoCosts.Forms
             else
                 fmateriaprima.BringToFront();
         }
+
+        private void btnManoObra_Click(object sender, EventArgs e)
+        {
+            FManoObra fmanoobra = Application.OpenForms.OfType<FManoObra>().FirstOrDefault();
+
+            if (fmanoobra == null)
+            {
+                fmanoobra = new FManoObra();
+                fmanoobra.Show();
+            }
+            else
+                fmanoobra.BringToFront();
+        }
     }
 }

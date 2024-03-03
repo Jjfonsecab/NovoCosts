@@ -56,6 +56,12 @@
     <Compile Include="Forms\FInicio.Designer.cs">
       <DependentUpon>FInicio.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FManoObra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FManoObra.Designer.cs">
+      <DependentUpon>FManoObra.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FRegistroMateriaPrima.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,25 +74,39 @@
     <Compile Include="Forms\FRegistroProductos.Designer.cs">
       <DependentUpon>FRegistroProductos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FRegistroTipoManoObra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FRegistroTipoManoObra.Designer.cs">
+      <DependentUpon>FRegistroTipoManoObra.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FRegistroUnidadMedida.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FRegistroUnidadMedida.Designer.cs">
       <DependentUpon>FRegistroUnidadMedida.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\ManoObra.cs" />
     <Compile Include="Models\MateriasPrimas.cs" />
     <Compile Include="Models\Producto.cs" />
+    <Compile Include="Models\TipoManoObra.cs" />
     <Compile Include="Models\UnidadesMedida.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\FInicio.resx">
       <DependentUpon>FInicio.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FManoObra.resx">
+      <DependentUpon>FManoObra.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FRegistroMateriaPrima.resx">
       <DependentUpon>FRegistroMateriaPrima.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FRegistroProductos.resx">
       <DependentUpon>FRegistroProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FRegistroTipoManoObra.resx">
+      <DependentUpon>FRegistroTipoManoObra.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FRegistroUnidadMedida.resx">
       <DependentUpon>FRegistroUnidadMedida.cs</DependentUpon>

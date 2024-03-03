@@ -3,24 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|c:\\users\\jeison\\documents\\code\u0027s\\.net\\novocosts\\novocosts\\forms\\fregistroproductos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\forms\\fregistroproductos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|c:\\users\\jeison\\documents\\code\u0027s\\.net\\novocosts\\novocosts\\forms\\fregistrotipomanoobra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\forms\\fregistrotipomanoobra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\novocosts\\forms\\fregistromateriaprima.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|c:\\users\\jeison\\documents\\code\u0027s\\.net\\novocosts\\novocosts\\forms\\fregistromateriaprima.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\forms\\fregistromateriaprima.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|c:\\users\\jeison\\documents\\code\u0027s\\.net\\novocosts\\novocosts\\forms\\fregistroproductos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\forms\\fregistroproductos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|c:\\users\\jeison\\documents\\code\u0027s\\.net\\novocosts\\novocosts\\forms\\fregistrotipomanoobra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\forms\\fregistrotipomanoobra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|c:\\users\\jeison\\documents\\code\u0027s\\.net\\novocosts\\novocosts\\models\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\models\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|c:\\users\\jeison\\documents\\code\u0027s\\.net\\novocosts\\novocosts\\forms\\fmanoobra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\forms\\fmanoobra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|c:\\users\\jeison\\documents\\code\u0027s\\.net\\novocosts\\novocosts\\forms\\fmanoobra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\forms\\fmanoobra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|c:\\users\\jeison\\documents\\code\u0027s\\.net\\novocosts\\novocosts\\forms\\fregistromateriaprima.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\forms\\fregistromateriaprima.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|c:\\users\\jeison\\documents\\code\u0027s\\.net\\novocosts\\novocosts\\models\\tipomanoobra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\models\\tipomanoobra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|c:\\users\\jeison\\documents\\code\u0027s\\.net\\novocosts\\novocosts\\models\\manoobra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\models\\manoobra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,67 +42,34 @@
       "DocumentGroups": [
         {
           "DockedWidth": 324,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "FRegistroProductos.cs",
-              "DocumentMoniker": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FRegistroProductos.cs",
-              "RelativeDocumentMoniker": "NovoCosts\\Forms\\FRegistroProductos.cs",
-              "ToolTip": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FRegistroProductos.cs",
-              "RelativeToolTip": "NovoCosts\\Forms\\FRegistroProductos.cs",
-              "ViewState": "AQIAADkAAAAAAAAAAAAAwFkAAABIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-01T20:01:14.448Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Producto.cs",
-              "DocumentMoniker": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Models\\Producto.cs",
-              "RelativeDocumentMoniker": "NovoCosts\\Models\\Producto.cs",
-              "ToolTip": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Models\\Producto.cs",
-              "RelativeToolTip": "NovoCosts\\Models\\Producto.cs",
-              "ViewState": "AQIAABMAAAAAAAAAAAAEwBoAAAAMAAAA",
+              "Title": "FManoObra.cs",
+              "DocumentMoniker": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FManoObra.cs",
+              "RelativeDocumentMoniker": "NovoCosts\\Forms\\FManoObra.cs",
+              "ToolTip": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FManoObra.cs",
+              "RelativeToolTip": "NovoCosts\\Forms\\FManoObra.cs",
+              "ViewState": "AQIAABwAAAAAAAAAAAAvwCcAAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-01T23:25:39.894Z",
+              "WhenOpened": "2024-03-02T18:08:31.946Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "FRegistroProductos.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FRegistroProductos.cs",
-              "RelativeDocumentMoniker": "NovoCosts\\Forms\\FRegistroProductos.cs",
-              "ToolTip": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FRegistroProductos.cs [Design]",
-              "RelativeToolTip": "NovoCosts\\Forms\\FRegistroProductos.cs [Design]",
+              "Title": "FRegistroTipoManoObra.cs",
+              "DocumentMoniker": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FRegistroTipoManoObra.cs",
+              "RelativeDocumentMoniker": "NovoCosts\\Forms\\FRegistroTipoManoObra.cs",
+              "ToolTip": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FRegistroTipoManoObra.cs",
+              "RelativeToolTip": "NovoCosts\\Forms\\FRegistroTipoManoObra.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAnwBUAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-01T19:54:04.733Z",
-              "EditorCaption": " [Design]"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Orientation": 0,
-      "VerticalTabListWidth": 256,
-      "FloatingWindowState": {
-        "Id": "d43ae613-08cf-4f60-aadd-69c7d61d365b",
-        "Display": 0,
-        "X": 759,
-        "Y": 111,
-        "Width": 893,
-        "Height": 510,
-        "WindowState": 0
-      },
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
+              "WhenOpened": "2024-03-02T18:08:10.736Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -99,22 +78,72 @@
               "RelativeDocumentMoniker": "NovoCosts\\Forms\\FRegistroMateriaPrima.cs",
               "ToolTip": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FRegistroMateriaPrima.cs",
               "RelativeToolTip": "NovoCosts\\Forms\\FRegistroMateriaPrima.cs",
-              "ViewState": "AQIAAPUAAAAAAAAAAAApwIsBAAABAAAA",
+              "ViewState": "AQIAAB0AAAAAAAAAAAASwCcAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-27T22:46:50.731Z",
+              "WhenOpened": "2024-03-02T18:08:00.387Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FRegistroTipoManoObra.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FRegistroTipoManoObra.cs",
+              "RelativeDocumentMoniker": "NovoCosts\\Forms\\FRegistroTipoManoObra.cs",
+              "ToolTip": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FRegistroTipoManoObra.cs [Design]",
+              "RelativeToolTip": "NovoCosts\\Forms\\FRegistroTipoManoObra.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-02T17:56:14.009Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 4,
+              "Title": "FManoObra.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FManoObra.cs",
+              "RelativeDocumentMoniker": "NovoCosts\\Forms\\FManoObra.cs",
+              "ToolTip": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FManoObra.cs [Design]",
+              "RelativeToolTip": "NovoCosts\\Forms\\FManoObra.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-02T17:50:25.165Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "FRegistroMateriaPrima.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FRegistroMateriaPrima.cs",
               "RelativeDocumentMoniker": "NovoCosts\\Forms\\FRegistroMateriaPrima.cs",
               "ToolTip": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FRegistroMateriaPrima.cs [Design]",
               "RelativeToolTip": "NovoCosts\\Forms\\FRegistroMateriaPrima.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-01T21:32:03.27Z",
+              "WhenOpened": "2024-03-02T17:58:12.543Z",
               "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TipoManoObra.cs",
+              "DocumentMoniker": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Models\\TipoManoObra.cs",
+              "RelativeDocumentMoniker": "NovoCosts\\Models\\TipoManoObra.cs",
+              "ToolTip": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Models\\TipoManoObra.cs",
+              "RelativeToolTip": "NovoCosts\\Models\\TipoManoObra.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAQwCIAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-02T17:31:13.626Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ManoObra.cs",
+              "DocumentMoniker": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Models\\ManoObra.cs",
+              "RelativeDocumentMoniker": "NovoCosts\\Models\\ManoObra.cs",
+              "ToolTip": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Models\\ManoObra.cs",
+              "RelativeToolTip": "NovoCosts\\Models\\ManoObra.cs",
+              "ViewState": "AQIAABEAAAAAAAAAAAA9wCgAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-02T17:31:04.669Z",
+              "EditorCaption": ""
             }
           ]
         }
