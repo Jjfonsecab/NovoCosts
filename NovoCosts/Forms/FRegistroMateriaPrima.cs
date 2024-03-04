@@ -135,8 +135,53 @@ namespace NovoCosts.Forms
             string searchText = txtProveedor.Text;
 
             BuscarYMostrarResultados("RetornarMateriaPrimaPorProveedor", txtProveedor, listBox1, "@NombreBuscado", "proveedor");
-        }    
-               
+        }
+        private void txtDetalle_KeyUp(object sender, KeyEventArgs e)
+        {
+            ultimoTextBoxModificado = txtDetalle;
+            string searchText = txtDetalle.Text;
+            BuscarYMostrarResultados("RetornarMateriaPrimaPorDetalle", txtDetalle, listBox1, "@NombreBuscado", "detalle_mp");
+
+        }
+        private void txtProveedor_KeyUp(object sender, KeyEventArgs e)
+        {
+            ultimoTextBoxModificado = txtProveedor;
+            string searchText = txtProveedor.Text;
+            BuscarYMostrarResultados("RetornarMateriaPrimaPorProveedor", txtProveedor, listBox1, "@NombreBuscado", "proveedor");
+        }
+        private void txtBuscar_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (comboBoxBuscar.SelectedIndex == -1)
+            {
+                MessageBox.Show("Por favor seleccione una opción de búsqueda.");
+                return;
+            }
+
+            string opcionCombo = comboBoxBuscar.SelectedItem.ToString();
+
+            switch (opcionCombo)
+            {
+                case "DETALLE":
+                    opcionSeleccionada = "detalle_mp";
+                    break;
+                case "MEDIDA":
+                    opcionSeleccionada = "medida";
+                    break;
+                case "VALOR":
+                    opcionSeleccionada = "valor";
+                    break;
+                case "PROVEEDOR":
+                    opcionSeleccionada = "proveedor";
+                    break;
+                case "FECHA":
+                    opcionSeleccionada = "fecha";
+                    break;
+            }
+
+            ultimoTextBoxModificado = txtBuscar;
+            MostrarResultados("BuscarMateriaPrimaPorColumnaYValor", txtBuscar, listBox1, opcionSeleccionada, "@ValorBuscado", opcionSeleccionada);
+        }
+
         //Metodos       
         private bool Guardar()
         {
@@ -153,22 +198,12 @@ namespace NovoCosts.Forms
                 IdMateriaPrima = IdMateriaPrima,
             };
 
-            Console.WriteLine("IdMateriaPrima: " + materiasPrimas.IdMateriaPrima);
-            Console.WriteLine("DetalleMateriaPrima: " + materiasPrimas.DetalleMateriaPrima);
-            Console.WriteLine("IdUnidadMedida: " + materiasPrimas.IdUnidadMedida);
-            Console.WriteLine("Medida: " + materiasPrimas.Medida);
-            Console.WriteLine("Valor: " + materiasPrimas.Valor);
-            Console.WriteLine("Proveedor: " + materiasPrimas.Proveedor);
-            Console.WriteLine("Fecha: " + materiasPrimas.Fecha);
-            Console.WriteLine("Comentarios: " + materiasPrimas.Comentarios);
-
             return MateriasPrimas.Guardar(materiasPrimas, Editar);
         }
         private bool GuardarEditado()
         {
             if (IdMateriaPrima > 0)
             {
-                // Obtén la fecha original almacenada
                 DateTime fechaOriginal = DateTime.Parse(dgvMateriaPrima.CurrentRow.Cells["fecha"].Value.ToString());
 
                 MateriasPrimas materiasPrimasEditado = new MateriasPrimas()
@@ -391,7 +426,6 @@ namespace NovoCosts.Forms
             }
             else
                 MessageBox.Show("No se pudo determinar el TextBox correspondiente.");
-
         }
         private void BuscarYMostrarResultados(string nombreProcedimiento, System.Windows.Forms.TextBox textBox, ListBox listBox, string parametroNombre, string nombreColumna)
         {
@@ -413,38 +447,6 @@ namespace NovoCosts.Forms
             }
         }
         string opcionSeleccionada;       
-        private void txtBuscar_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (comboBoxBuscar.SelectedIndex == -1)
-            {
-                MessageBox.Show("Por favor seleccione una opción de búsqueda.");
-                return;
-            }
-
-            string opcionCombo = comboBoxBuscar.SelectedItem.ToString();
-
-            switch (opcionCombo)
-            {
-                case "DETALLE":
-                    opcionSeleccionada = "detalle_mp";
-                    break;
-                case "MEDIDA":
-                    opcionSeleccionada = "medida";
-                    break;
-                case "VALOR":
-                    opcionSeleccionada = "valor";
-                    break;
-                case "PROVEEDOR":
-                    opcionSeleccionada = "proveedor";
-                    break;
-                case "FECHA":
-                    opcionSeleccionada = "fecha";
-                    break;
-            }
-
-            ultimoTextBoxModificado = txtBuscar;
-            MostrarResultados("BuscarMateriaPrimaPorColumnaYValor", txtBuscar, listBox1, opcionSeleccionada, "@ValorBuscado", opcionSeleccionada);
-        }
         private void MostrarResultados(string nombreProcedimiento, System.Windows.Forms.TextBox textBox, ListBox listBox,string columna, string parametroNombre, string nombreColumna)
         {            
             string searchText = textBox.Text;
@@ -474,5 +476,42 @@ namespace NovoCosts.Forms
                 }
             }
         }
+
+        private void dgvMateriaPrima_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvMateriaPrima.SelectedRows.Count > 0)
+                {
+                    DataGridViewRow selectedRow = dgvMateriaPrima.SelectedRows[0];
+
+                    if (selectedRow.Cells.Count >= 5)
+                    {
+                        IdMateriaPrima = Convert.ToInt32(selectedRow.Cells["id_materia_prima"].Value);
+                        IdUnidadMedida = Convert.ToInt32(selectedRow.Cells["id_unidad_medida"].Value);
+                        txtDetalle.Text = Convert.ToString(selectedRow.Cells["detalle_mp"].Value);
+                        txtProveedor.Text = Convert.ToString(selectedRow.Cells["proveedor"].Value);
+                        txtOtros.Text = Convert.ToString(selectedRow.Cells["medida"].Value);
+                        txtValorUnitario.Text = Convert.ToString(selectedRow.Cells["valor"].Value);
+                        txtFecha.Text = Convert.ToString(selectedRow.Cells["fecha"].Value);
+                        txtComentarios.Text = Convert.ToString(selectedRow.Cells["comentarios"].Value);
+
+                        Editar = true;
+                        Modificar = true;
+                    }
+                }
+            }
+            catch (StrongTypingException)
+            {
+                MessageBox.Show("Fila vacia");
+                return;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error al Guardar");
+                return;
+            }
+        }
+    
     }
 }

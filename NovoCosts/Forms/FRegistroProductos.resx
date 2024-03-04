@@ -121,7 +121,7 @@
   <data name="btnBuscar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wQAADsEBuJFr7QAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAHbPSURBVHhe7d0F
+        vwAADr8BOAVTJAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAHbPSURBVHhe7d0F
         tBxVtgZgrru75LrE3Y14iLtgCe4heJAEgiQhWBIIFiWOJbjDAMF1kEFnGNx9Bhl0v70Lwovsm67uququ
         qv7/tb713oSku+R0n91Vp87ZA0EQBInq5LNubB82iy1i69kD7Hn2FvuQfcV+ZbSdX5j8+fvsFfYEu4et
         YfPZMWwM68jSGIIgCIIgYY50wD3Ykexq9jT7mm3foTvpd/YOkwJhMZvOWrJYhiAIgiCITSliE5h0ts8y
@@ -1076,4 +1076,7 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwESYMeP/A5onI3G3Ym1rAAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

@@ -33,6 +33,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.comboBoxP = new System.Windows.Forms.ComboBox();
             this.btnEliminar = new System.Windows.Forms.PictureBox();
             this.btnGuardar = new System.Windows.Forms.PictureBox();
@@ -40,7 +41,6 @@
             this.dgvRegistroUnidades = new System.Windows.Forms.DataGridView();
             this.btnInicio = new System.Windows.Forms.PictureBox();
             this.btnMateriales = new System.Windows.Forms.PictureBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
@@ -65,7 +65,7 @@
             // 
             this.txtNombre.Location = new System.Drawing.Point(164, 47);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(102, 26);
+            this.txtNombre.Size = new System.Drawing.Size(152, 26);
             this.txtNombre.TabIndex = 1;
             this.txtNombre.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtNombre_KeyUp);
             // 
@@ -80,10 +80,20 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Location = new System.Drawing.Point(30, 29);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(489, 168);
+            this.groupBox1.Size = new System.Drawing.Size(572, 208);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Registro:";
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 20;
+            this.listBox1.Location = new System.Drawing.Point(380, 25);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(170, 104);
+            this.listBox1.TabIndex = 51;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // comboBoxP
             // 
@@ -92,15 +102,15 @@
             "1",
             "2",
             "3"});
-            this.comboBoxP.Location = new System.Drawing.Point(148, 104);
+            this.comboBoxP.Location = new System.Drawing.Point(164, 112);
             this.comboBoxP.Name = "comboBoxP";
-            this.comboBoxP.Size = new System.Drawing.Size(54, 28);
+            this.comboBoxP.Size = new System.Drawing.Size(62, 28);
             this.comboBoxP.TabIndex = 50;
             // 
             // btnEliminar
             // 
             this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
-            this.btnEliminar.Location = new System.Drawing.Point(435, 96);
+            this.btnEliminar.Location = new System.Drawing.Point(325, 135);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(32, 36);
             this.btnEliminar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -111,7 +121,7 @@
             // btnGuardar
             // 
             this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
-            this.btnGuardar.Location = new System.Drawing.Point(435, 37);
+            this.btnGuardar.Location = new System.Drawing.Point(395, 135);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(34, 36);
             this.btnGuardar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -122,7 +132,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 102);
+            this.label2.Location = new System.Drawing.Point(28, 112);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(99, 20);
             this.label2.TabIndex = 49;
@@ -136,13 +146,13 @@
             this.dgvRegistroUnidades.Name = "dgvRegistroUnidades";
             this.dgvRegistroUnidades.RowHeadersWidth = 62;
             this.dgvRegistroUnidades.RowTemplate.Height = 28;
-            this.dgvRegistroUnidades.Size = new System.Drawing.Size(608, 340);
+            this.dgvRegistroUnidades.Size = new System.Drawing.Size(641, 340);
             this.dgvRegistroUnidades.TabIndex = 3;
             // 
             // btnInicio
             // 
             this.btnInicio.Image = ((System.Drawing.Image)(resources.GetObject("btnInicio.Image")));
-            this.btnInicio.Location = new System.Drawing.Point(626, 29);
+            this.btnInicio.Location = new System.Drawing.Point(623, 29);
             this.btnInicio.Name = "btnInicio";
             this.btnInicio.Size = new System.Drawing.Size(50, 53);
             this.btnInicio.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -153,7 +163,7 @@
             // btnMateriales
             // 
             this.btnMateriales.Image = ((System.Drawing.Image)(resources.GetObject("btnMateriales.Image")));
-            this.btnMateriales.Location = new System.Drawing.Point(612, 133);
+            this.btnMateriales.Location = new System.Drawing.Point(623, 133);
             this.btnMateriales.Name = "btnMateriales";
             this.btnMateriales.Size = new System.Drawing.Size(48, 53);
             this.btnMateriales.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -161,28 +171,18 @@
             this.btnMateriales.TabStop = false;
             this.btnMateriales.Click += new System.EventHandler(this.btnMateriales_Click);
             // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 20;
-            this.listBox1.Location = new System.Drawing.Point(289, 25);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(105, 104);
-            this.listBox1.TabIndex = 51;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editarToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(241, 69);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(130, 36);
             // 
             // editarToolStripMenuItem
             // 
             this.editarToolStripMenuItem.Name = "editarToolStripMenuItem";
-            this.editarToolStripMenuItem.Size = new System.Drawing.Size(240, 32);
+            this.editarToolStripMenuItem.Size = new System.Drawing.Size(129, 32);
             this.editarToolStripMenuItem.Text = "Editar";
             this.editarToolStripMenuItem.Click += new System.EventHandler(this.editarToolStripMenuItem_Click);
             // 
@@ -190,7 +190,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(688, 595);
+            this.ClientSize = new System.Drawing.Size(722, 595);
             this.Controls.Add(this.btnInicio);
             this.Controls.Add(this.btnMateriales);
             this.Controls.Add(this.dgvRegistroUnidades);

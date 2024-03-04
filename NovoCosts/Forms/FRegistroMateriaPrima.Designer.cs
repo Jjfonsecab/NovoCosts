@@ -42,6 +42,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboBoxBuscar = new System.Windows.Forms.ComboBox();
+            this.btnBuscar = new System.Windows.Forms.PictureBox();
             this.label11 = new System.Windows.Forms.Label();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
@@ -65,8 +66,8 @@
             this.dgvMateriaPrima = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnBuscar = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnBuscar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnRegistroUnidades)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnInicio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnEliminar)).BeginInit();
@@ -74,7 +75,6 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMateriaPrima)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnBuscar)).BeginInit();
             this.SuspendLayout();
             // 
             // label2
@@ -88,12 +88,13 @@
             // 
             // txtDetalle
             // 
-            this.txtDetalle.Location = new System.Drawing.Point(145, 30);
+            this.txtDetalle.Location = new System.Drawing.Point(160, 30);
             this.txtDetalle.Multiline = true;
             this.txtDetalle.Name = "txtDetalle";
-            this.txtDetalle.Size = new System.Drawing.Size(320, 26);
+            this.txtDetalle.Size = new System.Drawing.Size(305, 26);
             this.txtDetalle.TabIndex = 7;
             this.txtDetalle.TextChanged += new System.EventHandler(this.txtDetalle_TextChanged);
+            this.txtDetalle.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDetalle_KeyUp);
             // 
             // label3
             // 
@@ -127,6 +128,7 @@
             this.txtProveedor.Size = new System.Drawing.Size(240, 26);
             this.txtProveedor.TabIndex = 11;
             this.txtProveedor.TextChanged += new System.EventHandler(this.txtProveedor_TextChanged);
+            this.txtProveedor.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtProveedor_KeyUp);
             // 
             // label5
             // 
@@ -149,7 +151,7 @@
             // 
             // txtFecha
             // 
-            this.txtFecha.Location = new System.Drawing.Point(471, 679);
+            this.txtFecha.Location = new System.Drawing.Point(471, 713);
             this.txtFecha.Name = "txtFecha";
             this.txtFecha.Size = new System.Drawing.Size(120, 26);
             this.txtFecha.TabIndex = 14;
@@ -157,7 +159,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(384, 682);
+            this.label6.Location = new System.Drawing.Point(467, 661);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(66, 20);
             this.label6.TabIndex = 13;
@@ -206,6 +208,17 @@
             this.comboBoxBuscar.Name = "comboBoxBuscar";
             this.comboBoxBuscar.Size = new System.Drawing.Size(180, 28);
             this.comboBoxBuscar.TabIndex = 40;
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Enabled = false;
+            this.btnBuscar.Image = ((System.Drawing.Image)(resources.GetObject("btnBuscar.Image")));
+            this.btnBuscar.Location = new System.Drawing.Point(268, 186);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(57, 58);
+            this.btnBuscar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.btnBuscar.TabIndex = 53;
+            this.btnBuscar.TabStop = false;
             // 
             // label11
             // 
@@ -395,15 +408,19 @@
             // 
             // dgvMateriaPrima
             // 
+            this.dgvMateriaPrima.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvMateriaPrima.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvMateriaPrima.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMateriaPrima.ContextMenuStrip = this.contextMenuStrip1;
-            this.dgvMateriaPrima.Location = new System.Drawing.Point(756, 29);
+            this.dgvMateriaPrima.Location = new System.Drawing.Point(704, 29);
             this.dgvMateriaPrima.Name = "dgvMateriaPrima";
             this.dgvMateriaPrima.RowHeadersWidth = 62;
             this.dgvMateriaPrima.RowTemplate.Height = 28;
             this.dgvMateriaPrima.Size = new System.Drawing.Size(1029, 894);
             this.dgvMateriaPrima.TabIndex = 19;
+            this.dgvMateriaPrima.SelectionChanged += new System.EventHandler(this.dgvMateriaPrima_SelectionChanged);
             // 
             // contextMenuStrip1
             // 
@@ -419,22 +436,11 @@
             this.editarToolStripMenuItem.Size = new System.Drawing.Size(129, 32);
             this.editarToolStripMenuItem.Text = "Editar";
             // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Enabled = false;
-            this.btnBuscar.Image = ((System.Drawing.Image)(resources.GetObject("btnBuscar.Image")));
-            this.btnBuscar.Location = new System.Drawing.Point(268, 186);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(57, 58);
-            this.btnBuscar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.btnBuscar.TabIndex = 53;
-            this.btnBuscar.TabStop = false;
-            // 
             // FRegistroMateriaPrima
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1813, 961);
+            this.ClientSize = new System.Drawing.Size(1745, 961);
             this.Controls.Add(this.dgvMateriaPrima);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.groupBox1);
@@ -445,6 +451,7 @@
             this.Load += new System.EventHandler(this.Registro_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnBuscar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnRegistroUnidades)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnInicio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnEliminar)).EndInit();
@@ -453,7 +460,6 @@
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMateriaPrima)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.btnBuscar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

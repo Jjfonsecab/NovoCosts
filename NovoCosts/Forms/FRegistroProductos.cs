@@ -327,6 +327,45 @@ namespace NovoCosts.Forms
                 MessageBox.Show("No se pudo determinar el TextBox correspondiente.");
         }
 
-        
+        private void editarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IdProducto = Convert.ToInt32(dgvRegistroProductos.CurrentRow.Cells["id_producto"].Value);
+            txtReferencia.Text = dgvRegistroProductos.CurrentRow.Cells["referencia"].Value.ToString();
+            txtDescripcion.Text = dgvRegistroProductos.CurrentRow.Cells["descripcion"].Value.ToString();
+
+            Editar = true;
+            Modificar = true;
+        }
+
+        private void dgvRegistroProductos_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvRegistroProductos.SelectedRows.Count > 0)
+                {
+                    DataGridViewRow selectedRow = dgvRegistroProductos.SelectedRows[0];
+
+                    if (selectedRow.Cells.Count >= 5)
+                    {
+                        IdProducto = Convert.ToInt32(selectedRow.Cells["id_producto"].Value);
+                        txtDescripcion.Text = Convert.ToString(selectedRow.Cells["descripcion"].Value);
+                        txtReferencia.Text = Convert.ToString(selectedRow.Cells["referencia"].Value);
+
+                        Editar = true;
+                        Modificar = true;
+                    }
+                }
+            }
+            catch (StrongTypingException)
+            {
+                MessageBox.Show("Fila vacia");
+                return;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error al Guardar");
+                return;
+            }
+        }
     }
 }

@@ -40,5 +40,11 @@ namespace NovoCosts.Models
         {
             return DbDatos.Listar("ManoObra_Listar");
         }
+        public static DataTable ListarCompleto()
+        {
+            return DbDatos.Listar("ObtenerInformacionManoObra");
+        }
+        
+
     }
 }
