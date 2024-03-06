@@ -56,5 +56,18 @@ namespace NovoCosts.Forms
             else
                 fmanoobra.BringToFront();
         }
+
+        private void btnTapiceria_Click(object sender, EventArgs e)
+        {
+            FRegistroTapiceriaCostos ftapiceria = Application.OpenForms.OfType<FRegistroTapiceriaCostos>().FirstOrDefault();
+
+            if (ftapiceria == null)
+            {
+                ftapiceria = new FRegistroTapiceriaCostos();
+                ftapiceria.Show();
+            }
+            else
+                ftapiceria.BringToFront();
+        }
     }
 }
