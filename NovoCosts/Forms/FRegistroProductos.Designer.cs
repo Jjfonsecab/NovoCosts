@@ -130,9 +130,11 @@
             this.txtDescripcion.Size = new System.Drawing.Size(129, 26);
             this.txtDescripcion.TabIndex = 3;
             this.txtDescripcion.TextChanged += new System.EventHandler(this.txtDescripcion_TextChanged);
+            this.txtDescripcion.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDescripcion_KeyUp);
             // 
             // btnEliminar
             // 
+            this.btnEliminar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
             this.btnEliminar.Location = new System.Drawing.Point(74, 341);
             this.btnEliminar.Name = "btnEliminar";
@@ -149,9 +151,11 @@
             this.txtReferencia.Size = new System.Drawing.Size(129, 26);
             this.txtReferencia.TabIndex = 2;
             this.txtReferencia.TextChanged += new System.EventHandler(this.txtReferencia_TextChanged);
+            this.txtReferencia.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtReferencia_KeyUp);
             // 
             // btnGuardar
             // 
+            this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
             this.btnGuardar.Location = new System.Drawing.Point(72, 274);
             this.btnGuardar.Name = "btnGuardar";
@@ -187,7 +191,7 @@
             this.dgvRegistroProductos.Name = "dgvRegistroProductos";
             this.dgvRegistroProductos.RowHeadersWidth = 62;
             this.dgvRegistroProductos.RowTemplate.Height = 28;
-            this.dgvRegistroProductos.Size = new System.Drawing.Size(613, 402);
+            this.dgvRegistroProductos.Size = new System.Drawing.Size(402, 402);
             this.dgvRegistroProductos.TabIndex = 1;
             this.dgvRegistroProductos.SelectionChanged += new System.EventHandler(this.dgvRegistroProductos_SelectionChanged);
             // 
@@ -222,7 +226,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1218, 529);
+            this.ClientSize = new System.Drawing.Size(1006, 529);
             this.Controls.Add(this.btnInicio);
             this.Controls.Add(this.dgvRegistroProductos);
             this.Controls.Add(this.groupBox1);

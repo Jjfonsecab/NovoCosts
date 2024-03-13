@@ -65,9 +65,10 @@ namespace NovoCosts.Forms
             else
                 if (!Guardar()) return;
 
+            Modificar = false;
             Finalizar();
         }
-        private void btnEliminar_Click(object sender, EventArgs e)//ToDo
+        private void btnEliminar_Click(object sender, EventArgs e)
         {
             if (dgvMateriaPrima.SelectedRows.Count == 0 || dgvMateriaPrima.CurrentRow == null)
             {
@@ -77,14 +78,19 @@ namespace NovoCosts.Forms
 
             if (dgvMateriaPrima.SelectedRows.Count > 0)
             {
-                DataGridViewCell cell = dgvMateriaPrima.CurrentRow.Cells["id_producto"];
-                int id_producto = Convert.ToInt32(cell.Value);
-                IdMateriaPrima = id_producto;
+                DataGridViewCell cell = dgvMateriaPrima.CurrentRow.Cells["id_materia_prima"];//Antes id_producto
+                int id_materia_prima = Convert.ToInt32(cell.Value);
+                IdMateriaPrima = id_materia_prima;
                 Eliminar();
                 Finalizar();
             }
         }
-        private void btnRegistroUnidades_Click(object sender, EventArgs e)//ToDo
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            Limpiar();
+            Modificar = false;
+        }
+        private void btnRegistroUnidades_Click(object sender, EventArgs e)
         {
             FRegistroUnidadMedida fregistro = Application.OpenForms.OfType<FRegistroUnidadMedida>().FirstOrDefault();
 
@@ -116,7 +122,22 @@ namespace NovoCosts.Forms
             }
 
         }
+        private void editarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IdMateriaPrima = Convert.ToInt32(dgvMateriaPrima.CurrentRow.Cells["id_materia_prima"].Value);
+            txtDetalle.Text = dgvMateriaPrima.CurrentRow.Cells["detalle_mp"].Value.ToString();
+            IdUnidadMedida = Convert.ToInt32(dgvMateriaPrima.CurrentRow.Cells["id_unidad_medida"].Value);
+            txtOtros.Text = dgvMateriaPrima.CurrentRow.Cells["medida"].Value.ToString();
+            txtValorUnitario.Text = dgvMateriaPrima.CurrentRow.Cells["valor"].Value.ToString();
+            txtProveedor.Text = dgvMateriaPrima.CurrentRow.Cells["proveedor"].Value.ToString();
+            txtComentarios.Text = dgvMateriaPrima.CurrentRow.Cells["comentarios"].Value.ToString();
 
+            DateTime fechaOriginal = DateTime.Parse(dgvMateriaPrima.CurrentRow.Cells["fecha"].Value.ToString());
+            txtFecha.Text = fechaOriginal.ToString("yyyy-MM-dd");
+
+            Editar = true;
+            Modificar = true;
+        }
         private System.Windows.Forms.TextBox campoSeleccionado;
         private void monthCalendar_DateChanged(object sender, DateRangeEventArgs e)
         {
@@ -136,18 +157,20 @@ namespace NovoCosts.Forms
 
             BuscarYMostrarResultados("RetornarMateriaPrimaPorProveedor", txtProveedor, listBox1, "@NombreBuscado", "proveedor");
         }
+
+        private System.Windows.Forms.TextBox ultimoTextBoxModificado = null;
         private void txtDetalle_KeyUp(object sender, KeyEventArgs e)
         {
             ultimoTextBoxModificado = txtDetalle;
-            string searchText = txtDetalle.Text;
-            BuscarYMostrarResultados("RetornarMateriaPrimaPorDetalle", txtDetalle, listBox1, "@NombreBuscado", "detalle_mp");
+            //string searchText = txtDetalle.Text;
+            //BuscarYMostrarResultados("RetornarMateriaPrimaPorDetalle", txtDetalle, listBox1, "@NombreBuscado", "detalle_mp");
 
         }
         private void txtProveedor_KeyUp(object sender, KeyEventArgs e)
         {
             ultimoTextBoxModificado = txtProveedor;
-            string searchText = txtProveedor.Text;
-            BuscarYMostrarResultados("RetornarMateriaPrimaPorProveedor", txtProveedor, listBox1, "@NombreBuscado", "proveedor");
+            //string searchText = txtProveedor.Text;
+            //BuscarYMostrarResultados("RetornarMateriaPrimaPorProveedor", txtProveedor, listBox1, "@NombreBuscado", "proveedor");
         }
         private void txtBuscar_KeyUp(object sender, KeyEventArgs e)
         {
@@ -393,30 +416,29 @@ namespace NovoCosts.Forms
         }
         private void RealizarCalculoYEnviar()
         {
-            if (txtOtros.Enabled && txtOtros != null)
+            if (txtOtros.Enabled)
             {
                 if (decimal.TryParse(txtOtros.Text, out decimal otro))
                 {
                     ResultadoMedida = otro;
                 }
             }
-            else if (txtLargo.Enabled && txtLargo != null && txtAncho.Enabled && txtAncho != null)
-            {
-                if (decimal.TryParse(txtLargo.Text, out decimal largo) && decimal.TryParse(txtAncho.Text, out decimal ancho))
-                {
-                    ResultadoMedida = largo * ancho;
-                }
-            }
-            else if (txtLargo.Enabled && txtLargo != null && txtAncho.Enabled && txtAncho != null && txtAlto.Enabled && txtAlto != null)
+            else if (txtLargo.Enabled && txtAncho.Enabled && txtAlto.Enabled)
             {
                 if (decimal.TryParse(txtLargo.Text, out decimal largo) && decimal.TryParse(txtAncho.Text, out decimal ancho) && decimal.TryParse(txtAlto.Text, out decimal alto))
                 {
                     ResultadoMedida = largo * ancho * alto;
                 }
             }
+            else if (txtLargo.Enabled && txtAncho.Enabled)
+            {
+                if (decimal.TryParse(txtLargo.Text, out decimal largo) && decimal.TryParse(txtAncho.Text, out decimal ancho))
+                {
+                    ResultadoMedida = largo * ancho;
+                }
+            }
             Console.WriteLine("ResultadoMedida: " + ResultadoMedida);
         }
-        private System.Windows.Forms.TextBox ultimoTextBoxModificado = null;
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listBox1.SelectedIndex != -1 && ultimoTextBoxModificado != null)
@@ -426,6 +448,8 @@ namespace NovoCosts.Forms
             }
             else
                 MessageBox.Show("No se pudo determinar el TextBox correspondiente.");
+
+
         }
         private void BuscarYMostrarResultados(string nombreProcedimiento, System.Windows.Forms.TextBox textBox, ListBox listBox, string parametroNombre, string nombreColumna)
         {
@@ -476,42 +500,11 @@ namespace NovoCosts.Forms
                 }
             }
         }
-
         private void dgvMateriaPrima_SelectionChanged(object sender, EventArgs e)
         {
-            try
-            {
-                if (dgvMateriaPrima.SelectedRows.Count > 0)
-                {
-                    DataGridViewRow selectedRow = dgvMateriaPrima.SelectedRows[0];
 
-                    if (selectedRow.Cells.Count >= 5)
-                    {
-                        IdMateriaPrima = Convert.ToInt32(selectedRow.Cells["id_materia_prima"].Value);
-                        IdUnidadMedida = Convert.ToInt32(selectedRow.Cells["id_unidad_medida"].Value);
-                        txtDetalle.Text = Convert.ToString(selectedRow.Cells["detalle_mp"].Value);
-                        txtProveedor.Text = Convert.ToString(selectedRow.Cells["proveedor"].Value);
-                        txtOtros.Text = Convert.ToString(selectedRow.Cells["medida"].Value);
-                        txtValorUnitario.Text = Convert.ToString(selectedRow.Cells["valor"].Value);
-                        txtFecha.Text = Convert.ToString(selectedRow.Cells["fecha"].Value);
-                        txtComentarios.Text = Convert.ToString(selectedRow.Cells["comentarios"].Value);
-
-                        Editar = true;
-                        Modificar = true;
-                    }
-                }
-            }
-            catch (StrongTypingException)
-            {
-                MessageBox.Show("Fila vacia");
-                return;
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Error al Guardar");
-                return;
-            }
         }
-    
+
+        
     }
 }

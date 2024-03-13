@@ -55,8 +55,11 @@ namespace NovoCosts.Forms
                     return;
             }
             else
-                if (!Guardar()) return;
-
+                if (!Guardar())
+                {
+                    MessageBox.Show("ERROR!. Dato Existente.");
+                    return;
+                }
             Finalizar();
         }
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -82,7 +85,6 @@ namespace NovoCosts.Forms
 
             BuscarYMostrarResultados("RetornarMateriaPrimaPorReferencia", txtReferencia, listBox1, "@NombreBuscado", "referencia");
         }
-
         private void txtDescripcion_TextChanged(object sender, EventArgs e)
         {
             string searchText = txtDescripcion.Text;
@@ -90,6 +92,15 @@ namespace NovoCosts.Forms
             BuscarYMostrarResultados("RetornarMateriaPrimaPorDescripcion", txtDescripcion, listBox1, "@NombreBuscado", "descripcion");
         }
         string opcionSeleccionada;
+        private System.Windows.Forms.TextBox ultimoTextBoxModificado = null;
+        private void txtReferencia_KeyUp(object sender, KeyEventArgs e)
+        {
+            ultimoTextBoxModificado = txtReferencia;
+        }
+        private void txtDescripcion_KeyUp(object sender, KeyEventArgs e)
+        {
+            ultimoTextBoxModificado = txtDescripcion;
+        }
         private void txtBuscar_KeyUp(object sender, KeyEventArgs e)
         {
             if (comboBoxBuscar.SelectedIndex == -1)
@@ -111,7 +122,6 @@ namespace NovoCosts.Forms
             }
             ultimoTextBoxModificado = txtBuscar;
             MostrarResultados("BuscarProducto", txtBuscar, listBox1, opcionSeleccionada, "@ValorBuscado", opcionSeleccionada);
-
         }
         private void BuscarYMostrarResultados(string nombreProcedimiento, System.Windows.Forms.TextBox textBox, ListBox listBox, string parametroNombre, string nombreColumna)
         {
@@ -207,14 +217,11 @@ namespace NovoCosts.Forms
 
                     if (resultado == DialogResult.Yes)
                         return Producto.Eliminar(IdProducto);
-                    else
-                        return false;
-                }
-                else
-                {
-                    MessageBox.Show("Selecciona un producto antes de eliminar.", "Producto no seleccionado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
                 }
+                MessageBox.Show("Selecciona un producto antes de eliminar.", "Producto no seleccionado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+
             }
             catch (System.Data.SqlClient.SqlException)
             {
@@ -274,18 +281,15 @@ namespace NovoCosts.Forms
         }
         private void TextBox_Click(object sender, EventArgs e)
         {
-
+            if (sender is System.Windows.Forms.TextBox textBox)
+                textBox.SelectAll();
         }
         private void PersonalizarColumnasGrid()
         {
-            // Itera sobre todas las columnas del DataGridView
             foreach (DataGridViewColumn columna in dgvRegistroProductos.Columns)
             {
-                // Asegúrate de que la columna tenga un nombre
                 if (!string.IsNullOrEmpty(columna.Name))
                 {
-                    ConfigurarCabeceraColumna(columna, columna.HeaderText);
-                    // Puedes personalizar las columnas según su nombre o cualquier otra condición necesaria
                     if (columna.Name == "valor_unitario")
                     {
                         dgvRegistroProductos.Columns["valor_unitario"].HeaderText = "Valor Unitario";
@@ -308,25 +312,30 @@ namespace NovoCosts.Forms
                         DbDatos.OcultarIds(dgvRegistroProductos);
                     }
                 }
+                ConfigurarCabeceraColumna(columna, columna.HeaderText);
             }
         }
         private void ConfigurarCabeceraColumna(DataGridViewColumn columna, string nuevoHeaderText)
         {
-            columna.HeaderText = nuevoHeaderText;
+            string nuevoHeaderTextMayusculas = nuevoHeaderText.ToUpper();
+
+            columna.HeaderText = nuevoHeaderTextMayusculas;
             columna.HeaderCell.Style.Font = new Font(columna.DataGridView.Font, FontStyle.Bold);
+            columna.HeaderCell.Style.Font = new Font(columna.HeaderCell.Style.Font, FontStyle.Bold);
         }
-        private System.Windows.Forms.TextBox ultimoTextBoxModificado = null;
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listBox1.SelectedIndex != -1 && ultimoTextBoxModificado != null)
             {
                 string selectedText = listBox1.SelectedItem.ToString();
+
                 ultimoTextBoxModificado.Text = selectedText;
             }
             else
-                MessageBox.Show("No se pudo determinar el TextBox correspondiente.");
+            {
+                MessageBox.Show("Seleccione un dato valido.");
+            }
         }
-
         private void editarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             IdProducto = Convert.ToInt32(dgvRegistroProductos.CurrentRow.Cells["id_producto"].Value);
@@ -367,5 +376,7 @@ namespace NovoCosts.Forms
                 return;
             }
         }
+
+        
     }
 }

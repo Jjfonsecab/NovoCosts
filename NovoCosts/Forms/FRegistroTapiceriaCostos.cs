@@ -19,12 +19,11 @@ namespace NovoCosts.Forms
             InitializeComponent();
             ToUpperText();
         }
-
         private void FRegistroTapiceriaCostos_Load(object sender, EventArgs e)
         {
             ListarTodo();
             ListarProductos();
-            monthCalendar.DateChanged += monthCalendar_DateChanged;
+            MostrarFechaActual();
         }
 
         bool Editar;
@@ -51,7 +50,7 @@ namespace NovoCosts.Forms
         }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (!ValidarCampos(txtReferencia, txtDescripcion, txtCorte, txtCostura, txtForrado, txtBlanco,txtFecha))
+            if (!ValidarCampos(txtReferencia, txtDescripcion, txtCorte, txtCostura, txtForrado, txtBlanco, txtFecha))
                 return;
             if (Modificar)
             {
@@ -63,7 +62,6 @@ namespace NovoCosts.Forms
 
             Finalizar();
         }
-
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             if (dgvTapiceria.SelectedRows.Count == 0 || dgvTapiceria.CurrentRow == null)
@@ -80,13 +78,6 @@ namespace NovoCosts.Forms
                 Eliminar();
                 Finalizar();
             }
-        }
-        private System.Windows.Forms.TextBox campoSeleccionado;
-        private void monthCalendar_DateChanged(object sender, DateRangeEventArgs e)
-        {
-            DateTime fechaSeleccionada = monthCalendar.SelectionStart;
-
-            txtFecha.Text = fechaSeleccionada.ToString("yyyy-MM-dd");
         }
         private void editarToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -277,14 +268,10 @@ namespace NovoCosts.Forms
         }
         private void PersonalizarColumnasGrid()
         {
-            // Itera sobre todas las columnas del DataGridView
             foreach (DataGridViewColumn columna in dgvTapiceria.Columns)
             {
-                // Asegúrate de que la columna tenga un nombre
                 if (!string.IsNullOrEmpty(columna.Name))
                 {
-                    ConfigurarCabeceraColumna(columna, columna.HeaderText);
-                    // Puedes personalizar las columnas según su nombre o cualquier otra condición necesaria
                     if (columna.Name == "valor_unitario")
                     {
                         dgvTapiceria.Columns["valor_unitario"].HeaderText = "Valor Unitario";
@@ -307,14 +294,26 @@ namespace NovoCosts.Forms
                         DbDatos.OcultarIds(dgvTapiceria);
                     }
                 }
+                ConfigurarCabeceraColumna(columna, columna.HeaderText);
+            }
+            foreach (DataGridViewColumn columna in dgvProductos.Columns)
+            {
+                ConfigurarCabeceraColumna(columna, columna.HeaderText);
             }
         }
         private void ConfigurarCabeceraColumna(DataGridViewColumn columna, string nuevoHeaderText)
         {
-            columna.HeaderText = nuevoHeaderText;
-            columna.HeaderCell.Style.Font = new Font(columna.DataGridView.Font, FontStyle.Bold);
-    }
+            string nuevoHeaderTextMayusculas = nuevoHeaderText.ToUpper();
 
-        
+            columna.HeaderText = nuevoHeaderTextMayusculas;
+            columna.HeaderCell.Style.Font = new Font(columna.DataGridView.Font, FontStyle.Bold);
+            columna.HeaderCell.Style.Font = new Font(columna.HeaderCell.Style.Font, FontStyle.Bold);
+        }
+        private void MostrarFechaActual()
+        {
+            txtFecha.Text = DateTime.Now.ToString("yyyy-MM-dd");
+        }
+
+
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace NovoCosts.Forms
 {
-    partial class FRegistroTipoManoObra
+    partial class FRegistroTipoCosto
     {
         /// <summary>
         /// Required designer variable.
@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FRegistroTipoManoObra));
-            this.dgvTipoMO = new System.Windows.Forms.DataGridView();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FRegistroTipoCosto));
+            this.dgvTipoCosto = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnEliminar = new System.Windows.Forms.PictureBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
@@ -39,24 +39,24 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTipoMO)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTipoCosto)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnEliminar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnGuardar)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dgvTipoMO
+            // dgvTipoCosto
             // 
-            this.dgvTipoMO.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dgvTipoMO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTipoMO.Location = new System.Drawing.Point(472, 41);
-            this.dgvTipoMO.Name = "dgvTipoMO";
-            this.dgvTipoMO.RowHeadersWidth = 62;
-            this.dgvTipoMO.RowTemplate.Height = 28;
-            this.dgvTipoMO.Size = new System.Drawing.Size(285, 386);
-            this.dgvTipoMO.TabIndex = 0;
-            this.dgvTipoMO.SelectionChanged += new System.EventHandler(this.dgvTipoMO_SelectionChanged);
+            this.dgvTipoCosto.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dgvTipoCosto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTipoCosto.Location = new System.Drawing.Point(450, 22);
+            this.dgvTipoCosto.Name = "dgvTipoCosto";
+            this.dgvTipoCosto.RowHeadersWidth = 62;
+            this.dgvTipoCosto.RowTemplate.Height = 28;
+            this.dgvTipoCosto.Size = new System.Drawing.Size(285, 386);
+            this.dgvTipoCosto.TabIndex = 1;
+            this.dgvTipoCosto.SelectionChanged += new System.EventHandler(this.dgvTipoCosto_SelectionChanged);
             // 
             // groupBox1
             // 
@@ -65,10 +65,10 @@
             this.groupBox1.Controls.Add(this.btnGuardar);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtNombre);
-            this.groupBox1.Location = new System.Drawing.Point(42, 31);
+            this.groupBox1.Location = new System.Drawing.Point(25, 22);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(372, 322);
-            this.groupBox1.TabIndex = 1;
+            this.groupBox1.Size = new System.Drawing.Size(372, 346);
+            this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos :";
             // 
@@ -139,17 +139,17 @@
             this.editarToolStripMenuItem.Text = "Editar";
             this.editarToolStripMenuItem.Click += new System.EventHandler(this.editarToolStripMenuItem_Click);
             // 
-            // FRegistroTipoManoObra
+            // FRegistroTipoCosto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(798, 450);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.dgvTipoMO);
-            this.Name = "FRegistroTipoManoObra";
-            this.Text = "Registro Tipo  Mano de Obra";
-            this.Load += new System.EventHandler(this.FRegistroTipoManoObra_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTipoMO)).EndInit();
+            this.Controls.Add(this.dgvTipoCosto);
+            this.Name = "FRegistroTipoCosto";
+            this.Text = "Registro Tipo Costo";
+            this.Load += new System.EventHandler(this.FRegistroTipoCosto_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTipoCosto)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnEliminar)).EndInit();
@@ -161,13 +161,13 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgvTipoMO;
+        private System.Windows.Forms.DataGridView dgvTipoCosto;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.PictureBox btnEliminar;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.PictureBox btnGuardar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtNombre;
-        private System.Windows.Forms.PictureBox btnEliminar;
-        private System.Windows.Forms.PictureBox btnGuardar;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem editarToolStripMenuItem;
     }

@@ -85,7 +85,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 96);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(549, 520);
+            this.groupBox1.Size = new System.Drawing.Size(549, 550);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos:";
@@ -136,9 +136,9 @@
             // 
             // txtFecha
             // 
-            this.txtFecha.Location = new System.Drawing.Point(406, 303);
+            this.txtFecha.Location = new System.Drawing.Point(418, 302);
             this.txtFecha.Name = "txtFecha";
-            this.txtFecha.Size = new System.Drawing.Size(100, 26);
+            this.txtFecha.Size = new System.Drawing.Size(96, 26);
             this.txtFecha.TabIndex = 8;
             // 
             // btnGuardar
@@ -215,6 +215,7 @@
             // 
             // btnInicio
             // 
+            this.btnInicio.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnInicio.Image = ((System.Drawing.Image)(resources.GetObject("btnInicio.Image")));
             this.btnInicio.Location = new System.Drawing.Point(111, 23);
             this.btnInicio.Name = "btnInicio";
@@ -261,7 +262,7 @@
             this.tabControl1.Location = new System.Drawing.Point(609, 55);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(497, 561);
+            this.tabControl1.Size = new System.Drawing.Size(546, 561);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 54;
             // 
@@ -271,7 +272,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(489, 528);
+            this.tabPage1.Size = new System.Drawing.Size(538, 528);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Mano de Obra";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -288,7 +289,7 @@
             this.dgvManoObra.Name = "dgvManoObra";
             this.dgvManoObra.RowHeadersWidth = 62;
             this.dgvManoObra.RowTemplate.Height = 28;
-            this.dgvManoObra.Size = new System.Drawing.Size(477, 484);
+            this.dgvManoObra.Size = new System.Drawing.Size(526, 484);
             this.dgvManoObra.TabIndex = 1;
             this.dgvManoObra.SelectionChanged += new System.EventHandler(this.dgvManoObra_SelectionChanged);
             // 

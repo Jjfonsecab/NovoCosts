@@ -69,5 +69,18 @@ namespace NovoCosts.Forms
             else
                 ftapiceria.BringToFront();
         }
+
+        private void btnCostos_Click(object sender, EventArgs e)
+        {
+            FCostos fcostos = Application.OpenForms.OfType<FCostos>().FirstOrDefault();
+
+            if (fcostos == null)
+            {
+                fcostos = new FCostos();
+                fcostos.Show();
+            }
+            else
+                fcostos.BringToFront();
+        }
     }
 }

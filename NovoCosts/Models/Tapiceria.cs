@@ -44,9 +44,13 @@ namespace NovoCosts.Models
         {
             return DbDatos.Listar("Tapiceria_Listar");
         }
-        public static DataTable ListarCompleto()
+        public static DataTable ListarPorProducto(int IdProducto)
         {
-            return DbDatos.Listar("ObtenerInformacionManoObra");
+            List<Parametro> parametros = new List<Parametro>
+            {
+                new Parametro("@id_producto", IdProducto)
+            };
+            return DbDatos.Listar("ObtenerCostoProductoTapiceria",parametros);
         }
     }
 }

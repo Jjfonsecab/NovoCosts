@@ -19,7 +19,6 @@ namespace NovoCosts.Forms
             InitializeComponent();
             ToUpperText();
         }
-
         private void FRegistroUnidadMedida_Load(object sender, EventArgs e)
         {
             Listar();
@@ -28,39 +27,6 @@ namespace NovoCosts.Forms
         bool Editar;
         int IdUnidadMedia;
         bool Modificar;
-
-        private void btnInicio_Click(object sender, EventArgs e)
-        {
-            /*
-                FInicio fInicio = Application.OpenForms.OfType<FInicio>().FirstOrDefault();
-
-                if (fInicio == null)
-                {
-                    fInicio = new FInicio();
-                    fInicio.Show();
-                }
-                else
-                    fInicio.BringToFront();
-
-                if (Application.OpenForms.Count > 1)
-                    this.Close();
-                else
-                    this.Hide();*/
-        }
-
-        private void btnMateriales_Click(object sender, EventArgs e)
-        {
-            FRegistroMateriaPrima fregistro = Application.OpenForms.OfType<FRegistroMateriaPrima>().FirstOrDefault();
-
-            if (fregistro == null)
-            {
-                fregistro = new FRegistroMateriaPrima();
-                fregistro.Show();
-            }
-            else
-                fregistro.BringToFront();
-
-        }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
@@ -75,9 +41,7 @@ namespace NovoCosts.Forms
                 if (!Guardar()) return;
 
             Finalizar();
-        }
-
-        private void btnEliminar_Click(object sender, EventArgs e)
+        }        private void btnEliminar_Click(object sender, EventArgs e)
         {
             if (dgvRegistroUnidades.SelectedRows.Count == 0 || dgvRegistroUnidades.CurrentRow == null)
             {
@@ -94,6 +58,8 @@ namespace NovoCosts.Forms
                 Finalizar();
             }
         }
+
+        private System.Windows.Forms.TextBox ultimoTextBoxModificado = null;
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listBox1.SelectedIndex != -1 && ultimoTextBoxModificado != null)
@@ -227,14 +193,10 @@ namespace NovoCosts.Forms
         }
         private void PersonalizarColumnasGrid()
         {
-            // Itera sobre todas las columnas del DataGridView
             foreach (DataGridViewColumn columna in dgvRegistroUnidades.Columns)
             {
-                // Asegúrate de que la columna tenga un nombre
-                if (!string.IsNullOrEmpty(columna.Name))
-                {
-                    ConfigurarCabeceraColumna(columna, columna.HeaderText);
-                    // Puedes personalizar las columnas según su nombre o cualquier otra condición necesaria
+                if (!string.IsNullOrEmpty(columna.Name))                {
+                    
                     if (columna.Name == "Precio" || columna.Name == "Cantidad" || columna.Name == "Total")
                     {
                         dgvRegistroUnidades.Columns["Precio"].HeaderText = "Precio por Unidad";
@@ -258,15 +220,18 @@ namespace NovoCosts.Forms
                         columna.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                     }
                 }
+                ConfigurarCabeceraColumna(columna, columna.HeaderText);
             }
         }
         private void ConfigurarCabeceraColumna(DataGridViewColumn columna, string nuevoHeaderText)
         {
-            columna.HeaderText = nuevoHeaderText;
+            string nuevoHeaderTextMayusculas = nuevoHeaderText.ToUpper();
+
+            columna.HeaderText = nuevoHeaderTextMayusculas;
             columna.HeaderCell.Style.Font = new Font(columna.DataGridView.Font, FontStyle.Bold);
+            columna.HeaderCell.Style.Font = new Font(columna.HeaderCell.Style.Font, FontStyle.Bold);
         }
 
-        private System.Windows.Forms.TextBox ultimoTextBoxModificado = null;       
         private void BuscarYMostrarResultados(string nombreProcedimiento, System.Windows.Forms.TextBox textBox, ListBox listBox, string parametroNombre, string nombreColumna)
         {
             string searchText = textBox.Text;

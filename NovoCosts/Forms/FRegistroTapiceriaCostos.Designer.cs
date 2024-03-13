@@ -31,29 +31,29 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FRegistroTapiceriaCostos));
             this.btnInicio = new System.Windows.Forms.PictureBox();
-            this.monthCalendar = new System.Windows.Forms.MonthCalendar();
             this.btnEliminar = new System.Windows.Forms.PictureBox();
             this.txtFecha = new System.Windows.Forms.TextBox();
             this.btnGuardar = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtForrado = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtCostura = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtBlanco = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtCorte = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtReferencia = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dgvTapiceria = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
-            this.txtDescripcion = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtReferencia = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtBlanco = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtCorte = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtForrado = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtCostura = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.btnInicio)).BeginInit();
@@ -80,18 +80,11 @@
             this.btnInicio.TabStop = false;
             this.btnInicio.Click += new System.EventHandler(this.btnInicio_Click);
             // 
-            // monthCalendar
-            // 
-            this.monthCalendar.Location = new System.Drawing.Point(12, 312);
-            this.monthCalendar.Name = "monthCalendar";
-            this.monthCalendar.TabIndex = 57;
-            this.monthCalendar.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar_DateChanged);
-            // 
             // btnEliminar
             // 
             this.btnEliminar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
-            this.btnEliminar.Location = new System.Drawing.Point(442, 509);
+            this.btnEliminar.Location = new System.Drawing.Point(454, 401);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(38, 36);
             this.btnEliminar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -101,7 +94,7 @@
             // 
             // txtFecha
             // 
-            this.txtFecha.Location = new System.Drawing.Point(411, 401);
+            this.txtFecha.Location = new System.Drawing.Point(166, 401);
             this.txtFecha.Name = "txtFecha";
             this.txtFecha.Size = new System.Drawing.Size(100, 26);
             this.txtFecha.TabIndex = 54;
@@ -110,7 +103,7 @@
             // 
             this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
-            this.btnGuardar.Location = new System.Drawing.Point(440, 455);
+            this.btnGuardar.Location = new System.Drawing.Point(376, 401);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(40, 36);
             this.btnGuardar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -136,22 +129,127 @@
             this.groupBox1.Controls.Add(this.btnEliminar);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.btnGuardar);
-            this.groupBox1.Controls.Add(this.monthCalendar);
+            this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Location = new System.Drawing.Point(29, 73);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(536, 577);
+            this.groupBox1.Size = new System.Drawing.Size(536, 482);
             this.groupBox1.TabIndex = 58;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos : ";
             // 
+            // txtForrado
+            // 
+            this.txtForrado.Location = new System.Drawing.Point(260, 303);
+            this.txtForrado.Name = "txtForrado";
+            this.txtForrado.Size = new System.Drawing.Size(103, 26);
+            this.txtForrado.TabIndex = 71;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(86, 303);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(73, 20);
+            this.label5.TabIndex = 70;
+            this.label5.Text = "Forrado :";
+            // 
+            // txtCostura
+            // 
+            this.txtCostura.Location = new System.Drawing.Point(260, 259);
+            this.txtCostura.Name = "txtCostura";
+            this.txtCostura.Size = new System.Drawing.Size(103, 26);
+            this.txtCostura.TabIndex = 69;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(86, 259);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(73, 20);
+            this.label7.TabIndex = 68;
+            this.label7.Text = "Costura :";
+            // 
+            // txtBlanco
+            // 
+            this.txtBlanco.Location = new System.Drawing.Point(260, 215);
+            this.txtBlanco.Name = "txtBlanco";
+            this.txtBlanco.Size = new System.Drawing.Size(103, 26);
+            this.txtBlanco.TabIndex = 67;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(86, 215);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(72, 20);
+            this.label2.TabIndex = 66;
+            this.label2.Text = "Postura :";
+            // 
+            // txtCorte
+            // 
+            this.txtCorte.Location = new System.Drawing.Point(260, 171);
+            this.txtCorte.Name = "txtCorte";
+            this.txtCorte.Size = new System.Drawing.Size(103, 26);
+            this.txtCorte.TabIndex = 65;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(86, 171);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(56, 20);
+            this.label3.TabIndex = 64;
+            this.label3.Text = "Corte :";
+            // 
+            // txtDescripcion
+            // 
+            this.txtDescripcion.Location = new System.Drawing.Point(216, 91);
+            this.txtDescripcion.Name = "txtDescripcion";
+            this.txtDescripcion.Size = new System.Drawing.Size(177, 26);
+            this.txtDescripcion.TabIndex = 63;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(407, 359);
+            this.label4.Location = new System.Drawing.Point(42, 401);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 20);
             this.label4.TabIndex = 58;
             this.label4.Text = "Fecha :";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(42, 91);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(100, 20);
+            this.label6.TabIndex = 62;
+            this.label6.Text = "Descripcion :";
+            // 
+            // txtReferencia
+            // 
+            this.txtReferencia.Location = new System.Drawing.Point(216, 47);
+            this.txtReferencia.Name = "txtReferencia";
+            this.txtReferencia.Size = new System.Drawing.Size(177, 26);
+            this.txtReferencia.TabIndex = 61;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(42, 47);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(95, 20);
+            this.label1.TabIndex = 60;
+            this.label1.Text = "Referencia :";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Location = new System.Drawing.Point(55, 134);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(361, 210);
+            this.groupBox2.TabIndex = 72;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Datos Tapiceria";
             // 
             // tabControl1
             // 
@@ -189,7 +287,7 @@
             this.dgvTapiceria.Name = "dgvTapiceria";
             this.dgvTapiceria.RowHeadersWidth = 62;
             this.dgvTapiceria.RowTemplate.Height = 28;
-            this.dgvTapiceria.Size = new System.Drawing.Size(728, 459);
+            this.dgvTapiceria.Size = new System.Drawing.Size(728, 469);
             this.dgvTapiceria.TabIndex = 1;
             this.dgvTapiceria.SelectionChanged += new System.EventHandler(this.dgvTapiceria_SelectionChanged);
             // 
@@ -219,102 +317,6 @@
             this.dgvProductos.TabIndex = 2;
             this.dgvProductos.SelectionChanged += new System.EventHandler(this.dgvProductos_SelectionChanged);
             // 
-            // txtDescripcion
-            // 
-            this.txtDescripcion.Location = new System.Drawing.Point(216, 91);
-            this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(177, 26);
-            this.txtDescripcion.TabIndex = 63;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(42, 91);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(100, 20);
-            this.label6.TabIndex = 62;
-            this.label6.Text = "Descripcion :";
-            // 
-            // txtReferencia
-            // 
-            this.txtReferencia.Location = new System.Drawing.Point(216, 47);
-            this.txtReferencia.Name = "txtReferencia";
-            this.txtReferencia.Size = new System.Drawing.Size(177, 26);
-            this.txtReferencia.TabIndex = 61;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(42, 47);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(95, 20);
-            this.label1.TabIndex = 60;
-            this.label1.Text = "Referencia :";
-            // 
-            // txtBlanco
-            // 
-            this.txtBlanco.Location = new System.Drawing.Point(221, 177);
-            this.txtBlanco.Name = "txtBlanco";
-            this.txtBlanco.Size = new System.Drawing.Size(103, 26);
-            this.txtBlanco.TabIndex = 67;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(47, 177);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 20);
-            this.label2.TabIndex = 66;
-            this.label2.Text = "Postura :";
-            // 
-            // txtCorte
-            // 
-            this.txtCorte.Location = new System.Drawing.Point(221, 133);
-            this.txtCorte.Name = "txtCorte";
-            this.txtCorte.Size = new System.Drawing.Size(103, 26);
-            this.txtCorte.TabIndex = 65;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(47, 133);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 20);
-            this.label3.TabIndex = 64;
-            this.label3.Text = "Corte :";
-            // 
-            // txtForrado
-            // 
-            this.txtForrado.Location = new System.Drawing.Point(221, 265);
-            this.txtForrado.Name = "txtForrado";
-            this.txtForrado.Size = new System.Drawing.Size(103, 26);
-            this.txtForrado.TabIndex = 71;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(47, 265);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(73, 20);
-            this.label5.TabIndex = 70;
-            this.label5.Text = "Forrado :";
-            // 
-            // txtCostura
-            // 
-            this.txtCostura.Location = new System.Drawing.Point(221, 221);
-            this.txtCostura.Name = "txtCostura";
-            this.txtCostura.Size = new System.Drawing.Size(103, 26);
-            this.txtCostura.TabIndex = 69;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(47, 221);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(73, 20);
-            this.label7.TabIndex = 68;
-            this.label7.Text = "Costura :";
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
@@ -334,12 +336,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1387, 696);
+            this.ClientSize = new System.Drawing.Size(1387, 593);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnInicio);
             this.Controls.Add(this.groupBox1);
             this.Name = "FRegistroTapiceriaCostos";
-            this.Text = "FRegistroTapiceriaCostos";
+            this.Text = "Registro Costos Tapiceria";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FRegistroTapiceriaCostos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.btnInicio)).EndInit();
@@ -360,7 +362,6 @@
         #endregion
 
         private System.Windows.Forms.PictureBox btnInicio;
-        private System.Windows.Forms.MonthCalendar monthCalendar;
         private System.Windows.Forms.PictureBox btnEliminar;
         private System.Windows.Forms.TextBox txtFecha;
         private System.Windows.Forms.PictureBox btnGuardar;
@@ -385,5 +386,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem editarToolStripMenuItem;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }

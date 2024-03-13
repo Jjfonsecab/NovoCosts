@@ -39,16 +39,12 @@
             this.btnGuardar = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dgvRegistroUnidades = new System.Windows.Forms.DataGridView();
-            this.btnInicio = new System.Windows.Forms.PictureBox();
-            this.btnMateriales = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnEliminar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnGuardar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRegistroUnidades)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnInicio)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnMateriales)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,7 +76,7 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Location = new System.Drawing.Point(30, 29);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(572, 208);
+            this.groupBox1.Size = new System.Drawing.Size(368, 340);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Registro:";
@@ -89,7 +85,7 @@
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 20;
-            this.listBox1.Location = new System.Drawing.Point(380, 25);
+            this.listBox1.Location = new System.Drawing.Point(32, 183);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(170, 104);
             this.listBox1.TabIndex = 51;
@@ -110,7 +106,7 @@
             // btnEliminar
             // 
             this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
-            this.btnEliminar.Location = new System.Drawing.Point(325, 135);
+            this.btnEliminar.Location = new System.Drawing.Point(284, 251);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(32, 36);
             this.btnEliminar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -121,7 +117,7 @@
             // btnGuardar
             // 
             this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
-            this.btnGuardar.Location = new System.Drawing.Point(395, 135);
+            this.btnGuardar.Location = new System.Drawing.Point(282, 183);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(34, 36);
             this.btnGuardar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -142,34 +138,12 @@
             // 
             this.dgvRegistroUnidades.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvRegistroUnidades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvRegistroUnidades.Location = new System.Drawing.Point(30, 243);
+            this.dgvRegistroUnidades.Location = new System.Drawing.Point(428, 39);
             this.dgvRegistroUnidades.Name = "dgvRegistroUnidades";
             this.dgvRegistroUnidades.RowHeadersWidth = 62;
             this.dgvRegistroUnidades.RowTemplate.Height = 28;
-            this.dgvRegistroUnidades.Size = new System.Drawing.Size(641, 340);
+            this.dgvRegistroUnidades.Size = new System.Drawing.Size(370, 340);
             this.dgvRegistroUnidades.TabIndex = 3;
-            // 
-            // btnInicio
-            // 
-            this.btnInicio.Image = ((System.Drawing.Image)(resources.GetObject("btnInicio.Image")));
-            this.btnInicio.Location = new System.Drawing.Point(623, 29);
-            this.btnInicio.Name = "btnInicio";
-            this.btnInicio.Size = new System.Drawing.Size(50, 53);
-            this.btnInicio.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.btnInicio.TabIndex = 47;
-            this.btnInicio.TabStop = false;
-            this.btnInicio.Click += new System.EventHandler(this.btnInicio_Click);
-            // 
-            // btnMateriales
-            // 
-            this.btnMateriales.Image = ((System.Drawing.Image)(resources.GetObject("btnMateriales.Image")));
-            this.btnMateriales.Location = new System.Drawing.Point(623, 133);
-            this.btnMateriales.Name = "btnMateriales";
-            this.btnMateriales.Size = new System.Drawing.Size(48, 53);
-            this.btnMateriales.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.btnMateriales.TabIndex = 48;
-            this.btnMateriales.TabStop = false;
-            this.btnMateriales.Click += new System.EventHandler(this.btnMateriales_Click);
             // 
             // contextMenuStrip1
             // 
@@ -190,9 +164,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(722, 595);
-            this.Controls.Add(this.btnInicio);
-            this.Controls.Add(this.btnMateriales);
+            this.ClientSize = new System.Drawing.Size(841, 410);
             this.Controls.Add(this.dgvRegistroUnidades);
             this.Controls.Add(this.groupBox1);
             this.Name = "FRegistroUnidadMedida";
@@ -203,8 +175,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnEliminar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnGuardar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRegistroUnidades)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnInicio)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnMateriales)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -218,8 +188,6 @@
         private System.Windows.Forms.DataGridView dgvRegistroUnidades;
         private System.Windows.Forms.PictureBox btnEliminar;
         private System.Windows.Forms.PictureBox btnGuardar;
-        private System.Windows.Forms.PictureBox btnInicio;
-        private System.Windows.Forms.PictureBox btnMateriales;
         private System.Windows.Forms.ComboBox comboBoxP;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox listBox1;

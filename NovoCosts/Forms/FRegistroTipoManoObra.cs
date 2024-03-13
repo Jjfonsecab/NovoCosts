@@ -28,24 +28,6 @@ namespace NovoCosts.Forms
         bool Editar;
         bool Modificar;
         int IdTipoManoObra;
-
-        private void btnInicio_Click(object sender, EventArgs e)
-        {
-            FInicio fInicio = Application.OpenForms.OfType<FInicio>().FirstOrDefault();
-
-            if (fInicio == null)
-            {
-                fInicio = new FInicio();
-                fInicio.Show();
-            }
-            else
-                fInicio.BringToFront();
-
-            if (Application.OpenForms.Count > 1)
-                this.Close();
-            else
-                this.Hide();
-        }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (!ValidarCampos(txtNombre))
@@ -56,7 +38,11 @@ namespace NovoCosts.Forms
                     return;
             }
             else
-                if (!Guardar()) return;
+                if (!Guardar())
+                {
+                    MessageBox.Show("ERROR!. Dato Existente.");
+                    return;
+                }
 
             Finalizar();
         }
@@ -77,7 +63,19 @@ namespace NovoCosts.Forms
                 Finalizar();
             }
         }
-
+        private System.Windows.Forms.TextBox ultimoTextBoxModificado = null;
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex != -1 && ultimoTextBoxModificado != null)
+            {
+                string selectedText = listBox1.SelectedItem.ToString();
+                ultimoTextBoxModificado.Text = selectedText;
+            }
+            else
+            {
+                MessageBox.Show("No se pudo determinar el TextBox correspondiente.");
+            }
+        }
         private void ToUpperText()//El upperText para los comboBox esta en comboBox_TextChanged
         {
             txtNombre.CharacterCasing = CharacterCasing.Upper;
@@ -96,42 +94,21 @@ namespace NovoCosts.Forms
         }
         private void PersonalizarColumnasGrid()
         {
-            // Itera sobre todas las columnas del DataGridView
             foreach (DataGridViewColumn columna in dgvTipoMO.Columns)
             {
-                // Asegúrate de que la columna tenga un nombre
                 if (!string.IsNullOrEmpty(columna.Name))
                 {
                     ConfigurarCabeceraColumna(columna, columna.HeaderText);
-                    // Puedes personalizar las columnas según su nombre o cualquier otra condición necesaria
-                    if (columna.Name == "valor_unitario")
-                    {
-                        dgvTipoMO.Columns["valor_unitario"].HeaderText = "Valor Unitario";
-                        DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
-                        estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight; // Alinea a la derecha
-                        estiloCeldaNumerica.Format = "N0";
-                        columna.DefaultCellStyle = estiloCeldaNumerica;
-                        DbDatos.OcultarIds(dgvTipoMO);
-                    }
-                    else if (columna.Name == "nombre_materia_prima")
-                    {
-                        dgvTipoMO.Columns["nombre_materia_prima"].HeaderText = "Detalle";
-                        DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
-                        columna.DefaultCellStyle = estiloCeldaNumerica;
-                        DbDatos.OcultarIds(dgvTipoMO);
-                    }
-                    else if (columna.Name == "fecha")
-                    {
-                        dgvTipoMO.Columns["fecha"].HeaderText = "Fecha";
-                        DbDatos.OcultarIds(dgvTipoMO);
-                    }
                 }
             }
         }
         private void ConfigurarCabeceraColumna(DataGridViewColumn columna, string nuevoHeaderText)
         {
-            columna.HeaderText = nuevoHeaderText;
+            string nuevoHeaderTextMayusculas = nuevoHeaderText.ToUpper();
+
+            columna.HeaderText = nuevoHeaderTextMayusculas;
             columna.HeaderCell.Style.Font = new Font(columna.DataGridView.Font, FontStyle.Bold);
+            columna.HeaderCell.Style.Font = new Font(columna.HeaderCell.Style.Font, FontStyle.Bold);
         }
         private bool ValidarCampos(params Control[] controles)
         {
@@ -216,7 +193,6 @@ namespace NovoCosts.Forms
         {
             txtNombre.Text = "";
         }
-
         private void txtNombre_TextChanged(object sender, EventArgs e)
         {
             string searchText = txtNombre.Text;
@@ -224,7 +200,6 @@ namespace NovoCosts.Forms
             BuscarYMostrarResultados("RetornarNombreTipo", txtNombre, listBox1, "@NombreBuscado", "nombre_tipo");
 
         }
-
         private void txtNombre_KeyUp(object sender, KeyEventArgs e)
         {
             string searchText = txtNombre.Text;
@@ -232,7 +207,7 @@ namespace NovoCosts.Forms
             BuscarYMostrarResultados("RetornarNombreTipo", txtNombre, listBox1, "@NombreBuscado", "nombre_tipo");
 
         }
-        private void BuscarYMostrarResultados(string nombreProcedimiento, System.Windows.Forms.TextBox textBox, ListBox listBox, string parametroNombre, string nombreColumna)
+private void BuscarYMostrarResultados(string nombreProcedimiento, System.Windows.Forms.TextBox textBox, ListBox listBox, string parametroNombre, string nombreColumna)
         {
             string searchText = textBox.Text;
 
@@ -250,8 +225,7 @@ namespace NovoCosts.Forms
                 foreach (DataRow row in result.Rows)
                     listBox.Items.Add(row[nombreColumna].ToString());
             }
-        }
-
+        }        
         private void editarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             IdTipoManoObra = Convert.ToInt32(dgvTipoMO.CurrentRow.Cells["id_tipo_mano_obra"].Value);
@@ -260,7 +234,6 @@ namespace NovoCosts.Forms
             Editar = true;
             Modificar = true;
         }
-
         private void dgvTipoMO_SelectionChanged(object sender, EventArgs e)
         {
             try
@@ -290,6 +263,5 @@ namespace NovoCosts.Forms
                 return;
             }
         }
-    
     }
 }

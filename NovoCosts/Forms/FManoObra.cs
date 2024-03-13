@@ -154,10 +154,8 @@ namespace NovoCosts.Forms
         {
             if (dgvProductos.SelectedRows.Count > 0)
             {
-                // Obtener la fila seleccionada
                 DataGridViewRow selectedRow = dgvProductos.SelectedRows[0];
 
-                // Asegurarse de que la fila tiene al menos dos celdas
                 if (selectedRow.Cells.Count >= 2)
                 {
                     IdProducto = Convert.ToInt32(selectedRow.Cells["id_producto"].Value);
@@ -309,42 +307,39 @@ namespace NovoCosts.Forms
         }        
         private void PersonalizarColumnasGrid()
         {
-            // Itera sobre todas las columnas del DataGridView
             foreach (DataGridViewColumn columna in dgvManoObra.Columns)
             {
-                // Asegúrate de que la columna tenga un nombre
-                if (!string.IsNullOrEmpty(columna.Name))
-                {
-                    ConfigurarCabeceraColumna(columna, columna.HeaderText);
-                    // Puedes personalizar las columnas según su nombre o cualquier otra condición necesaria
-                    if (columna.Name == "valor_unitario")
+                if (!string.IsNullOrEmpty(columna.Name))                {
+                    
+                    if (columna.Name == "costo")
                     {
-                        dgvManoObra.Columns["valor_unitario"].HeaderText = "Valor Unitario";
+                        dgvManoObra.Columns["costo"].HeaderText = "COSTO UNITARIO";
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight; // Alinea a la derecha
                         estiloCeldaNumerica.Format = "N0";
                         columna.DefaultCellStyle = estiloCeldaNumerica;
                         DbDatos.OcultarIds(dgvManoObra);
                     }
-                    else if (columna.Name == "nombre_materia_prima")
-                    {
-                        dgvManoObra.Columns["nombre_materia_prima"].HeaderText = "Detalle";
-                        DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
-                        columna.DefaultCellStyle = estiloCeldaNumerica;
-                        DbDatos.OcultarIds(dgvManoObra);
-                    }
                     else if (columna.Name == "fecha")
                     {
-                        dgvManoObra.Columns["fecha"].HeaderText = "Fecha";
+                        dgvManoObra.Columns["fecha"].HeaderText = "FECHA";
                         DbDatos.OcultarIds(dgvManoObra);
                     }
+                    ConfigurarCabeceraColumna(columna, columna.HeaderText);
                 }
             }
-        }
+            foreach (DataGridViewColumn columna in dgvProductos.Columns)
+            {
+                ConfigurarCabeceraColumna(columna, columna.HeaderText);
+            }
+        }       
         private void ConfigurarCabeceraColumna(DataGridViewColumn columna, string nuevoHeaderText)
         {
-            columna.HeaderText = nuevoHeaderText;
+            string nuevoHeaderTextMayusculas = nuevoHeaderText.ToUpper();
+
+            columna.HeaderText = nuevoHeaderTextMayusculas;
             columna.HeaderCell.Style.Font = new Font(columna.DataGridView.Font, FontStyle.Bold);
+            columna.HeaderCell.Style.Font = new Font(columna.HeaderCell.Style.Font, FontStyle.Bold);
         }        
 
         
