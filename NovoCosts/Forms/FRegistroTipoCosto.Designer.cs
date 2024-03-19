@@ -60,6 +60,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.Plum;
             this.groupBox1.Controls.Add(this.btnEliminar);
             this.groupBox1.Controls.Add(this.listBox1);
             this.groupBox1.Controls.Add(this.btnGuardar);

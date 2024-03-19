@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
 
 namespace NovoCosts.Forms
 {
@@ -30,6 +31,8 @@ namespace NovoCosts.Forms
         bool Modificar;
         int IdTapiceria;
         int IdProducto;
+        int IdManoObra;
+        decimal ResultadoSuma;
 
         private void btnInicio_Click(object sender, EventArgs e)
         {
@@ -50,6 +53,7 @@ namespace NovoCosts.Forms
         }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            totalSuma(Convert.ToDecimal(txtCorte.Text),Convert.ToDecimal(txtBlanco.Text),Convert.ToDecimal(txtCostura.Text),Convert.ToDecimal(txtForrado.Text));
             if (!ValidarCampos(txtReferencia, txtDescripcion, txtCorte, txtCostura, txtForrado, txtBlanco, txtFecha))
                 return;
             if (Modificar)
@@ -94,42 +98,6 @@ namespace NovoCosts.Forms
             Editar = true;
             Modificar = true;
         }
-        private void dgvTapiceria_SelectionChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (dgvTapiceria.SelectedRows.Count > 0)
-                {
-                    DataGridViewRow selectedRow = dgvTapiceria.SelectedRows[0];
-
-                    if (selectedRow.Cells.Count >= 5)
-                    {
-                        // Verifica si el valor es DBNull antes de convertir
-                        IdTapiceria = Convert.ToInt32(selectedRow.Cells["id_costo_tapiceria"].Value);
-                        IdProducto = Convert.ToInt32(selectedRow.Cells["id_producto"].Value);
-                        txtCorte.Text = Convert.ToString(selectedRow.Cells["corte_alistado"].Value);
-                        txtBlanco.Text = Convert.ToString(selectedRow.Cells["blanco"].Value);
-                        txtCostura.Text = Convert.ToString(selectedRow.Cells["costura"].Value);
-                        txtForrado.Text = Convert.ToString(selectedRow.Cells["forrado"].Value);
-
-                        txtFecha.Text = selectedRow.Cells["fecha"].Value.ToString();
-
-                        Editar = true;
-                        Modificar = true;
-                    }
-                }
-            }
-            catch (StrongTypingException)
-            {
-                MessageBox.Show("Fila vacia");
-                return;
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Error al Guardar");
-                return;
-            }
-        }
         private void dgvProductos_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvProductos.SelectedRows.Count > 0)
@@ -147,19 +115,35 @@ namespace NovoCosts.Forms
         //Metodos
         private bool Guardar()
         {
-            Tapiceria tapiceria = new Tapiceria()
+            try
             {
-                IdTapiceria = IdTapiceria,
-                IdProducto = IdProducto,
-                CorteAlistado = Convert.ToInt32(txtCorte.Text),
-                Blanco = Convert.ToInt32(txtBlanco.Text),
-                Costura = Convert.ToInt32(txtCostura.Text),
-                Forrado = Convert.ToInt32(txtForrado.Text),
-                Fecha = DateTime.Parse(txtFecha.Text),
-            };
+                Tapiceria tapiceria = new Tapiceria()
+                {
+                    IdTapiceria = IdTapiceria,
+                    IdProducto = IdProducto,
+                    CorteAlistado = Convert.ToInt32(txtCorte.Text),
+                    Blanco = Convert.ToInt32(txtBlanco.Text),
+                    Costura = Convert.ToInt32(txtCostura.Text),
+                    Forrado = Convert.ToInt32(txtForrado.Text),
+                    Fecha = DateTime.Parse(txtFecha.Text),
+                };
 
-
-            return Tapiceria.Guardar(tapiceria, Editar);
+                ManoObra manoobra = new ManoObra()
+                {
+                    IdManoObra = IdManoObra,
+                    IdProducto = IdProducto,
+                    IdTipoManoObra = 8,
+                    Costo = ResultadoSuma,
+                    Fecha = DateTime.Parse(txtFecha.Text),
+                };
+                Modificar = false;
+                return Tapiceria.Guardar(tapiceria, Editar) && ManoObra.Guardar(manoobra, Editar);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error al guardar.");
+                return false;
+            }            
         }
         private bool GuardarEditado()
         {
@@ -239,6 +223,7 @@ namespace NovoCosts.Forms
             txtForrado.Text = "";
             txtFecha.Text = "";
             Editar = false;
+            MostrarFechaActual();
         }
         private void ListarTodo()
         {
@@ -314,6 +299,11 @@ namespace NovoCosts.Forms
             txtFecha.Text = DateTime.Now.ToString("yyyy-MM-dd");
         }
 
-
+        private decimal totalSuma(decimal corte, decimal blanco, decimal costura,decimal forrado)
+        {
+            ResultadoSuma = corte + blanco + costura + forrado;
+            return ResultadoSuma;
+            
+        }
     }
 }

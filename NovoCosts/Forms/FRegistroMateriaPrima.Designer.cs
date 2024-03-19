@@ -41,16 +41,20 @@
             this.txtFecha = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtCantidadDesperdicio = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.btnLimpiar = new System.Windows.Forms.PictureBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.btnRegistroUnidades = new System.Windows.Forms.PictureBox();
-            this.btnInicio = new System.Windows.Forms.PictureBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.btnRegistroUnidades = new System.Windows.Forms.PictureBox();
             this.txtComentarios = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnEliminar = new System.Windows.Forms.PictureBox();
             this.btnGuardar = new System.Windows.Forms.PictureBox();
             this.monthCalendar = new System.Windows.Forms.MonthCalendar();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtDividir = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.txtLargo = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -64,21 +68,21 @@
             this.label11 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.PictureBox();
             this.txtBuscar = new System.Windows.Forms.TextBox();
+            this.btnInicio = new System.Windows.Forms.PictureBox();
             this.dgvMateriaPrima = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnLimpiar = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnLimpiar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnRegistroUnidades)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnInicio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnEliminar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnGuardar)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnBuscar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnInicio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMateriaPrima)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnLimpiar)).BeginInit();
             this.SuspendLayout();
             // 
             // label2
@@ -103,7 +107,8 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(68, 62);
+            this.label3.BackColor = System.Drawing.Color.PowderBlue;
+            this.label3.Location = new System.Drawing.Point(56, 30);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 20);
             this.label3.TabIndex = 6;
@@ -171,11 +176,14 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.PowderBlue;
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.txtCantidadDesperdicio);
+            this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.btnLimpiar);
             this.groupBox1.Controls.Add(this.listBox1);
-            this.groupBox1.Controls.Add(this.btnRegistroUnidades);
-            this.groupBox1.Controls.Add(this.btnInicio);
             this.groupBox1.Controls.Add(this.label10);
+            this.groupBox1.Controls.Add(this.btnRegistroUnidades);
             this.groupBox1.Controls.Add(this.txtComentarios);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtDetalle);
@@ -190,12 +198,39 @@
             this.groupBox1.Controls.Add(this.txtProveedor);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.groupBox3);
-            this.groupBox1.Location = new System.Drawing.Point(12, 29);
+            this.groupBox1.Location = new System.Drawing.Point(12, 71);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(632, 907);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Registro de Datos :";
+            // 
+            // txtCantidadDesperdicio
+            // 
+            this.txtCantidadDesperdicio.Location = new System.Drawing.Point(513, 579);
+            this.txtCantidadDesperdicio.Name = "txtCantidadDesperdicio";
+            this.txtCantidadDesperdicio.Size = new System.Drawing.Size(59, 26);
+            this.txtCantidadDesperdicio.TabIndex = 83;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(368, 579);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(119, 20);
+            this.label12.TabIndex = 82;
+            this.label12.Text = "% Desperdicio :";
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Image = ((System.Drawing.Image)(resources.GetObject("btnLimpiar.Image")));
+            this.btnLimpiar.Location = new System.Drawing.Point(522, 789);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(64, 55);
+            this.btnLimpiar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.btnLimpiar.TabIndex = 55;
+            this.btnLimpiar.TabStop = false;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // listBox1
             // 
@@ -207,28 +242,6 @@
             this.listBox1.TabIndex = 20;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
-            // btnRegistroUnidades
-            // 
-            this.btnRegistroUnidades.Image = ((System.Drawing.Image)(resources.GetObject("btnRegistroUnidades.Image")));
-            this.btnRegistroUnidades.Location = new System.Drawing.Point(534, 369);
-            this.btnRegistroUnidades.Name = "btnRegistroUnidades";
-            this.btnRegistroUnidades.Size = new System.Drawing.Size(57, 58);
-            this.btnRegistroUnidades.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.btnRegistroUnidades.TabIndex = 48;
-            this.btnRegistroUnidades.TabStop = false;
-            this.btnRegistroUnidades.Click += new System.EventHandler(this.btnRegistroUnidades_Click);
-            // 
-            // btnInicio
-            // 
-            this.btnInicio.Image = ((System.Drawing.Image)(resources.GetObject("btnInicio.Image")));
-            this.btnInicio.Location = new System.Drawing.Point(534, 48);
-            this.btnInicio.Name = "btnInicio";
-            this.btnInicio.Size = new System.Drawing.Size(52, 50);
-            this.btnInicio.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.btnInicio.TabIndex = 18;
-            this.btnInicio.TabStop = false;
-            this.btnInicio.Click += new System.EventHandler(this.btnInicio_Click);
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -237,6 +250,17 @@
             this.label10.Size = new System.Drawing.Size(18, 20);
             this.label10.TabIndex = 49;
             this.label10.Text = "$";
+            // 
+            // btnRegistroUnidades
+            // 
+            this.btnRegistroUnidades.Image = ((System.Drawing.Image)(resources.GetObject("btnRegistroUnidades.Image")));
+            this.btnRegistroUnidades.Location = new System.Drawing.Point(560, 344);
+            this.btnRegistroUnidades.Name = "btnRegistroUnidades";
+            this.btnRegistroUnidades.Size = new System.Drawing.Size(57, 58);
+            this.btnRegistroUnidades.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.btnRegistroUnidades.TabIndex = 48;
+            this.btnRegistroUnidades.TabStop = false;
+            this.btnRegistroUnidades.Click += new System.EventHandler(this.btnRegistroUnidades_Click);
             // 
             // txtComentarios
             // 
@@ -287,6 +311,8 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Thistle;
+            this.groupBox2.Controls.Add(this.label14);
+            this.groupBox2.Controls.Add(this.txtDividir);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.txtLargo);
             this.groupBox2.Controls.Add(this.label2);
@@ -299,10 +325,27 @@
             this.groupBox2.Controls.Add(this.txtAlto);
             this.groupBox2.Location = new System.Drawing.Point(27, 281);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(449, 183);
+            this.groupBox2.Size = new System.Drawing.Size(518, 183);
             this.groupBox2.TabIndex = 45;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Medidas :";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(416, 88);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(90, 20);
+            this.label14.TabIndex = 49;
+            this.label14.Text = "Dividir por : ";
+            // 
+            // txtDividir
+            // 
+            this.txtDividir.Enabled = false;
+            this.txtDividir.Location = new System.Drawing.Point(429, 124);
+            this.txtDividir.Name = "txtDividir";
+            this.txtDividir.Size = new System.Drawing.Size(40, 26);
+            this.txtDividir.TabIndex = 50;
             // 
             // label7
             // 
@@ -424,6 +467,17 @@
             this.txtBuscar.TabIndex = 52;
             this.txtBuscar.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBuscar_KeyUp);
             // 
+            // btnInicio
+            // 
+            this.btnInicio.Image = ((System.Drawing.Image)(resources.GetObject("btnInicio.Image")));
+            this.btnInicio.Location = new System.Drawing.Point(44, 12);
+            this.btnInicio.Name = "btnInicio";
+            this.btnInicio.Size = new System.Drawing.Size(52, 50);
+            this.btnInicio.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.btnInicio.TabIndex = 18;
+            this.btnInicio.TabStop = false;
+            this.btnInicio.Click += new System.EventHandler(this.btnInicio_Click);
+            // 
             // dgvMateriaPrima
             // 
             this.dgvMateriaPrima.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -436,7 +490,7 @@
             this.dgvMateriaPrima.Name = "dgvMateriaPrima";
             this.dgvMateriaPrima.RowHeadersWidth = 62;
             this.dgvMateriaPrima.RowTemplate.Height = 28;
-            this.dgvMateriaPrima.Size = new System.Drawing.Size(1029, 894);
+            this.dgvMateriaPrima.Size = new System.Drawing.Size(1029, 949);
             this.dgvMateriaPrima.TabIndex = 19;
             // 
             // contextMenuStrip1
@@ -454,25 +508,15 @@
             this.editarToolStripMenuItem.Text = "Editar";
             this.editarToolStripMenuItem.Click += new System.EventHandler(this.editarToolStripMenuItem_Click);
             // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.Image = ((System.Drawing.Image)(resources.GetObject("btnLimpiar.Image")));
-            this.btnLimpiar.Location = new System.Drawing.Point(522, 789);
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(64, 55);
-            this.btnLimpiar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.btnLimpiar.TabIndex = 55;
-            this.btnLimpiar.TabStop = false;
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
-            // 
             // FRegistroMateriaPrima
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1745, 961);
+            this.BackColor = System.Drawing.Color.Honeydew;
+            this.ClientSize = new System.Drawing.Size(1745, 1016);
             this.Controls.Add(this.dgvMateriaPrima);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.btnInicio);
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Name = "FRegistroMateriaPrima";
             this.Text = " Materia Prima";
@@ -480,8 +524,8 @@
             this.Load += new System.EventHandler(this.Registro_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnLimpiar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnRegistroUnidades)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnInicio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnEliminar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnGuardar)).EndInit();
             this.groupBox2.ResumeLayout(false);
@@ -489,11 +533,10 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnBuscar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnInicio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMateriaPrima)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.btnLimpiar)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -536,5 +579,9 @@
         private System.Windows.Forms.PictureBox btnBuscar;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.PictureBox btnLimpiar;
+        private System.Windows.Forms.TextBox txtCantidadDesperdicio;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox txtDividir;
     }
 }

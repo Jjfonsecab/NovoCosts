@@ -90,14 +90,23 @@ namespace NovoCosts.Forms
         //Methods
         private bool Guardar()
         {
-            UnidadesMedida unidadesMedida = new UnidadesMedida()
+            try
             {
-                IdUnidadMedida = IdUnidadMedia,  // Asegúrate de tener el ID correcto
-                Nombre = txtNombre.Text,
-                CantidadParametros = Convert.ToInt32(comboBoxP.Text),
-            };
-            MessageBox.Show("Proceso Exitoso.");
-            return UnidadesMedida.Guardar(unidadesMedida, Editar);            
+                UnidadesMedida unidadesMedida = new UnidadesMedida()
+                {
+                    IdUnidadMedida = IdUnidadMedia,  // Asegúrate de tener el ID correcto
+                    Nombre = txtNombre.Text,
+                    CantidadParametros = Convert.ToInt32(comboBoxP.Text),
+                };
+                MessageBox.Show("Proceso Exitoso.");
+                return UnidadesMedida.Guardar(unidadesMedida, Editar);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error al Guardar.");
+                return false;
+            }
+                     
         }
         private bool GuardarEditado()
         {
@@ -127,7 +136,7 @@ namespace NovoCosts.Forms
                     DialogResult resultado = MessageBox.Show("¿Estás seguro de que deseas eliminar esta unidad de medida?", "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                     if (resultado == DialogResult.Yes)
-                        return MateriasPrimas.Eliminar(IdUnidadMedia);
+                        return UnidadesMedida.Eliminar(IdUnidadMedia);
                     else
                         return false;
                 }

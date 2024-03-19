@@ -176,14 +176,23 @@ namespace NovoCosts.Forms
         //Metodos
         private bool Guardar()
         {
-            Producto producto = new Producto()
+            try
             {
-                IdProducto = IdProducto,
-                ReferenciaProducto = txtReferencia.Text,
-                DescripcionProducto = txtDescripcion.Text,
-            };
+                Producto producto = new Producto()
+                {
+                    IdProducto = IdProducto,
+                    ReferenciaProducto = txtReferencia.Text,
+                    DescripcionProducto = txtDescripcion.Text,
+                };
 
-            return Producto.Guardar(producto, Editar);
+                return Producto.Guardar(producto, Editar);
+            }
+            catch (Exception )
+            {
+                MessageBox.Show("Error al Guardar!");
+                return false;
+            }
+            
         }
         private bool GuardarEditado()
         {

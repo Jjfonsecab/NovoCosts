@@ -36,9 +36,13 @@ namespace NovoCosts.Models
             };
             return DbDatos.Ejecutar("ManoObra_Eliminar", parametros);
         }
-        public static DataTable ListarTodo()
+        public static DataTable ListarPorProducto(int IdProducto)
         {
-            return DbDatos.Listar("ManoObra_Listar");
+            List<Parametro> parametros = new List<Parametro>
+            {
+                new Parametro("@id_producto", IdProducto)
+            };
+            return DbDatos.Listar("ObtenerCostoProductoManoObra", parametros);
         }
         public static DataTable ListarCompleto()
         {

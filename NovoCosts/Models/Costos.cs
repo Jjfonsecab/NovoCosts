@@ -41,10 +41,10 @@ namespace NovoCosts.Models
                 new Parametro("@dimension3", costos.Dimension3),
                 new Parametro("@cm", costos.Cm),
                 new Parametro("@cantidad_desperdicio", costos.CantidadDesperdicio),
-                new Parametro("@desperdicio", costos.CantidadDesperdicio),
-                new Parametro("@total_cantidad", costos.CantidadDesperdicio),
+                new Parametro("@desperdicio", costos.Desperdicio),
+                new Parametro("@total_cantidad", costos.TotalCantidad),
                 new Parametro("@valor_unitario", costos.ValorUnitario),
-                new Parametro("@valor_total", costos.CantidadDesperdicio),
+                new Parametro("@valor_total", costos.ValorTotal),
                 new Parametro("@id_tipo_costo", costos.IdTipoCosto),
                 new Parametro("@fecha", costos.Fecha),
                 new Parametro("@Editar", editar)
@@ -62,6 +62,14 @@ namespace NovoCosts.Models
         public static DataTable ListarTodo()
         {
             return DbDatos.Listar("Costos_Listar");
+        }
+        public static DataTable ListarCostoProducto(int IdProducto)
+        {
+            List<Parametro> parametros = new List<Parametro>
+            {
+                new Parametro("@id_producto", IdProducto)
+            };
+            return DbDatos.Listar("Costos_ListarPorIDProducto", parametros);
         }
     }
 }

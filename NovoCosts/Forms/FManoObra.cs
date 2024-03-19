@@ -23,7 +23,7 @@ namespace NovoCosts.Forms
         {
             ListarTodo();
             ListarProductos();
-            monthCalendar.DateChanged += monthCalendar_DateChanged;
+            MostrarFechaActual();
         }
 
         bool Editar;
@@ -92,14 +92,6 @@ namespace NovoCosts.Forms
                 Finalizar();
             }
         }
-
-        private System.Windows.Forms.TextBox campoSeleccionado;
-        private void monthCalendar_DateChanged(object sender, DateRangeEventArgs e)
-        {
-            DateTime fechaSeleccionada = monthCalendar.SelectionStart;
-
-            txtFecha.Text = fechaSeleccionada.ToString("yyyy-MM-dd");
-        }
         private void editarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             IdManoObra = Convert.ToInt32(dgvManoObra.CurrentRow.Cells["id_mano_obra"].Value);
@@ -139,7 +131,7 @@ namespace NovoCosts.Forms
                     }
                 }
             }
-            catch (StrongTypingException)
+            catch (System.NullReferenceException)
             {
                 MessageBox.Show("Fila vacia");
                 return;
@@ -184,17 +176,25 @@ namespace NovoCosts.Forms
         //Metodos
         private bool Guardar()
         {
-            ManoObra manoobra = new ManoObra()
+            try
             {
-                IdManoObra = IdManoObra,
-                IdProducto = IdProducto,
-                IdTipoManoObra = IdTipoManoObra,
-                Costo = Convert.ToInt32(txtCosto.Text),
-                Fecha = DateTime.Parse(txtFecha.Text),
-            };
+                ManoObra manoobra = new ManoObra()
+                {
+                    IdManoObra = IdManoObra,
+                    IdProducto = IdProducto,
+                    IdTipoManoObra = IdTipoManoObra,
+                    Costo = Convert.ToInt32(txtCosto.Text),
+                    Fecha = DateTime.Parse(txtFecha.Text),
+                };
 
-
-            return ManoObra.Guardar(manoobra, Editar);
+                return ManoObra.Guardar(manoobra, Editar);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error al Guardar.");
+                return false;
+            }
+            
         }
         private bool GuardarEditado()
         {
@@ -258,6 +258,7 @@ namespace NovoCosts.Forms
             txtCosto.Text = "";
             txtFecha.Text = "";
             Editar = false;
+            MostrarFechaActual();
         }
         private void ListarTodo()
         {
@@ -300,6 +301,10 @@ namespace NovoCosts.Forms
 
             txtFecha.CharacterCasing = CharacterCasing.Upper;
         }
+        private void MostrarFechaActual()
+        {
+            txtFecha.Text = DateTime.Now.ToString("yyyy-MM-dd");
+        }
         private void TextBox_Click(object sender, EventArgs e)
         {
             if (sender is System.Windows.Forms.TextBox textBox)
@@ -340,8 +345,12 @@ namespace NovoCosts.Forms
             columna.HeaderText = nuevoHeaderTextMayusculas;
             columna.HeaderCell.Style.Font = new Font(columna.DataGridView.Font, FontStyle.Bold);
             columna.HeaderCell.Style.Font = new Font(columna.HeaderCell.Style.Font, FontStyle.Bold);
-        }        
+        }
 
-        
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            Limpiar();
+            Modificar = false;
+        }
     }
 }

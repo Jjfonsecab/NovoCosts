@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FRegistroProductos));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboBoxBuscar = new System.Windows.Forms.ComboBox();
+            this.btnInicio = new System.Windows.Forms.PictureBox();
             this.btnBuscar = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtBuscar = new System.Windows.Forms.TextBox();
@@ -43,21 +44,22 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvRegistroProductos = new System.Windows.Forms.DataGridView();
-            this.btnInicio = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnInicio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnBuscar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnEliminar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnGuardar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRegistroProductos)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnInicio)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.PowderBlue;
             this.groupBox1.Controls.Add(this.comboBoxBuscar);
+            this.groupBox1.Controls.Add(this.btnInicio);
             this.groupBox1.Controls.Add(this.btnBuscar);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.txtBuscar);
@@ -68,9 +70,9 @@
             this.groupBox1.Controls.Add(this.btnGuardar);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(48, 73);
+            this.groupBox1.Location = new System.Drawing.Point(48, 36);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(490, 409);
+            this.groupBox1.Size = new System.Drawing.Size(490, 446);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos :";
@@ -86,10 +88,22 @@
             this.comboBoxBuscar.Size = new System.Drawing.Size(121, 28);
             this.comboBoxBuscar.TabIndex = 52;
             // 
+            // btnInicio
+            // 
+            this.btnInicio.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnInicio.Image = ((System.Drawing.Image)(resources.GetObject("btnInicio.Image")));
+            this.btnInicio.Location = new System.Drawing.Point(414, 24);
+            this.btnInicio.Name = "btnInicio";
+            this.btnInicio.Size = new System.Drawing.Size(52, 50);
+            this.btnInicio.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.btnInicio.TabIndex = 19;
+            this.btnInicio.TabStop = false;
+            this.btnInicio.Click += new System.EventHandler(this.btnInicio_Click);
+            // 
             // btnBuscar
             // 
             this.btnBuscar.Image = ((System.Drawing.Image)(resources.GetObject("btnBuscar.Image")));
-            this.btnBuscar.Location = new System.Drawing.Point(387, 119);
+            this.btnBuscar.Location = new System.Drawing.Point(393, 168);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(52, 44);
             this.btnBuscar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -195,18 +209,6 @@
             this.dgvRegistroProductos.TabIndex = 1;
             this.dgvRegistroProductos.SelectionChanged += new System.EventHandler(this.dgvRegistroProductos_SelectionChanged);
             // 
-            // btnInicio
-            // 
-            this.btnInicio.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnInicio.Image = ((System.Drawing.Image)(resources.GetObject("btnInicio.Image")));
-            this.btnInicio.Location = new System.Drawing.Point(48, 12);
-            this.btnInicio.Name = "btnInicio";
-            this.btnInicio.Size = new System.Drawing.Size(52, 50);
-            this.btnInicio.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.btnInicio.TabIndex = 19;
-            this.btnInicio.TabStop = false;
-            this.btnInicio.Click += new System.EventHandler(this.btnInicio_Click);
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
@@ -226,8 +228,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.LightYellow;
             this.ClientSize = new System.Drawing.Size(1006, 529);
-            this.Controls.Add(this.btnInicio);
             this.Controls.Add(this.dgvRegistroProductos);
             this.Controls.Add(this.groupBox1);
             this.Name = "FRegistroProductos";
@@ -235,11 +237,11 @@
             this.Load += new System.EventHandler(this.FRegistroProductos_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnInicio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnBuscar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnEliminar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnGuardar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRegistroProductos)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnInicio)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 

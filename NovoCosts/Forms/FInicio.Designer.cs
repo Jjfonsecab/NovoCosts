@@ -34,18 +34,22 @@
             this.btnManoObra = new System.Windows.Forms.PictureBox();
             this.btnTapiceria = new System.Windows.Forms.PictureBox();
             this.btnCostos = new System.Windows.Forms.PictureBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.btnProducto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMateriaPrima)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnManoObra)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnTapiceria)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCostos)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnProducto
             // 
             this.btnProducto.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnProducto.Image = ((System.Drawing.Image)(resources.GetObject("btnProducto.Image")));
-            this.btnProducto.Location = new System.Drawing.Point(553, 298);
+            this.btnProducto.Location = new System.Drawing.Point(105, 75);
             this.btnProducto.Name = "btnProducto";
             this.btnProducto.Size = new System.Drawing.Size(66, 61);
             this.btnProducto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -57,7 +61,7 @@
             // 
             this.btnMateriaPrima.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMateriaPrima.Image = ((System.Drawing.Image)(resources.GetObject("btnMateriaPrima.Image")));
-            this.btnMateriaPrima.Location = new System.Drawing.Point(681, 195);
+            this.btnMateriaPrima.Location = new System.Drawing.Point(294, 75);
             this.btnMateriaPrima.Name = "btnMateriaPrima";
             this.btnMateriaPrima.Size = new System.Drawing.Size(66, 61);
             this.btnMateriaPrima.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -69,7 +73,7 @@
             // 
             this.btnManoObra.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnManoObra.Image = ((System.Drawing.Image)(resources.GetObject("btnManoObra.Image")));
-            this.btnManoObra.Location = new System.Drawing.Point(681, 298);
+            this.btnManoObra.Location = new System.Drawing.Point(16, 38);
             this.btnManoObra.Name = "btnManoObra";
             this.btnManoObra.Size = new System.Drawing.Size(66, 61);
             this.btnManoObra.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -82,7 +86,7 @@
             // 
             this.btnTapiceria.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTapiceria.Image = ((System.Drawing.Image)(resources.GetObject("btnTapiceria.Image")));
-            this.btnTapiceria.Location = new System.Drawing.Point(431, 298);
+            this.btnTapiceria.Location = new System.Drawing.Point(197, 38);
             this.btnTapiceria.Name = "btnTapiceria";
             this.btnTapiceria.Size = new System.Drawing.Size(66, 61);
             this.btnTapiceria.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -94,7 +98,7 @@
             // 
             this.btnCostos.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCostos.Image = ((System.Drawing.Image)(resources.GetObject("btnCostos.Image")));
-            this.btnCostos.Location = new System.Drawing.Point(56, 59);
+            this.btnCostos.Location = new System.Drawing.Point(387, 25);
             this.btnCostos.Name = "btnCostos";
             this.btnCostos.Size = new System.Drawing.Size(81, 84);
             this.btnCostos.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -102,16 +106,40 @@
             this.btnCostos.TabStop = false;
             this.btnCostos.Click += new System.EventHandler(this.btnCostos_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.groupBox1.Controls.Add(this.btnTapiceria);
+            this.groupBox1.Controls.Add(this.btnManoObra);
+            this.groupBox1.Controls.Add(this.btnCostos);
+            this.groupBox1.Controls.Add(this.btnMateriaPrima);
+            this.groupBox1.Controls.Add(this.btnProducto);
+            this.groupBox1.Location = new System.Drawing.Point(12, 203);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(493, 160);
+            this.groupBox1.TabIndex = 80;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Registro";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(12, 24);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(493, 162);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 81;
+            this.pictureBox1.TabStop = false;
+            // 
             // FInicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btnCostos);
-            this.Controls.Add(this.btnTapiceria);
-            this.Controls.Add(this.btnManoObra);
-            this.Controls.Add(this.btnMateriaPrima);
-            this.Controls.Add(this.btnProducto);
+            this.BackColor = System.Drawing.Color.MintCream;
+            this.ClientSize = new System.Drawing.Size(516, 372);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.groupBox1);
             this.Name = "FInicio";
             this.Text = "Inicio";
             ((System.ComponentModel.ISupportInitialize)(this.btnProducto)).EndInit();
@@ -119,6 +147,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnManoObra)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnTapiceria)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCostos)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -130,5 +160,7 @@
         private System.Windows.Forms.PictureBox btnManoObra;
         private System.Windows.Forms.PictureBox btnTapiceria;
         private System.Windows.Forms.PictureBox btnCostos;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

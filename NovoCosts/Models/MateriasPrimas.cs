@@ -16,6 +16,7 @@ namespace NovoCosts.Models
         public decimal Medida { get; set; }
         public decimal Valor { get; set; }
         public string Proveedor { get; set; }
+        public decimal Desperdicio {  get; set; }
         public DateTime Fecha { get; set; }
         public string Comentarios { get; set; }
 
@@ -30,6 +31,7 @@ namespace NovoCosts.Models
                 new Parametro("@medida", materiasPrimas.Medida),
                 new Parametro("@valor", materiasPrimas.Valor),
                 new Parametro("@proveedor", materiasPrimas.Proveedor),
+                new Parametro("@desperdicio_cantidad", materiasPrimas.Desperdicio),
                 new Parametro("@fecha", materiasPrimas.Fecha),
                 new Parametro("@Comentarios", materiasPrimas.Comentarios),
                 new Parametro("@Editar", editar)

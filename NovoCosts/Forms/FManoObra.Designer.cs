@@ -33,8 +33,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.btnTipo = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.monthCalendar = new System.Windows.Forms.MonthCalendar();
             this.btnEliminar = new System.Windows.Forms.PictureBox();
             this.txtFecha = new System.Windows.Forms.TextBox();
             this.btnGuardar = new System.Windows.Forms.PictureBox();
@@ -46,7 +46,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnInicio = new System.Windows.Forms.PictureBox();
-            this.btnTipo = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -54,25 +53,29 @@
             this.dgvManoObra = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
+            this.btnLimpiar = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnTipo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnEliminar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnGuardar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnInicio)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnTipo)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvManoObra)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnLimpiar)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.groupBox1.Controls.Add(this.btnLimpiar);
             this.groupBox1.Controls.Add(this.txtDescripcion);
             this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.btnTipo);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.monthCalendar);
             this.groupBox1.Controls.Add(this.btnEliminar);
             this.groupBox1.Controls.Add(this.txtFecha);
             this.groupBox1.Controls.Add(this.btnGuardar);
@@ -83,9 +86,9 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 96);
+            this.groupBox1.Location = new System.Drawing.Point(12, 78);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(549, 550);
+            this.groupBox1.Size = new System.Drawing.Size(549, 456);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos:";
@@ -106,6 +109,18 @@
             this.label6.TabIndex = 54;
             this.label6.Text = "Descripcion :";
             // 
+            // btnTipo
+            // 
+            this.btnTipo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnTipo.Image = ((System.Drawing.Image)(resources.GetObject("btnTipo.Image")));
+            this.btnTipo.Location = new System.Drawing.Point(161, 346);
+            this.btnTipo.Name = "btnTipo";
+            this.btnTipo.Size = new System.Drawing.Size(52, 50);
+            this.btnTipo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.btnTipo.TabIndex = 53;
+            this.btnTipo.TabStop = false;
+            this.btnTipo.Click += new System.EventHandler(this.btnTipo_Click);
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -115,18 +130,11 @@
             this.label5.TabIndex = 9;
             this.label5.Text = "$";
             // 
-            // monthCalendar
-            // 
-            this.monthCalendar.Location = new System.Drawing.Point(20, 255);
-            this.monthCalendar.Name = "monthCalendar";
-            this.monthCalendar.TabIndex = 53;
-            this.monthCalendar.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar_DateChanged);
-            // 
             // btnEliminar
             // 
             this.btnEliminar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
-            this.btnEliminar.Location = new System.Drawing.Point(443, 404);
+            this.btnEliminar.Location = new System.Drawing.Point(464, 265);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(38, 36);
             this.btnEliminar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -136,7 +144,7 @@
             // 
             // txtFecha
             // 
-            this.txtFecha.Location = new System.Drawing.Point(418, 302);
+            this.txtFecha.Location = new System.Drawing.Point(137, 262);
             this.txtFecha.Name = "txtFecha";
             this.txtFecha.Size = new System.Drawing.Size(96, 26);
             this.txtFecha.TabIndex = 8;
@@ -145,7 +153,7 @@
             // 
             this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
-            this.btnGuardar.Location = new System.Drawing.Point(441, 350);
+            this.btnGuardar.Location = new System.Drawing.Point(381, 265);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(40, 36);
             this.btnGuardar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -180,7 +188,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(414, 267);
+            this.label4.Location = new System.Drawing.Point(42, 265);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 20);
             this.label4.TabIndex = 3;
@@ -217,25 +225,13 @@
             // 
             this.btnInicio.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnInicio.Image = ((System.Drawing.Image)(resources.GetObject("btnInicio.Image")));
-            this.btnInicio.Location = new System.Drawing.Point(111, 23);
+            this.btnInicio.Location = new System.Drawing.Point(12, 12);
             this.btnInicio.Name = "btnInicio";
             this.btnInicio.Size = new System.Drawing.Size(52, 50);
             this.btnInicio.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.btnInicio.TabIndex = 19;
             this.btnInicio.TabStop = false;
             this.btnInicio.Click += new System.EventHandler(this.btnInicio_Click);
-            // 
-            // btnTipo
-            // 
-            this.btnTipo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTipo.Image = ((System.Drawing.Image)(resources.GetObject("btnTipo.Image")));
-            this.btnTipo.Location = new System.Drawing.Point(225, 23);
-            this.btnTipo.Name = "btnTipo";
-            this.btnTipo.Size = new System.Drawing.Size(52, 50);
-            this.btnTipo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.btnTipo.TabIndex = 53;
-            this.btnTipo.TabStop = false;
-            this.btnTipo.Click += new System.EventHandler(this.btnTipo_Click);
             // 
             // contextMenuStrip1
             // 
@@ -259,7 +255,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(609, 55);
+            this.tabControl1.Location = new System.Drawing.Point(611, 37);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(546, 561);
@@ -289,7 +285,7 @@
             this.dgvManoObra.Name = "dgvManoObra";
             this.dgvManoObra.RowHeadersWidth = 62;
             this.dgvManoObra.RowTemplate.Height = 28;
-            this.dgvManoObra.Size = new System.Drawing.Size(526, 484);
+            this.dgvManoObra.Size = new System.Drawing.Size(526, 510);
             this.dgvManoObra.TabIndex = 1;
             this.dgvManoObra.SelectionChanged += new System.EventHandler(this.dgvManoObra_SelectionChanged);
             // 
@@ -299,7 +295,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(489, 528);
+            this.tabPage2.Size = new System.Drawing.Size(538, 528);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Productos";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -315,17 +311,28 @@
             this.dgvProductos.Name = "dgvProductos";
             this.dgvProductos.RowHeadersWidth = 62;
             this.dgvProductos.RowTemplate.Height = 28;
-            this.dgvProductos.Size = new System.Drawing.Size(490, 484);
+            this.dgvProductos.Size = new System.Drawing.Size(526, 513);
             this.dgvProductos.TabIndex = 2;
             this.dgvProductos.SelectionChanged += new System.EventHandler(this.dgvProductos_SelectionChanged);
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Image = ((System.Drawing.Image)(resources.GetObject("btnLimpiar.Image")));
+            this.btnLimpiar.Location = new System.Drawing.Point(438, 346);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(64, 55);
+            this.btnLimpiar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.btnLimpiar.TabIndex = 56;
+            this.btnLimpiar.TabStop = false;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // FManoObra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Thistle;
             this.ClientSize = new System.Drawing.Size(1209, 658);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.btnTipo);
             this.Controls.Add(this.btnInicio);
             this.Controls.Add(this.groupBox1);
             this.Name = "FManoObra";
@@ -335,16 +342,17 @@
             this.Load += new System.EventHandler(this.FManoObra_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnTipo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnEliminar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnGuardar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnInicio)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnTipo)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvManoObra)).EndInit();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnLimpiar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -363,7 +371,6 @@
         private System.Windows.Forms.PictureBox btnInicio;
         private System.Windows.Forms.PictureBox btnEliminar;
         private System.Windows.Forms.PictureBox btnGuardar;
-        private System.Windows.Forms.MonthCalendar monthCalendar;
         private System.Windows.Forms.PictureBox btnTipo;
         private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.Label label6;
@@ -374,5 +381,6 @@
         private System.Windows.Forms.DataGridView dgvManoObra;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridView dgvProductos;
+        private System.Windows.Forms.PictureBox btnLimpiar;
     }
 }

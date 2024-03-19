@@ -67,6 +67,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.LightPink;
             this.groupBox1.Controls.Add(this.listBox1);
             this.groupBox1.Controls.Add(this.comboBoxP);
             this.groupBox1.Controls.Add(this.btnEliminar);
@@ -105,10 +106,11 @@
             // 
             // btnEliminar
             // 
+            this.btnEliminar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
             this.btnEliminar.Location = new System.Drawing.Point(284, 251);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(32, 36);
+            this.btnEliminar.Size = new System.Drawing.Size(44, 36);
             this.btnEliminar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.btnEliminar.TabIndex = 46;
             this.btnEliminar.TabStop = false;
@@ -116,10 +118,11 @@
             // 
             // btnGuardar
             // 
+            this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
             this.btnGuardar.Location = new System.Drawing.Point(282, 183);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(34, 36);
+            this.btnGuardar.Size = new System.Drawing.Size(46, 36);
             this.btnGuardar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.btnGuardar.TabIndex = 45;
             this.btnGuardar.TabStop = false;

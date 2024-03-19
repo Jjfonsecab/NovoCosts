@@ -54,8 +54,8 @@ namespace NovoCosts.Forms
         }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            RealizarCalculoYEnviar();
-            if (!ValidarCampos(txtDetalle, comboBoxUnidadMedida, txtValorUnitario, txtProveedor, txtFecha))
+            RealizarCalculo();
+            if (!ValidarCampos(txtDetalle, comboBoxUnidadMedida, txtValorUnitario, txtProveedor, txtCantidadDesperdicio,txtFecha))
                 return;
             if (Modificar)
             {
@@ -88,6 +88,7 @@ namespace NovoCosts.Forms
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             Limpiar();
+            txtComentarios.Text = "N.A.";
             Modificar = false;
         }
         private void btnRegistroUnidades_Click(object sender, EventArgs e)
@@ -118,7 +119,17 @@ namespace NovoCosts.Forms
                 Console.WriteLine("IdUnidadMedida: " + IdUnidadMedida);
                 Console.WriteLine("NumeroParametros: " + NumeroParametros);
 
-                ActivarControlesSegunParametros();
+                string unidadMedida = selectedRow["nombre"].ToString();
+
+                if (unidadMedida.Contains("TABLA"))
+                {
+                    txtOtros.Enabled = true;
+                    txtDividir.Enabled = true;
+                }
+                else
+                {
+                    ActivarControlesSegunParametros();
+                }                
             }
 
         }
@@ -130,6 +141,7 @@ namespace NovoCosts.Forms
             txtOtros.Text = dgvMateriaPrima.CurrentRow.Cells["medida"].Value.ToString();
             txtValorUnitario.Text = dgvMateriaPrima.CurrentRow.Cells["valor"].Value.ToString();
             txtProveedor.Text = dgvMateriaPrima.CurrentRow.Cells["proveedor"].Value.ToString();
+            txtCantidadDesperdicio.Text = dgvMateriaPrima.CurrentRow.Cells["desperdicio_cantidad"].Value.ToString();
             txtComentarios.Text = dgvMateriaPrima.CurrentRow.Cells["comentarios"].Value.ToString();
 
             DateTime fechaOriginal = DateTime.Parse(dgvMateriaPrima.CurrentRow.Cells["fecha"].Value.ToString());
@@ -208,20 +220,28 @@ namespace NovoCosts.Forms
         //Metodos       
         private bool Guardar()
         {
-            //Console.WriteLine("Antes de asignar IdMateriaPrima: " + IdMateriaPrima);
-            MateriasPrimas materiasPrimas = new MateriasPrimas()
+            try
             {
-                DetalleMateriaPrima = txtDetalle.Text,
-                IdUnidadMedida = IdUnidadMedida,
-                Medida = ResultadoMedida,
-                Valor = Convert.ToDecimal(txtValorUnitario.Text),
-                Proveedor = txtProveedor.Text,
-                Fecha = DateTime.Parse(txtFecha.Text),
-                Comentarios = txtComentarios.Text,
-                IdMateriaPrima = IdMateriaPrima,
-            };
+                MateriasPrimas materiasPrimas = new MateriasPrimas()
+                {
+                    DetalleMateriaPrima = txtDetalle.Text,
+                    IdUnidadMedida = IdUnidadMedida,
+                    Medida = ResultadoMedida,
+                    Valor = Convert.ToDecimal(txtValorUnitario.Text),
+                    Proveedor = txtProveedor.Text,
+                    Desperdicio = Convert.ToDecimal(txtCantidadDesperdicio.Text),
+                    Fecha = DateTime.Parse(txtFecha.Text),
+                    Comentarios = txtComentarios.Text,
+                    IdMateriaPrima = IdMateriaPrima,
+                };
 
-            return MateriasPrimas.Guardar(materiasPrimas, Editar);
+                return MateriasPrimas.Guardar(materiasPrimas, Editar);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error al Guardar.");
+                return false;
+            }            
         }
         private bool GuardarEditado()
         {
@@ -237,6 +257,7 @@ namespace NovoCosts.Forms
                     Medida = ResultadoMedida,
                     Valor = Convert.ToDecimal(txtValorUnitario.Text),
                     Proveedor = txtProveedor.Text,
+                    Desperdicio = Convert.ToDecimal(txtCantidadDesperdicio.Text),
                     Fecha = fechaOriginal,
                     Comentarios = txtComentarios.Text,
                 };
@@ -297,7 +318,9 @@ namespace NovoCosts.Forms
             txtOtros.Text = "";
             txtValorUnitario.Text = "";
             txtProveedor.Text = "";
+            txtCantidadDesperdicio.Text = "";
             txtFecha.Text = "";
+            txtDividir.Text = "";
             Editar = false;
             MostrarFechaActual();
         }
@@ -323,7 +346,6 @@ namespace NovoCosts.Forms
         {
             DataTable dataTable = UnidadesMedida.Listar();
 
-
             comboBoxUnidadMedida.DataSource = dataTable;
             comboBoxUnidadMedida.DisplayMember = "nombre";
             comboBoxUnidadMedida.ValueMember = "cantidad_parametros";
@@ -332,7 +354,7 @@ namespace NovoCosts.Forms
         {
             txtFecha.Text = DateTime.Now.ToString("yyyy-MM-dd");
         }
-        private void PersonalizarColumnasGrid()
+        private void PersonalizarColumnasGrid()//ToDo
         {
             // Itera sobre todas las columnas del DataGridView
             foreach (DataGridViewColumn columna in dgvMateriaPrima.Columns)
@@ -381,6 +403,8 @@ namespace NovoCosts.Forms
             txtComentarios.Click += TextBox_Click;
             txtBuscar.CharacterCasing = CharacterCasing.Upper;
             txtBuscar.Click += TextBox_Click;
+            //txtCantidadDesperdicio.CharacterCasing = CharacterCasing.Upper;
+            txtCantidadDesperdicio.Click += TextBox_Click;
 
             txtFecha.CharacterCasing = CharacterCasing.Upper;
         }
@@ -414,9 +438,19 @@ namespace NovoCosts.Forms
                     break;
             }
         }
-        private void RealizarCalculoYEnviar()
+        private void RealizarCalculo()
         {
-            if (txtOtros.Enabled)
+            if (txtOtros.Enabled && txtDividir.Enabled)
+            {
+                if (decimal.TryParse(txtOtros.Text, out decimal otros) && decimal.TryParse(txtDividir.Text, out decimal divisor))
+                {
+                    Console.WriteLine("Valor de txtOtros: " + otros);
+                    Console.WriteLine("Valor de txtDividir: " + divisor);
+                    ResultadoMedida = otros / divisor;
+                    Console.WriteLine("Resultado: " + ResultadoMedida);
+                }
+            }
+            else if (txtOtros.Enabled)
             {
                 if (decimal.TryParse(txtOtros.Text, out decimal otro))
                 {
@@ -434,6 +468,8 @@ namespace NovoCosts.Forms
             {
                 if (decimal.TryParse(txtLargo.Text, out decimal largo) && decimal.TryParse(txtAncho.Text, out decimal ancho))
                 {
+                    Console.WriteLine("largo: " + largo);
+                    Console.WriteLine("ancho: " + ancho);
                     ResultadoMedida = largo * ancho;
                 }
             }
@@ -448,7 +484,6 @@ namespace NovoCosts.Forms
             }
             else
                 MessageBox.Show("No se pudo determinar el TextBox correspondiente.");
-
 
         }
         private void BuscarYMostrarResultados(string nombreProcedimiento, System.Windows.Forms.TextBox textBox, ListBox listBox, string parametroNombre, string nombreColumna)
@@ -499,10 +534,6 @@ namespace NovoCosts.Forms
                     listBox.Items.Add(row[nombreColumna].ToString());
                 }
             }
-        }
-        private void dgvMateriaPrima_SelectionChanged(object sender, EventArgs e)
-        {
-
         }
 
         

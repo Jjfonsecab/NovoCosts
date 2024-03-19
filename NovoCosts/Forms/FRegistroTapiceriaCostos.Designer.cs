@@ -72,7 +72,7 @@
             // 
             this.btnInicio.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnInicio.Image = ((System.Drawing.Image)(resources.GetObject("btnInicio.Image")));
-            this.btnInicio.Location = new System.Drawing.Point(29, 12);
+            this.btnInicio.Location = new System.Drawing.Point(454, 47);
             this.btnInicio.Name = "btnInicio";
             this.btnInicio.Size = new System.Drawing.Size(52, 50);
             this.btnInicio.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -94,6 +94,7 @@
             // 
             // txtFecha
             // 
+            this.txtFecha.Enabled = false;
             this.txtFecha.Location = new System.Drawing.Point(166, 401);
             this.txtFecha.Name = "txtFecha";
             this.txtFecha.Size = new System.Drawing.Size(100, 26);
@@ -113,8 +114,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.Lavender;
             this.groupBox1.Controls.Add(this.txtForrado);
             this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.btnInicio);
             this.groupBox1.Controls.Add(this.txtCostura);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.txtBlanco);
@@ -130,9 +133,9 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.btnGuardar);
             this.groupBox1.Controls.Add(this.groupBox2);
-            this.groupBox1.Location = new System.Drawing.Point(29, 73);
+            this.groupBox1.Location = new System.Drawing.Point(29, 24);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(536, 482);
+            this.groupBox1.Size = new System.Drawing.Size(536, 531);
             this.groupBox1.TabIndex = 58;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos : ";
@@ -244,6 +247,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.BackColor = System.Drawing.Color.Thistle;
             this.groupBox2.Location = new System.Drawing.Point(55, 134);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(361, 210);
@@ -283,13 +287,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvTapiceria.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvTapiceria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTapiceria.ContextMenuStrip = this.contextMenuStrip1;
             this.dgvTapiceria.Location = new System.Drawing.Point(6, 12);
             this.dgvTapiceria.Name = "dgvTapiceria";
             this.dgvTapiceria.RowHeadersWidth = 62;
             this.dgvTapiceria.RowTemplate.Height = 28;
             this.dgvTapiceria.Size = new System.Drawing.Size(728, 469);
             this.dgvTapiceria.TabIndex = 1;
-            this.dgvTapiceria.SelectionChanged += new System.EventHandler(this.dgvTapiceria_SelectionChanged);
             // 
             // tabPage2
             // 
@@ -336,9 +340,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.SlateBlue;
             this.ClientSize = new System.Drawing.Size(1387, 593);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.btnInicio);
             this.Controls.Add(this.groupBox1);
             this.Name = "FRegistroTapiceriaCostos";
             this.Text = "Registro Costos Tapiceria";

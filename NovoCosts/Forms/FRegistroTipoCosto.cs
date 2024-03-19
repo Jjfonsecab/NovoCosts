@@ -119,13 +119,21 @@ namespace NovoCosts.Forms
 
         private bool Guardar()
         {
-            TipoCosto tipo = new TipoCosto()
+            try
             {
-                IdTipoCosto = IdTipoCosto,
-                Nombre = txtNombre.Text,
-            };
+                TipoCosto tipo = new TipoCosto()
+                {
+                    IdTipoCosto = IdTipoCosto,
+                    Nombre = txtNombre.Text,
+                };
 
-            return TipoCosto.Guardar(tipo, Editar);
+                return TipoCosto.Guardar(tipo, Editar);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error al Guardar.");
+                return false;
+            }            
         }
         private bool GuardarEditado()
         {
