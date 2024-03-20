@@ -334,16 +334,25 @@ namespace NovoCosts.Forms
         }
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listBox1.SelectedIndex != -1 && ultimoTextBoxModificado != null)
+            try
             {
-                string selectedText = listBox1.SelectedItem.ToString();
+                if (listBox1.SelectedIndex != -1 && ultimoTextBoxModificado != null)
+                {
+                    string selectedText = listBox1.SelectedItem.ToString();
 
-                ultimoTextBoxModificado.Text = selectedText;
+                    ultimoTextBoxModificado.Text = selectedText;
+                }
+                else
+                {
+                    MessageBox.Show("Seleccione un dato valido.");
+                }
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("Seleccione un dato valido.");
+                MessageBox.Show("Fila vacia");
+                return;
             }
+            
         }
         private void editarToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -354,7 +363,6 @@ namespace NovoCosts.Forms
             Editar = true;
             Modificar = true;
         }
-
         private void dgvRegistroProductos_SelectionChanged(object sender, EventArgs e)
         {
             try
@@ -384,8 +392,6 @@ namespace NovoCosts.Forms
                 MessageBox.Show("Error al Guardar");
                 return;
             }
-        }
-
-        
+        }        
     }
 }

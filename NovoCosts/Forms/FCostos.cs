@@ -33,7 +33,6 @@ namespace NovoCosts.Forms
         int IdProducto;
         int IdMateriaPrima;
         int IdTipoCosto;
-        int IdManoObra;
         Decimal ResultadoDesperdicio;
         Decimal ResultadoTotalCantidad;
         Decimal ResultadoValorTotal;
@@ -88,12 +87,13 @@ namespace NovoCosts.Forms
                     txtDesperdicioTotal.Text = ResultadoDesperdicio.ToString();
                     CalcularValorTotalManoObra(ResultadoTotalCantidad, Convert.ToDecimal(txtValorU.Text));
                 }
-
             }
             if (Modificar)
             {
                 if (!GuardarEditado())
                     return;
+                else
+                    LimpiarTodo();
             }
             else
                 if (!Guardar()) return;
@@ -102,133 +102,178 @@ namespace NovoCosts.Forms
         }
         private void btnEliminar_Click_1(object sender, EventArgs e)
         {
-            if (dgvCostos.SelectedRows.Count == 0 || dgvCostos.CurrentRow == null)
+            DataGridView dgvActual = null;
+            
+            if (dgvCostos.SelectedRows.Count > 0)
+            {
+                dgvActual = dgvCostos;
+            }
+            else if (dgvCosto.SelectedRows.Count > 0)
+            {
+                dgvActual = dgvCosto;
+            }
+            else if (dgvActual == null)
+            {
+                MessageBox.Show("Configuracion no disponible");
+                return;
+            }
+
+            if (dgvActual == null || dgvActual.SelectedRows.Count == 0 || dgvActual.CurrentRow == null)
             {
                 MessageBox.Show("Selecciona una fila antes de eliminar.");
                 return;
             }
 
-            if (dgvCostos.SelectedRows.Count > 0)
-            {
-                DataGridViewCell cell = dgvCostos.CurrentRow.Cells["id_costos"];
-                int id_costo = Convert.ToInt32(cell.Value);
-                IdCosto = id_costo;
-                Eliminar();
-                Finalizar();
-            }
-        }        
-        private void editarToolStripMenuItem_Click(object sender, EventArgs e)//faltan campos
+
+            DataGridViewCell cell = dgvActual.CurrentRow.Cells["id_costos"];
+            int id_costo = Convert.ToInt32(cell.Value);
+            IdCosto = id_costo;
+            Eliminar();
+            Finalizar();
+            
+        }
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            LimpiarTodo();
+            Modificar = false;
+        }
+        private void editarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             IdCosto = Convert.ToInt32(dgvCostos.CurrentRow.Cells["id_costos"].Value);
             IdProducto = Convert.ToInt32(dgvCostos.CurrentRow.Cells["id_producto"].Value);
             IdMateriaPrima = Convert.ToInt32(dgvCostos.CurrentRow.Cells["id_materia_prima"].Value);
             txtDesempeño.Text = dgvCostos.CurrentRow.Cells["desempeño"].Value.ToString();
             txtCantidad.Text = dgvCostos.CurrentRow.Cells["cantidad"].Value.ToString();
+            txtValorU.Text = dgvCostos.CurrentRow.Cells["valor_unitario"].Value.ToString();
             txtD1.Text = dgvCostos.CurrentRow.Cells["dimension1"].Value.ToString();
             txtD2.Text = dgvCostos.CurrentRow.Cells["dimension2"].Value.ToString();
             txtD3.Text = dgvCostos.CurrentRow.Cells["dimension3"].Value.ToString();
             txtCM.Text = dgvCostos.CurrentRow.Cells["cm"].Value.ToString();
-            txtCantidadDesperdicio.Text = dgvCostos.CurrentRow.Cells["cm"].Value.ToString();
+            txtCantidadDesperdicio.Text = dgvCostos.CurrentRow.Cells["cantidad_desperdicio"].Value.ToString();
+            txtDesperdicioTotal.Text = dgvCostos.CurrentRow.Cells["total_cantidad"].Value.ToString();
+            txtValorU.Text = dgvCostos.CurrentRow.Cells["valor_unitario"].Value.ToString(); 
             IdTipoCosto = Convert.ToInt32(dgvCostos.CurrentRow.Cells["id_tipo_costo"].Value);
 
             DateTime fechaOriginal = DateTime.Parse(dgvCostos.CurrentRow.Cells["fecha"].Value.ToString());
             txtFecha.Text = fechaOriginal.ToString("yyyy-MM-dd");
 
+            ListarProductoId(IdProducto);
+            ListarMaterialId(IdMateriaPrima);
+            ListarTipoCostoId(IdTipoCosto);
+
+            Console.WriteLine("El id producto es:" + IdProducto);
+            Console.WriteLine("El id material es:" + IdMateriaPrima);
+            Console.WriteLine("El id tipo costo es:" + IdTipoCosto);
+
+            Editar = true;
+
+            Modificar = true;            
+        }
+        private void editarToolStripMenuItem1_Click(object sender, EventArgs e)//Se creo otro metodo copiando el anterior, no encontre como hacerlo mas versatil.
+        {
+            IdCosto = Convert.ToInt32(dgvCosto.CurrentRow.Cells["id_costos"].Value);
+            IdProducto = Convert.ToInt32(dgvCosto.CurrentRow.Cells["id_producto"].Value);
+            IdMateriaPrima = Convert.ToInt32(dgvCosto.CurrentRow.Cells["id_materia_prima"].Value);
+            txtDesempeño.Text = dgvCosto.CurrentRow.Cells["desempeño"].Value.ToString();
+            txtCantidad.Text = dgvCosto.CurrentRow.Cells["cantidad"].Value.ToString();
+            txtValorU.Text = dgvCosto.CurrentRow.Cells["valor_unitario"].Value.ToString();
+            txtD1.Text = dgvCosto.CurrentRow.Cells["dimension1"].Value.ToString();
+            txtD2.Text = dgvCosto.CurrentRow.Cells["dimension2"].Value.ToString();
+            txtD3.Text = dgvCosto.CurrentRow.Cells["dimension3"].Value.ToString();
+            txtCM.Text = dgvCosto.CurrentRow.Cells["cm"].Value.ToString();
+            txtCantidadDesperdicio.Text = dgvCosto.CurrentRow.Cells["cantidad_desperdicio"].Value.ToString();
+            txtDesperdicioTotal.Text = dgvCosto.CurrentRow.Cells["total_cantidad"].Value.ToString();
+            txtValorU.Text = dgvCosto.CurrentRow.Cells["valor_unitario"].Value.ToString();
+            IdTipoCosto = Convert.ToInt32(dgvCosto.CurrentRow.Cells["id_tipo_costo"].Value);
+
+            DateTime fechaOriginal = DateTime.Parse(dgvCosto.CurrentRow.Cells["fecha"].Value.ToString());
+            txtFecha.Text = fechaOriginal.ToString("yyyy-MM-dd");
+
+            ListarProductoId(IdProducto);
+            ListarMaterialId(IdMateriaPrima);
+            ListarTipoCostoId(IdTipoCosto);
+
+            Console.WriteLine("El id producto es:" + IdProducto);
+            Console.WriteLine("El id material es:" + IdMateriaPrima);
+            Console.WriteLine("El id tipo costo es:" + IdTipoCosto);
+
             Editar = true;
             Modificar = true;
         }
-        private void dgvCostos_SelectionChanged(object sender, EventArgs e)
+        private void dgvProductos_SelectionChanged(object sender, EventArgs e)
         {
             try
             {
-                if (dgvCostos.SelectedRows.Count > 0)
+                if (dgvProductos.SelectedRows.Count > 0)
                 {
-                    DataGridViewRow selectedRow = dgvCostos.SelectedRows[0];
+                    DataGridViewRow selectedRow = dgvProductos.SelectedRows[0];
 
-                    if (selectedRow.Cells.Count >= 5)
+                    if (selectedRow.Cells.Count >= 2)
                     {
-                        IdCosto = Convert.ToInt32(selectedRow.Cells["id_costos"].Value);
                         IdProducto = Convert.ToInt32(selectedRow.Cells["id_producto"].Value);
-                        IdMateriaPrima = Convert.ToInt32(selectedRow.Cells["id_materia_prima"].Value);
-                        txtDesempeño.Text = Convert.ToString(selectedRow.Cells["desempeño"].Value);
-                        txtCantidad.Text = Convert.ToString(selectedRow.Cells["cantidad"].Value);
-                        txtD1.Text = Convert.ToString(selectedRow.Cells["dimension1"].Value);
-                        txtD2.Text = Convert.ToString(selectedRow.Cells["dimension2"].Value);
-                        txtD3.Text = Convert.ToString(selectedRow.Cells["dimension3"].Value);
-                        txtCM.Text = Convert.ToString(selectedRow.Cells["cm"].Value);
-                        txtCantidadDesperdicio.Text = Convert.ToString(selectedRow.Cells["cantidad_desperdicio"].Value);
-                        txtDesperdicioTotal.Text = Convert.ToString(selectedRow.Cells["cm"].Value);
-                        IdTipoCosto = Convert.ToInt32(selectedRow.Cells["id_tipo_costo"].Value);
-
-                        txtFecha.Text = selectedRow.Cells["fecha"].Value.ToString();                       
-
-                        Editar = true;
-                        Modificar = true;
+                        txtDescripcion.Text = selectedRow.Cells[2].Value.ToString();
+                        txtReferencia.Text = selectedRow.Cells[1].Value.ToString();
                     }
-                    
                 }
-                else
-                {
-                    Limpiar(); 
-                    Editar = false;
-                    Modificar = false;
-                }
+                ListarManoObra(IdProducto);
+                ListarCosto(IdProducto);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Error al Guardar" + ex);
+                MessageBox.Show("Fila vacia");
                 return;
             }
-        }
-        private void dgvProductos_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dgvProductos.SelectedRows.Count > 0)
-            {
-                DataGridViewRow selectedRow = dgvProductos.SelectedRows[0];
-
-                if (selectedRow.Cells.Count >= 2)
-                {
-                    IdProducto = Convert.ToInt32(selectedRow.Cells["id_producto"].Value);
-                    txtDescripcion.Text = selectedRow.Cells[2].Value.ToString();
-                    txtReferencia.Text = selectedRow.Cells[1].Value.ToString();
-                }
-            }
-            ListarManoObra(IdProducto);
-            ListarCosto(IdProducto);
-            Console.WriteLine(IdProducto);
-
+            
         }
         private void dgvMateriasPrimas_SelectionChanged(object sender, EventArgs e)
         {
-            txtDesperdicioTotal.Enabled = false;
-            if (dgvMateriasPrimas.SelectedRows.Count > 0)
+            try
             {
-                DataGridViewRow selectedRow = dgvMateriasPrimas.SelectedRows[0];
-
-                if (selectedRow.Cells.Count >= 4)
+                txtDesperdicioTotal.Enabled = false;
+                if (dgvMateriasPrimas.SelectedRows.Count > 0)
                 {
-                    IdMateriaPrima = Convert.ToInt32(selectedRow.Cells["id_materia_prima"].Value);
-                    txtMaterial.Text = selectedRow.Cells[1].Value.ToString();
-                    txtValorU.Text = selectedRow.Cells[4].Value.ToString();
-                    txtCM.Text = selectedRow.Cells["medida"].Value.ToString();
-                    txtCantidadDesperdicio.Text = selectedRow.Cells[8].Value.ToString();
+                    DataGridViewRow selectedRow = dgvMateriasPrimas.SelectedRows[0];
+
+                    if (selectedRow.Cells.Count >= 4)
+                    {
+                        IdMateriaPrima = Convert.ToInt32(selectedRow.Cells["id_materia_prima"].Value);
+                        txtMaterial.Text = selectedRow.Cells[1].Value.ToString();
+                        txtValorU.Text = selectedRow.Cells[4].Value.ToString();
+                        txtCM.Text = selectedRow.Cells["medida"].Value.ToString();
+                        txtCantidadDesperdicio.Text = selectedRow.Cells[8].Value.ToString();
+                    }
                 }
             }
+            catch (Exception)
+            {
+                MessageBox.Show("Fila vacia");
+                return;
+            }
+            
         }
         private void dgvManoObra_SelectionChanged(object sender, EventArgs e)
         {
-            txtDesperdicioTotal.Enabled = true;
-            if (dgvManoObra.SelectedRows.Count > 0)
+            try
             {
-                DataGridViewRow selectedRow = dgvManoObra.SelectedRows[0];
-
-                if (selectedRow.Cells.Count >= 3)
+                txtDesperdicioTotal.Enabled = true;
+                if (dgvManoObra.SelectedRows.Count > 0)
                 {
-                    txtMaterial.Text = "MANO DE OBRA";
-                    txtDesempeño.Text = selectedRow.Cells["nombre_tipo"].Value.ToString();
-                    txtValorU.Text = selectedRow.Cells["costo"].Value.ToString();
+                    DataGridViewRow selectedRow = dgvManoObra.SelectedRows[0];
+
+                    if (selectedRow.Cells.Count >= 3)
+                    {
+                        txtMaterial.Text = "MANO DE OBRA";
+                        txtDesempeño.Text = selectedRow.Cells["nombre_tipo"].Value.ToString();
+                        txtValorU.Text = selectedRow.Cells["costo"].Value.ToString();
+                    }
                 }
             }
+            catch (Exception)
+            {
+                MessageBox.Show("Fila vacia");
+                return;
+            }
+            
         }
         private void comboBoxTC_DropDown(object sender, EventArgs e)
         {
@@ -236,41 +281,60 @@ namespace NovoCosts.Forms
         }
         private void comboBoxTC_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DataRowView selectedRow = (DataRowView)comboBoxTC.SelectedItem;
-
-            if (selectedRow != null)
+            try
             {
-                IdTipoCosto = Convert.ToInt32(selectedRow["id_tipo_costo"]);
+                DataRowView selectedRow = (DataRowView)comboBoxTC.SelectedItem;
+
+                if (selectedRow != null)
+                {
+                    IdTipoCosto = Convert.ToInt32(selectedRow["id_tipo_costo"]);
+                }
             }
+            catch (Exception)
+            {
+                MessageBox.Show("Fila vacia");
+                return;
+            }
+            
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtD1.Enabled = false;
-            txtD2.Enabled = false;
-            txtD3.Enabled = false;
-
-            int selectedIndex = comboBox1.SelectedIndex;
-
-            switch (selectedIndex)
+            try
             {
-                case 0:
-                    txtD1.Enabled = false;
-                    txtD2.Enabled = false;
-                    txtD3.Enabled = false;
-                    break;
-                case 1:
-                    txtD1.Enabled = true;
-                    break;
-                case 2:
-                    txtD1.Enabled = true;
-                    txtD2.Enabled = true;
-                    break;
-                case 3:
-                    txtD1.Enabled = true;
-                    txtD2.Enabled = true;
-                    txtD3.Enabled = true;
-                    break;
+                txtD1.Enabled = false;
+                txtD2.Enabled = false;
+                txtD3.Enabled = false;
+
+                int selectedIndex = comboBox1.SelectedIndex;
+
+                switch (selectedIndex)
+                {
+                    case 0:
+                        txtD1.Enabled = false;
+                        txtD2.Enabled = false;
+                        txtD3.Enabled = false;
+                        break;
+                    case 1:
+                        txtD1.Enabled = true;
+                        break;
+                    case 2:
+                        txtD1.Enabled = true;
+                        txtD2.Enabled = true;
+                        break;
+                    case 3:
+                        txtD1.Enabled = true;
+                        txtD2.Enabled = true;
+                        txtD3.Enabled = true;
+                        break;
+                }
+
             }
+            catch (Exception)
+            {
+                MessageBox.Show("Fila vacia");
+                return;
+            }
+            
         }
 
         //Metodos
@@ -294,19 +358,17 @@ namespace NovoCosts.Forms
                     TotalCantidad = ResultadoTotalCantidad,
                     ValorUnitario = Convert.ToDecimal(txtValorU.Text),
                     ValorTotal = ResultadoValorTotal,
-
                     IdTipoCosto = IdTipoCosto,
 
                     Fecha = DateTime.Parse(txtFecha.Text),
                 };
                 return Models.Costos.Guardar(costos, Editar);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Error al Guardar.");
+                MessageBox.Show("Error al Guardar." + ex);
                 return false;
-            }
-            
+            }            
         }
         private bool GuardarEditado()
         {
@@ -331,7 +393,7 @@ namespace NovoCosts.Forms
 
                     Fecha = fechaOriginal,
                 };
-
+                Console.WriteLine(IdCosto);
                 return Models.Costos.Guardar(costos, true);
             }
             else
@@ -400,6 +462,7 @@ namespace NovoCosts.Forms
         private void Finalizar()
         {
             ListarTodo();
+            ListarCosto(IdProducto);
             Limpiar();
         }
         private void Limpiar()
@@ -412,26 +475,79 @@ namespace NovoCosts.Forms
             comboBoxTC.Text = "";
             txtFecha.Text = "";
             Editar = false;
+            
+            MostrarFechaActual();
+        }
+        private void LimpiarTodo()
+        {
+            txtReferencia.Text = "";
+            txtDescripcion.Text = "";
+            txtMaterial.Text = "";
+            txtDesempeño.Text = "";
+            txtCantidad.Text = "";
+            txtValorU.Text = "";
+            txtD1.Text = "";
+            txtD2.Text = "";
+            txtD3.Text = "";
+            txtCM.Text = "";
+            txtCantidadDesperdicio.Text = "";
+            txtDesperdicioTotal.Text = "";
+            txtValorU.Text = "";
+            comboBoxTC.Text = "";
 
+            IdProducto = 0;
+            IdMateriaPrima = 0;
+            IdTipoCosto = 0;
             MostrarFechaActual();
         }
         private void ListarTodo()
         {
             dgvCostos.DataSource = Models.Costos.ListarTodo();
             DbDatos.OcultarIds(dgvCostos);
-            PersonalizarColumnasGrid();
+            PersonalizarColumnasCostos(dgvCostos);
         }
         private void ListarProductos()
         {
             dgvProductos.DataSource = Producto.ListarTodo();
             DbDatos.OcultarIds(dgvProductos);
-            PersonalizarColumnasGrid();
+            PersonalizarColumnasProductos();
+        }
+        private void ListarProductoId(int idProducto)
+        {
+            DataTable dataTable = Producto.ListarProducto(idProducto);
+
+            if (dataTable.Rows.Count > 0)
+            {
+                txtReferencia.Text = dataTable.Rows[0]["referencia"].ToString();
+                txtDescripcion.Text = dataTable.Rows[0]["descripcion"].ToString();
+            }
+            PersonalizarColumnasProductos();
+        }        
+        private void ListarMaterialId(int idMateriaPrima)
+        {
+            DataTable dataTable = MateriasPrimas.ListarMateriaPrima(idMateriaPrima);
+
+            if (dataTable.Rows.Count > 0)
+            {                
+                txtMaterial.Text = dataTable.Rows[0]["detalle_mp"].ToString();
+            }
+            PersonalizarColumnaMateriales();
+        }
+        private void ListarTipoCostoId(int idTipoCosto)
+        {
+            DataTable dataTable = TipoCosto.ListarTipoCosto(idTipoCosto);
+
+            if (dataTable.Rows.Count > 0)
+            {
+                comboBoxTC.Text = dataTable.Rows[0]["nombre"].ToString();
+            }
+            DbDatos.OcultarIds(dgvCosto);
         }
         private void ListarMaterial()
         {
             dgvMateriasPrimas.DataSource = MateriasPrimas.ListarTodo();
             DbDatos.OcultarIds(dgvMateriasPrimas);
-            PersonalizarColumnasGrid();
+            PersonalizarColumnaMateriales();
         }
         private void ListarTipoCosto()
         {
@@ -445,13 +561,13 @@ namespace NovoCosts.Forms
         {
             dgvCosto.DataSource = Models.Costos.ListarCostoProducto(IdProducto);
             DbDatos.OcultarIds(dgvCosto);
-            PersonalizarColumnasGrid();
+            PersonalizarColumnasCostos(dgvCosto);
         }
         private void ListarManoObra(int IdProducto)
         {
             dgvManoObra.DataSource = ManoObra.ListarPorProducto(IdProducto);
             DbDatos.OcultarIds(dgvManoObra);
-            PersonalizarColumnasGrid();
+            PersonalizarColumnasManoObra();
         }
         private void ToUpperText()//El upperText para los comboBox esta en comboBox_TextChanged
         {
@@ -473,34 +589,34 @@ namespace NovoCosts.Forms
             if (sender is System.Windows.Forms.TextBox textBox)
                 textBox.SelectAll();
         }
-        private void PersonalizarColumnasGrid()
-        {
-            foreach (DataGridViewColumn columna in dgvCostos.Columns)
+        private void PersonalizarColumnasCostos(DataGridView dgvActual)
+        {           
+            foreach (DataGridViewColumn columna in dgvActual.Columns)
             {
                 if (!string.IsNullOrEmpty(columna.Name))
                 {
-                    if (columna.Name == "dimension1" || columna.Name == "dimension2" || columna.Name == "dimension3" || columna.Name == "cantidad")
+                    if (columna.Name == "dimension1" || columna.Name == "dimension2" || columna.Name == "dimension3" || columna.Name == "cantidad" )
                     {
-                        dgvCostos.Columns["dimension1"].HeaderText = "D1";
-                        dgvCostos.Columns["dimension2"].HeaderText = "D2";
-                        dgvCostos.Columns["dimension3"].HeaderText = "D3";
-                        dgvCostos.Columns["cantidad"].HeaderText = "CAN";
-                        dgvCostos.Columns[columna.Name].Width = 35;
+                        dgvActual.Columns["dimension1"].HeaderText = "D1";
+                        dgvActual.Columns["dimension2"].HeaderText = "D2";
+                        dgvActual.Columns["dimension3"].HeaderText = "D3";
+                        dgvActual.Columns["cantidad"].HeaderText = "CAN";
+                        dgvActual.Columns[columna.Name].Width = 35;
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight; // Alinea a la derecha
                         //estiloCeldaNumerica.Format = "N0";
                         columna.DefaultCellStyle = estiloCeldaNumerica;
-                        DbDatos.OcultarIds(dgvCostos);
+                        DbDatos.OcultarIds(dgvActual);
                     }
                     else if (columna.Name == "total_cantidad" || columna.Name == "valor_unitario")
                     {
-                        dgvCostos.Columns["total_cantidad"].HeaderText = "TOTAL CANT.";
-                        dgvCostos.Columns["valor_unitario"].HeaderText = "VALOR UNIT.";
-                        dgvCostos.Columns[columna.Name].Width = 62;
+                        dgvActual.Columns["total_cantidad"].HeaderText = "TOTAL CANT.";
+                        dgvActual.Columns["valor_unitario"].HeaderText = "VALOR UNIT.";
+                        dgvActual.Columns[columna.Name].Width = 62;
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleCenter; // Alinea aL CENTRO
                         columna.DefaultCellStyle = estiloCeldaNumerica;
-                        DbDatos.OcultarIds(dgvCostos);
+                        DbDatos.OcultarIds(dgvActual);
                     }
                     else if (columna.Name == "cantidad_desperdicio")
                     {
@@ -508,23 +624,23 @@ namespace NovoCosts.Forms
                     }
                     else if (columna.Name == "fecha")
                     {
-                        dgvCostos.Columns["fecha"].HeaderText = "Fecha";
-                        dgvCostos.Columns[columna.Name].Width = 80;
-                        DbDatos.OcultarIds(dgvCostos);
+                        dgvActual.Columns["fecha"].HeaderText = "Fecha";
+                        dgvActual.Columns[columna.Name].Width = 80;
+                        DbDatos.OcultarIds(dgvActual);
                     }
                     else if (columna.Name == "desempeño")
                     {
-                        dgvCostos.Columns[columna.Name].Width = 111;
-                        DbDatos.OcultarIds(dgvCostos);
+                        dgvActual.Columns[columna.Name].Width = 180;
+                        DbDatos.OcultarIds(dgvActual);
                     }
                     else if (columna.Name == "desper")
                     {
-                        dgvCostos.Columns[columna.Name].Width = 60;
+                        dgvActual.Columns[columna.Name].Width = 60;
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleCenter; // Alinea aL CENTRO
                         estiloCeldaNumerica.Format = "N0";
                         columna.DefaultCellStyle = estiloCeldaNumerica;
-                        DbDatos.OcultarIds(dgvCostos);
+                        DbDatos.OcultarIds(dgvActual);
                     }
                     else if (columna.Name == "cm")
                     {
@@ -532,23 +648,94 @@ namespace NovoCosts.Forms
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleCenter; // Alinea aL CENTRO
                         estiloCeldaNumerica.Format = "N0";
                         columna.DefaultCellStyle = estiloCeldaNumerica;
-                        DbDatos.OcultarIds(dgvCostos);
+                        DbDatos.OcultarIds(dgvActual);
                     }
                     else if (columna.Name == "valor_total")
                     {
-                        dgvCostos.Columns["valor_total"].HeaderText = "VALOR TOTAL";
+                        dgvActual.Columns["valor_total"].HeaderText = "VALOR TOTAL";
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleCenter; // Alinea aL CENTRO
                         estiloCeldaNumerica.Format = "N0";
                         columna.DefaultCellStyle = estiloCeldaNumerica;
                         DbDatos.OcultarIds(dgvCostos);
                     }
+                    else if (columna.Name == "descripcion" || columna.Name == "referencia")
+                    {
+                        dgvActual.Columns[columna.Name].Width = 180;
+                        DbDatos.OcultarIds(dgvActual);
+                    }
+
                 }
                 ConfigurarCabeceraColumna(columna, columna.HeaderText);
             }
+        }
+        private void PersonalizarColumnasProductos()
+        {
+            foreach (DataGridViewColumn columna in dgvProductos.Columns)
+            {
+
+                if (!string.IsNullOrEmpty(columna.Name))
+                {
+                    if (columna.Name == "descripcion" || columna.Name == "referencia")
+                    {
+                        dgvProductos.Columns["descripcion"].HeaderText = "DESCRIPCION";
+                        dgvProductos.Columns["referencia"].HeaderText = "REFERENCIA";
+
+                        dgvProductos.Columns["descripcion"].Width = 155;
+                    }
+                    ConfigurarCabeceraColumna(columna, columna.HeaderText);
+                }
+            }
+        }
+        private void PersonalizarColumnaMateriales()
+        {
             foreach (DataGridViewColumn columna in dgvMateriasPrimas.Columns)
             {
-                ConfigurarCabeceraColumna(columna, columna.HeaderText);
+
+                if (!string.IsNullOrEmpty(columna.Name))
+                {
+                    if (columna.Name == "detalle_mp" || columna.Name == "proveedor" || columna.Name == "comentarios")
+                    {
+                        dgvMateriasPrimas.Columns["detalle_mp"].HeaderText = "DETALLE";
+                        dgvMateriasPrimas.Columns["proveedor"].HeaderText = "PROVEEDOR";
+                        dgvMateriasPrimas.Columns["comentarios"].HeaderText = "COMENTARIOS";
+                        dgvMateriasPrimas.Columns[columna.Name].Width = 250;
+                    }
+                    else if (columna.Name == "medida" || columna.Name == "valor" || columna.Name == "desperdicio_cantidad" )
+                    {
+                        dgvMateriasPrimas.Columns["medida"].HeaderText = "MEDIDA";
+                        dgvMateriasPrimas.Columns["valor"].HeaderText = "VALOR";
+                        dgvMateriasPrimas.Columns["desperdicio_cantidad"].HeaderText = "CANTIDAD DESPERDICIO";
+                        //dgvCostos.Columns[columna.Name].Width = 35;
+                        DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
+                        estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight; 
+                        DbDatos.OcultarIds(dgvProductos);
+                    }
+                    else if (columna.Name == "fecha")
+                    {
+                        dgvMateriasPrimas.Columns["fecha"].HeaderText = "Fecha";
+                        dgvMateriasPrimas.Columns[columna.Name].Width = 80;
+                        DbDatos.OcultarIds(dgvMateriasPrimas);
+                    }
+                    ConfigurarCabeceraColumna(columna, columna.HeaderText);
+                }
+            }
+        }
+        private void PersonalizarColumnasManoObra()
+        {
+            foreach (DataGridViewColumn columna in dgvManoObra.Columns)
+            {
+                if (!string.IsNullOrEmpty(columna.Name))
+                {
+                    if (columna.Name == "nombre_tipo")
+                    {
+                        dgvManoObra.Columns["nombre_tipo"].HeaderText = "NOMBRE";
+                    }
+                    else if (columna.Name == "fecha")      
+                        columna.Visible = false;                        
+                    
+                    ConfigurarCabeceraColumna(columna, columna.HeaderText);
+                }
             }
         }
         private void ConfigurarCabeceraColumna(DataGridViewColumn columna, string nuevoHeaderText)
@@ -569,10 +756,10 @@ namespace NovoCosts.Forms
         {
             int selectedIndex = comboBox1.SelectedIndex;
 
-            if (selectedIndex == 3)
+            if (selectedIndex == 1)
             {
-                ResultadoTotalCantidad = (cantidad * d1 * d2 * d3) / cm;
-                Console.WriteLine($"ResultadoTotalCantidad :" + cantidad + " + " + d1 + " + " + d2 + " + " + d3 + " / " + cm + " = " + ResultadoTotalCantidad);
+                ResultadoTotalCantidad = (cantidad * d1) / cm;
+                Console.WriteLine($"ResultadoTotalCantidad :" + cantidad + " + " + d1 + " / " + cm + " = " + ResultadoTotalCantidad);
                 return ResultadoTotalCantidad;
             }
             else if (selectedIndex == 2)
@@ -581,10 +768,10 @@ namespace NovoCosts.Forms
                 Console.WriteLine($"ResultadoTotalCantidad :" + cantidad + " + " + d1 + " + " + d2 + " / " + cm + " = " + ResultadoTotalCantidad);
                 return ResultadoTotalCantidad;
             }
-            else if (selectedIndex == 1)
+            else if (selectedIndex == 3)
             {
-                ResultadoTotalCantidad = (cantidad * d1) / cm;
-                Console.WriteLine($"ResultadoTotalCantidad :" + cantidad + " + " + d1 + " / " + cm + " = " + ResultadoTotalCantidad);
+                ResultadoTotalCantidad = (cantidad * d1 * d2 * d3) / cm;
+                Console.WriteLine($"ResultadoTotalCantidad :" + cantidad + " + " + d1 + " + " + d2 + " + " + d3 + " / " + cm + " = " + ResultadoTotalCantidad);
                 return ResultadoTotalCantidad;
             }
             else
@@ -613,7 +800,6 @@ namespace NovoCosts.Forms
 
             return ResultadoValorTotal;
         }
-
         
     }
 }

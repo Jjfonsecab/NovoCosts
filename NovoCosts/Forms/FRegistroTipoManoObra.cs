@@ -66,15 +66,23 @@ namespace NovoCosts.Forms
         private System.Windows.Forms.TextBox ultimoTextBoxModificado = null;
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listBox1.SelectedIndex != -1 && ultimoTextBoxModificado != null)
+            try
             {
-                string selectedText = listBox1.SelectedItem.ToString();
-                ultimoTextBoxModificado.Text = selectedText;
+                if (listBox1.SelectedIndex != -1 && ultimoTextBoxModificado != null)
+                {
+                    string selectedText = listBox1.SelectedItem.ToString();
+                    ultimoTextBoxModificado.Text = selectedText;
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo determinar el TextBox correspondiente.");
+                }
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("No se pudo determinar el TextBox correspondiente.");
-            }
+                MessageBox.Show("Fila vacia");
+                return;
+            }            
         }
         private void ToUpperText()//El upperText para los comboBox esta en comboBox_TextChanged
         {
@@ -215,7 +223,7 @@ namespace NovoCosts.Forms
             BuscarYMostrarResultados("RetornarNombreTipo", txtNombre, listBox1, "@NombreBuscado", "nombre_tipo");
 
         }
-private void BuscarYMostrarResultados(string nombreProcedimiento, System.Windows.Forms.TextBox textBox, ListBox listBox, string parametroNombre, string nombreColumna)
+        private void BuscarYMostrarResultados(string nombreProcedimiento, System.Windows.Forms.TextBox textBox, ListBox listBox, string parametroNombre, string nombreColumna)
         {
             string searchText = textBox.Text;
 

@@ -35,5 +35,13 @@ namespace NovoCosts.Models
         {
             return DbDatos.Listar("TipoCosto_Listar");
         }
+        public static DataTable ListarTipoCosto(int tipoCosto)
+        {
+            List<Parametro> parametros = new List<Parametro>
+            {
+                new Parametro("@id_tipo_costo", tipoCosto)
+            };
+            return DbDatos.Listar("Listar_TipoCostoId", parametros);
+        }
     }
 }

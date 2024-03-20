@@ -26,7 +26,6 @@ namespace NovoCosts.Models
         public decimal ValorTotal { get; set; }
         public int IdTipoCosto { get; set; }
         public DateTime Fecha { get; set; }
-
         public static bool Guardar(Costos costos, bool editar)
         {
             List<Parametro> parametros = new List<Parametro>()
@@ -51,11 +50,11 @@ namespace NovoCosts.Models
             };
             return DbDatos.Ejecutar("Costos_Agregar", parametros);
         }
-        public static bool Eliminar(int idMateriaPrima)
+        public static bool Eliminar(int idCosto)
         {
             List<Parametro> parametros = new List<Parametro>
             {
-                new Parametro("@id_costos", idMateriaPrima)
+                new Parametro("@id_costos", idCosto)
             };
             return DbDatos.Ejecutar("Costos_Eliminar", parametros);
         }

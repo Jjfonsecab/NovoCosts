@@ -26,17 +26,25 @@ namespace NovoCosts.Models
             };
             return DbDatos.Ejecutar("Producto_Agregar", parametros);
         }
-        public static bool Eliminar(int idMateriaPrima)
+        public static bool Eliminar(int idProducto)
         {
             List<Parametro> parametros = new List<Parametro>
             {
-                new Parametro("@id_producto", idMateriaPrima)
+                new Parametro("@id_producto", idProducto)
             };
             return DbDatos.Ejecutar("Producto_Eliminar", parametros);
         }
         public static DataTable ListarTodo()
         {
             return DbDatos.Listar("Producto_Listar");
+        }
+        public static DataTable ListarProducto(int idProducto)
+        {
+            List<Parametro> parametros = new List<Parametro>
+            {
+                new Parametro("@id_producto", idProducto)
+            };
+            return DbDatos.Listar("Listar_ProductoId", parametros);
         }
     }
 }

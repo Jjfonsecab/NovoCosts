@@ -37,13 +37,13 @@
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.dgvManoObra = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.dgvProductos = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.dgvMateriasPrimas = new System.Windows.Forms.DataGridView();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dgvCostos = new System.Windows.Forms.DataGridView();
             this.Costos = new System.Windows.Forms.TabControl();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtValorU = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.txtCM = new System.Windows.Forms.TextBox();
             this.btnTipoCostos = new System.Windows.Forms.PictureBox();
@@ -77,17 +77,18 @@
             this.txtD1 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtValorU = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
+            this.btnLimpiar = new System.Windows.Forms.PictureBox();
+            this.dgvProductos = new System.Windows.Forms.DataGridView();
+            this.dgvMateriasPrimas = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCosto)).BeginInit();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvManoObra)).BeginInit();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvMateriasPrimas)).BeginInit();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCostos)).BeginInit();
             this.Costos.SuspendLayout();
@@ -97,6 +98,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnEliminar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnGuardar)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnLimpiar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMateriasPrimas)).BeginInit();
+            this.contextMenuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
@@ -132,12 +137,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvCosto.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgvCosto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCosto.Location = new System.Drawing.Point(6, 6);
+            this.dgvCosto.ContextMenuStrip = this.contextMenuStrip2;
+            this.dgvCosto.Location = new System.Drawing.Point(6, 5);
             this.dgvCosto.Name = "dgvCosto";
             this.dgvCosto.RowHeadersWidth = 62;
             this.dgvCosto.RowTemplate.Height = 28;
-            this.dgvCosto.Size = new System.Drawing.Size(1304, 304);
-            this.dgvCosto.TabIndex = 3;
+            this.dgvCosto.Size = new System.Drawing.Size(1304, 307);
+            this.dgvCosto.TabIndex = 2;
             // 
             // tabPage5
             // 
@@ -167,55 +173,25 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.dgvProductos);
+            this.tabPage3.Controls.Add(this.dgvMateriasPrimas);
             this.tabPage3.Location = new System.Drawing.Point(4, 29);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(1316, 316);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Productos";
+            this.tabPage3.Text = "Materiales";
             this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // dgvProductos
-            // 
-            this.dgvProductos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvProductos.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProductos.Location = new System.Drawing.Point(6, 3);
-            this.dgvProductos.Name = "dgvProductos";
-            this.dgvProductos.RowHeadersWidth = 62;
-            this.dgvProductos.RowTemplate.Height = 28;
-            this.dgvProductos.Size = new System.Drawing.Size(1304, 307);
-            this.dgvProductos.TabIndex = 1;
-            this.dgvProductos.SelectionChanged += new System.EventHandler(this.dgvProductos_SelectionChanged);
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.dgvMateriasPrimas);
+            this.tabPage2.Controls.Add(this.dgvProductos);
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(1316, 316);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Materiales";
+            this.tabPage2.Text = "Productos";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // dgvMateriasPrimas
-            // 
-            this.dgvMateriasPrimas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvMateriasPrimas.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dgvMateriasPrimas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMateriasPrimas.Location = new System.Drawing.Point(6, 6);
-            this.dgvMateriasPrimas.Name = "dgvMateriasPrimas";
-            this.dgvMateriasPrimas.RowHeadersWidth = 62;
-            this.dgvMateriasPrimas.RowTemplate.Height = 28;
-            this.dgvMateriasPrimas.Size = new System.Drawing.Size(1304, 304);
-            this.dgvMateriasPrimas.TabIndex = 0;
-            this.dgvMateriasPrimas.SelectionChanged += new System.EventHandler(this.dgvMateriasPrimas_SelectionChanged);
             // 
             // tabPage1
             // 
@@ -264,6 +240,7 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.BackColor = System.Drawing.Color.SkyBlue;
+            this.groupBox1.Controls.Add(this.btnLimpiar);
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.txtValorU);
             this.groupBox1.Controls.Add(this.label9);
@@ -298,6 +275,24 @@
             this.groupBox1.TabIndex = 81;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos : ";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(393, 120);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(109, 20);
+            this.label14.TabIndex = 126;
+            this.label14.Text = "Valor Unidad :";
+            // 
+            // txtValorU
+            // 
+            this.txtValorU.Enabled = false;
+            this.txtValorU.Location = new System.Drawing.Point(517, 120);
+            this.txtValorU.Name = "txtValorU";
+            this.txtValorU.Size = new System.Drawing.Size(83, 26);
+            this.txtValorU.TabIndex = 125;
+            this.txtValorU.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label9
             // 
@@ -618,23 +613,62 @@
             this.label5.TabIndex = 70;
             this.label5.Text = "Dimension 2 :";
             // 
-            // txtValorU
+            // btnLimpiar
             // 
-            this.txtValorU.Enabled = false;
-            this.txtValorU.Location = new System.Drawing.Point(517, 120);
-            this.txtValorU.Name = "txtValorU";
-            this.txtValorU.Size = new System.Drawing.Size(83, 26);
-            this.txtValorU.TabIndex = 125;
-            this.txtValorU.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.btnLimpiar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLimpiar.Image = ((System.Drawing.Image)(resources.GetObject("btnLimpiar.Image")));
+            this.btnLimpiar.Location = new System.Drawing.Point(793, 120);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(64, 55);
+            this.btnLimpiar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.btnLimpiar.TabIndex = 56;
+            this.btnLimpiar.TabStop = false;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
-            // label14
+            // dgvProductos
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(393, 120);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(109, 20);
-            this.label14.TabIndex = 126;
-            this.label14.Text = "Valor Unidad :";
+            this.dgvProductos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvProductos.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProductos.Location = new System.Drawing.Point(6, 5);
+            this.dgvProductos.Name = "dgvProductos";
+            this.dgvProductos.RowHeadersWidth = 62;
+            this.dgvProductos.RowTemplate.Height = 28;
+            this.dgvProductos.Size = new System.Drawing.Size(1304, 307);
+            this.dgvProductos.TabIndex = 2;
+            this.dgvProductos.SelectionChanged += new System.EventHandler(this.dgvProductos_SelectionChanged);
+            // 
+            // dgvMateriasPrimas
+            // 
+            this.dgvMateriasPrimas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvMateriasPrimas.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dgvMateriasPrimas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMateriasPrimas.Location = new System.Drawing.Point(6, 6);
+            this.dgvMateriasPrimas.Name = "dgvMateriasPrimas";
+            this.dgvMateriasPrimas.RowHeadersWidth = 62;
+            this.dgvMateriasPrimas.RowTemplate.Height = 28;
+            this.dgvMateriasPrimas.Size = new System.Drawing.Size(1304, 304);
+            this.dgvMateriasPrimas.TabIndex = 1;
+            this.dgvMateriasPrimas.SelectionChanged += new System.EventHandler(this.dgvMateriasPrimas_SelectionChanged);
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editarToolStripMenuItem1});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(241, 69);
+            // 
+            // editarToolStripMenuItem1
+            // 
+            this.editarToolStripMenuItem1.Name = "editarToolStripMenuItem1";
+            this.editarToolStripMenuItem1.Size = new System.Drawing.Size(240, 32);
+            this.editarToolStripMenuItem1.Text = "Editar";
+            this.editarToolStripMenuItem1.Click += new System.EventHandler(this.editarToolStripMenuItem1_Click);
             // 
             // FCostos
             // 
@@ -654,9 +688,7 @@
             this.tabPage5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvManoObra)).EndInit();
             this.tabPage3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
             this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvMateriasPrimas)).EndInit();
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCostos)).EndInit();
             this.Costos.ResumeLayout(false);
@@ -668,6 +700,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnGuardar)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnLimpiar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMateriasPrimas)).EndInit();
+            this.contextMenuStrip2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -676,13 +712,10 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem editarToolStripMenuItem;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.DataGridView dgvCosto;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.DataGridView dgvManoObra;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.DataGridView dgvProductos;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.DataGridView dgvMateriasPrimas;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.DataGridView dgvCostos;
         private System.Windows.Forms.TabControl Costos;
@@ -722,5 +755,11 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtValorU;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.DataGridView dgvCosto;
+        private System.Windows.Forms.PictureBox btnLimpiar;
+        private System.Windows.Forms.DataGridView dgvProductos;
+        private System.Windows.Forms.DataGridView dgvMateriasPrimas;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem editarToolStripMenuItem1;
     }
 }

@@ -67,15 +67,23 @@ namespace NovoCosts.Forms
         private System.Windows.Forms.TextBox ultimoTextBoxModificado = null;
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listBox1.SelectedIndex != -1 && ultimoTextBoxModificado != null)
+            try
             {
-                string selectedText = listBox1.SelectedItem.ToString();
-                ultimoTextBoxModificado.Text = selectedText;
+                if (listBox1.SelectedIndex != -1 && ultimoTextBoxModificado != null)
+                {
+                    string selectedText = listBox1.SelectedItem.ToString();
+                    ultimoTextBoxModificado.Text = selectedText;
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo determinar el TextBox correspondiente.");
+                }
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("No se pudo determinar el TextBox correspondiente.");
-            }
+                MessageBox.Show("Fila vacia");
+                return;
+            }            
         }
         private void editarToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -274,7 +282,6 @@ namespace NovoCosts.Forms
                     listBox.Items.Add(row[nombreColumna].ToString());
             }
         }
-
         
     }
 }

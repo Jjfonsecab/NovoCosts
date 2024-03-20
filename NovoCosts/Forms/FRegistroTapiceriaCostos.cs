@@ -100,17 +100,26 @@ namespace NovoCosts.Forms
         }
         private void dgvProductos_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvProductos.SelectedRows.Count > 0)
+            try
             {
-                DataGridViewRow selectedRow = dgvProductos.SelectedRows[0];
-
-                if (selectedRow.Cells.Count >= 2)
+                if (dgvProductos.SelectedRows.Count > 0)
                 {
-                    IdProducto = Convert.ToInt32(selectedRow.Cells["id_producto"].Value);
-                    txtDescripcion.Text = selectedRow.Cells[2].Value.ToString();
-                    txtReferencia.Text = selectedRow.Cells[1].Value.ToString();
+                    DataGridViewRow selectedRow = dgvProductos.SelectedRows[0];
+
+                    if (selectedRow.Cells.Count >= 2)
+                    {
+                        IdProducto = Convert.ToInt32(selectedRow.Cells["id_producto"].Value);
+                        txtDescripcion.Text = selectedRow.Cells[2].Value.ToString();
+                        txtReferencia.Text = selectedRow.Cells[1].Value.ToString();
+                    }
                 }
             }
+            catch (Exception)
+            {
+                MessageBox.Show("Fila vacia");
+                return;
+            }
+            
         }
         //Metodos
         private bool Guardar()
@@ -298,7 +307,6 @@ namespace NovoCosts.Forms
         {
             txtFecha.Text = DateTime.Now.ToString("yyyy-MM-dd");
         }
-
         private decimal totalSuma(decimal corte, decimal blanco, decimal costura,decimal forrado)
         {
             ResultadoSuma = corte + blanco + costura + forrado;

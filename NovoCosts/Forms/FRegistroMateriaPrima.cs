@@ -109,29 +109,34 @@ namespace NovoCosts.Forms
         }
         private void comboBoxUnidadMedida_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DataRowView selectedRow = (DataRowView)comboBoxUnidadMedida.SelectedItem;
-
-            if (selectedRow != null)
+            try
             {
-                IdUnidadMedida = Convert.ToInt32(selectedRow["id_unidad_medida"]);
-                NumeroParametros = Convert.ToInt32(selectedRow["cantidad_parametros"]);
+                DataRowView selectedRow = (DataRowView)comboBoxUnidadMedida.SelectedItem;
 
-                Console.WriteLine("IdUnidadMedida: " + IdUnidadMedida);
-                Console.WriteLine("NumeroParametros: " + NumeroParametros);
-
-                string unidadMedida = selectedRow["nombre"].ToString();
-
-                if (unidadMedida.Contains("TABLA"))
+                if (selectedRow != null)
                 {
-                    txtOtros.Enabled = true;
-                    txtDividir.Enabled = true;
+                    IdUnidadMedida = Convert.ToInt32(selectedRow["id_unidad_medida"]);
+                    NumeroParametros = Convert.ToInt32(selectedRow["cantidad_parametros"]);
+
+                    Console.WriteLine("IdUnidadMedida: " + IdUnidadMedida);
+                    Console.WriteLine("NumeroParametros: " + NumeroParametros);
+
+                    string unidadMedida = selectedRow["nombre"].ToString();
+
+                    if (unidadMedida.Contains("TABLA"))
+                    {
+                        txtOtros.Enabled = true;
+                        txtDividir.Enabled = true;
+                    }
+                    else                    
+                        ActivarControlesSegunParametros();                    
                 }
-                else
-                {
-                    ActivarControlesSegunParametros();
-                }                
             }
-
+            catch (Exception)
+            {
+                MessageBox.Show("Fila vacia");
+                return;
+            }
         }
         private void editarToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -477,14 +482,21 @@ namespace NovoCosts.Forms
         }
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listBox1.SelectedIndex != -1 && ultimoTextBoxModificado != null)
+            try
             {
-                string selectedText = listBox1.SelectedItem.ToString();
-                ultimoTextBoxModificado.Text = selectedText;
+                if (listBox1.SelectedIndex != -1 && ultimoTextBoxModificado != null)
+                {
+                    string selectedText = listBox1.SelectedItem.ToString();
+                    ultimoTextBoxModificado.Text = selectedText;
+                }
+                else
+                    MessageBox.Show("No se pudo determinar el TextBox correspondiente.");
             }
-            else
-                MessageBox.Show("No se pudo determinar el TextBox correspondiente.");
-
+            catch (Exception)
+            {
+                MessageBox.Show("Fila vacia");
+                return;
+            }
         }
         private void BuscarYMostrarResultados(string nombreProcedimiento, System.Windows.Forms.TextBox textBox, ListBox listBox, string parametroNombre, string nombreColumna)
         {

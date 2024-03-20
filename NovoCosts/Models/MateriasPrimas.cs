@@ -46,9 +46,13 @@ namespace NovoCosts.Models
             };
             return DbDatos.Ejecutar("MateriaPrima_Eliminar", parametros);
         }
-        public static DataTable Listar()
+        public static DataTable ListarMateriaPrima(int idMateriaPrima)
         {
-            return DbDatos.Listar("MateriasPrimas_Stock");
+            List<Parametro> parametros = new List<Parametro>
+            {
+                new Parametro("@id_material", idMateriaPrima)
+            };
+            return DbDatos.Listar("Listar_MaterialId", parametros);
         }
         public static DataTable ListarTodo()
         {

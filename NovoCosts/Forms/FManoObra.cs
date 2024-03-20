@@ -124,7 +124,7 @@ namespace NovoCosts.Forms
                         txtReferencia.Text = Convert.ToString(selectedRow.Cells["Referencia"].Value);
                         comboBoxTMO.Text = Convert.ToString(selectedRow.Cells["Nombre"].Value);
 
-                        txtFecha.Text = selectedRow.Cells["fecha"].Value.ToString();
+                        txtFecha.Text = selectedRow.Cells["fecha"].Value != DBNull.Value ? selectedRow.Cells["fecha"].Value.ToString() : "";
 
                         Editar = true;
                         Modificar = true;
@@ -144,17 +144,25 @@ namespace NovoCosts.Forms
         }
         private void dgvProductos_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvProductos.SelectedRows.Count > 0)
+            try
             {
-                DataGridViewRow selectedRow = dgvProductos.SelectedRows[0];
-
-                if (selectedRow.Cells.Count >= 2)
+                if (dgvProductos.SelectedRows.Count > 0)
                 {
-                    IdProducto = Convert.ToInt32(selectedRow.Cells["id_producto"].Value);
-                    txtDescripcion.Text = selectedRow.Cells[2].Value.ToString();
-                    txtReferencia.Text = selectedRow.Cells[1].Value.ToString();
+                    DataGridViewRow selectedRow = dgvProductos.SelectedRows[0];
+
+                    if (selectedRow.Cells.Count >= 2)
+                    {
+                        IdProducto = Convert.ToInt32(selectedRow.Cells["id_producto"].Value);
+                        txtDescripcion.Text = selectedRow.Cells[2].Value.ToString();
+                        txtReferencia.Text = selectedRow.Cells[1].Value.ToString();
+                    }
                 }
             }
+            catch (Exception)
+            {
+                MessageBox.Show("Fila vacia");
+                return;
+            }            
         }
         private void comboBoxMO_DropDown(object sender, EventArgs e)
         {
@@ -162,15 +170,23 @@ namespace NovoCosts.Forms
         }        
         private void comboBoxMO_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DataRowView selectedRow = (DataRowView)comboBoxTMO.SelectedItem;
-
-            if (selectedRow != null)
+            try
             {
-                IdTipoManoObra = Convert.ToInt32(selectedRow["id_tipo_mano_obra"]);
+                DataRowView selectedRow = (DataRowView)comboBoxTMO.SelectedItem;
 
-                Console.WriteLine("IdUnidadMedida: " + IdTipoManoObra);
+                if (selectedRow != null)
+                {
+                    IdTipoManoObra = Convert.ToInt32(selectedRow["id_tipo_mano_obra"]);
 
+                    Console.WriteLine("IdUnidadMedida: " + IdTipoManoObra);
+
+                }
             }
+            catch (Exception)
+            {
+                MessageBox.Show("Fila vacia");
+                return;
+            }            
         }
 
         //Metodos
@@ -191,7 +207,7 @@ namespace NovoCosts.Forms
             }
             catch (Exception)
             {
-                MessageBox.Show("Error al Guardar.");
+                MessageBox.Show("Error !.");
                 return false;
             }
             
@@ -346,7 +362,6 @@ namespace NovoCosts.Forms
             columna.HeaderCell.Style.Font = new Font(columna.DataGridView.Font, FontStyle.Bold);
             columna.HeaderCell.Style.Font = new Font(columna.HeaderCell.Style.Font, FontStyle.Bold);
         }
-
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             Limpiar();
