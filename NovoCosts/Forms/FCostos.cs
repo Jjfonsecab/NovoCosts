@@ -98,6 +98,7 @@ namespace NovoCosts.Forms
             else
                 if (!Guardar()) return;
 
+            ListarProductos();
             Finalizar();
         }
         private void btnEliminar_Click_1(object sender, EventArgs e)
@@ -348,7 +349,7 @@ namespace NovoCosts.Forms
                     IdProducto = IdProducto,
                     IdMateriaPrima = IdMateriaPrima,
                     Desempeño = txtDesempeño.Text,
-                    Cantidad = Convert.ToInt32(txtCantidad.Text),
+                    Cantidad = Convert.ToDecimal(txtCantidad.Text),
                     Dimension1 = Convert.ToDecimal(txtD1.Text),
                     Dimension2 = Convert.ToDecimal(txtD2.Text),
                     Dimension3 = Convert.ToDecimal(txtD3.Text),
@@ -469,9 +470,9 @@ namespace NovoCosts.Forms
         {
             txtDesempeño.Text = "";
             txtCantidad.Text = "";
-            txtD1.Text = "";
-            txtD2.Text = "";
-            txtD3.Text = "";
+            txtD1.Text = "0";
+            txtD2.Text = "0";
+            txtD3.Text = "0";
             comboBoxTC.Text = "";
             txtFecha.Text = "";
             Editar = false;
@@ -561,7 +562,9 @@ namespace NovoCosts.Forms
         {
             dgvCosto.DataSource = Models.Costos.ListarCostoProducto(IdProducto);
             DbDatos.OcultarIds(dgvCosto);
+            //CalcularValorTipoCosto(IdProducto);
             PersonalizarColumnasCostos(dgvCosto);
+            
         }
         private void ListarManoObra(int IdProducto)
         {
@@ -730,12 +733,20 @@ namespace NovoCosts.Forms
                     if (columna.Name == "nombre_tipo")
                     {
                         dgvManoObra.Columns["nombre_tipo"].HeaderText = "NOMBRE";
+                        dgvManoObra.Columns["nombre_tipo"].DisplayIndex = 0;
                     }
                     else if (columna.Name == "fecha")      
-                        columna.Visible = false;                        
-                    
-                    ConfigurarCabeceraColumna(columna, columna.HeaderText);
-                }
+                        columna.Visible = false;
+                    else if (columna.Name == "costo")
+                    {
+                        columna.Width = 35;
+                        DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
+                        estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight;
+                        estiloCeldaNumerica.Format = "N0";
+                        columna.DefaultCellStyle = estiloCeldaNumerica;
+                    }
+                }                
+                ConfigurarCabeceraColumna(columna, columna.HeaderText);
             }
         }
         private void ConfigurarCabeceraColumna(DataGridViewColumn columna, string nuevoHeaderText)

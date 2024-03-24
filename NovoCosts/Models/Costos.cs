@@ -14,7 +14,7 @@ namespace NovoCosts.Models
         public int IdProducto { get; set; }
         public int IdMateriaPrima { get; set; }
         public string Desempeño { get; set; }
-        public int Cantidad { get; set; }
+        public decimal Cantidad { get; set; }
         public decimal? Dimension1 { get; set; }
         public decimal? Dimension2 { get; set; }
         public decimal? Dimension3 { get; set; }
@@ -26,6 +26,7 @@ namespace NovoCosts.Models
         public decimal ValorTotal { get; set; }
         public int IdTipoCosto { get; set; }
         public DateTime Fecha { get; set; }
+
         public static bool Guardar(Costos costos, bool editar)
         {
             List<Parametro> parametros = new List<Parametro>()
