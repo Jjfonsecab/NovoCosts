@@ -27,12 +27,13 @@ namespace NovoCosts.Forms
             MostrarFechaActual();
         }
 
-        bool Editar;
+        bool Editar = false;
         bool Modificar;
         int IdTapiceria;
         int IdProducto;
         int IdManoObra;
         decimal ResultadoSuma;
+        decimal ResultadoTotal;
 
         private void btnInicio_Click(object sender, EventArgs e)
         {
@@ -54,6 +55,7 @@ namespace NovoCosts.Forms
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             totalSuma(Convert.ToDecimal(txtCorte.Text),Convert.ToDecimal(txtBlanco.Text),Convert.ToDecimal(txtCostura.Text),Convert.ToDecimal(txtForrado.Text));
+            valorTotal(ResultadoSuma, Convert.ToDecimal(txtCantidad.Text));
             if (!ValidarCampos(txtReferencia, txtDescripcion, txtCorte, txtCostura, txtForrado, txtBlanco, txtFecha))
                 return;
             if (Modificar)
@@ -131,9 +133,12 @@ namespace NovoCosts.Forms
                     IdTapiceria = IdTapiceria,
                     IdProducto = IdProducto,
                     CorteAlistado = Convert.ToInt32(txtCorte.Text),
-                    Blanco = Convert.ToInt32(txtBlanco.Text),
-                    Costura = Convert.ToInt32(txtCostura.Text),
-                    Forrado = Convert.ToInt32(txtForrado.Text),
+                    Blanco = Convert.ToDecimal(txtBlanco.Text),
+                    Costura = Convert.ToDecimal(txtCostura.Text),
+                    Forrado = Convert.ToDecimal(txtForrado.Text),
+                    ValorUnitario = ResultadoSuma,
+                    Cantidad = Convert.ToDecimal(txtCantidad.Text),
+                    ValorTotal = ResultadoTotal,
                     Fecha = DateTime.Parse(txtFecha.Text),
                 };
 
@@ -141,9 +146,11 @@ namespace NovoCosts.Forms
                 {
                     IdManoObra = IdManoObra,
                     IdProducto = IdProducto,
-                    IdTipoManoObra = 8,
+                    IdTipoManoObra = 8,//Es el id en base de datos de tapiceria
                     Costo = ResultadoSuma,
                     Fecha = DateTime.Parse(txtFecha.Text),
+                    TotalCantidad = Convert.ToDecimal(txtCantidad.Text),
+                    ValorTotal = ResultadoTotal,
                 };
                 Modificar = false;
                 return Tapiceria.Guardar(tapiceria, Editar) && ManoObra.Guardar(manoobra, Editar);
@@ -226,10 +233,10 @@ namespace NovoCosts.Forms
         {
             txtReferencia.Text = "";
             txtDescripcion.Text = "";
-            txtBlanco.Text = "";
-            txtCorte.Text = "";
-            txtCostura.Text = "";
-            txtForrado.Text = "";
+            txtBlanco.Text = "0";
+            txtCorte.Text = "0";
+            txtCostura.Text = "0";
+            txtForrado.Text = "0";
             txtFecha.Text = "";
             Editar = false;
             MostrarFechaActual();
@@ -312,6 +319,12 @@ namespace NovoCosts.Forms
             ResultadoSuma = corte + blanco + costura + forrado;
             return ResultadoSuma;
             
+        }
+        private decimal valorTotal(decimal vCantidad, decimal vUnitario)
+        {
+            ResultadoTotal = vCantidad * vUnitario;
+            return ResultadoTotal;
+
         }
     }
 }

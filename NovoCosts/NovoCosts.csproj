@@ -56,6 +56,12 @@
     <Compile Include="Forms\FCostos.Designer.cs">
       <DependentUpon>FCostos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FFormularioCostos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FFormularioCostos.Designer.cs">
+      <DependentUpon>FFormularioCostos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FInicio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +122,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\FCostos.resx">
       <DependentUpon>FCostos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FFormularioCostos.resx">
+      <DependentUpon>FFormularioCostos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FInicio.resx">
       <DependentUpon>FInicio.cs</DependentUpon>

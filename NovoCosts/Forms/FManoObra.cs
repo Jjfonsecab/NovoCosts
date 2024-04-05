@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace NovoCosts.Forms
 {
@@ -27,10 +28,11 @@ namespace NovoCosts.Forms
         }
 
         bool Editar;
-        bool Modificar;
+        bool Modificar = false;
         int IdManoObra;
         int IdProducto;
         int IdTipoManoObra;
+        decimal ResultadoValorTotal;
 
         private void btnInicio_Click(object sender, EventArgs e)
         {
@@ -62,9 +64,13 @@ namespace NovoCosts.Forms
                 ftipo.BringToFront();
         }
         private void btnGuardar_Click(object sender, EventArgs e)
-        {
-            if (!ValidarCampos(txtReferencia, txtDescripcion, comboBoxTMO, txtCosto, txtFecha))
+        {            
+            if (!ValidarCampos(txtReferencia, txtDescripcion, comboBoxTMO, txtCosto, txtFecha, txtCantidad))
                 return;
+            else
+            {
+                CalcularValorTotal(Convert.ToDecimal(txtCantidad.Text), Convert.ToDecimal(txtCosto.Text));
+            }
             if (Modificar)
             {
                 if (!GuardarEditado())
@@ -199,8 +205,10 @@ namespace NovoCosts.Forms
                     IdManoObra = IdManoObra,
                     IdProducto = IdProducto,
                     IdTipoManoObra = IdTipoManoObra,
-                    Costo = Convert.ToInt32(txtCosto.Text),
+                    Costo = Convert.ToDecimal(txtCosto.Text),
                     Fecha = DateTime.Parse(txtFecha.Text),
+                    TotalCantidad = Convert.ToDecimal(txtCantidad.Text),
+                    ValorTotal = ResultadoValorTotal,
                 };
 
                 return ManoObra.Guardar(manoobra, Editar);
@@ -273,6 +281,7 @@ namespace NovoCosts.Forms
             txtDescripcion.Text = "";
             txtCosto.Text = "";
             txtFecha.Text = "";
+            txtCantidad.Text = "";
             Editar = false;
             MostrarFechaActual();
         }
@@ -366,6 +375,12 @@ namespace NovoCosts.Forms
         {
             Limpiar();
             Modificar = false;
+        }
+        private decimal CalcularValorTotal(decimal vCantidad, decimal vUnitario)
+        {
+            ResultadoValorTotal = vCantidad * vUnitario;
+
+            return ResultadoValorTotal;
         }
     }
 }

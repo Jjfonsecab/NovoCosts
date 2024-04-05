@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace NovoCosts.Forms
 {
@@ -33,9 +34,10 @@ namespace NovoCosts.Forms
         int IdProducto;
         int IdMateriaPrima;
         int IdTipoCosto;
-        Decimal ResultadoDesperdicio;
-        Decimal ResultadoTotalCantidad;
-        Decimal ResultadoValorTotal;
+        decimal ResultadoDesperdicio;
+        decimal ResultadoTotalCantidad;
+        decimal ResultadoValorTotal;
+
         private void btnInicio_Click_1(object sender, EventArgs e)
         {
             FInicio fInicio = Application.OpenForms.OfType<FInicio>().FirstOrDefault();
@@ -67,27 +69,17 @@ namespace NovoCosts.Forms
         }
         private void btnGuardar_Click_1(object sender, EventArgs e)
         {
-            if (!ValidarCamposString(txtReferencia, txtDescripcion, txtDesempeño, txtCantidad, txtCM, txtD1, txtD2, txtD3, comboBoxTC, txtFecha))
+            if (!ValidarCamposString(txtReferencia, txtDescripcion, txtDesempeño, txtCantidad, txtD1, txtD2, txtD3, comboBoxTC, txtFecha))
                 return;
             else if (!ValidarCamposNumericos(txtD1, txtD2, txtD3, txtCantidad))
                 return;
-            else
-            {
-                if (txtDesperdicioTotal.Enabled == false)
-                {
-                    CalcularTotalCantidad(Convert.ToDecimal(txtCantidad.Text), Convert.ToDecimal(txtD1.Text), Convert.ToDecimal(txtD2.Text), Convert.ToDecimal(txtD3.Text), Convert.ToDecimal(txtCM.Text));
-                    CalcularDesperdicio(ResultadoTotalCantidad, Convert.ToDecimal(txtCantidadDesperdicio.Text));
-                    txtDesperdicioTotal.Text = ResultadoDesperdicio.ToString();
-                    CalcularValorTotal(Convert.ToDecimal(txtValorU.Text));
-                }
-                else if (txtDesperdicioTotal.Enabled == false)
-                {
-                    ResultadoTotalCantidad = Convert.ToDecimal(txtDesperdicioTotal.Text);
-                    ResultadoDesperdicio = 0;
-                    txtDesperdicioTotal.Text = ResultadoDesperdicio.ToString();
-                    CalcularValorTotalManoObra(ResultadoTotalCantidad, Convert.ToDecimal(txtValorU.Text));
-                }
-            }
+
+            CalcularTotalCantidad(Convert.ToDecimal(txtCantidad.Text), Convert.ToDecimal(txtD1.Text), Convert.ToDecimal(txtD2.Text), Convert.ToDecimal(txtD3.Text), Convert.ToDecimal(txtCM.Text));
+            CalcularDesperdicio(ResultadoTotalCantidad, Convert.ToDecimal(txtCantidadDesperdicio.Text));
+            txtDesperdicioTotal.Text = ResultadoDesperdicio.ToString();
+            CalcularValorTotal(Convert.ToDecimal(txtValorU.Text));
+
+
             if (Modificar)
             {
                 if (!GuardarEditado())
@@ -118,14 +110,11 @@ namespace NovoCosts.Forms
                 MessageBox.Show("Configuracion no disponible");
                 return;
             }
-
             if (dgvActual == null || dgvActual.SelectedRows.Count == 0 || dgvActual.CurrentRow == null)
             {
                 MessageBox.Show("Selecciona una fila antes de eliminar.");
                 return;
             }
-
-
             DataGridViewCell cell = dgvActual.CurrentRow.Cells["id_costos"];
             int id_costo = Convert.ToInt32(cell.Value);
             IdCosto = id_costo;
@@ -136,6 +125,7 @@ namespace NovoCosts.Forms
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             LimpiarTodo();
+            ListarMaterial();
             Modificar = false;
         }
         private void editarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -256,7 +246,6 @@ namespace NovoCosts.Forms
         {
             try
             {
-                txtDesperdicioTotal.Enabled = true;
                 if (dgvManoObra.SelectedRows.Count > 0)
                 {
                     DataGridViewRow selectedRow = dgvManoObra.SelectedRows[0];
@@ -273,8 +262,7 @@ namespace NovoCosts.Forms
             {
                 MessageBox.Show("Fila vacia");
                 return;
-            }
-            
+            }            
         }
         private void comboBoxTC_DropDown(object sender, EventArgs e)
         {
@@ -336,6 +324,11 @@ namespace NovoCosts.Forms
                 return;
             }
             
+        }
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            string searchText = txtBuscar.Text;
+            BuscarMaterial("BuscarCostosPorDetalleMP", txtBuscar, dgvMateriasPrimas, "@detalleMP");
         }
 
         //Metodos
@@ -469,7 +462,7 @@ namespace NovoCosts.Forms
         private void Limpiar()
         {
             txtDesempeño.Text = "";
-            txtCantidad.Text = "";
+            txtCantidad.Text = "0";
             txtD1.Text = "0";
             txtD2.Text = "0";
             txtD3.Text = "0";
@@ -485,16 +478,16 @@ namespace NovoCosts.Forms
             txtDescripcion.Text = "";
             txtMaterial.Text = "";
             txtDesempeño.Text = "";
-            txtCantidad.Text = "";
-            txtValorU.Text = "";
-            txtD1.Text = "";
-            txtD2.Text = "";
-            txtD3.Text = "";
-            txtCM.Text = "";
-            txtCantidadDesperdicio.Text = "";
-            txtDesperdicioTotal.Text = "";
-            txtValorU.Text = "";
-            comboBoxTC.Text = "";
+            txtCantidad.Text = "0";
+            txtValorU.Text = "0";
+            txtD1.Text = "0";
+            txtD2.Text = "0";
+            txtD3.Text = "0";
+            txtCM.Text = "0";
+            txtCantidadDesperdicio.Text = "0";
+            txtDesperdicioTotal.Text = "0";
+            txtValorU.Text = "0";
+            comboBoxTC.Text = "0";
 
             IdProducto = 0;
             IdMateriaPrima = 0;
@@ -550,6 +543,19 @@ namespace NovoCosts.Forms
             DbDatos.OcultarIds(dgvMateriasPrimas);
             PersonalizarColumnaMateriales();
         }
+        private void BuscarMaterial(string nombreProcedimiento, System.Windows.Forms.TextBox textBox, DataGridView dgv, string parametroNombre) 
+        {
+            string searchText = textBox.Text;
+
+            List<Parametro> parametros = new List<Parametro>
+            {
+                new Parametro(parametroNombre, searchText)
+            };
+
+            DataTable result = DbDatos.Listar(nombreProcedimiento, parametros);
+
+            dgv.DataSource = result;
+        }
         private void ListarTipoCosto()
         {
             DataTable dataTable = TipoCosto.ListarTodo();
@@ -562,7 +568,6 @@ namespace NovoCosts.Forms
         {
             dgvCosto.DataSource = Models.Costos.ListarCostoProducto(IdProducto);
             DbDatos.OcultarIds(dgvCosto);
-            //CalcularValorTipoCosto(IdProducto);
             PersonalizarColumnasCostos(dgvCosto);
             
         }
@@ -584,6 +589,7 @@ namespace NovoCosts.Forms
             txtD1.Click += TextBox_Click;
             txtD2.Click += TextBox_Click;
             txtD3.Click += TextBox_Click;
+            txtValorU.Click += TextBox_Click;
 
             txtFecha.CharacterCasing = CharacterCasing.Upper;
         }
@@ -739,7 +745,7 @@ namespace NovoCosts.Forms
                         columna.Visible = false;
                     else if (columna.Name == "costo")
                     {
-                        columna.Width = 35;
+                        columna.Width = 107;
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight;
                         estiloCeldaNumerica.Format = "N0";
@@ -770,24 +776,21 @@ namespace NovoCosts.Forms
             if (selectedIndex == 1)
             {
                 ResultadoTotalCantidad = (cantidad * d1) / cm;
-                Console.WriteLine($"ResultadoTotalCantidad :" + cantidad + " + " + d1 + " / " + cm + " = " + ResultadoTotalCantidad);
                 return ResultadoTotalCantidad;
             }
             else if (selectedIndex == 2)
             {
                 ResultadoTotalCantidad = (cantidad * d1 * d2) / cm;
-                Console.WriteLine($"ResultadoTotalCantidad :" + cantidad + " + " + d1 + " + " + d2 + " / " + cm + " = " + ResultadoTotalCantidad);
                 return ResultadoTotalCantidad;
             }
             else if (selectedIndex == 3)
             {
                 ResultadoTotalCantidad = (cantidad * d1 * d2 * d3) / cm;
-                Console.WriteLine($"ResultadoTotalCantidad :" + cantidad + " + " + d1 + " + " + d2 + " + " + d3 + " / " + cm + " = " + ResultadoTotalCantidad);
                 return ResultadoTotalCantidad;
             }
             else
             {
-                ResultadoTotalCantidad = 0;
+                ResultadoTotalCantidad = Convert.ToDecimal(txtCantidad.Text);
                 return ResultadoTotalCantidad;
             }
         }
@@ -799,18 +802,17 @@ namespace NovoCosts.Forms
         }
         private decimal CalcularValorTotal(decimal ValorU)
         {
-            ResultadoValorTotal = (ResultadoDesperdicio + ResultadoTotalCantidad) * ValorU;
-            Console.WriteLine($"ResultadoValorTotal :" + ResultadoDesperdicio + " + " + ResultadoTotalCantidad + " * " + ValorU + " = " + ResultadoValorTotal);
+            if (ResultadoDesperdicio != 0 && ResultadoTotalCantidad != 0)
+            {
+                ResultadoValorTotal = (ResultadoDesperdicio + ResultadoTotalCantidad) * ValorU;
+                Console.WriteLine($"ResultadoValorTotal :" + ResultadoDesperdicio + " + " + ResultadoTotalCantidad + " * " + ValorU + " = " + ResultadoValorTotal);
+            }
+            else
+            {
+                ResultadoValorTotal = 0;
+            }
 
             return ResultadoValorTotal;
-        }
-        private decimal CalcularValorTotalManoObra(decimal valorU, decimal totalCantidad)
-        {
-            ResultadoValorTotal = totalCantidad * valorU;
-            Console.WriteLine($"ResultadoValorTotal :" + totalCantidad + " * " + valorU + " = " + ResultadoValorTotal);
-
-            return ResultadoValorTotal;
-        }
-        
+        }       
     }
 }

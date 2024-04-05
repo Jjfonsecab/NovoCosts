@@ -16,6 +16,9 @@ namespace NovoCosts.Models
         public decimal Blanco { get; set; }
         public decimal Costura { get; set; }
         public decimal Forrado { get; set; }
+        public decimal ValorUnitario { get; set; }
+        public decimal Cantidad { get; set; }
+        public decimal ValorTotal { get; set; }
         public DateTime Fecha { get; set; }
         public static bool Guardar(Tapiceria tapiceria, bool editar)
         {
@@ -27,6 +30,9 @@ namespace NovoCosts.Models
                 new Parametro("@blanco", tapiceria.Blanco),
                 new Parametro("@costura", tapiceria.Costura),
                 new Parametro("@forrado", tapiceria.Forrado),
+                new Parametro("@valor_unitario", tapiceria.Forrado),
+                new Parametro("@cantidad", tapiceria.Forrado),
+                new Parametro("@valor_total", tapiceria.Forrado),
                 new Parametro("@fecha", tapiceria.Fecha),
                 new Parametro("@Editar", editar)
             };

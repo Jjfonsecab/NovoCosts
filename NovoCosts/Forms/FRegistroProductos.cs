@@ -123,55 +123,36 @@ namespace NovoCosts.Forms
             ultimoTextBoxModificado = txtBuscar;
             MostrarResultados("BuscarProducto", txtBuscar, listBox1, opcionSeleccionada, "@ValorBuscado", opcionSeleccionada);
         }
-        private void BuscarYMostrarResultados(string nombreProcedimiento, System.Windows.Forms.TextBox textBox, ListBox listBox, string parametroNombre, string nombreColumna)
+        private void dgvRegistroProductos_SelectionChanged(object sender, EventArgs e)
         {
-            string searchText = textBox.Text;
-
-            List<Parametro> parametros = new List<Parametro>
+            try
             {
-                new Parametro(parametroNombre, searchText)
-            };
-
-            DataTable result = DbDatos.Listar(nombreProcedimiento, parametros);
-
-            listBox.Items.Clear();
-
-            if (result != null && result.Rows.Count > 0)
-            {
-                foreach (DataRow row in result.Rows)
-                    listBox.Items.Add(row[nombreColumna].ToString());
-            }
-        }
-        private void MostrarResultados(string nombreProcedimiento, System.Windows.Forms.TextBox textBox, ListBox listBox, string columna, string parametroNombre, string nombreColumna)
-        {
-            string searchText = textBox.Text;
-
-            List<Parametro> parametros = new List<Parametro>
-            {
-                new Parametro(parametroNombre, searchText),
-                new Parametro("@NombreColumna", columna)  // Asegúrate de agregar este parámetro
-            };
-
-            Console.WriteLine($"Valor de {parametroNombre}: {searchText}");
-            Console.WriteLine($"Valor de @NombreColumna: {columna}");
-
-            // Llama al método Listar para obtener los resultados de la consulta
-            DataTable result = DbDatos.Listar(nombreProcedimiento, parametros);
-
-            // Limpia el ListBox antes de agregar nuevos elementos
-            listBox.Items.Clear();
-
-            // Verifica si hay resultados y llena el ListBox
-            if (result != null && result.Rows.Count > 0)
-            {
-                foreach (DataRow row in result.Rows)
+                if (dgvRegistroProductos.SelectedRows.Count > 0)
                 {
-                    // Agrega los elementos al ListBox
-                    listBox.Items.Add(row[nombreColumna].ToString());
+                    DataGridViewRow selectedRow = dgvRegistroProductos.SelectedRows[0];
+
+                    if (selectedRow.Cells.Count >= 5)
+                    {
+                        IdProducto = Convert.ToInt32(selectedRow.Cells["id_producto"].Value);
+                        txtDescripcion.Text = Convert.ToString(selectedRow.Cells["descripcion"].Value);
+                        txtReferencia.Text = Convert.ToString(selectedRow.Cells["referencia"].Value);
+
+                        Editar = true;
+                        Modificar = true;
+                    }
                 }
             }
-        }
-
+            catch (StrongTypingException)
+            {
+                MessageBox.Show("Fila vacia");
+                return;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error al Guardar");
+                return;
+            }
+        }        
 
         //Metodos
         private bool Guardar()
@@ -332,6 +313,55 @@ namespace NovoCosts.Forms
             columna.HeaderCell.Style.Font = new Font(columna.DataGridView.Font, FontStyle.Bold);
             columna.HeaderCell.Style.Font = new Font(columna.HeaderCell.Style.Font, FontStyle.Bold);
         }
+        private void BuscarYMostrarResultados(string nombreProcedimiento, System.Windows.Forms.TextBox textBox, ListBox listBox, string parametroNombre, string nombreColumna)
+        {
+            string searchText = textBox.Text;
+
+            List<Parametro> parametros = new List<Parametro>
+            {
+                new Parametro(parametroNombre, searchText)
+            };
+
+            DataTable result = DbDatos.Listar(nombreProcedimiento, parametros);
+
+            listBox.Items.Clear();
+
+            if (result != null && result.Rows.Count > 0)
+            {
+                foreach (DataRow row in result.Rows)
+                    listBox.Items.Add(row[nombreColumna].ToString());
+            }
+        }
+        private void MostrarResultados(string nombreProcedimiento, System.Windows.Forms.TextBox textBox, ListBox listBox, string columna, string parametroNombre, string nombreColumna)
+        {
+            string searchText = textBox.Text;
+
+            List<Parametro> parametros = new List<Parametro>
+            {
+                new Parametro(parametroNombre, searchText),
+                new Parametro("@NombreColumna", columna)  // Asegúrate de agregar este parámetro
+            };
+
+            Console.WriteLine($"Valor de {parametroNombre}: {searchText}");
+            Console.WriteLine($"Valor de @NombreColumna: {columna}");
+
+            // Llama al método Listar para obtener los resultados de la consulta
+            DataTable result = DbDatos.Listar(nombreProcedimiento, parametros);
+
+            // Limpia el ListBox antes de agregar nuevos elementos
+            listBox.Items.Clear();
+
+            // Verifica si hay resultados y llena el ListBox
+            if (result != null && result.Rows.Count > 0)
+            {
+                foreach (DataRow row in result.Rows)
+                {
+                    // Agrega los elementos al ListBox
+                    listBox.Items.Add(row[nombreColumna].ToString());
+                }
+            }
+        }
+
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -363,35 +393,5 @@ namespace NovoCosts.Forms
             Editar = true;
             Modificar = true;
         }
-        private void dgvRegistroProductos_SelectionChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (dgvRegistroProductos.SelectedRows.Count > 0)
-                {
-                    DataGridViewRow selectedRow = dgvRegistroProductos.SelectedRows[0];
-
-                    if (selectedRow.Cells.Count >= 5)
-                    {
-                        IdProducto = Convert.ToInt32(selectedRow.Cells["id_producto"].Value);
-                        txtDescripcion.Text = Convert.ToString(selectedRow.Cells["descripcion"].Value);
-                        txtReferencia.Text = Convert.ToString(selectedRow.Cells["referencia"].Value);
-
-                        Editar = true;
-                        Modificar = true;
-                    }
-                }
-            }
-            catch (StrongTypingException)
-            {
-                MessageBox.Show("Fila vacia");
-                return;
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Error al Guardar");
-                return;
-            }
-        }        
     }
 }
