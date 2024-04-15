@@ -52,6 +52,7 @@
             this.dgvCostos = new System.Windows.Forms.DataGridView();
             this.Costos = new System.Windows.Forms.TabControl();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnFCostos = new System.Windows.Forms.PictureBox();
             this.btnLimpiar = new System.Windows.Forms.PictureBox();
             this.label14 = new System.Windows.Forms.Label();
             this.txtValorU = new System.Windows.Forms.TextBox();
@@ -104,6 +105,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvCostos)).BeginInit();
             this.Costos.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnFCostos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnLimpiar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnTipoCostos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnInicio)).BeginInit();
@@ -134,7 +136,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 29);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1316, 299);
+            this.tabPage4.Size = new System.Drawing.Size(1738, 455);
             this.tabPage4.TabIndex = 5;
             this.tabPage4.Text = "Costo";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -175,7 +177,7 @@
             this.dgvCosto.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCosto.RowHeadersWidth = 62;
             this.dgvCosto.RowTemplate.Height = 28;
-            this.dgvCosto.Size = new System.Drawing.Size(1304, 307);
+            this.dgvCosto.Size = new System.Drawing.Size(1715, 444);
             this.dgvCosto.TabIndex = 2;
             // 
             // contextMenuStrip2
@@ -199,7 +201,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 29);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1316, 299);
+            this.tabPage5.Size = new System.Drawing.Size(1738, 455);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Mano de Obra";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -225,7 +227,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 29);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1316, 299);
+            this.tabPage3.Size = new System.Drawing.Size(1738, 455);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Materiales";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -251,7 +253,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1316, 299);
+            this.tabPage2.Size = new System.Drawing.Size(1738, 455);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Productos";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -342,6 +344,7 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.BackColor = System.Drawing.Color.SkyBlue;
+            this.groupBox1.Controls.Add(this.btnFCostos);
             this.groupBox1.Controls.Add(this.btnLimpiar);
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.txtValorU);
@@ -372,12 +375,24 @@
             this.groupBox1.Controls.Add(this.txtFecha);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.groupBox3);
-            this.groupBox1.Location = new System.Drawing.Point(20, 8);
+            this.groupBox1.Location = new System.Drawing.Point(21, 7);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1742, 242);
+            this.groupBox1.Size = new System.Drawing.Size(1741, 242);
             this.groupBox1.TabIndex = 81;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos : ";
+            // 
+            // btnFCostos
+            // 
+            this.btnFCostos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFCostos.Image = ((System.Drawing.Image)(resources.GetObject("btnFCostos.Image")));
+            this.btnFCostos.Location = new System.Drawing.Point(1698, 55);
+            this.btnFCostos.Name = "btnFCostos";
+            this.btnFCostos.Size = new System.Drawing.Size(64, 55);
+            this.btnFCostos.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.btnFCostos.TabIndex = 130;
+            this.btnFCostos.TabStop = false;
+            this.btnFCostos.Click += new System.EventHandler(this.btnFCostos_Click);
             // 
             // btnLimpiar
             // 
@@ -456,7 +471,7 @@
             // 
             this.btnEliminar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
-            this.btnEliminar.Location = new System.Drawing.Point(1770, 126);
+            this.btnEliminar.Location = new System.Drawing.Point(1773, 177);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(46, 41);
             this.btnEliminar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -468,7 +483,7 @@
             // 
             this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
-            this.btnGuardar.Location = new System.Drawing.Point(1700, 126);
+            this.btnGuardar.Location = new System.Drawing.Point(1698, 177);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(47, 41);
             this.btnGuardar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -779,6 +794,7 @@
             this.Costos.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnFCostos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnLimpiar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnTipoCostos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnInicio)).EndInit();
@@ -847,5 +863,6 @@
         private System.Windows.Forms.ToolStripMenuItem editarToolStripMenuItem1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox txtBuscar;
+        private System.Windows.Forms.PictureBox btnFCostos;
     }
 }

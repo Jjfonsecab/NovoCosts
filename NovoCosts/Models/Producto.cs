@@ -46,5 +46,9 @@ namespace NovoCosts.Models
             };
             return DbDatos.Listar("Listar_ProductoId", parametros);
         }
+        public static DataTable ListarProductos()
+        {
+            return DbDatos.Listar("Productos_Listar");
+        }
     }
 }

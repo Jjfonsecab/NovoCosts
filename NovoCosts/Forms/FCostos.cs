@@ -67,6 +67,17 @@ namespace NovoCosts.Forms
             else
                 fregistrotp.BringToFront();
         }
+        private void btnFCostos_Click(object sender, EventArgs e)
+        {
+            FFormularioCostos fFormulario = Application.OpenForms.OfType<FFormularioCostos>().FirstOrDefault();
+            if (fFormulario == null)
+            {
+                fFormulario = new FFormularioCostos();
+                fFormulario.Show();
+            }
+            else
+                fFormulario.BringToFront();
+        }
         private void btnGuardar_Click_1(object sender, EventArgs e)
         {
             if (!ValidarCamposString(txtReferencia, txtDescripcion, txtDesempeño, txtCantidad, txtD1, txtD2, txtD3, comboBoxTC, txtFecha))
@@ -813,6 +824,6 @@ namespace NovoCosts.Forms
             }
 
             return ResultadoValorTotal;
-        }       
+        }        
     }
 }
