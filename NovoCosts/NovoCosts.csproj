@@ -111,6 +111,7 @@
       <DependentUpon>FRegistroUnidadMedida.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Costos.cs" />
+    <Compile Include="Models\FormularioCostos.cs" />
     <Compile Include="Models\ManoObra.cs" />
     <Compile Include="Models\MateriasPrimas.cs" />
     <Compile Include="Models\Producto.cs" />

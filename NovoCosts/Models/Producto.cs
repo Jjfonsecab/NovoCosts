@@ -50,5 +50,6 @@ namespace NovoCosts.Models
         {
             return DbDatos.Listar("Productos_Listar");
         }
+        
     }
 }

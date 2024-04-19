@@ -22,7 +22,7 @@ namespace NovoCosts.Forms
         }        
         private void FCostos_Load(object sender, EventArgs e)
         {
-            ListarTodo();
+            //ListarTodo();
             ListarProductos();
             ListarMaterial();
             MostrarFechaActual();

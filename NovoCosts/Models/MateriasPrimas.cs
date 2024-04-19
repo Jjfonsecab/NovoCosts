@@ -58,5 +58,7 @@ namespace NovoCosts.Models
         {
             return DbDatos.Listar("MateriaPrima_Listar");
         }
+        
+
     }
 }

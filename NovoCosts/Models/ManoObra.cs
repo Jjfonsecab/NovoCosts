@@ -52,7 +52,15 @@ namespace NovoCosts.Models
         public static DataTable ListarCompleto()
         {
             return DbDatos.Listar("ObtenerInformacionManoObra");
-        }    
+        }
+        public static DataTable CalcularCostoManoObra(int idProducto)
+        {
+            List<Parametro> parametros = new List<Parametro>
+            {
+                new Parametro("@idProducto", idProducto)
+            };
+            return DbDatos.Listar("SumarCostoPorID", parametros);
+        }
 
     }
 }
