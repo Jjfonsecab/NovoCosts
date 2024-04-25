@@ -337,9 +337,9 @@
             this.btnCalcular.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCalcular.Location = new System.Drawing.Point(1343, 518);
             this.btnCalcular.Name = "btnCalcular";
-            this.btnCalcular.Size = new System.Drawing.Size(106, 44);
+            this.btnCalcular.Size = new System.Drawing.Size(106, 62);
             this.btnCalcular.TabIndex = 87;
-            this.btnCalcular.Text = "Calcular %";
+            this.btnCalcular.Text = "Calcular ";
             this.btnCalcular.UseVisualStyleBackColor = false;
             this.btnCalcular.Click += new System.EventHandler(this.btnCalcular_Click);
             // 

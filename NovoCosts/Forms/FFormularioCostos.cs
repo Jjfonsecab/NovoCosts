@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,7 +51,11 @@ namespace NovoCosts.Forms
         }
         private void btnImprimir_Click(object sender, EventArgs e)//toDo
         {
-
+            printDocument1 = new System.Drawing.Printing.PrintDocument();
+            PrinterSettings ps = new PrinterSettings();
+            printDocument1.PrinterSettings = ps;
+            printDocument1.PrintPage += Imprimir;
+            printDocument1.Print();
         }
         private void btnCalcular_Click(object sender, EventArgs e)
         {
@@ -257,6 +262,23 @@ namespace NovoCosts.Forms
             columna.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
         }
+        private void Imprimir(object sender, PrintPageEventArgs e)
+        {
+            if (comboBox1.SelectedItem != null)
+            {
+                string textoComboBox = comboBox1.SelectedItem.ToString();
+
+                // Definir la fuente y el pincel para dibujar el texto
+                Font fuente = new Font("Arial", 12);
+                SolidBrush pincel = new SolidBrush(Color.Black);
+
+                PointF posicion = new PointF(100, 100);
+
+                e.Graphics.DrawString(textoComboBox, fuente, pincel, posicion);
+            }
+                
+        }
+
         //Definir costo, utilidad y precio de fabrica:
         private void calcularCosto()
         {

@@ -108,11 +108,39 @@ namespace NovoCosts.Forms
                 {
                     DataGridViewRow selectedRow = dgvProductos.SelectedRows[0];
 
-                    if (selectedRow.Cells.Count >= 2)
+                    if (selectedRow != null)
                     {
-                        IdProducto = Convert.ToInt32(selectedRow.Cells["id_producto"].Value);
-                        txtDescripcion.Text = selectedRow.Cells[2].Value.ToString();
-                        txtReferencia.Text = selectedRow.Cells[1].Value.ToString();
+                        // Verificar si la celda "id_producto" no es nula antes de acceder a su valor
+                        DataGridViewCell idProductoCell = selectedRow.Cells["id_producto"];
+                        if (idProductoCell != null && idProductoCell.Value != null)                        
+                            IdProducto = Convert.ToInt32(idProductoCell.Value);
+                        
+                        else
+                        {
+                            MessageBox.Show("Valor nulo!");
+                            return;
+                        }
+
+                        // Verificar si la celda "descripcion" no es nula antes de acceder a su valor
+                        DataGridViewCell descripcionCell = selectedRow.Cells["descripcion"];
+                        if (descripcionCell != null && descripcionCell.Value != null)                        
+                            txtDescripcion.Text = descripcionCell.Value.ToString();                        
+                        else
+                        {
+                            MessageBox.Show("Valor nulo!");
+                            return;
+                        }
+
+                        // Verificar si la celda "referencia" no es nula antes de acceder a su valor
+                        DataGridViewCell referenciaCell = selectedRow.Cells["referencia"];
+                        if (referenciaCell != null && referenciaCell.Value != null)                        
+                            txtReferencia.Text = referenciaCell.Value.ToString();
+                        
+                        else
+                        {
+                            MessageBox.Show("Valor nulo!");
+                            return;
+                        }
                     }
                 }
             }

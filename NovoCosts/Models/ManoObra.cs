@@ -47,7 +47,7 @@ namespace NovoCosts.Models
             {
                 new Parametro("@id_producto", IdProducto)
             };
-            return DbDatos.Listar("ObtenerCostoProductoManoObra", parametros);
+            return DbDatos.Listar("ObtenerManoObraPorProducto", parametros);
         }
         public static DataTable ListarCompleto()
         {

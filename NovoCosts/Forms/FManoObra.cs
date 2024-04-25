@@ -64,7 +64,7 @@ namespace NovoCosts.Forms
                 ftipo.BringToFront();
         }
         private void btnGuardar_Click(object sender, EventArgs e)
-        {            
+        {
             if (!ValidarCampos(txtReferencia, txtDescripcion, comboBoxTMO, txtCosto, txtFecha, txtCantidad))
                 return;
             else
@@ -106,7 +106,7 @@ namespace NovoCosts.Forms
             txtCosto.Text = dgvManoObra.CurrentRow.Cells["costo"].Value.ToString();
 
             DateTime fechaOriginal = DateTime.Parse(dgvManoObra.CurrentRow.Cells["fecha"].Value.ToString());
-            txtFecha.Text = fechaOriginal.ToString("yyyy-MM-dd"); 
+            txtFecha.Text = fechaOriginal.ToString("yyyy-MM-dd");
 
             Editar = true;
             Modificar = true;
@@ -118,23 +118,31 @@ namespace NovoCosts.Forms
                 if (dgvManoObra.SelectedRows.Count > 0)
                 {
                     DataGridViewRow selectedRow = dgvManoObra.SelectedRows[0];
-
-                    if (selectedRow.Cells.Count >= 5)
+                    if (selectedRow != null)
                     {
-                        // Verifica si el valor es DBNull antes de convertir
                         IdManoObra = Convert.ToInt32(selectedRow.Cells["id_mano_obra"].Value);
                         IdProducto = Convert.ToInt32(selectedRow.Cells["id_producto"].Value);
                         IdTipoManoObra = Convert.ToInt32(selectedRow.Cells["id_tipo_mano_obra"].Value);
                         txtCosto.Text = Convert.ToString(selectedRow.Cells["costo"].Value);
                         txtDescripcion.Text = Convert.ToString(selectedRow.Cells["Descripcion"].Value);
                         txtReferencia.Text = Convert.ToString(selectedRow.Cells["Referencia"].Value);
+                        txtCantidad.Text = Convert.ToString(selectedRow.Cells["Cantidad"].Value);
                         comboBoxTMO.Text = Convert.ToString(selectedRow.Cells["Nombre"].Value);
 
-                        txtFecha.Text = selectedRow.Cells["fecha"].Value != DBNull.Value ? selectedRow.Cells["fecha"].Value.ToString() : "";
+                        DataGridViewCell fechaCell = selectedRow.Cells["fecha"];
+                        if (fechaCell != null && fechaCell.Value != null)
+                            txtFecha.Text = fechaCell.Value.ToString();
+                        else
+                        {
+                            MessageBox.Show("Valor nulo!");
+                            return;
+                        }
 
                         Editar = true;
                         Modificar = true;
+
                     }
+
                 }
             }
             catch (System.NullReferenceException)
@@ -143,7 +151,7 @@ namespace NovoCosts.Forms
                 return;
             }
             catch (Exception)
-            {                
+            {
                 MessageBox.Show("Error al Guardar");
                 return;
             }
@@ -156,11 +164,22 @@ namespace NovoCosts.Forms
                 {
                     DataGridViewRow selectedRow = dgvProductos.SelectedRows[0];
 
-                    if (selectedRow.Cells.Count >= 2)
+                    if (selectedRow != null)
                     {
-                        IdProducto = Convert.ToInt32(selectedRow.Cells["id_producto"].Value);
-                        txtDescripcion.Text = selectedRow.Cells[2].Value.ToString();
-                        txtReferencia.Text = selectedRow.Cells[1].Value.ToString();
+                        DataGridViewCell idProductoCell = selectedRow.Cells["id_producto"];
+                        DataGridViewCell descripcionCell = selectedRow.Cells["descripcion"];
+                        DataGridViewCell referenciaCell = selectedRow.Cells["referencia"];
+                        if (idProductoCell != null && idProductoCell.Value != null)
+                            IdProducto = Convert.ToInt32(idProductoCell.Value);
+                        if (descripcionCell != null && descripcionCell.Value != null)
+                            txtDescripcion.Text = descripcionCell.Value.ToString();
+                        if (referenciaCell != null && referenciaCell.Value != null)
+                            txtReferencia.Text = referenciaCell.Value.ToString();
+                        if (idProductoCell == null || descripcionCell == null || referenciaCell != null)
+                        {
+                            MessageBox.Show("Valor nulo!");
+                            return;
+                        }
                     }
                 }
             }
@@ -168,12 +187,12 @@ namespace NovoCosts.Forms
             {
                 MessageBox.Show("Fila vacia");
                 return;
-            }            
+            }
         }
         private void comboBoxMO_DropDown(object sender, EventArgs e)
         {
             ListarTipoManoObra();
-        }        
+        }
         private void comboBoxMO_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -192,7 +211,7 @@ namespace NovoCosts.Forms
             {
                 MessageBox.Show("Fila vacia");
                 return;
-            }            
+            }
         }
 
         //Metodos
@@ -218,7 +237,7 @@ namespace NovoCosts.Forms
                 MessageBox.Show("Error !.");
                 return false;
             }
-            
+
         }
         private bool GuardarEditado()
         {
@@ -334,13 +353,14 @@ namespace NovoCosts.Forms
         {
             if (sender is System.Windows.Forms.TextBox textBox)
                 textBox.SelectAll();
-        }        
+        }
         private void PersonalizarColumnasGrid()
         {
             foreach (DataGridViewColumn columna in dgvManoObra.Columns)
             {
-                if (!string.IsNullOrEmpty(columna.Name))                {
-                    
+                if (!string.IsNullOrEmpty(columna.Name))
+                {
+
                     if (columna.Name == "costo")
                     {
                         dgvManoObra.Columns["costo"].HeaderText = "COSTO UNITARIO";
@@ -362,7 +382,7 @@ namespace NovoCosts.Forms
             {
                 ConfigurarCabeceraColumna(columna, columna.HeaderText);
             }
-        }       
+        }
         private void ConfigurarCabeceraColumna(DataGridViewColumn columna, string nuevoHeaderText)
         {
             string nuevoHeaderTextMayusculas = nuevoHeaderText.ToUpper();

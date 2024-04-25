@@ -217,7 +217,7 @@
             this.dgvManoObra.Name = "dgvManoObra";
             this.dgvManoObra.RowHeadersWidth = 62;
             this.dgvManoObra.RowTemplate.Height = 28;
-            this.dgvManoObra.Size = new System.Drawing.Size(1307, 304);
+            this.dgvManoObra.Size = new System.Drawing.Size(1729, 443);
             this.dgvManoObra.TabIndex = 2;
             this.dgvManoObra.SelectionChanged += new System.EventHandler(this.dgvManoObra_SelectionChanged);
             // 
@@ -243,7 +243,7 @@
             this.dgvMateriasPrimas.Name = "dgvMateriasPrimas";
             this.dgvMateriasPrimas.RowHeadersWidth = 62;
             this.dgvMateriasPrimas.RowTemplate.Height = 28;
-            this.dgvMateriasPrimas.Size = new System.Drawing.Size(1304, 304);
+            this.dgvMateriasPrimas.Size = new System.Drawing.Size(1726, 446);
             this.dgvMateriasPrimas.TabIndex = 1;
             this.dgvMateriasPrimas.SelectionChanged += new System.EventHandler(this.dgvMateriasPrimas_SelectionChanged);
             // 
@@ -269,7 +269,7 @@
             this.dgvProductos.Name = "dgvProductos";
             this.dgvProductos.RowHeadersWidth = 62;
             this.dgvProductos.RowTemplate.Height = 28;
-            this.dgvProductos.Size = new System.Drawing.Size(1304, 307);
+            this.dgvProductos.Size = new System.Drawing.Size(1726, 444);
             this.dgvProductos.TabIndex = 2;
             this.dgvProductos.SelectionChanged += new System.EventHandler(this.dgvProductos_SelectionChanged);
             // 

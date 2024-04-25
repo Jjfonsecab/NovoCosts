@@ -210,11 +210,36 @@ namespace NovoCosts.Forms
                 {
                     DataGridViewRow selectedRow = dgvProductos.SelectedRows[0];
 
-                    if (selectedRow.Cells.Count >= 2)
+                    if (selectedRow != null)
                     {
-                        IdProducto = Convert.ToInt32(selectedRow.Cells["id_producto"].Value);
-                        txtDescripcion.Text = selectedRow.Cells[2].Value.ToString();
-                        txtReferencia.Text = selectedRow.Cells[1].Value.ToString();
+                        DataGridViewCell idProductoCell = selectedRow.Cells["id_producto"];
+                        if (idProductoCell != null && idProductoCell.Value != null)                        
+                            IdProducto = Convert.ToInt32(idProductoCell.Value);
+                        
+                        else
+                        {
+                            MessageBox.Show("Valor nulo!");
+                            return;
+                        }
+
+                        DataGridViewCell descripcionCell = selectedRow.Cells["descripcion"];
+                        if (descripcionCell != null && descripcionCell.Value != null)
+                            txtDescripcion.Text = descripcionCell.Value.ToString();
+                        else
+                        {
+                            MessageBox.Show("Valor nulo!");
+                            return;
+                        }
+
+                        DataGridViewCell referenciaCell = selectedRow.Cells["referencia"];
+                        if (referenciaCell != null && referenciaCell.Value != null)
+                            txtReferencia.Text = referenciaCell.Value.ToString();
+
+                        else
+                        {
+                            MessageBox.Show("Valor nulo!");
+                            return;
+                        }
                     }
                 }
                 ListarManoObra(IdProducto);
@@ -236,13 +261,33 @@ namespace NovoCosts.Forms
                 {
                     DataGridViewRow selectedRow = dgvMateriasPrimas.SelectedRows[0];
 
-                    if (selectedRow.Cells.Count >= 4)
-                    {
-                        IdMateriaPrima = Convert.ToInt32(selectedRow.Cells["id_materia_prima"].Value);
-                        txtMaterial.Text = selectedRow.Cells[1].Value.ToString();
-                        txtValorU.Text = selectedRow.Cells[4].Value.ToString();
-                        txtCM.Text = selectedRow.Cells["medida"].Value.ToString();
-                        txtCantidadDesperdicio.Text = selectedRow.Cells[8].Value.ToString();
+                    if (selectedRow != null)
+                    {                                                                  
+                        DataGridViewCell idMateriaPrimaCell = selectedRow.Cells["id_materia_prima"];
+                        DataGridViewCell detalleCell = selectedRow.Cells["detalle_mp"];
+                        DataGridViewCell cmCell = selectedRow.Cells["medida"];
+                        DataGridViewCell valorUcell = selectedRow.Cells["valor"];
+                        DataGridViewCell fechaCell = selectedRow.Cells["fecha"];
+                        DataGridViewCell desperdicioCell = selectedRow.Cells["desperdicio_cantidad"];
+
+                        if (idMateriaPrimaCell != null && idMateriaPrimaCell.Value != null)
+                            IdMateriaPrima = Convert.ToInt32(idMateriaPrimaCell.Value);                        
+                        if (detalleCell != null && detalleCell.Value != null)
+                            txtMaterial.Text = detalleCell.Value.ToString();
+                        if (cmCell != null && cmCell.Value != null)
+                            txtCM.Text = cmCell.Value.ToString();
+                        if (valorUcell != null && valorUcell.Value != null)
+                            txtValorU.Text = valorUcell.Value.ToString();
+                        if (fechaCell != null && fechaCell.Value != null)                        
+                            txtFecha.Text = fechaCell.Value.ToString();                        
+                        if (desperdicioCell != null && desperdicioCell.Value != null)                        
+                            txtCantidadDesperdicio.Text = valorUcell.Value.ToString();
+                        
+                        if (idMateriaPrimaCell == null || detalleCell == null || idMateriaPrimaCell.Value == null || detalleCell.Value == null || cmCell.Value == null || valorUcell == null || fechaCell == null || desperdicioCell == null)
+                        {
+                            mensaje();
+                        }
+
                     }
                 }
             }
@@ -252,6 +297,12 @@ namespace NovoCosts.Forms
                 return;
             }
             
+            
+        }
+        private void mensaje()
+        {
+            MessageBox.Show("Valor nulo!");
+            return;
         }
         private void dgvManoObra_SelectionChanged(object sender, EventArgs e)
         {
