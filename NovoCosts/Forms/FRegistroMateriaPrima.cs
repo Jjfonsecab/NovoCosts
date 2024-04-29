@@ -162,15 +162,16 @@ namespace NovoCosts.Forms
 
             txtFecha.Text = fechaSeleccionada.ToString("yyyy-MM-dd");
         }
+        string searchText;
         private void txtDetalle_TextChanged(object sender, EventArgs e)
         {
-            string searchText = txtDetalle.Text;
+            searchText = txtDetalle.Text;
 
             BuscarYMostrarResultados("RetornarMateriaPrimaPorDetalle", txtDetalle, listBox1, "@NombreBuscado", "detalle_mp");
         }
         private void txtProveedor_TextChanged(object sender, EventArgs e)
         {
-            string searchText = txtProveedor.Text;
+           searchText = txtProveedor.Text;
 
             BuscarYMostrarResultados("RetornarMateriaPrimaPorProveedor", txtProveedor, listBox1, "@NombreBuscado", "proveedor");
         }
@@ -189,6 +190,7 @@ namespace NovoCosts.Forms
             //string searchText = txtProveedor.Text;
             //BuscarYMostrarResultados("RetornarMateriaPrimaPorProveedor", txtProveedor, listBox1, "@NombreBuscado", "proveedor");
         }
+        /*
         private void txtBuscar_KeyUp(object sender, KeyEventArgs e)
         {
             if (comboBoxBuscar.SelectedIndex == -1)
@@ -219,8 +221,9 @@ namespace NovoCosts.Forms
             }
 
             ultimoTextBoxModificado = txtBuscar;
-            MostrarResultados("BuscarMateriaPrimaPorColumnaYValor", txtBuscar, listBox1, opcionSeleccionada, "@ValorBuscado", opcionSeleccionada);
-        }
+            MostrarResultados("BuscarMateriaPrimaPorColumnaYValor", txtBuscar, listBox1, opcionSeleccionada, "@ValorBuscado");
+            Console.WriteLine("Se selecciono " + opcionCombo);
+        }*/
 
         //Metodos       
         private bool Guardar()
@@ -326,6 +329,9 @@ namespace NovoCosts.Forms
             txtCantidadDesperdicio.Text = "";
             txtFecha.Text = "";
             txtDividir.Text = "";
+            listBox1.Text = null;
+            ultimoTextBoxModificado = null;
+            searchText = ""; 
             Editar = false;
             MostrarFechaActual();
         }
@@ -406,8 +412,8 @@ namespace NovoCosts.Forms
             txtProveedor.Click += TextBox_Click;
             txtComentarios.CharacterCasing = CharacterCasing.Upper;
             txtComentarios.Click += TextBox_Click;
-            txtBuscar.CharacterCasing = CharacterCasing.Upper;
-            txtBuscar.Click += TextBox_Click;
+            //txtBuscar.CharacterCasing = CharacterCasing.Upper;
+            //txtBuscar.Click += TextBox_Click;
             //txtCantidadDesperdicio.CharacterCasing = CharacterCasing.Upper;
             txtCantidadDesperdicio.Click += TextBox_Click;
 
@@ -517,8 +523,8 @@ namespace NovoCosts.Forms
                     listBox.Items.Add(row[nombreColumna].ToString());
             }
         }
-        string opcionSeleccionada;       
-        private void MostrarResultados(string nombreProcedimiento, System.Windows.Forms.TextBox textBox, ListBox listBox,string columna, string parametroNombre, string nombreColumna)
+        string opcionSeleccionada;
+        private void MostrarResultados(string nombreProcedimiento, System.Windows.Forms.TextBox textBox, ListBox listBox,string columna, string parametroNombre)
         {            
             string searchText = textBox.Text;
 
@@ -531,23 +537,17 @@ namespace NovoCosts.Forms
             Console.WriteLine($"Valor de {parametroNombre}: {searchText}");
             Console.WriteLine($"Valor de @NombreColumna: {columna}");
 
-            // Llama al método Listar para obtener los resultados de la consulta
             DataTable result = DbDatos.Listar(nombreProcedimiento, parametros);
 
-            // Limpia el ListBox antes de agregar nuevos elementos
             listBox.Items.Clear();
 
-            // Verifica si hay resultados y llena el ListBox
             if (result != null && result.Rows.Count > 0)
             {
-                foreach (DataRow row in result.Rows)
-                {
-                    // Agrega los elementos al ListBox
-                    listBox.Items.Add(row[nombreColumna].ToString());
-                }
+                foreach (DataRow row in result.Rows)                
+                    listBox.Items.Add(row[columna].ToString());
+                
             }
         }
-
         
     }
 }

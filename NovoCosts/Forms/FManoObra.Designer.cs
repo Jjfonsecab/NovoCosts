@@ -52,10 +52,10 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.dgvManoObra = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.dgvManoObra = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnLimpiar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnTipo)).BeginInit();
@@ -64,10 +64,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnInicio)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvManoObra)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvManoObra)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -126,6 +126,7 @@
             // 
             // txtDescripcion
             // 
+            this.txtDescripcion.Enabled = false;
             this.txtDescripcion.Location = new System.Drawing.Point(244, 103);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(177, 26);
@@ -201,6 +202,7 @@
             // 
             // txtReferencia
             // 
+            this.txtReferencia.Enabled = false;
             this.txtReferencia.Location = new System.Drawing.Point(244, 59);
             this.txtReferencia.Name = "txtReferencia";
             this.txtReferencia.Size = new System.Drawing.Size(177, 26);
@@ -284,41 +286,14 @@
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(611, 37);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(742, 561);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 54;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.dgvManoObra);
-            this.tabPage1.Location = new System.Drawing.Point(4, 29);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(734, 528);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Mano de Obra";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // dgvManoObra
-            // 
-            this.dgvManoObra.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvManoObra.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dgvManoObra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvManoObra.ContextMenuStrip = this.contextMenuStrip1;
-            this.dgvManoObra.Location = new System.Drawing.Point(6, 12);
-            this.dgvManoObra.Name = "dgvManoObra";
-            this.dgvManoObra.RowHeadersWidth = 62;
-            this.dgvManoObra.RowTemplate.Height = 28;
-            this.dgvManoObra.Size = new System.Drawing.Size(722, 510);
-            this.dgvManoObra.TabIndex = 1;
-            this.dgvManoObra.SelectionChanged += new System.EventHandler(this.dgvManoObra_SelectionChanged);
             // 
             // tabPage2
             // 
@@ -342,9 +317,35 @@
             this.dgvProductos.Name = "dgvProductos";
             this.dgvProductos.RowHeadersWidth = 62;
             this.dgvProductos.RowTemplate.Height = 28;
-            this.dgvProductos.Size = new System.Drawing.Size(526, 513);
+            this.dgvProductos.Size = new System.Drawing.Size(722, 513);
             this.dgvProductos.TabIndex = 2;
             this.dgvProductos.SelectionChanged += new System.EventHandler(this.dgvProductos_SelectionChanged);
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.dgvManoObra);
+            this.tabPage3.Location = new System.Drawing.Point(4, 29);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(734, 528);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Mano de Obra";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // dgvManoObra
+            // 
+            this.dgvManoObra.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvManoObra.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dgvManoObra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvManoObra.ContextMenuStrip = this.contextMenuStrip1;
+            this.dgvManoObra.Location = new System.Drawing.Point(6, 9);
+            this.dgvManoObra.Name = "dgvManoObra";
+            this.dgvManoObra.RowHeadersWidth = 62;
+            this.dgvManoObra.RowTemplate.Height = 28;
+            this.dgvManoObra.Size = new System.Drawing.Size(722, 510);
+            this.dgvManoObra.TabIndex = 2;
             // 
             // FManoObra
             // 
@@ -369,10 +370,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnInicio)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvManoObra)).EndInit();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvManoObra)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -397,12 +398,12 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem editarToolStripMenuItem;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.DataGridView dgvManoObra;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridView dgvProductos;
         private System.Windows.Forms.PictureBox btnLimpiar;
         private System.Windows.Forms.TextBox txtCantidad;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.DataGridView dgvManoObra;
     }
 }

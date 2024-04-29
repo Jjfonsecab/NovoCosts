@@ -33,22 +33,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtDetalle = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtValorUnitario = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.txtProveedor = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBoxUnidadMedida = new System.Windows.Forms.ComboBox();
             this.txtFecha = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtCantidadDesperdicio = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.btnLimpiar = new System.Windows.Forms.PictureBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.btnRegistroUnidades = new System.Windows.Forms.PictureBox();
-            this.txtComentarios = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.btnEliminar = new System.Windows.Forms.PictureBox();
             this.btnGuardar = new System.Windows.Forms.PictureBox();
             this.monthCalendar = new System.Windows.Forms.MonthCalendar();
@@ -63,26 +56,27 @@
             this.txtAncho = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.txtAlto = new System.Windows.Forms.TextBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.comboBoxBuscar = new System.Windows.Forms.ComboBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.btnBuscar = new System.Windows.Forms.PictureBox();
-            this.txtBuscar = new System.Windows.Forms.TextBox();
             this.btnInicio = new System.Windows.Forms.PictureBox();
             this.dgvMateriaPrima = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtComentarios = new System.Windows.Forms.TextBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtValorUnitario = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnLimpiar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnRegistroUnidades)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnEliminar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnGuardar)).BeginInit();
             this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnBuscar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnInicio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMateriaPrima)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -114,22 +108,6 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Detalle : ";
             // 
-            // txtValorUnitario
-            // 
-            this.txtValorUnitario.Location = new System.Drawing.Point(217, 576);
-            this.txtValorUnitario.Name = "txtValorUnitario";
-            this.txtValorUnitario.Size = new System.Drawing.Size(127, 26);
-            this.txtValorUnitario.TabIndex = 9;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(32, 579);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(117, 20);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Valor Unitario : ";
-            // 
             // txtProveedor
             // 
             this.txtProveedor.Location = new System.Drawing.Point(160, 78);
@@ -160,54 +138,42 @@
             // 
             // txtFecha
             // 
-            this.txtFecha.Location = new System.Drawing.Point(471, 713);
+            this.txtFecha.Location = new System.Drawing.Point(250, 25);
             this.txtFecha.Name = "txtFecha";
             this.txtFecha.Size = new System.Drawing.Size(120, 26);
             this.txtFecha.TabIndex = 14;
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(467, 661);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(66, 20);
-            this.label6.TabIndex = 13;
-            this.label6.Text = "Fecha : ";
-            // 
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.PowderBlue;
+            this.groupBox1.Controls.Add(this.label10);
+            this.groupBox1.Controls.Add(this.txtValorUnitario);
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.txtCantidadDesperdicio);
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.btnLimpiar);
             this.groupBox1.Controls.Add(this.listBox1);
-            this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.btnRegistroUnidades);
             this.groupBox1.Controls.Add(this.txtComentarios);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtDetalle);
             this.groupBox1.Controls.Add(this.btnEliminar);
             this.groupBox1.Controls.Add(this.btnGuardar);
-            this.groupBox1.Controls.Add(this.monthCalendar);
-            this.groupBox1.Controls.Add(this.txtValorUnitario);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.txtFecha);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.txtProveedor);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Location = new System.Drawing.Point(12, 71);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(632, 907);
+            this.groupBox1.Size = new System.Drawing.Size(635, 906);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Registro de Datos :";
             // 
             // txtCantidadDesperdicio
             // 
-            this.txtCantidadDesperdicio.Location = new System.Drawing.Point(513, 579);
+            this.txtCantidadDesperdicio.Location = new System.Drawing.Point(491, 179);
             this.txtCantidadDesperdicio.Name = "txtCantidadDesperdicio";
             this.txtCantidadDesperdicio.Size = new System.Drawing.Size(59, 26);
             this.txtCantidadDesperdicio.TabIndex = 83;
@@ -215,7 +181,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(368, 579);
+            this.label12.Location = new System.Drawing.Point(346, 179);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(119, 20);
             this.label12.TabIndex = 82;
@@ -224,7 +190,7 @@
             // btnLimpiar
             // 
             this.btnLimpiar.Image = ((System.Drawing.Image)(resources.GetObject("btnLimpiar.Image")));
-            this.btnLimpiar.Location = new System.Drawing.Point(522, 789);
+            this.btnLimpiar.Location = new System.Drawing.Point(539, 810);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(64, 55);
             this.btnLimpiar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -232,29 +198,11 @@
             this.btnLimpiar.TabStop = false;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 20;
-            this.listBox1.Location = new System.Drawing.Point(32, 123);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(249, 144);
-            this.listBox1.TabIndex = 20;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(185, 579);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(18, 20);
-            this.label10.TabIndex = 49;
-            this.label10.Text = "$";
-            // 
             // btnRegistroUnidades
             // 
+            this.btnRegistroUnidades.BackColor = System.Drawing.Color.PowderBlue;
             this.btnRegistroUnidades.Image = ((System.Drawing.Image)(resources.GetObject("btnRegistroUnidades.Image")));
-            this.btnRegistroUnidades.Location = new System.Drawing.Point(560, 344);
+            this.btnRegistroUnidades.Location = new System.Drawing.Point(561, 343);
             this.btnRegistroUnidades.Name = "btnRegistroUnidades";
             this.btnRegistroUnidades.Size = new System.Drawing.Size(57, 58);
             this.btnRegistroUnidades.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -262,30 +210,12 @@
             this.btnRegistroUnidades.TabStop = false;
             this.btnRegistroUnidades.Click += new System.EventHandler(this.btnRegistroUnidades_Click);
             // 
-            // txtComentarios
-            // 
-            this.txtComentarios.Location = new System.Drawing.Point(176, 486);
-            this.txtComentarios.Multiline = true;
-            this.txtComentarios.Name = "txtComentarios";
-            this.txtComentarios.Size = new System.Drawing.Size(320, 55);
-            this.txtComentarios.TabIndex = 47;
-            this.txtComentarios.Text = "N.A.";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 495);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(111, 20);
-            this.label1.TabIndex = 46;
-            this.label1.Text = "Comentarios : ";
-            // 
             // btnEliminar
             // 
             this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
-            this.btnEliminar.Location = new System.Drawing.Point(418, 836);
+            this.btnEliminar.Location = new System.Drawing.Point(554, 621);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(38, 36);
+            this.btnEliminar.Size = new System.Drawing.Size(49, 43);
             this.btnEliminar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.btnEliminar.TabIndex = 44;
             this.btnEliminar.TabStop = false;
@@ -294,9 +224,9 @@
             // btnGuardar
             // 
             this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
-            this.btnGuardar.Location = new System.Drawing.Point(416, 768);
+            this.btnGuardar.Location = new System.Drawing.Point(488, 621);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(40, 36);
+            this.btnGuardar.Size = new System.Drawing.Size(51, 43);
             this.btnGuardar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.btnGuardar.TabIndex = 43;
             this.btnGuardar.TabStop = false;
@@ -304,7 +234,7 @@
             // 
             // monthCalendar
             // 
-            this.monthCalendar.Location = new System.Drawing.Point(27, 629);
+            this.monthCalendar.Location = new System.Drawing.Point(23, 59);
             this.monthCalendar.Name = "monthCalendar";
             this.monthCalendar.TabIndex = 50;
             // 
@@ -325,7 +255,7 @@
             this.groupBox2.Controls.Add(this.txtAlto);
             this.groupBox2.Location = new System.Drawing.Point(27, 281);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(518, 183);
+            this.groupBox2.Size = new System.Drawing.Size(523, 183);
             this.groupBox2.TabIndex = 45;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Medidas :";
@@ -333,7 +263,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(416, 88);
+            this.label14.Location = new System.Drawing.Point(425, 88);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(90, 20);
             this.label14.TabIndex = 49;
@@ -411,62 +341,6 @@
             this.txtAlto.Size = new System.Drawing.Size(69, 26);
             this.txtAlto.TabIndex = 15;
             // 
-            // groupBox3
-            // 
-            this.groupBox3.BackColor = System.Drawing.Color.MediumTurquoise;
-            this.groupBox3.Controls.Add(this.comboBoxBuscar);
-            this.groupBox3.Controls.Add(this.label11);
-            this.groupBox3.Controls.Add(this.btnBuscar);
-            this.groupBox3.Controls.Add(this.txtBuscar);
-            this.groupBox3.Location = new System.Drawing.Point(300, 123);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(317, 144);
-            this.groupBox3.TabIndex = 54;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Busqueda";
-            // 
-            // comboBoxBuscar
-            // 
-            this.comboBoxBuscar.FormattingEnabled = true;
-            this.comboBoxBuscar.Items.AddRange(new object[] {
-            "DETALLE",
-            "MEDIDA",
-            "VALOR",
-            "PROVEEDOR ",
-            "FECHA"});
-            this.comboBoxBuscar.Location = new System.Drawing.Point(118, 37);
-            this.comboBoxBuscar.Name = "comboBoxBuscar";
-            this.comboBoxBuscar.Size = new System.Drawing.Size(180, 28);
-            this.comboBoxBuscar.TabIndex = 40;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(9, 40);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(98, 20);
-            this.label11.TabIndex = 51;
-            this.label11.Text = "Buscar por : ";
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Enabled = false;
-            this.btnBuscar.Image = ((System.Drawing.Image)(resources.GetObject("btnBuscar.Image")));
-            this.btnBuscar.Location = new System.Drawing.Point(241, 79);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(57, 58);
-            this.btnBuscar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.btnBuscar.TabIndex = 53;
-            this.btnBuscar.TabStop = false;
-            // 
-            // txtBuscar
-            // 
-            this.txtBuscar.Location = new System.Drawing.Point(15, 95);
-            this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(186, 26);
-            this.txtBuscar.TabIndex = 52;
-            this.txtBuscar.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBuscar_KeyUp);
-            // 
             // btnInicio
             // 
             this.btnInicio.Image = ((System.Drawing.Image)(resources.GetObject("btnInicio.Image")));
@@ -486,11 +360,11 @@
             this.dgvMateriaPrima.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvMateriaPrima.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMateriaPrima.ContextMenuStrip = this.contextMenuStrip1;
-            this.dgvMateriaPrima.Location = new System.Drawing.Point(704, 29);
+            this.dgvMateriaPrima.Location = new System.Drawing.Point(692, 29);
             this.dgvMateriaPrima.Name = "dgvMateriaPrima";
             this.dgvMateriaPrima.RowHeadersWidth = 62;
             this.dgvMateriaPrima.RowTemplate.Height = 28;
-            this.dgvMateriaPrima.Size = new System.Drawing.Size(1029, 949);
+            this.dgvMateriaPrima.Size = new System.Drawing.Size(1041, 963);
             this.dgvMateriaPrima.TabIndex = 19;
             // 
             // contextMenuStrip1
@@ -508,11 +382,76 @@
             this.editarToolStripMenuItem.Text = "Editar";
             this.editarToolStripMenuItem.Click += new System.EventHandler(this.editarToolStripMenuItem_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(28, 495);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(111, 20);
+            this.label1.TabIndex = 46;
+            this.label1.Text = "Comentarios : ";
+            // 
+            // txtComentarios
+            // 
+            this.txtComentarios.Location = new System.Drawing.Point(176, 486);
+            this.txtComentarios.Multiline = true;
+            this.txtComentarios.Name = "txtComentarios";
+            this.txtComentarios.Size = new System.Drawing.Size(320, 55);
+            this.txtComentarios.TabIndex = 47;
+            this.txtComentarios.Text = "N.A.";
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 20;
+            this.listBox1.Location = new System.Drawing.Point(32, 123);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(295, 144);
+            this.listBox1.TabIndex = 20;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(459, 126);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(18, 20);
+            this.label10.TabIndex = 86;
+            this.label10.Text = "$";
+            // 
+            // txtValorUnitario
+            // 
+            this.txtValorUnitario.Location = new System.Drawing.Point(491, 123);
+            this.txtValorUnitario.Name = "txtValorUnitario";
+            this.txtValorUnitario.Size = new System.Drawing.Size(127, 26);
+            this.txtValorUnitario.TabIndex = 85;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(340, 123);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(117, 20);
+            this.label4.TabIndex = 84;
+            this.label4.Text = "Valor Unitario : ";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.BackColor = System.Drawing.Color.Thistle;
+            this.groupBox3.Controls.Add(this.monthCalendar);
+            this.groupBox3.Controls.Add(this.txtFecha);
+            this.groupBox3.Location = new System.Drawing.Point(11, 563);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(408, 324);
+            this.groupBox3.TabIndex = 87;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Fecha : ";
+            // 
             // FRegistroMateriaPrima
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Honeydew;
+            this.BackColor = System.Drawing.Color.Lavender;
             this.ClientSize = new System.Drawing.Size(1745, 1016);
             this.Controls.Add(this.dgvMateriaPrima);
             this.Controls.Add(this.groupBox1);
@@ -530,12 +469,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnGuardar)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnBuscar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnInicio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMateriaPrima)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -544,13 +482,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtDetalle;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtValorUnitario;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtProveedor;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox comboBoxUnidadMedida;
         private System.Windows.Forms.TextBox txtFecha;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.PictureBox btnInicio;
         private System.Windows.Forms.DataGridView dgvMateriaPrima;
@@ -567,21 +502,19 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.PictureBox btnEliminar;
         private System.Windows.Forms.PictureBox btnGuardar;
-        private System.Windows.Forms.TextBox txtComentarios;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.PictureBox btnRegistroUnidades;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.ComboBox comboBoxBuscar;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox txtBuscar;
-        private System.Windows.Forms.PictureBox btnBuscar;
-        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.PictureBox btnLimpiar;
         private System.Windows.Forms.TextBox txtCantidadDesperdicio;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox txtDividir;
+        private System.Windows.Forms.TextBox txtComentarios;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txtValorUnitario;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.GroupBox groupBox3;
     }
 }

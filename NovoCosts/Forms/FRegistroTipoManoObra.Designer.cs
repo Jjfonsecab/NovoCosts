@@ -50,11 +50,11 @@
             // 
             this.dgvTipoMO.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvTipoMO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTipoMO.Location = new System.Drawing.Point(472, 41);
+            this.dgvTipoMO.Location = new System.Drawing.Point(474, 31);
             this.dgvTipoMO.Name = "dgvTipoMO";
             this.dgvTipoMO.RowHeadersWidth = 62;
             this.dgvTipoMO.RowTemplate.Height = 28;
-            this.dgvTipoMO.Size = new System.Drawing.Size(285, 386);
+            this.dgvTipoMO.Size = new System.Drawing.Size(285, 397);
             this.dgvTipoMO.TabIndex = 0;
             this.dgvTipoMO.SelectionChanged += new System.EventHandler(this.dgvTipoMO_SelectionChanged);
             // 
@@ -87,6 +87,7 @@
             // 
             // listBox1
             // 
+            this.listBox1.Enabled = false;
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 20;
             this.listBox1.Location = new System.Drawing.Point(130, 133);

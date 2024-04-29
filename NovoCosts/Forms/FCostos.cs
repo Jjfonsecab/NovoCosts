@@ -91,12 +91,15 @@ namespace NovoCosts.Forms
             CalcularValorTotal(Convert.ToDecimal(txtValorU.Text));
 
 
-            if (Modificar)
+            if (Modificar == true)
             {
                 if (!GuardarEditado())
                     return;
                 else
-                    LimpiarTodo();
+                {
+                    MessageBox.Show("Error al Editar");
+                    return;
+                }
             }
             else
                 if (!Guardar()) return;
@@ -108,9 +111,9 @@ namespace NovoCosts.Forms
         {
             DataGridView dgvActual = null;
             
-            if (dgvCostos.SelectedRows.Count > 0)
+            if (dgvCosto.SelectedRows.Count > 0)
             {
-                dgvActual = dgvCostos;
+                dgvActual = dgvCosto;
             }
             else if (dgvCosto.SelectedRows.Count > 0)
             {
@@ -141,31 +144,27 @@ namespace NovoCosts.Forms
         }
         private void editarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IdCosto = Convert.ToInt32(dgvCostos.CurrentRow.Cells["id_costos"].Value);
-            IdProducto = Convert.ToInt32(dgvCostos.CurrentRow.Cells["id_producto"].Value);
-            IdMateriaPrima = Convert.ToInt32(dgvCostos.CurrentRow.Cells["id_materia_prima"].Value);
-            txtDesempeño.Text = dgvCostos.CurrentRow.Cells["desempeño"].Value.ToString();
-            txtCantidad.Text = dgvCostos.CurrentRow.Cells["cantidad"].Value.ToString();
-            txtValorU.Text = dgvCostos.CurrentRow.Cells["valor_unitario"].Value.ToString();
-            txtD1.Text = dgvCostos.CurrentRow.Cells["dimension1"].Value.ToString();
-            txtD2.Text = dgvCostos.CurrentRow.Cells["dimension2"].Value.ToString();
-            txtD3.Text = dgvCostos.CurrentRow.Cells["dimension3"].Value.ToString();
-            txtCM.Text = dgvCostos.CurrentRow.Cells["cm"].Value.ToString();
-            txtCantidadDesperdicio.Text = dgvCostos.CurrentRow.Cells["cantidad_desperdicio"].Value.ToString();
-            txtDesperdicioTotal.Text = dgvCostos.CurrentRow.Cells["total_cantidad"].Value.ToString();
-            txtValorU.Text = dgvCostos.CurrentRow.Cells["valor_unitario"].Value.ToString(); 
-            IdTipoCosto = Convert.ToInt32(dgvCostos.CurrentRow.Cells["id_tipo_costo"].Value);
+            IdCosto = Convert.ToInt32(dgvCosto.CurrentRow.Cells["id_costos"].Value);
+            IdProducto = Convert.ToInt32(dgvCosto.CurrentRow.Cells["id_producto"].Value);
+            IdMateriaPrima = Convert.ToInt32(dgvCosto.CurrentRow.Cells["id_materia_prima"].Value);
+            txtDesempeño.Text = dgvCosto.CurrentRow.Cells["desempeño"].Value.ToString();
+            txtCantidad.Text = dgvCosto.CurrentRow.Cells["cantidad"].Value.ToString();
+            txtValorU.Text = dgvCosto.CurrentRow.Cells["valor_unitario"].Value.ToString();
+            txtD1.Text = dgvCosto.CurrentRow.Cells["dimension1"].Value.ToString();
+            txtD2.Text = dgvCosto.CurrentRow.Cells["dimension2"].Value.ToString();
+            txtD3.Text = dgvCosto.CurrentRow.Cells["dimension3"].Value.ToString();
+            txtCM.Text = dgvCosto.CurrentRow.Cells["cm"].Value.ToString();
+            txtCantidadDesperdicio.Text = dgvCosto.CurrentRow.Cells["cantidad_desperdicio"].Value.ToString();
+            txtDesperdicioTotal.Text = dgvCosto.CurrentRow.Cells["total_cantidad"].Value.ToString();
+            txtValorU.Text = dgvCosto.CurrentRow.Cells["valor_unitario"].Value.ToString(); 
+            IdTipoCosto = Convert.ToInt32(dgvCosto.CurrentRow.Cells["id_tipo_costo"].Value);
 
-            DateTime fechaOriginal = DateTime.Parse(dgvCostos.CurrentRow.Cells["fecha"].Value.ToString());
+            DateTime fechaOriginal = DateTime.Parse(dgvCosto.CurrentRow.Cells["fecha"].Value.ToString());
             txtFecha.Text = fechaOriginal.ToString("yyyy-MM-dd");
 
             ListarProductoId(IdProducto);
             ListarMaterialId(IdMateriaPrima);
-            ListarTipoCostoId(IdTipoCosto);
-
-            Console.WriteLine("El id producto es:" + IdProducto);
-            Console.WriteLine("El id material es:" + IdMateriaPrima);
-            Console.WriteLine("El id tipo costo es:" + IdTipoCosto);
+            ListarTipoCostoId(IdTipoCosto);           
 
             Editar = true;
 
@@ -418,6 +417,7 @@ namespace NovoCosts.Forms
 
                     Fecha = DateTime.Parse(txtFecha.Text),
                 };
+                Modificar = false;
                 return Models.Costos.Guardar(costos, Editar);
             }
             catch (Exception ex)
@@ -430,7 +430,7 @@ namespace NovoCosts.Forms
         {
             if (IdCosto > 0)
             {
-                DateTime fechaOriginal = DateTime.Parse(dgvCostos.CurrentRow.Cells["fecha"].Value.ToString());
+                //DateTime fechaOriginal = DateTime.Parse(dgvCosto.CurrentRow.Cells["fecha"].Value.ToString());
 
                 Costos costos = new Costos()
                 {
@@ -438,7 +438,7 @@ namespace NovoCosts.Forms
                     IdProducto = IdProducto,
                     IdMateriaPrima = IdMateriaPrima,
                     Desempeño = txtDesempeño.Text,
-                    Cantidad = Convert.ToInt32(txtCantidad.Text),
+                    Cantidad = Convert.ToDecimal(txtCantidad.Text),
                     Dimension1 = Convert.ToDecimal(txtD1.Text),
                     Dimension2 = Convert.ToDecimal(txtD2.Text),
                     Dimension3 = Convert.ToDecimal(txtD3.Text),
@@ -447,9 +447,10 @@ namespace NovoCosts.Forms
                     ValorUnitario = Convert.ToDecimal(txtValorU.Text),
                     IdTipoCosto = IdTipoCosto,
 
-                    Fecha = fechaOriginal,
+                    Fecha = DateTime.Parse(txtFecha.Text),
                 };
                 Console.WriteLine(IdCosto);
+                Modificar = true;
                 return Models.Costos.Guardar(costos, true);
             }
             else
@@ -517,7 +518,7 @@ namespace NovoCosts.Forms
         }
         private void Finalizar()
         {
-            ListarTodo();
+            //ListarTodo();
             ListarCosto(IdProducto);
             Limpiar();
         }
@@ -556,12 +557,13 @@ namespace NovoCosts.Forms
             IdTipoCosto = 0;
             MostrarFechaActual();
         }
+        /*
         private void ListarTodo()
         {
             dgvCostos.DataSource = Models.Costos.ListarTodo();
             DbDatos.OcultarIds(dgvCostos);
             PersonalizarColumnasCostos(dgvCostos);
-        }
+        }*/
         private void ListarProductos()
         {
             dgvProductos.DataSource = Producto.ListarTodo();
@@ -728,7 +730,7 @@ namespace NovoCosts.Forms
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleCenter; // Alinea aL CENTRO
                         estiloCeldaNumerica.Format = "N0";
                         columna.DefaultCellStyle = estiloCeldaNumerica;
-                        DbDatos.OcultarIds(dgvCostos);
+                        DbDatos.OcultarIds(dgvCosto);
                     }
                     else if (columna.Name == "descripcion" || columna.Name == "referencia")
                     {

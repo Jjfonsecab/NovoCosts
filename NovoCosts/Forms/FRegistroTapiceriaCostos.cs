@@ -287,6 +287,11 @@ namespace NovoCosts.Forms
             txtReferencia.Click += TextBox_Click;
             txtDescripcion.CharacterCasing = CharacterCasing.Upper;
             txtDescripcion.Click += TextBox_Click;
+            txtCantidad.Click += TextBox_Click;
+            txtCorte.Click += TextBox_Click;
+            txtBlanco.Click += TextBox_Click;
+            txtCostura.Click += TextBox_Click;
+            txtForrado.Click += TextBox_Click;
 
             txtFecha.CharacterCasing = CharacterCasing.Upper;
         }

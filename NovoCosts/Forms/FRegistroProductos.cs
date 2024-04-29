@@ -101,6 +101,7 @@ namespace NovoCosts.Forms
         {
             ultimoTextBoxModificado = txtDescripcion;
         }
+        /*
         private void txtBuscar_KeyUp(object sender, KeyEventArgs e)
         {
             if (comboBoxBuscar.SelectedIndex == -1)
@@ -122,7 +123,7 @@ namespace NovoCosts.Forms
             }
             ultimoTextBoxModificado = txtBuscar;
             MostrarResultados("BuscarProducto", txtBuscar, listBox1, opcionSeleccionada, "@ValorBuscado", opcionSeleccionada);
-        }
+        }*/
         private void dgvRegistroProductos_SelectionChanged(object sender, EventArgs e)
         {
             try
@@ -251,8 +252,8 @@ namespace NovoCosts.Forms
         }
         private void Limpiar()
         {
-            txtBuscar.Text = "";
-            txtBuscar.Text = "";
+            //txtBuscar.Text = "";
+            //txtBuscar.Text = "";
             txtDescripcion.Text = "";
             txtDescripcion.Text = "";
             txtReferencia.Text = "";
@@ -265,8 +266,8 @@ namespace NovoCosts.Forms
             txtDescripcion.Click += TextBox_Click;
             txtReferencia.CharacterCasing = CharacterCasing.Upper;
             txtReferencia.Click += TextBox_Click;
-            txtBuscar.CharacterCasing = CharacterCasing.Upper;
-            txtBuscar.Click += TextBox_Click;
+            //txtBuscar.CharacterCasing = CharacterCasing.Upper;
+            //txtBuscar.Click += TextBox_Click;
 
         }
         private void TextBox_Click(object sender, EventArgs e)

@@ -37,20 +37,20 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtCantidad = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.txtForrado = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtCostura = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtBlanco = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtCorte = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.txtReferencia = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtCorte = new System.Windows.Forms.TextBox();
+            this.txtForrado = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtBlanco = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtCostura = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dgvTapiceria = new System.Windows.Forms.DataGridView();
@@ -58,6 +58,7 @@
             this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.btnInicio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnEliminar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnGuardar)).BeginInit();
@@ -73,9 +74,10 @@
             // 
             // btnInicio
             // 
+            this.btnInicio.BackColor = System.Drawing.Color.Thistle;
             this.btnInicio.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnInicio.Image = ((System.Drawing.Image)(resources.GetObject("btnInicio.Image")));
-            this.btnInicio.Location = new System.Drawing.Point(454, 47);
+            this.btnInicio.Location = new System.Drawing.Point(463, 17);
             this.btnInicio.Name = "btnInicio";
             this.btnInicio.Size = new System.Drawing.Size(52, 50);
             this.btnInicio.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -118,6 +120,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Lavender;
+            this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.txtCantidad);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.btnInicio);
@@ -153,76 +156,9 @@
             this.label8.TabIndex = 73;
             this.label8.Text = "Cantidad :";
             // 
-            // txtForrado
-            // 
-            this.txtForrado.Location = new System.Drawing.Point(223, 172);
-            this.txtForrado.Name = "txtForrado";
-            this.txtForrado.Size = new System.Drawing.Size(103, 26);
-            this.txtForrado.TabIndex = 71;
-            this.txtForrado.Text = "0";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(49, 172);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(73, 20);
-            this.label5.TabIndex = 70;
-            this.label5.Text = "Forrado :";
-            // 
-            // txtCostura
-            // 
-            this.txtCostura.Location = new System.Drawing.Point(223, 128);
-            this.txtCostura.Name = "txtCostura";
-            this.txtCostura.Size = new System.Drawing.Size(103, 26);
-            this.txtCostura.TabIndex = 69;
-            this.txtCostura.Text = "0";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(49, 128);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(73, 20);
-            this.label7.TabIndex = 68;
-            this.label7.Text = "Costura :";
-            // 
-            // txtBlanco
-            // 
-            this.txtBlanco.Location = new System.Drawing.Point(223, 84);
-            this.txtBlanco.Name = "txtBlanco";
-            this.txtBlanco.Size = new System.Drawing.Size(103, 26);
-            this.txtBlanco.TabIndex = 67;
-            this.txtBlanco.Text = "0";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(49, 84);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 20);
-            this.label2.TabIndex = 66;
-            this.label2.Text = "Postura :";
-            // 
-            // txtCorte
-            // 
-            this.txtCorte.Location = new System.Drawing.Point(223, 40);
-            this.txtCorte.Name = "txtCorte";
-            this.txtCorte.Size = new System.Drawing.Size(103, 26);
-            this.txtCorte.TabIndex = 65;
-            this.txtCorte.Text = "0";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(49, 40);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 20);
-            this.label3.TabIndex = 64;
-            this.label3.Text = "Corte :";
-            // 
             // txtDescripcion
             // 
+            this.txtDescripcion.Enabled = false;
             this.txtDescripcion.Location = new System.Drawing.Point(168, 91);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(225, 26);
@@ -248,6 +184,7 @@
             // 
             // txtReferencia
             // 
+            this.txtReferencia.Enabled = false;
             this.txtReferencia.Location = new System.Drawing.Point(168, 52);
             this.txtReferencia.Name = "txtReferencia";
             this.txtReferencia.Size = new System.Drawing.Size(225, 26);
@@ -279,6 +216,74 @@
             this.groupBox2.TabIndex = 72;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos Tapiceria";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(49, 40);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(56, 20);
+            this.label3.TabIndex = 64;
+            this.label3.Text = "Corte :";
+            // 
+            // txtCorte
+            // 
+            this.txtCorte.Location = new System.Drawing.Point(223, 40);
+            this.txtCorte.Name = "txtCorte";
+            this.txtCorte.Size = new System.Drawing.Size(103, 26);
+            this.txtCorte.TabIndex = 65;
+            this.txtCorte.Text = "0";
+            // 
+            // txtForrado
+            // 
+            this.txtForrado.Location = new System.Drawing.Point(223, 172);
+            this.txtForrado.Name = "txtForrado";
+            this.txtForrado.Size = new System.Drawing.Size(103, 26);
+            this.txtForrado.TabIndex = 71;
+            this.txtForrado.Text = "0";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(49, 84);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(72, 20);
+            this.label2.TabIndex = 66;
+            this.label2.Text = "Postura :";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(49, 172);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(73, 20);
+            this.label5.TabIndex = 70;
+            this.label5.Text = "Forrado :";
+            // 
+            // txtBlanco
+            // 
+            this.txtBlanco.Location = new System.Drawing.Point(223, 84);
+            this.txtBlanco.Name = "txtBlanco";
+            this.txtBlanco.Size = new System.Drawing.Size(103, 26);
+            this.txtBlanco.TabIndex = 67;
+            this.txtBlanco.Text = "0";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(49, 128);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(73, 20);
+            this.label7.TabIndex = 68;
+            this.label7.Text = "Costura :";
+            // 
+            // txtCostura
+            // 
+            this.txtCostura.Location = new System.Drawing.Point(223, 128);
+            this.txtCostura.Name = "txtCostura";
+            this.txtCostura.Size = new System.Drawing.Size(103, 26);
+            this.txtCostura.TabIndex = 69;
+            this.txtCostura.Text = "0";
             // 
             // tabControl1
             // 
@@ -361,6 +366,15 @@
             this.dgvProductos.TabIndex = 2;
             this.dgvProductos.SelectionChanged += new System.EventHandler(this.dgvProductos_SelectionChanged);
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(228, 138);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(168, 30);
+            this.label9.TabIndex = 75;
+            this.label9.Text = "% desperdicio.";
+            // 
             // FRegistroTapiceriaCostos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -420,5 +434,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox txtCantidad;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
     }
 }

@@ -22,7 +22,7 @@ namespace NovoCosts.Forms
         }
         private void FManoObra_Load(object sender, EventArgs e)
         {
-            ListarTodo();
+            //ListarTodo();
             ListarProductos();
             MostrarFechaActual();
         }
@@ -98,6 +98,11 @@ namespace NovoCosts.Forms
                 Finalizar();
             }
         }
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            Limpiar();
+            Modificar = false;
+        }
         private void editarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             IdManoObra = Convert.ToInt32(dgvManoObra.CurrentRow.Cells["id_mano_obra"].Value);
@@ -170,16 +175,31 @@ namespace NovoCosts.Forms
                         DataGridViewCell descripcionCell = selectedRow.Cells["descripcion"];
                         DataGridViewCell referenciaCell = selectedRow.Cells["referencia"];
                         if (idProductoCell != null && idProductoCell.Value != null)
+                        {
                             IdProducto = Convert.ToInt32(idProductoCell.Value);
-                        if (descripcionCell != null && descripcionCell.Value != null)
-                            txtDescripcion.Text = descripcionCell.Value.ToString();
-                        if (referenciaCell != null && referenciaCell.Value != null)
-                            txtReferencia.Text = referenciaCell.Value.ToString();
-                        if (idProductoCell == null || descripcionCell == null || referenciaCell != null)
+                            ListarTodoPorProducto(IdProducto);
+                        }                      
+                        else
                         {
                             MessageBox.Show("Valor nulo!");
                             return;
                         }
+                            
+                        if (descripcionCell != null && descripcionCell.Value != null)
+                            txtDescripcion.Text = descripcionCell.Value.ToString();
+                        else
+                        {
+                            MessageBox.Show("Valor nulo!");
+                            return;
+                        }
+                        if (referenciaCell != null && referenciaCell.Value != null)
+                            txtReferencia.Text = referenciaCell.Value.ToString();
+                        else
+                        {
+                            MessageBox.Show("Valor nulo!");
+                            return;
+                        }
+
                     }
                 }
             }
@@ -290,7 +310,7 @@ namespace NovoCosts.Forms
         }
         private void Finalizar()
         {
-            ListarTodo();
+            //ListarTodo();
             Limpiar();
         }
         private void Limpiar()
@@ -310,6 +330,12 @@ namespace NovoCosts.Forms
             DbDatos.OcultarIds(dgvManoObra);
             PersonalizarColumnasGrid();
         }
+        private void ListarTodoPorProducto(int IdProducto)
+        {
+            dgvManoObra.DataSource = ManoObra.ListarPorProducto(IdProducto);
+            DbDatos.OcultarIds(dgvManoObra);
+            PersonalizarColumnasGrid();
+        }
         private void ListarProductos()
         {
             dgvProductos.DataSource = Producto.ListarTodo();
@@ -320,7 +346,11 @@ namespace NovoCosts.Forms
         {
             DataTable dataTable = TipoManoObra.ListarTodo();
 
-            comboBoxTMO.DataSource = dataTable;
+            var filteredRows = dataTable.AsEnumerable()
+                                .Where(row => row.Field<string>("nombre_tipo") != "PORCENTAJE")
+                                .CopyToDataTable();
+
+            comboBoxTMO.DataSource = filteredRows;
             comboBoxTMO.DisplayMember = "nombre_tipo";
             comboBoxTMO.ValueMember = "id_tipo_mano_obra";
         }
@@ -390,12 +420,7 @@ namespace NovoCosts.Forms
             columna.HeaderText = nuevoHeaderTextMayusculas;
             columna.HeaderCell.Style.Font = new Font(columna.DataGridView.Font, FontStyle.Bold);
             columna.HeaderCell.Style.Font = new Font(columna.HeaderCell.Style.Font, FontStyle.Bold);
-        }
-        private void btnLimpiar_Click(object sender, EventArgs e)
-        {
-            Limpiar();
-            Modificar = false;
-        }
+        }        
         private decimal CalcularValorTotal(decimal vCantidad, decimal vUnitario)
         {
             ResultadoValorTotal = vCantidad * vUnitario;
