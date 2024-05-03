@@ -54,7 +54,7 @@
             this.dgvTipoMO.Name = "dgvTipoMO";
             this.dgvTipoMO.RowHeadersWidth = 62;
             this.dgvTipoMO.RowTemplate.Height = 28;
-            this.dgvTipoMO.Size = new System.Drawing.Size(285, 397);
+            this.dgvTipoMO.Size = new System.Drawing.Size(366, 397);
             this.dgvTipoMO.TabIndex = 0;
             this.dgvTipoMO.SelectionChanged += new System.EventHandler(this.dgvTipoMO_SelectionChanged);
             // 
@@ -145,7 +145,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(798, 450);
+            this.ClientSize = new System.Drawing.Size(857, 450);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvTipoMO);
             this.Name = "FRegistroTipoManoObra";

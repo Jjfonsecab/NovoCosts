@@ -178,13 +178,13 @@ namespace NovoCosts.Forms
                         {
                             IdProducto = Convert.ToInt32(idProductoCell.Value);
                             ListarTodoPorProducto(IdProducto);
-                        }                      
+                        }
                         else
                         {
                             MessageBox.Show("Valor nulo!");
                             return;
                         }
-                            
+
                         if (descripcionCell != null && descripcionCell.Value != null)
                             txtDescripcion.Text = descripcionCell.Value.ToString();
                         else
@@ -393,7 +393,7 @@ namespace NovoCosts.Forms
 
                     if (columna.Name == "costo")
                     {
-                        dgvManoObra.Columns["costo"].HeaderText = "COSTO UNITARIO";
+                        dgvManoObra.Columns["costo"].HeaderText = "COSTO";
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight; // Alinea a la derecha
                         estiloCeldaNumerica.Format = "N0";
@@ -405,11 +405,39 @@ namespace NovoCosts.Forms
                         dgvManoObra.Columns["fecha"].HeaderText = "FECHA";
                         DbDatos.OcultarIds(dgvManoObra);
                     }
+                    else if (columna.Name == "total_cantidad" || columna.Name == "valor_total")
+                    {
+                        dgvManoObra.Columns["total_cantidad"].HeaderText = "CANTIDAD";
+                        dgvManoObra.Columns["valor_total"].HeaderText = "$TOTAL";
+                        DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
+                        estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight; // Alinea a la derecha
+                        estiloCeldaNumerica.Format = "N0";
+                        columna.DefaultCellStyle = estiloCeldaNumerica;
+                        DbDatos.OcultarIds(dgvManoObra);
+                        dgvManoObra.Columns[columna.Name].Width = 200;
+                        
+                    }
                     ConfigurarCabeceraColumna(columna, columna.HeaderText);
+
                 }
             }
             foreach (DataGridViewColumn columna in dgvProductos.Columns)
             {
+                if (columna.Name == "costo")
+                {
+                    dgvProductos.Columns["costo"].HeaderText = "COSTO";
+                    DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
+                    estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight; // Alinea a la derecha
+                    estiloCeldaNumerica.Format = "N0";
+                    columna.DefaultCellStyle = estiloCeldaNumerica;
+                    DbDatos.OcultarIds(dgvProductos);
+                }
+                else if (columna.Name == "descripcion")
+                {
+                    dgvProductos.Columns["descripcion"].HeaderText = "DESCRIPCION";
+                    DbDatos.OcultarIds(dgvProductos);
+                    dgvProductos.Columns[columna.Name].Width = 170;
+                }
                 ConfigurarCabeceraColumna(columna, columna.HeaderText);
             }
         }
@@ -420,7 +448,7 @@ namespace NovoCosts.Forms
             columna.HeaderText = nuevoHeaderTextMayusculas;
             columna.HeaderCell.Style.Font = new Font(columna.DataGridView.Font, FontStyle.Bold);
             columna.HeaderCell.Style.Font = new Font(columna.HeaderCell.Style.Font, FontStyle.Bold);
-        }        
+        }
         private decimal CalcularValorTotal(decimal vCantidad, decimal vUnitario)
         {
             ResultadoValorTotal = vCantidad * vUnitario;

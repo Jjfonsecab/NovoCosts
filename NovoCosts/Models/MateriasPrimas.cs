@@ -58,7 +58,11 @@ namespace NovoCosts.Models
         {
             return DbDatos.Listar("MateriaPrima_Listar");
         }
-        
+        public static DataTable ListarTodoActualizado()
+        {
+            return DbDatos.Listar("MateriaPrima_Listar_Actualizado");
+        }
+
 
     }
 }

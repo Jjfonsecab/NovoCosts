@@ -84,6 +84,57 @@ namespace NovoCosts.Forms
                 return;
             }            
         }
+        private void txtNombre_TextChanged(object sender, EventArgs e)
+        {
+            string searchText = txtNombre.Text;
+
+            BuscarYMostrarResultados("RetornarNombreTipo", txtNombre, listBox1, "@NombreBuscado", "nombre_tipo");
+
+        }
+        private void txtNombre_KeyUp(object sender, KeyEventArgs e)
+        {
+            string searchText = txtNombre.Text;
+
+            BuscarYMostrarResultados("RetornarNombreTipo", txtNombre, listBox1, "@NombreBuscado", "nombre_tipo");
+
+        }
+        private void editarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IdTipoManoObra = Convert.ToInt32(dgvTipoMO.CurrentRow.Cells["id_tipo_mano_obra"].Value);
+            txtNombre.Text = dgvTipoMO.CurrentRow.Cells["nombre_tipo"].Value.ToString();
+
+            Editar = true;
+            Modificar = true;
+        }
+        private void dgvTipoMO_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvTipoMO.SelectedRows.Count > 0)
+                {
+                    DataGridViewRow selectedRow = dgvTipoMO.SelectedRows[0];
+
+                    if (selectedRow.Cells.Count >= 5)
+                    {
+                        IdTipoManoObra = Convert.ToInt32(selectedRow.Cells["id_tipo_mano_obra"].Value);
+                        txtNombre.Text = Convert.ToString(selectedRow.Cells["nombre_tipo"].Value);
+
+                        Editar = true;
+                        Modificar = true;
+                    }
+                }
+            }
+            catch (StrongTypingException)
+            {
+                MessageBox.Show("Fila vacia");
+                return;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error al Guardar");
+                return;
+            }
+        }
         private void ToUpperText()//El upperText para los comboBox esta en comboBox_TextChanged
         {
             txtNombre.CharacterCasing = CharacterCasing.Upper;
@@ -106,6 +157,13 @@ namespace NovoCosts.Forms
             {
                 if (!string.IsNullOrEmpty(columna.Name))
                 {
+                    if (columna.Name == "nombre_tipo")
+                    {
+                        dgvTipoMO.Columns["nombre_tipo"].HeaderText = "Tipo";
+                        DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
+                        DbDatos.OcultarIds(dgvTipoMO);
+                        dgvTipoMO.Columns[columna.Name].Width = 150;
+                    }
                     ConfigurarCabeceraColumna(columna, columna.HeaderText);
                 }
             }
@@ -209,20 +267,7 @@ namespace NovoCosts.Forms
         {
             txtNombre.Text = "";
         }
-        private void txtNombre_TextChanged(object sender, EventArgs e)
-        {
-            string searchText = txtNombre.Text;
-
-            BuscarYMostrarResultados("RetornarNombreTipo", txtNombre, listBox1, "@NombreBuscado", "nombre_tipo");
-
-        }
-        private void txtNombre_KeyUp(object sender, KeyEventArgs e)
-        {
-            string searchText = txtNombre.Text;
-
-            BuscarYMostrarResultados("RetornarNombreTipo", txtNombre, listBox1, "@NombreBuscado", "nombre_tipo");
-
-        }
+       
         private void BuscarYMostrarResultados(string nombreProcedimiento, System.Windows.Forms.TextBox textBox, ListBox listBox, string parametroNombre, string nombreColumna)
         {
             string searchText = textBox.Text;
@@ -242,42 +287,6 @@ namespace NovoCosts.Forms
                     listBox.Items.Add(row[nombreColumna].ToString());
             }
         }        
-        private void editarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            IdTipoManoObra = Convert.ToInt32(dgvTipoMO.CurrentRow.Cells["id_tipo_mano_obra"].Value);
-            txtNombre.Text = dgvTipoMO.CurrentRow.Cells["nombre_tipo"].Value.ToString();
-
-            Editar = true;
-            Modificar = true;
-        }
-        private void dgvTipoMO_SelectionChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (dgvTipoMO.SelectedRows.Count > 0)
-                {
-                    DataGridViewRow selectedRow = dgvTipoMO.SelectedRows[0];
-
-                    if (selectedRow.Cells.Count >= 5)
-                    {
-                        IdTipoManoObra = Convert.ToInt32(selectedRow.Cells["id_tipo_mano_obra"].Value);
-                        txtNombre.Text = Convert.ToString(selectedRow.Cells["nombre_tipo"].Value);
-
-                        Editar = true;
-                        Modificar = true;
-                    }
-                }
-            }
-            catch (StrongTypingException)
-            {
-                MessageBox.Show("Fila vacia");
-                return;
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Error al Guardar");
-                return;
-            }
-        }
+        
     }
 }

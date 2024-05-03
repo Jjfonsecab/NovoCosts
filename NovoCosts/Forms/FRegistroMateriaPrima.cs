@@ -155,7 +155,7 @@ namespace NovoCosts.Forms
             Editar = true;
             Modificar = true;
         }
-        private System.Windows.Forms.TextBox campoSeleccionado;
+        //private System.Windows.Forms.TextBox campoSeleccionado;
         private void monthCalendar_DateChanged(object sender, DateRangeEventArgs e)
         {
             DateTime fechaSeleccionada = monthCalendar.SelectionStart;
@@ -365,39 +365,39 @@ namespace NovoCosts.Forms
         {
             txtFecha.Text = DateTime.Now.ToString("yyyy-MM-dd");
         }
-        private void PersonalizarColumnasGrid()//ToDo
+        private void PersonalizarColumnasGrid()
         {
-            // Itera sobre todas las columnas del DataGridView
             foreach (DataGridViewColumn columna in dgvMateriaPrima.Columns)
             {
-                // Asegúrate de que la columna tenga un nombre
                 if (!string.IsNullOrEmpty(columna.Name))
                 {
-                    ConfigurarCabeceraColumna(columna, columna.HeaderText);
-                    // Puedes personalizar las columnas según su nombre o cualquier otra condición necesaria
-                    if (columna.Name == "valor_unitario")
+                    if (columna.Name == "detalle_mp" || columna.Name == "proveedor" || columna.Name == "comentarios")
                     {
-                        dgvMateriaPrima.Columns["valor_unitario"].HeaderText = "Valor Unitario";
+                        dgvMateriaPrima.Columns["detalle_mp"].HeaderText = "DETALLE";
+                        dgvMateriaPrima.Columns["proveedor"].HeaderText = "PROVEEDOR";
+                        dgvMateriaPrima.Columns["comentarios"].HeaderText = "COMENTARIOS";
+                        dgvMateriaPrima.Columns[columna.Name].Width = 170;
+                    }
+                    else if (columna.Name == "medida" || columna.Name == "valor" || columna.Name == "desperdicio_cantidad")
+                    {
+                        dgvMateriaPrima.Columns["medida"].HeaderText = "MEDIDA";
+                        dgvMateriaPrima.Columns["valor"].HeaderText = "VALOR";
+                        dgvMateriaPrima.Columns["desperdicio_cantidad"].HeaderText = "DESPERDICIO";
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
-                        estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight; // Alinea a la derecha
+                        estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight;
                         estiloCeldaNumerica.Format = "N0";
                         columna.DefaultCellStyle = estiloCeldaNumerica;
                         DbDatos.OcultarIds(dgvMateriaPrima);
                     }
-                    else if (columna.Name == "nombre_materia_prima")
-                    {
-                        dgvMateriaPrima.Columns["nombre_materia_prima"].HeaderText = "Detalle";
-                        DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
-                        columna.DefaultCellStyle = estiloCeldaNumerica;
-                        DbDatos.OcultarIds(dgvMateriaPrima);
-                    }
                     else if (columna.Name == "fecha")
-                    {
-                        dgvMateriaPrima.Columns["fecha"].HeaderText = "Fecha";
-                        DbDatos.OcultarIds(dgvMateriaPrima);
+                    {                        
+                        dgvMateriaPrima.Columns["fecha"].Visible = false;
                     }
-                }
+                }                    
+
+                ConfigurarCabeceraColumna(columna, columna.HeaderText);
             }
+            
         }
         private void ConfigurarCabeceraColumna(DataGridViewColumn columna, string nuevoHeaderText)
         {

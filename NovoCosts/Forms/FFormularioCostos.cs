@@ -12,6 +12,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.tool.xml;
+using System.IO;
+
 namespace NovoCosts.Forms
 {
     public partial class FFormularioCostos : Form
@@ -33,6 +38,7 @@ namespace NovoCosts.Forms
         decimal CostoManoObra;
         decimal Utilidad;
         decimal PrecioFabrica;
+        string NombreProdcucto;
         private void btnCostos_Click(object sender, EventArgs e)
         {
             FCostos fcostos = Application.OpenForms.OfType<FCostos>().FirstOrDefault();
@@ -57,6 +63,48 @@ namespace NovoCosts.Forms
             printDocument1.PrintPage += Imprimir;
             printDocument1.Print();
         }
+        private void btnPdf_Click(object sender, EventArgs e)
+        {
+            if(comboBox1.SelectedItem == null)
+            {
+                MessageBox.Show("Seleccione un producto.");
+                return;
+            }
+            else
+            {
+                string defaultFileName = $"{NombreProdcucto}_{DateTime.Now.ToString("dd-MM-yyyy")}.pdf";
+
+                SaveFileDialog savePdf = new SaveFileDialog();
+                savePdf.FileName = defaultFileName;
+                savePdf.Filter = "Archivos PDF (*.pdf)|*.pdf"; // Filtro para mostrar solo archivos PDF
+
+                string paginaHtml_texto = $"<table border=1><tr><td>{NombreProdcucto}</td></tr></table>";
+
+               if(savePdf.ShowDialog() == DialogResult.OK)
+                {
+                    using(FileStream stream = new FileStream(savePdf.FileName, FileMode.Create))
+                    {
+                        Document pdfDoc = new Document(PageSize.A4,25,25,25,25);
+
+                        PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);//este creo que es el que permite actualizar
+
+                        pdfDoc.Open();
+                        pdfDoc.Add(new Phrase("Novo Arte!"));
+
+                        using (StringReader sr = new StringReader(paginaHtml_texto))
+                        {
+                            XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+                        }
+
+                        pdfDoc.Close();
+                        stream.Close();
+                    }
+                }
+
+
+            }
+            
+        }
         private void btnCalcular_Click(object sender, EventArgs e)
         {
             if(IdProducto != 0)
@@ -79,6 +127,7 @@ namespace NovoCosts.Forms
             if (selectedRow != null)
             {
                 IdProducto = Convert.ToInt32(selectedRow["id_producto"]);
+                NombreProdcucto = Convert.ToString(selectedRow["nombre"]);
             }
 
             ListarCostosProductoPorId();
@@ -257,8 +306,8 @@ namespace NovoCosts.Forms
             string nuevoHeaderTextMayusculas = nuevoHeaderText.ToUpper();
 
             columna.HeaderText = nuevoHeaderTextMayusculas;
-            columna.HeaderCell.Style.Font = new Font(columna.DataGridView.Font, FontStyle.Bold);
-            columna.HeaderCell.Style.Font = new Font(columna.HeaderCell.Style.Font, FontStyle.Bold);
+            columna.HeaderCell.Style.Font = new System.Drawing.Font(columna.DataGridView.Font, FontStyle.Bold);
+            columna.HeaderCell.Style.Font = new System.Drawing.Font(columna.HeaderCell.Style.Font, FontStyle.Bold);
             columna.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
         }
@@ -269,7 +318,7 @@ namespace NovoCosts.Forms
                 string textoComboBox = comboBox1.SelectedItem.ToString();
 
                 // Definir la fuente y el pincel para dibujar el texto
-                Font fuente = new Font("Arial", 12);
+                System.Drawing.Font fuente = new System.Drawing.Font("Arial", 12);
                 SolidBrush pincel = new SolidBrush(Color.Black);
 
                 PointF posicion = new PointF(100, 100);
@@ -295,6 +344,7 @@ namespace NovoCosts.Forms
             txtUtilidad.Text = Convert.ToString(Utilidad);
             txtPrecioFabrica.Text = Convert.ToString(PrecioFabrica);
         }
+
         
     }
 }

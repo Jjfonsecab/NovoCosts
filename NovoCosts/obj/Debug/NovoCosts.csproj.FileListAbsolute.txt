@@ -17,3 +17,8 @@ C:\Users\Jeison\Documents\CODE'S\.NET\NovoCosts\NovoCosts\obj\Debug\NovoCosts.Fo
 C:\Users\Jeison\Documents\CODE'S\.NET\NovoCosts\NovoCosts\obj\Debug\NovoCosts.Forms.FCostos.resources
 C:\Users\Jeison\Documents\CODE'S\.NET\NovoCosts\NovoCosts\obj\Debug\NovoCosts.Forms.FRegistroTipoCosto.resources
 C:\Users\Jeison\Documents\CODE'S\.NET\NovoCosts\NovoCosts\obj\Debug\NovoCosts.Forms.FFormularioCostos.resources
+C:\Users\Jeison\Documents\CODE'S\.NET\NovoCosts\NovoCosts\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\Jeison\Documents\CODE'S\.NET\NovoCosts\NovoCosts\bin\Debug\itextsharp.dll
+C:\Users\Jeison\Documents\CODE'S\.NET\NovoCosts\NovoCosts\bin\Debug\itextsharp.xmlworker.dll
+C:\Users\Jeison\Documents\CODE'S\.NET\NovoCosts\NovoCosts\bin\Debug\itextsharp.xml
+C:\Users\Jeison\Documents\CODE'S\.NET\NovoCosts\NovoCosts\obj\Debug\NovoCosts.csproj.Up2Date

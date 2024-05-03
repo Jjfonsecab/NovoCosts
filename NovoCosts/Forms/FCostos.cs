@@ -603,7 +603,7 @@ namespace NovoCosts.Forms
         }
         private void ListarMaterial()
         {
-            dgvMateriasPrimas.DataSource = MateriasPrimas.ListarTodo();
+            dgvMateriasPrimas.DataSource = MateriasPrimas.ListarTodoActualizado();
             DbDatos.OcultarIds(dgvMateriasPrimas);
             PersonalizarColumnaMateriales();
         }
@@ -782,7 +782,7 @@ namespace NovoCosts.Forms
                         //dgvCostos.Columns[columna.Name].Width = 35;
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight; 
-                        DbDatos.OcultarIds(dgvProductos);
+                        DbDatos.OcultarIds(dgvMateriasPrimas);
                     }
                     else if (columna.Name == "fecha")
                     {

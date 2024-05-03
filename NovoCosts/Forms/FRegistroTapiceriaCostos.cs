@@ -306,32 +306,42 @@ namespace NovoCosts.Forms
             {
                 if (!string.IsNullOrEmpty(columna.Name))
                 {
-                    if (columna.Name == "valor_unitario")
+                    if (columna.Name == "descripcion")
                     {
-                        dgvTapiceria.Columns["valor_unitario"].HeaderText = "Valor Unitario";
+                        dgvTapiceria.Columns["descripcion"].HeaderText = "DESCRIPCION";
+                        DbDatos.OcultarIds(dgvTapiceria);
+                        dgvTapiceria.Columns[columna.Name].Width = 170;
+                    }
+                    else if (columna.Name == "corte_alistado" || columna.Name == "blanco" || columna.Name == "costura" || columna.Name == "forrado" || columna.Name == "valor_total")
+                    {
+                        dgvTapiceria.Columns["corte_alistado"].HeaderText = "CORTE";
+                        dgvTapiceria.Columns["valor_total"].HeaderText = "TOTAL";
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight; // Alinea a la derecha
                         estiloCeldaNumerica.Format = "N0";
                         columna.DefaultCellStyle = estiloCeldaNumerica;
-                        DbDatos.OcultarIds(dgvTapiceria);
-                    }
-                    else if (columna.Name == "nombre_materia_prima")
-                    {
-                        dgvTapiceria.Columns["nombre_materia_prima"].HeaderText = "Detalle";
-                        DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
-                        columna.DefaultCellStyle = estiloCeldaNumerica;
+                        dgvTapiceria.Columns[columna.Name].Width = 80;
                         DbDatos.OcultarIds(dgvTapiceria);
                     }
                     else if (columna.Name == "fecha")
                     {
                         dgvTapiceria.Columns["fecha"].HeaderText = "Fecha";
                         DbDatos.OcultarIds(dgvTapiceria);
+
+                        dgvTapiceria.Columns["fecha"].Visible = false;
                     }
                 }
                 ConfigurarCabeceraColumna(columna, columna.HeaderText);
             }
             foreach (DataGridViewColumn columna in dgvProductos.Columns)
             {
+                if (columna.Name == "descripcion")
+                {
+                    dgvProductos.Columns["descripcion"].HeaderText = "DESCRIPCION";
+                    DbDatos.OcultarIds(dgvProductos);
+                    dgvProductos.Columns[columna.Name].Width = 170;
+                }
+
                 ConfigurarCabeceraColumna(columna, columna.HeaderText);
             }
         }
