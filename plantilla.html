@@ -1,11 +1,98 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+
+    <title>Muebles Novo Arte S.A.S.</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 35px; /* Margen inferior para separar las tablas */
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 3px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .costo-table {
+            width: 48%;
+            float: left; /* Para alinearla a la izquierda */
+            margin-right: 2%; /* Margen derecho para separarla del siguiente contenido */
+        }
+
+        .additional-info {
+            float: left; /* Para alinearla a la izquierda */
+            width: 44%; /* Aumentar el ancho */
+        }
+
+            .additional-info ol {
+                margin: 0; /* Elimina los márgenes predeterminados de la lista */
+                padding-left: 10px; /* Agrega un espacio de sangría al contenido de la lista */
+                word-wrap: break-word; /* Forzar el texto largo a romperse */
+            }
+
+            .additional-info li {
+                margin-bottom: 8px; /* Espacio entre elementos de la lista */
+                list-style-type: none; /* Quitamos los puntos de la lista */
+            }
+
+                .additional-info li span {
+                    font-weight: bold; /* Texto en negrita */
+                    margin-right: 4px; /* Espacio entre etiqueta y valor */
+                }
+    </style>
 </head>
 <body>
-    
+    <h1>Muebles Novo Arte</h1>
+    <h2 style="margin-left:20px;margin-top:0;">Producto :   @nombre</h2>
+    <h2 style="margin-left:20px;margin-top:0;">Fecha :   @fecha</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>DESEMPEÑO</th>
+                <th>CAN</th>
+                <th>D1</th>
+                <th>D2</th>
+                <th>D3</th>
+                <th>CM</th>
+                <th>DESPERDICIO</th>
+                <th>TOTAL CANT</th>
+                <th>VALOR UNIT</th>
+                <th>VALOR TOTAL</th>
+                <th>MATERIAPRIMA</th>
+            </tr>
+        </thead>
+        <tbody>
+            @filasCostos
+        </tbody>
+    </table>
+    <table class="costo-table">
+        <thead>
+            <tr>
+                <th>NOMBRE</th>
+                <th>COSTO</th>
+                <th>TOTAL CANTINDAD</th>
+                <th>VALOR TOTAL</th>
+            </tr>
+        </thead>
+        <tbody>
+            @filasManoObra
+        </tbody>
+    </table>
+    <div class="additional-info">
+        <ol>
+            <li><span>Anotaciones:</span> @anotaciones</li>
+            <li><span>Costo:</span> @costo"</li>
+            <li><span>Porcentaje:</span> @porcentaje</li>
+            <li><span>Precio Fabrica:</span> @precioFabrica</li>
+            <li><span>Utilidad:</span> @utilidad"</li>
+        </ol>
+    </div>
 </body>
 </html>

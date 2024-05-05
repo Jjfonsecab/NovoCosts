@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Muebles Novo Arte S.A.S.</title>
     <style>
         table {
             border-collapse: collapse;
             width: 100%;
-            margin-bottom: 35px; /* Margen inferior para separar las tablas */
+            margin-bottom: 35px;
         }
 
         th, td {
-            border: 2px solid black;
-            padding: 3px;
+            border: 1px solid black;
+            font-size: 12px;
+            padding: 2px;
             text-align: center;
         }
 
@@ -21,38 +21,27 @@
             background-color: #f2f2f2;
         }
 
-        .costo-table {
-            width: 48%;
-            float: left; /* Para alinearla a la izquierda */
-            margin-right: 2%; /* Margen derecho para separarla del siguiente contenido */
+        .additional-info ol {
+            word-wrap: break-word;
+            text-align: left;
+            padding-left: 3px;
         }
 
-        .additional-info {
-            float: left; /* Para alinearla a la izquierda */
-            width: 48%; /* Aumentar el ancho */
+        .additional-info li {
+            margin-bottom: 6px;
+            list-style-type: none;
         }
 
-            .additional-info ol {
-                margin: 0; /* Elimina los márgenes predeterminados de la lista */
-                padding-left: 20px; /* Agrega un espacio de sangría al contenido de la lista */
-                word-wrap: break-word; /* Forzar el texto largo a romperse */
+            .additional-info li span {
+                font-weight: bold; 
+                margin-right: 4px; 
             }
-
-            .additional-info li {
-                margin-bottom: 8px; /* Espacio entre elementos de la lista */
-                list-style-type: none; /* Quitamos los puntos de la lista */
-            }
-
-                .additional-info li span {
-                    font-weight: bold; /* Texto en negrita */
-                    margin-right: 4px; /* Espacio entre etiqueta y valor */
-                }
     </style>
 </head>
 <body>
     <h1>Muebles Novo Arte</h1>
-    <h2 style="margin-left:20px;margin-top:0;">Producto :</h2>
-    <h2 style="margin-left:20px;margin-top:0;">Fecha :</h2>
+    <h2 style="margin-left:10px;margin-top:0;margin-bottom:1px;font-size:18px;">Producto :   @nombre</h2>
+    <h2 style="margin-left: 10px; margin-top: 0; font-size: 18px;">Fecha :   @fecha</h2>
     <table>
         <thead>
             <tr>
@@ -70,63 +59,38 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Producto A</td>
-                <td>100</td>
-                <td>20</td>
-                <td>15</td>
-                <td>10</td>
-                <td>45</td>
-                <td>5</td>
-                <td>190</td>
-                <td>$10</td>
-                <td>$1900</td>
-                <td>Madera</td>
-            </tr>
-            <tr>
-                <td>Producto B</td>
-                <td>80</td>
-                <td>18</td>
-                <td>12</td>
-                <td>8</td>
-                <td>38</td>
-                <td>4</td>
-                <td>162</td>
-                <td>$12</td>
-                <td>$1944</td>
-                <td>Plástico</td>
-            </tr>
+            @filasCostos
         </tbody>
     </table>
-    <table class="costo-table">
-        <thead>
-            <tr>
-                <th>COSTO</th>
-                <th>TOTAL CANTINDAD</th>
-                <th>VALOR TOTAL</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Costo A</td>
-                <td>200</td>
-                <td>$4000</td>
-            </tr>
-            <tr>
-                <td>Costo B</td>
-                <td>180</td>
-                <td>$2160</td>
-            </tr>
-        </tbody>
+    <table style="width: 100%; ">
+        <tr>
+            <td style="width:48%">
+                <table class="costo-table">
+                    <thead>
+                        <tr>
+                            <th>NOMBRE</th>
+                            <th>COSTO</th>
+                            <th>TOTAL CANTIDAD</th>
+                            <th>VALOR TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @filasManoObra
+                    </tbody>
+                </table>
+            </td>
+            <td style="width: 50%; text-align: left;padding-left:8px;">
+                <div class="additional-info">
+                    <ul>
+                        <li><span>Anotaciones:</span> @anotaciones</li>
+                        <li><span>Costo:</span> $ @costo"</li>
+                        <li><span>Porcentaje:</span> @porcentaje %</li>
+                        <li><span>Precio Fabrica:</span> $ @precioFabrica</li>
+                        <li><span>Utilidad:</span> $ @utilidad"</li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
     </table>
-    <div class="additional-info">
-        <ol>
-            <li><span>Anotaciones:</span> "Aca va la anotación salnlasd asdasd ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"</li>
-            <li><span>Costo:</span> "13123123"</li>
-            <li><span>Porcentaje:</span> "Porcentaje"</li>
-            <li><span>Precio Fabrica:</span> "Precio Fabrica"</li>
-            <li><span>Utilidad:</span> "123123"</li>
-        </ol>
-    </div>
 </body>
 </html>

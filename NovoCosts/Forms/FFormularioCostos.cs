@@ -39,6 +39,7 @@ namespace NovoCosts.Forms
         decimal Utilidad;
         decimal PrecioFabrica;
         string NombreProdcucto;
+        bool Calcualdo = false;
         private void btnCostos_Click(object sender, EventArgs e)
         {
             FCostos fcostos = Application.OpenForms.OfType<FCostos>().FirstOrDefault();
@@ -54,6 +55,9 @@ namespace NovoCosts.Forms
         private void btnLimpiar_Click(object sender, EventArgs e)//toDos
         {
             comboBox1.Text = "";
+            txtAnotaciones.Text = "N.A.";
+            txtPorcentaje.Text = "";
+            Calcualdo = false ;
         }
         private void btnImprimir_Click(object sender, EventArgs e)//toDo
         {
@@ -65,45 +69,97 @@ namespace NovoCosts.Forms
         }
         private void btnPdf_Click(object sender, EventArgs e)
         {
-            if(comboBox1.SelectedItem == null)
+            try
             {
-                MessageBox.Show("Seleccione un producto.");
-                return;
-            }
-            else
-            {
-                string defaultFileName = $"{NombreProdcucto}_{DateTime.Now.ToString("dd-MM-yyyy")}.pdf";
-
-                SaveFileDialog savePdf = new SaveFileDialog();
-                savePdf.FileName = defaultFileName;
-                savePdf.Filter = "Archivos PDF (*.pdf)|*.pdf"; // Filtro para mostrar solo archivos PDF
-
-                string paginaHtml_texto = $"<table border=1><tr><td>{NombreProdcucto}</td></tr></table>";
-
-               if(savePdf.ShowDialog() == DialogResult.OK)
+                if (comboBox1.SelectedItem == null)
                 {
-                    using(FileStream stream = new FileStream(savePdf.FileName, FileMode.Create))
+                    MessageBox.Show("Seleccione un producto.");
+                    return;
+                }
+                if (!Calcualdo)
+                {
+                    MessageBox.Show("Calcule los datos.");
+                    return;
+                }
+                else
+                {
+                    string defaultFileName = $"{NombreProdcucto}_{DateTime.Now.ToString("dd-MM-yyyy")}.pdf";
+
+                    SaveFileDialog savePdf = new SaveFileDialog();
+                    savePdf.FileName = defaultFileName;
+                    savePdf.Filter = "Archivos PDF (*.pdf)|*.pdf"; 
+                    
+                    string paginaHtml_texto = Properties.Resources.plantilla.ToString();
+                    paginaHtml_texto = paginaHtml_texto.Replace("@nombre", comboBox1.Text);
+                    paginaHtml_texto = paginaHtml_texto.Replace("@fecha", txtFecha.Text);
+                    paginaHtml_texto = paginaHtml_texto.Replace("@anotaciones", txtAnotaciones.Text);
+                    paginaHtml_texto = paginaHtml_texto.Replace("@costo", txtCosto.Text);
+                    paginaHtml_texto = paginaHtml_texto.Replace("@porcentaje", txtPorcentaje.Text);
+                    paginaHtml_texto = paginaHtml_texto.Replace("@precioFabrica", txtPrecioFabrica.Text);
+                    paginaHtml_texto = paginaHtml_texto.Replace("@utilidad", txtUtilidad.Text);
+
+                    string filasCostos = string.Empty;
+                    string filasManoObra = string.Empty;
+
+                    foreach (DataGridViewRow row in dgvCostos.Rows)
                     {
-                        Document pdfDoc = new Document(PageSize.A4,25,25,25,25);
+                        filasCostos += "<tr>";
+                        filasCostos += "<td>" + (row.Cells["desempeño"].Value ?? "").ToString() + "</td>";
+                        filasCostos += "<td>" + (row.Cells["cantidad"].Value ?? "").ToString() + "</td>";
+                        filasCostos += "<td>" + (row.Cells["dimension1"].Value ?? "").ToString() + "</td>";
+                        filasCostos += "<td>" + (row.Cells["dimension2"].Value ?? "").ToString() + "</td>";
+                        filasCostos += "<td>" + (row.Cells["dimension3"].Value ?? "").ToString() + "</td>";
+                        filasCostos += "<td>" + (row.Cells["cm"].Value ?? "").ToString() + "</td>";
+                        filasCostos += "<td>" + (row.Cells["desperdicio"].Value ?? "").ToString() + "</td>";
+                        filasCostos += "<td>" + (row.Cells["total_cantidad"].Value ?? "").ToString() + "</td>";
+                        filasCostos += "<td>" + (row.Cells["valor_unitario"].Value ?? "").ToString() + "</td>";
+                        filasCostos += "<td>" + (row.Cells["valor_total"].Value ?? "").ToString() + "</td>";
+                        filasCostos += "<td>" + (row.Cells["MateriaPrima"].Value ?? "").ToString() + "</td>";
+                        filasCostos += "</tr>";
+                    }
+                    paginaHtml_texto = paginaHtml_texto.Replace("@filasCostos", filasCostos);                    
 
-                        PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);//este creo que es el que permite actualizar
+                    foreach (DataGridViewRow row in dgvManoObra.Rows)
+                    {
+                        filasManoObra += "<tr>";
+                        filasManoObra += "<td>" + (row.Cells["nombre_tipo"].Value ?? "").ToString() + "</td>";
+                        filasManoObra += "<td>" + (row.Cells["costo"].Value ?? "").ToString() + "</td>";
+                        filasManoObra += "<td>" + (row.Cells["total_cantidad"].Value ?? "").ToString() + "</td>";
+                        filasManoObra += "<td>" + (row.Cells["valor_total"].Value ?? "").ToString() + "</td>";
+                        filasManoObra += "</tr>";
+                    }
 
-                        pdfDoc.Open();
-                        pdfDoc.Add(new Phrase("Novo Arte!"));
+                    paginaHtml_texto = paginaHtml_texto.Replace("@filasManoObra", filasManoObra);
 
-                        using (StringReader sr = new StringReader(paginaHtml_texto))
+
+                    if (savePdf.ShowDialog() == DialogResult.OK)
+                    {
+                        using (FileStream stream = new FileStream(savePdf.FileName, FileMode.Create))
                         {
-                            XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
-                        }
+                            Document pdfDoc = new Document(PageSize.LETTER, 25, 25, 25, 25);
 
-                        pdfDoc.Close();
-                        stream.Close();
+                            PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+
+                            pdfDoc.Open();
+
+                            using (StringReader sr = new StringReader(paginaHtml_texto))
+                            {
+                                XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+                            }
+
+                            pdfDoc.Close();
+                            stream.Close();
+                        }
                     }
                 }
-
-
             }
-            
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al crear el PDF:" );
+                Console.WriteLine(ex.Message );
+                return;
+            }
+                 
         }
         private void btnCalcular_Click(object sender, EventArgs e)
         {
@@ -114,6 +170,8 @@ namespace NovoCosts.Forms
                 calcularPorcentajeGanancia();            
             else            
                 MessageBox.Show("El porcentaje no ha sido definido.");
+
+            Calcualdo = true;
             
         }
         private void comboBox1_DropDown(object sender, EventArgs e)
@@ -135,11 +193,17 @@ namespace NovoCosts.Forms
             ConsultarProductoId(IdProducto);
         }
 
-
         //Metodos:
         private void ToUpperText()//El upperText para los comboBox esta en comboBox_TextChanged
         {
             txtFecha.CharacterCasing = CharacterCasing.Upper;
+            txtAnotaciones.Click += TextBox_Click;
+            txtPorcentaje.Click += TextBox_Click;
+        }
+        private void TextBox_Click(object sender, EventArgs e)
+        {
+            if (sender is System.Windows.Forms.TextBox textBox)
+                textBox.SelectAll();
         }
         private void MostrarFechaActual()
         {
@@ -202,8 +266,10 @@ namespace NovoCosts.Forms
             {
                 if (!string.IsNullOrEmpty(columna.Name))
                 {
+                    DbDatos.OcultarIds(dgvActual);
                     if (columna.Name == "dimension1" || columna.Name == "dimension2" || columna.Name == "dimension3" || columna.Name == "cantidad")
                     {
+                        
                         dgvActual.Columns["dimension1"].HeaderText = "D1";
                         dgvActual.Columns["dimension2"].HeaderText = "D2";
                         dgvActual.Columns["dimension3"].HeaderText = "D3";
@@ -212,8 +278,7 @@ namespace NovoCosts.Forms
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight; // Alinea a la derecha
                         //estiloCeldaNumerica.Format = "N0";
-                        columna.DefaultCellStyle = estiloCeldaNumerica;
-                        DbDatos.OcultarIds(dgvActual);
+                        columna.DefaultCellStyle = estiloCeldaNumerica;                        
                     }
                     else if (columna.Name == "total_cantidad" || columna.Name == "valor_unitario")
                     {
@@ -223,7 +288,6 @@ namespace NovoCosts.Forms
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleCenter; // Alinea aL CENTRO
                         columna.DefaultCellStyle = estiloCeldaNumerica;
-                        DbDatos.OcultarIds(dgvActual);
                     }
                     else if (columna.Name == "cantidad_desperdicio")
                     {
@@ -231,23 +295,20 @@ namespace NovoCosts.Forms
                     }
                     else if (columna.Name == "fecha")
                     {
-                        dgvActual.Columns["fecha"].HeaderText = "Fecha";
-                        dgvActual.Columns[columna.Name].Width = 80;
-                        DbDatos.OcultarIds(dgvActual);
+                        dgvActual.Columns["fecha"].Visible = false;
                     }
                     else if (columna.Name == "desempeño")
                     {
-                        dgvActual.Columns[columna.Name].Width = 180;
-                        DbDatos.OcultarIds(dgvActual);
+                        dgvActual.Columns[columna.Name].Width = 180;                        
                     }
-                    else if (columna.Name == "desper")
+                    else if (columna.Name == "desperdicio")
                     {
-                        dgvActual.Columns[columna.Name].Width = 60;
+                        dgvActual.Columns[columna.Name].Width = 100;
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleCenter; // Alinea aL CENTRO
                         estiloCeldaNumerica.Format = "N0";
                         columna.DefaultCellStyle = estiloCeldaNumerica;
-                        DbDatos.OcultarIds(dgvActual);
+                        
                     }
                     else if (columna.Name == "cm")
                     {
@@ -255,7 +316,7 @@ namespace NovoCosts.Forms
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleCenter; // Alinea aL CENTRO
                         estiloCeldaNumerica.Format = "N0";
                         columna.DefaultCellStyle = estiloCeldaNumerica;
-                        DbDatos.OcultarIds(dgvActual);
+                        
                     }
                     else if (columna.Name == "valor_total")
                     {
@@ -264,12 +325,17 @@ namespace NovoCosts.Forms
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleCenter; // Alinea aL CENTRO
                         estiloCeldaNumerica.Format = "N0";
                         columna.DefaultCellStyle = estiloCeldaNumerica;
-                        DbDatos.OcultarIds(dgvCostos);
+                        
                     }
                     else if (columna.Name == "descripcion" || columna.Name == "referencia")
                     {
                         dgvActual.Columns[columna.Name].Width = 180;
-                        DbDatos.OcultarIds(dgvActual);
+                        
+                    }
+                    else if (columna.Name == "MateriaPrima")
+                    {                       
+                        dgvActual.Columns[columna.Name].Width = 180;
+                        dgvActual.Columns[columna.Name].DisplayIndex = 0;
                     }
 
                 }
@@ -289,8 +355,10 @@ namespace NovoCosts.Forms
                     }
                     else if (columna.Name == "fecha")
                         columna.Visible = false;
-                    else if (columna.Name == "costo")
+                    else if (columna.Name == "costo" || columna.Name == "total_cantidad" || columna.Name == "valor_total")
                     {
+                        dgvManoObra.Columns["total_cantidad"].HeaderText = "CANTIDAD TOTAL";
+                        dgvManoObra.Columns["valor_total"].HeaderText = "VALOR TOTAL";
                         columna.Width = 107;
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight;
