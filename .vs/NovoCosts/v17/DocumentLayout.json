@@ -3,16 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|c:\\users\\jeison\\documents\\code\u0027s\\.net\\novocosts\\novocosts\\forms\\fformulariocostos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\forms\\fformulariocostos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|c:\\users\\jeison\\documents\\code\u0027s\\.net\\novocosts\\novocosts\\models\\formulariocostos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\models\\formulariocostos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\novocosts\\forms\\fcostos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\forms\\fcostos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\novocosts\\models\\costos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\models\\costos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|c:\\users\\jeison\\documents\\code\u0027s\\.net\\novocosts\\novocosts\\forms\\fformulariocostos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\forms\\fformulariocostos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\novocosts\\forms\\fformulariocostos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\forms\\fformulariocostos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\novocosts\\forms\\fcostos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\forms\\fcostos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|c:\\users\\jeison\\documents\\code\u0027s\\.net\\novocosts\\novocosts\\forms\\fcostos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\forms\\fcostos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|c:\\users\\jeison\\documents\\code\u0027s\\.net\\novocosts\\novocosts\\class\\dbdatos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\class\\dbdatos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 324,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,40 +46,92 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "FCostos.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FCostos.cs",
-              "RelativeDocumentMoniker": "NovoCosts\\Forms\\FCostos.cs",
-              "ToolTip": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FCostos.cs [Design]",
-              "RelativeToolTip": "NovoCosts\\Forms\\FCostos.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-03T18:52:58.077Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "FFormularioCostos.cs",
-              "DocumentMoniker": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FFormularioCostos.cs",
-              "RelativeDocumentMoniker": "NovoCosts\\Forms\\FFormularioCostos.cs",
-              "ToolTip": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FFormularioCostos.cs",
-              "RelativeToolTip": "NovoCosts\\Forms\\FFormularioCostos.cs",
-              "ViewState": "AQIAACMBAAAAAAAAAAAAwDEBAABCAAAA",
+              "Title": "FormularioCostos.cs",
+              "DocumentMoniker": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Models\\FormularioCostos.cs",
+              "RelativeDocumentMoniker": "NovoCosts\\Models\\FormularioCostos.cs",
+              "ToolTip": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Models\\FormularioCostos.cs",
+              "RelativeToolTip": "NovoCosts\\Models\\FormularioCostos.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAmwBgAAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-02T15:15:06.258Z",
+              "WhenOpened": "2024-05-14T15:38:29.337Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "FFormularioCostos.cs",
+              "DocumentMoniker": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FFormularioCostos.cs",
+              "RelativeDocumentMoniker": "NovoCosts\\Forms\\FFormularioCostos.cs",
+              "ToolTip": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FFormularioCostos.cs",
+              "RelativeToolTip": "NovoCosts\\Forms\\FFormularioCostos.cs",
+              "ViewState": "AQIAAC4AAAAAAAAAAADgv0AAAAA9AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-14T15:38:06.101Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "FFormularioCostos.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FFormularioCostos.cs",
               "RelativeDocumentMoniker": "NovoCosts\\Forms\\FFormularioCostos.cs",
               "ToolTip": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FFormularioCostos.cs [Design]",
               "RelativeToolTip": "NovoCosts\\Forms\\FFormularioCostos.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-02T15:15:00.046Z",
+              "WhenOpened": "2024-05-14T15:38:04.297Z",
               "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DbDatos.cs",
+              "DocumentMoniker": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Class\\DbDatos.cs",
+              "RelativeDocumentMoniker": "NovoCosts\\Class\\DbDatos.cs",
+              "ToolTip": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Class\\DbDatos.cs",
+              "RelativeToolTip": "NovoCosts\\Class\\DbDatos.cs",
+              "ViewState": "AQIAACAAAAAAAAAAAAAQwCQAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-08T06:51:55.463Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Costos.cs",
+              "DocumentMoniker": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Models\\Costos.cs",
+              "RelativeDocumentMoniker": "NovoCosts\\Models\\Costos.cs",
+              "ToolTip": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Models\\Costos.cs",
+              "RelativeToolTip": "NovoCosts\\Models\\Costos.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAgwDQAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-08T05:43:13.933Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FCostos.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FCostos.cs",
+              "RelativeDocumentMoniker": "NovoCosts\\Forms\\FCostos.cs",
+              "ToolTip": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FCostos.cs [Design]",
+              "RelativeToolTip": "NovoCosts\\Forms\\FCostos.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-07T21:11:38.148Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FCostos.cs",
+              "DocumentMoniker": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FCostos.cs",
+              "RelativeDocumentMoniker": "NovoCosts\\Forms\\FCostos.cs",
+              "ToolTip": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FCostos.cs",
+              "RelativeToolTip": "NovoCosts\\Forms\\FCostos.cs",
+              "ViewState": "AQIAABEAAAAAAAAAAAAhwB8AAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-06T17:14:42.92Z",
+              "EditorCaption": ""
             }
           ]
         }

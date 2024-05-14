@@ -28,7 +28,7 @@
         }
 
         .additional-info li {
-            margin-bottom: 6px;
+            margin-bottom: 3px;
             list-style-type: none;
         }
 
@@ -39,23 +39,23 @@
     </style>
 </head>
 <body>
-    <h1>Muebles Novo Arte</h1>
-    <h2 style="margin-left:10px;margin-top:0;margin-bottom:1px;font-size:18px;">Producto :   @nombre</h2>
-    <h2 style="margin-left: 10px; margin-top: 0; font-size: 18px;">Fecha :   @fecha</h2>
+    <h1></h1>
+    <h2 style="margin-left: 10px; margin-top: 0; margin-bottom: 1px; font-size: 18px; text-align: right;">Producto :   @nombre</h2>
+    <h2 style="margin-left: 10px; margin-top: 0; font-size: 18px; text-align: right;">Fecha :   @fecha</h2>
     <table>
         <thead>
             <tr>
+                <th>MATERIAPRIMA</th>
                 <th>DESEMPEÑO</th>
                 <th>CAN</th>
                 <th>D1</th>
                 <th>D2</th>
                 <th>D3</th>
                 <th>CM</th>
-                <th>DESPERDICIO</th>
+                <th>DESPER</th>
                 <th>TOTAL CANT</th>
                 <th>VALOR UNIT</th>
                 <th>VALOR TOTAL</th>
-                <th>MATERIAPRIMA</th>
             </tr>
         </thead>
         <tbody>
@@ -64,7 +64,7 @@
     </table>
     <table style="width: 100%; ">
         <tr>
-            <td style="width:48%">
+            <td style="width: 48%; padding-top: 4px; padding-bottom: 4px">
                 <table class="costo-table">
                     <thead>
                         <tr>
@@ -79,7 +79,7 @@
                     </tbody>
                 </table>
             </td>
-            <td style="width: 50%; text-align: left;padding-left:8px;">
+            <td style="width: 50%; text-align: left; padding-top: 8px; padding-bottom: 8px">
                 <div class="additional-info">
                     <ul>
                         <li><span>Anotaciones:</span> @anotaciones</li>

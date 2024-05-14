@@ -38,13 +38,17 @@
             this.comboBoxUnidadMedida = new System.Windows.Forms.ComboBox();
             this.txtFecha = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtValorUnitario = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.txtCantidadDesperdicio = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.btnLimpiar = new System.Windows.Forms.PictureBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.btnRegistroUnidades = new System.Windows.Forms.PictureBox();
+            this.txtComentarios = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnEliminar = new System.Windows.Forms.PictureBox();
             this.btnGuardar = new System.Windows.Forms.PictureBox();
-            this.monthCalendar = new System.Windows.Forms.MonthCalendar();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label14 = new System.Windows.Forms.Label();
             this.txtDividir = new System.Windows.Forms.TextBox();
@@ -56,27 +60,22 @@
             this.txtAncho = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.txtAlto = new System.Windows.Forms.TextBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.monthCalendar = new System.Windows.Forms.MonthCalendar();
             this.btnInicio = new System.Windows.Forms.PictureBox();
             this.dgvMateriaPrima = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtComentarios = new System.Windows.Forms.TextBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.txtValorUnitario = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnLimpiar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnRegistroUnidades)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnEliminar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnGuardar)).BeginInit();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnInicio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMateriaPrima)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -112,7 +111,7 @@
             // 
             this.txtProveedor.Location = new System.Drawing.Point(160, 78);
             this.txtProveedor.Name = "txtProveedor";
-            this.txtProveedor.Size = new System.Drawing.Size(240, 26);
+            this.txtProveedor.Size = new System.Drawing.Size(305, 26);
             this.txtProveedor.TabIndex = 11;
             this.txtProveedor.TextChanged += new System.EventHandler(this.txtProveedor_TextChanged);
             this.txtProveedor.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtProveedor_KeyUp);
@@ -146,7 +145,6 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.PowderBlue;
-            this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.txtValorUnitario);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
@@ -166,14 +164,30 @@
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Location = new System.Drawing.Point(12, 71);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(635, 906);
+            this.groupBox1.Size = new System.Drawing.Size(599, 906);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Registro de Datos :";
             // 
+            // txtValorUnitario
+            // 
+            this.txtValorUnitario.Location = new System.Drawing.Point(463, 175);
+            this.txtValorUnitario.Name = "txtValorUnitario";
+            this.txtValorUnitario.Size = new System.Drawing.Size(127, 26);
+            this.txtValorUnitario.TabIndex = 85;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(333, 175);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(126, 20);
+            this.label4.TabIndex = 84;
+            this.label4.Text = "Valor Unitario : $";
+            // 
             // txtCantidadDesperdicio
             // 
-            this.txtCantidadDesperdicio.Location = new System.Drawing.Point(491, 179);
+            this.txtCantidadDesperdicio.Location = new System.Drawing.Point(465, 226);
             this.txtCantidadDesperdicio.Name = "txtCantidadDesperdicio";
             this.txtCantidadDesperdicio.Size = new System.Drawing.Size(59, 26);
             this.txtCantidadDesperdicio.TabIndex = 83;
@@ -181,7 +195,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(346, 179);
+            this.label12.Location = new System.Drawing.Point(340, 226);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(119, 20);
             this.label12.TabIndex = 82;
@@ -198,17 +212,45 @@
             this.btnLimpiar.TabStop = false;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 20;
+            this.listBox1.Location = new System.Drawing.Point(32, 123);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(295, 144);
+            this.listBox1.TabIndex = 20;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            // 
             // btnRegistroUnidades
             // 
             this.btnRegistroUnidades.BackColor = System.Drawing.Color.PowderBlue;
             this.btnRegistroUnidades.Image = ((System.Drawing.Image)(resources.GetObject("btnRegistroUnidades.Image")));
-            this.btnRegistroUnidades.Location = new System.Drawing.Point(561, 343);
+            this.btnRegistroUnidades.Location = new System.Drawing.Point(517, 483);
             this.btnRegistroUnidades.Name = "btnRegistroUnidades";
             this.btnRegistroUnidades.Size = new System.Drawing.Size(57, 58);
             this.btnRegistroUnidades.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.btnRegistroUnidades.TabIndex = 48;
             this.btnRegistroUnidades.TabStop = false;
             this.btnRegistroUnidades.Click += new System.EventHandler(this.btnRegistroUnidades_Click);
+            // 
+            // txtComentarios
+            // 
+            this.txtComentarios.Location = new System.Drawing.Point(176, 486);
+            this.txtComentarios.Multiline = true;
+            this.txtComentarios.Name = "txtComentarios";
+            this.txtComentarios.Size = new System.Drawing.Size(320, 55);
+            this.txtComentarios.TabIndex = 47;
+            this.txtComentarios.Text = "N.A.";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(28, 495);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(111, 20);
+            this.label1.TabIndex = 46;
+            this.label1.Text = "Comentarios : ";
             // 
             // btnEliminar
             // 
@@ -231,12 +273,6 @@
             this.btnGuardar.TabIndex = 43;
             this.btnGuardar.TabStop = false;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
-            // 
-            // monthCalendar
-            // 
-            this.monthCalendar.Location = new System.Drawing.Point(23, 59);
-            this.monthCalendar.Name = "monthCalendar";
-            this.monthCalendar.TabIndex = 50;
             // 
             // groupBox2
             // 
@@ -341,6 +377,24 @@
             this.txtAlto.Size = new System.Drawing.Size(69, 26);
             this.txtAlto.TabIndex = 15;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.BackColor = System.Drawing.Color.Thistle;
+            this.groupBox3.Controls.Add(this.monthCalendar);
+            this.groupBox3.Controls.Add(this.txtFecha);
+            this.groupBox3.Location = new System.Drawing.Point(11, 563);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(408, 324);
+            this.groupBox3.TabIndex = 87;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Fecha : ";
+            // 
+            // monthCalendar
+            // 
+            this.monthCalendar.Location = new System.Drawing.Point(23, 59);
+            this.monthCalendar.Name = "monthCalendar";
+            this.monthCalendar.TabIndex = 50;
+            // 
             // btnInicio
             // 
             this.btnInicio.Image = ((System.Drawing.Image)(resources.GetObject("btnInicio.Image")));
@@ -360,11 +414,11 @@
             this.dgvMateriaPrima.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvMateriaPrima.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMateriaPrima.ContextMenuStrip = this.contextMenuStrip1;
-            this.dgvMateriaPrima.Location = new System.Drawing.Point(692, 29);
+            this.dgvMateriaPrima.Location = new System.Drawing.Point(621, 29);
             this.dgvMateriaPrima.Name = "dgvMateriaPrima";
             this.dgvMateriaPrima.RowHeadersWidth = 62;
             this.dgvMateriaPrima.RowTemplate.Height = 28;
-            this.dgvMateriaPrima.Size = new System.Drawing.Size(1041, 963);
+            this.dgvMateriaPrima.Size = new System.Drawing.Size(1112, 963);
             this.dgvMateriaPrima.TabIndex = 19;
             // 
             // contextMenuStrip1
@@ -381,71 +435,6 @@
             this.editarToolStripMenuItem.Size = new System.Drawing.Size(129, 32);
             this.editarToolStripMenuItem.Text = "Editar";
             this.editarToolStripMenuItem.Click += new System.EventHandler(this.editarToolStripMenuItem_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 495);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(111, 20);
-            this.label1.TabIndex = 46;
-            this.label1.Text = "Comentarios : ";
-            // 
-            // txtComentarios
-            // 
-            this.txtComentarios.Location = new System.Drawing.Point(176, 486);
-            this.txtComentarios.Multiline = true;
-            this.txtComentarios.Name = "txtComentarios";
-            this.txtComentarios.Size = new System.Drawing.Size(320, 55);
-            this.txtComentarios.TabIndex = 47;
-            this.txtComentarios.Text = "N.A.";
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 20;
-            this.listBox1.Location = new System.Drawing.Point(32, 123);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(295, 144);
-            this.listBox1.TabIndex = 20;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(459, 126);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(18, 20);
-            this.label10.TabIndex = 86;
-            this.label10.Text = "$";
-            // 
-            // txtValorUnitario
-            // 
-            this.txtValorUnitario.Location = new System.Drawing.Point(491, 123);
-            this.txtValorUnitario.Name = "txtValorUnitario";
-            this.txtValorUnitario.Size = new System.Drawing.Size(127, 26);
-            this.txtValorUnitario.TabIndex = 85;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(340, 123);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(117, 20);
-            this.label4.TabIndex = 84;
-            this.label4.Text = "Valor Unitario : ";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.BackColor = System.Drawing.Color.Thistle;
-            this.groupBox3.Controls.Add(this.monthCalendar);
-            this.groupBox3.Controls.Add(this.txtFecha);
-            this.groupBox3.Location = new System.Drawing.Point(11, 563);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(408, 324);
-            this.groupBox3.TabIndex = 87;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Fecha : ";
             // 
             // FRegistroMateriaPrima
             // 
@@ -469,11 +458,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnGuardar)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnInicio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMateriaPrima)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -512,7 +501,6 @@
         private System.Windows.Forms.TextBox txtComentarios;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtValorUnitario;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox3;

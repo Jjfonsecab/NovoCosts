@@ -30,6 +30,14 @@ namespace NovoCosts.Models
             };
             return DbDatos.Ejecutar("TipoManoObra_Eliminar", parametros);
         }
+        public static DataTable ListarTipoPorId(int idTipoManoObra)
+        {
+            List<Parametro> parametros = new List<Parametro>
+            {
+                new Parametro("@id_tipo_mano_obra", idTipoManoObra)
+            };
+            return DbDatos.Listar("ObtenerTipoManoObraPorId", parametros);
+        }
         public static DataTable ListarTodo()
         {
             return DbDatos.Listar("TipoManoObra_Listar");

@@ -174,7 +174,7 @@ namespace NovoCosts.Forms
                 {
                     IdManoObra = IdManoObra,
                     IdProducto = IdProducto,
-                    IdTipoManoObra = 8,//Es el id en base de datos de tapiceria
+                    IdTipoManoObra = 3,//Es el id en base de datos de tapiceria
                     Costo = ResultadoSuma,
                     Fecha = DateTime.Parse(txtFecha.Text),
                     TotalCantidad = Convert.ToDecimal(txtCantidad.Text),

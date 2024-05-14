@@ -22,7 +22,7 @@ namespace NovoCosts.Models
         {
             List<Parametro> parametros = new List<Parametro>()
             {
-                new Parametro("@id_fcostos", fcostos.IdFormularioCostos),
+                new Parametro("@id_formulario_costos", fcostos.IdFormularioCostos),
                 new Parametro("@id_producto", fcostos.IdProducto),
                 new Parametro("@porcentaje_ganancia", fcostos.PorcentajeGanancia),
                 new Parametro("@utilidad", fcostos.Utilidad),

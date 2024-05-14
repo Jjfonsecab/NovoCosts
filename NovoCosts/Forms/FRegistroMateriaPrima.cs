@@ -66,6 +66,7 @@ namespace NovoCosts.Forms
                 if (!Guardar()) return;
 
             Modificar = false;
+            MessageBox.Show("Proceso Exitoso.");
             Finalizar();
         }
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -82,6 +83,7 @@ namespace NovoCosts.Forms
                 int id_materia_prima = Convert.ToInt32(cell.Value);
                 IdMateriaPrima = id_materia_prima;
                 Eliminar();
+                MessageBox.Show("Proceso Exitoso.");
                 Finalizar();
             }
         }
@@ -329,6 +331,7 @@ namespace NovoCosts.Forms
             txtCantidadDesperdicio.Text = "";
             txtFecha.Text = "";
             txtDividir.Text = "";
+            txtComentarios.Text = "N.A.";
             listBox1.Text = null;
             ultimoTextBoxModificado = null;
             searchText = ""; 
@@ -371,6 +374,7 @@ namespace NovoCosts.Forms
             {
                 if (!string.IsNullOrEmpty(columna.Name))
                 {
+                    DbDatos.OcultarIds(dgvMateriaPrima);
                     if (columna.Name == "detalle_mp" || columna.Name == "proveedor" || columna.Name == "comentarios")
                     {
                         dgvMateriaPrima.Columns["detalle_mp"].HeaderText = "DETALLE";
@@ -378,20 +382,26 @@ namespace NovoCosts.Forms
                         dgvMateriaPrima.Columns["comentarios"].HeaderText = "COMENTARIOS";
                         dgvMateriaPrima.Columns[columna.Name].Width = 170;
                     }
-                    else if (columna.Name == "medida" || columna.Name == "valor" || columna.Name == "desperdicio_cantidad")
+                    else if (columna.Name == "medida" || columna.Name == "valor")
                     {
                         dgvMateriaPrima.Columns["medida"].HeaderText = "MEDIDA";
-                        dgvMateriaPrima.Columns["valor"].HeaderText = "VALOR";
-                        dgvMateriaPrima.Columns["desperdicio_cantidad"].HeaderText = "DESPERDICIO";
+                        dgvMateriaPrima.Columns["valor"].HeaderText = "VALOR";                        
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight;
                         estiloCeldaNumerica.Format = "N0";
                         columna.DefaultCellStyle = estiloCeldaNumerica;
-                        DbDatos.OcultarIds(dgvMateriaPrima);
                     }
                     else if (columna.Name == "fecha")
                     {                        
                         dgvMateriaPrima.Columns["fecha"].Visible = false;
+                    }
+                    else if (columna.Name == "desperdicio_cantidad")
+                    {
+                        dgvMateriaPrima.Columns["desperdicio_cantidad"].HeaderText = "DESPERDICIO";
+                        DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
+                        estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight;
+                        columna.DefaultCellStyle = estiloCeldaNumerica;
+                        dgvMateriaPrima.Columns[columna.Name].Width = 100;
                     }
                 }                    
 

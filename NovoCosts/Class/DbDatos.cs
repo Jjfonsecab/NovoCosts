@@ -46,6 +46,7 @@ namespace NovoCosts.Class
                         }
                     }
                 }
+                Console.WriteLine("Consulta SQL generada: " + cmd.CommandText);
                 int e = cmd.ExecuteNonQuery();
 
                 for (int i = 0; i < parametros.Count; i++)

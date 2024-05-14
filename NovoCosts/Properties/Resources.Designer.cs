@@ -61,16 +61,41 @@ namespace NovoCosts.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LogoNovo {
+            get {
+                object obj = ResourceManager.GetObject("LogoNovo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         ///&lt;html lang=&quot;es&quot;&gt;
-        ///&lt;head&gt;    
-        ///    &lt;title&gt;&lt;/title&gt;
-        ///&lt;/head&gt;
-        ///&lt;body&gt;
-        ///    
-        ///&lt;/body&gt;
-        ///&lt;/html&gt;
-        ///.
+        ///&lt;head&gt;
+        ///
+        ///    &lt;title&gt;Muebles Novo Arte S.A.S.&lt;/title&gt;
+        ///    &lt;style&gt;
+        ///        table {
+        ///            border-collapse: collapse;
+        ///            width: 100%;
+        ///            margin-bottom: 35px;
+        ///        }
+        ///
+        ///        th, td {
+        ///            border: 1px solid black;
+        ///            font-size: 12px;
+        ///            padding: 2px;
+        ///            text-align: center;
+        ///        }
+        ///
+        ///        th {
+        ///            background-color: #f2f2f2;
+        ///        }
+        ///
+        ///        .additional-info ol {
+        ///            word-wrap: [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string plantilla {
             get {

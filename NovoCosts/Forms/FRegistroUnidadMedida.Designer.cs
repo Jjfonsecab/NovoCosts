@@ -146,7 +146,7 @@
             this.dgvRegistroUnidades.Name = "dgvRegistroUnidades";
             this.dgvRegistroUnidades.RowHeadersWidth = 62;
             this.dgvRegistroUnidades.RowTemplate.Height = 28;
-            this.dgvRegistroUnidades.Size = new System.Drawing.Size(370, 340);
+            this.dgvRegistroUnidades.Size = new System.Drawing.Size(449, 340);
             this.dgvRegistroUnidades.TabIndex = 3;
             // 
             // contextMenuStrip1
@@ -168,7 +168,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(841, 410);
+            this.ClientSize = new System.Drawing.Size(923, 410);
             this.Controls.Add(this.dgvRegistroUnidades);
             this.Controls.Add(this.groupBox1);
             this.Name = "FRegistroUnidadMedida";

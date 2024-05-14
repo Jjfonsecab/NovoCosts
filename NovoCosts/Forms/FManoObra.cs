@@ -65,38 +65,63 @@ namespace NovoCosts.Forms
         }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (!ValidarCampos(txtReferencia, txtDescripcion, comboBoxTMO, txtCosto, txtFecha, txtCantidad))
-                return;
-            else
+            try
             {
-                CalcularValorTotal(Convert.ToDecimal(txtCantidad.Text), Convert.ToDecimal(txtCosto.Text));
-            }
-            if (Modificar)
-            {
-                if (!GuardarEditado())
+                if (!ValidarCampos(txtReferencia, txtDescripcion, comboBoxTMO, txtCosto, txtFecha, txtCantidad))
                     return;
-            }
-            else
-                if (!Guardar()) return;
+                else
+                {
+                    CalcularValorTotal(Convert.ToDecimal(txtCantidad.Text), Convert.ToDecimal(txtCosto.Text));
+                }
+                if (Modificar)
+                {
+                    if (!GuardarEditado())
+                        return;
+                    MessageBox.Show("Editado con Exito.!");
+                }
+                else
+                    if (!Guardar()) return;
+                else
+                    MessageBox.Show("Guardado con Exito.!");
+                ListarTodoPorProducto(IdProducto);
+                Finalizar();
 
-            Finalizar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al guardar.");
+                Console.WriteLine(ex.Message);
+                return;
+            }
+
         }
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (dgvManoObra.SelectedRows.Count == 0 || dgvManoObra.CurrentRow == null)
+            try
             {
-                MessageBox.Show("Selecciona una fila antes de eliminar.");
+                if (dgvManoObra.SelectedRows.Count == 0 || dgvManoObra.CurrentRow == null)
+                {
+                    MessageBox.Show("Selecciona una fila antes de eliminar.");
+                    return;
+                }
+
+                if (dgvManoObra.SelectedRows.Count > 0)
+                {
+                    DataGridViewCell cell = dgvManoObra.CurrentRow.Cells["id_mano_obra"];
+                    int id_mano_obra = Convert.ToInt32(cell.Value);
+                    IdManoObra = id_mano_obra;
+                    Eliminar();
+                    Finalizar();
+                }
+                MessageBox.Show("Eliminado con Exito.!");
+                ListarTodoPorProducto(IdProducto);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error al eliminar.");
                 return;
             }
 
-            if (dgvManoObra.SelectedRows.Count > 0)
-            {
-                DataGridViewCell cell = dgvManoObra.CurrentRow.Cells["id_mano_obra"];
-                int id_mano_obra = Convert.ToInt32(cell.Value);
-                IdManoObra = id_mano_obra;
-                Eliminar();
-                Finalizar();
-            }
         }
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
@@ -105,16 +130,27 @@ namespace NovoCosts.Forms
         }
         private void editarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IdManoObra = Convert.ToInt32(dgvManoObra.CurrentRow.Cells["id_mano_obra"].Value);
-            IdProducto = Convert.ToInt32(dgvManoObra.CurrentRow.Cells["id_producto"].Value);
-            IdTipoManoObra = Convert.ToInt32(dgvManoObra.CurrentRow.Cells["id_tipo_mano_obra"].Value);
-            txtCosto.Text = dgvManoObra.CurrentRow.Cells["costo"].Value.ToString();
+            try
+            {
+                IdManoObra = Convert.ToInt32(dgvManoObra.CurrentRow.Cells["id_mano_obra"].Value);
+                IdProducto = Convert.ToInt32(dgvManoObra.CurrentRow.Cells["id_producto"].Value);
+                IdTipoManoObra = Convert.ToInt32(dgvManoObra.CurrentRow.Cells["id_tipo_mano_obra"].Value);
+                txtCantidad.Text = dgvManoObra.CurrentRow.Cells["total_cantidad"].Value.ToString();
+                txtCosto.Text = dgvManoObra.CurrentRow.Cells["costo"].Value.ToString();
+                comboBoxTMO.Text = ObtenerNombreTipoManoObra(IdTipoManoObra);
 
-            DateTime fechaOriginal = DateTime.Parse(dgvManoObra.CurrentRow.Cells["fecha"].Value.ToString());
-            txtFecha.Text = fechaOriginal.ToString("yyyy-MM-dd");
+                txtFecha.Text = dgvManoObra.CurrentRow.Cells["fecha"].Value.ToString();
 
-            Editar = true;
-            Modificar = true;
+                Editar = true;
+                Modificar = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al Editar.!");
+                Console.WriteLine(ex.Message);
+                return;
+            }
+
         }
         private void dgvManoObra_SelectionChanged(object sender, EventArgs e)
         {
@@ -222,9 +258,6 @@ namespace NovoCosts.Forms
                 if (selectedRow != null)
                 {
                     IdTipoManoObra = Convert.ToInt32(selectedRow["id_tipo_mano_obra"]);
-
-                    Console.WriteLine("IdUnidadMedida: " + IdTipoManoObra);
-
                 }
             }
             catch (Exception)
@@ -249,12 +282,19 @@ namespace NovoCosts.Forms
                     TotalCantidad = Convert.ToDecimal(txtCantidad.Text),
                     ValorTotal = ResultadoValorTotal,
                 };
-
+                Console.WriteLine("IdManoObra: " + manoobra.IdManoObra);
+                Console.WriteLine("IdProducto: " + manoobra.IdProducto);
+                Console.WriteLine("IdTipoManoObra: " + manoobra.IdTipoManoObra);
+                Console.WriteLine("Costo: " + manoobra.Costo);
+                Console.WriteLine("Fecha: " + manoobra.Fecha);
+                Console.WriteLine("TotalCantidad: " + manoobra.TotalCantidad);
+                Console.WriteLine("ValorTotal: " + manoobra.ValorTotal);
                 return ManoObra.Guardar(manoobra, Editar);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Error !.");
+                MessageBox.Show("Error al guardar!.");
+                Console.WriteLine(ex.Message);
                 return false;
             }
 
@@ -263,15 +303,13 @@ namespace NovoCosts.Forms
         {
             if (IdManoObra > 0)
             {
-                DateTime fechaOriginal = DateTime.Parse(dgvManoObra.CurrentRow.Cells["fecha"].Value.ToString());
-
                 ManoObra manoobra = new ManoObra()
                 {
                     IdManoObra = IdManoObra,
                     IdProducto = IdProducto,
                     IdTipoManoObra = IdTipoManoObra,
                     Costo = Convert.ToInt32(txtCosto.Text),
-                    Fecha = fechaOriginal,
+                    Fecha = DateTime.Parse(txtFecha.Text),
                 };
 
                 return ManoObra.Guardar(manoobra, true);
@@ -296,6 +334,7 @@ namespace NovoCosts.Forms
                 }
                 MessageBox.Show("Selecciona una mano de obra antes de eliminar.", "Mano de Obra no seleccionada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
+
             }
             catch (System.Data.SqlClient.SqlException)
             {
@@ -323,12 +362,8 @@ namespace NovoCosts.Forms
             txtCantidad.Text = "";
             Editar = false;
             MostrarFechaActual();
-        }
-        private void ListarTodo()
-        {
-            dgvManoObra.DataSource = ManoObra.ListarCompleto();
-            DbDatos.OcultarIds(dgvManoObra);
-            PersonalizarColumnasGrid();
+            IdManoObra = 0;
+            IdTipoManoObra = 0;
         }
         private void ListarTodoPorProducto(int IdProducto)
         {
@@ -344,15 +379,37 @@ namespace NovoCosts.Forms
         }
         private void ListarTipoManoObra()
         {
-            DataTable dataTable = TipoManoObra.ListarTodo();
+            try
+            {
+                DataTable dataTable = TipoManoObra.ListarTodo();
 
-            var filteredRows = dataTable.AsEnumerable()
-                                .Where(row => row.Field<string>("nombre_tipo") != "PORCENTAJE")
-                                .CopyToDataTable();
+                var filteredRows = dataTable.AsEnumerable()
+                                    .Where(row => row.Field<string>("nombre_tipo") != "PORCENTAJE" && row.Field<string>("nombre_tipo") != "TAPICERIA")//Ocultamos los datos del combobox
+                                    .CopyToDataTable();
 
-            comboBoxTMO.DataSource = filteredRows;
-            comboBoxTMO.DisplayMember = "nombre_tipo";
-            comboBoxTMO.ValueMember = "id_tipo_mano_obra";
+                comboBoxTMO.DataSource = filteredRows;
+                comboBoxTMO.DisplayMember = "nombre_tipo";
+                comboBoxTMO.ValueMember = "id_tipo_mano_obra";
+
+                IdTipoManoObra = filteredRows.Rows[0].Field<int>("id_tipo_mano_obra");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Lista vacia.!");
+                return;
+            }
+
+        }
+        private string ObtenerNombreTipoManoObra(int idTipoManoObra)
+        {
+            DataTable dataTable = TipoManoObra.ListarTipoPorId(idTipoManoObra);
+
+            if (dataTable.Rows.Count > 0)
+            {
+                return dataTable.Rows[0]["nombre_tipo"].ToString();
+            }
+            return "Error al cargar los datos de tipo de mano de obra";
+
         }
         private bool ValidarCampos(params Control[] controles)
         {
@@ -372,6 +429,7 @@ namespace NovoCosts.Forms
             txtReferencia.Click += TextBox_Click;
             txtDescripcion.CharacterCasing = CharacterCasing.Upper;
             txtDescripcion.Click += TextBox_Click;
+            txtCantidad.Click += TextBox_Click;
 
             txtFecha.CharacterCasing = CharacterCasing.Upper;
         }
@@ -391,13 +449,15 @@ namespace NovoCosts.Forms
                 if (!string.IsNullOrEmpty(columna.Name))
                 {
 
-                    if (columna.Name == "costo")
+                    if (columna.Name == "costo" || columna.Name == "valor_total")
                     {
                         dgvManoObra.Columns["costo"].HeaderText = "COSTO";
+                        dgvManoObra.Columns["valor_total"].HeaderText = "TOTAL";
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight; // Alinea a la derecha
                         estiloCeldaNumerica.Format = "N0";
                         columna.DefaultCellStyle = estiloCeldaNumerica;
+                        dgvManoObra.Columns[columna.Name].Width = 170;
                         DbDatos.OcultarIds(dgvManoObra);
                     }
                     else if (columna.Name == "fecha")
@@ -405,17 +465,24 @@ namespace NovoCosts.Forms
                         dgvManoObra.Columns["fecha"].HeaderText = "FECHA";
                         DbDatos.OcultarIds(dgvManoObra);
                     }
-                    else if (columna.Name == "total_cantidad" || columna.Name == "valor_total")
+                    else if (columna.Name == "total_cantidad" )
                     {
                         dgvManoObra.Columns["total_cantidad"].HeaderText = "CANTIDAD";
-                        dgvManoObra.Columns["valor_total"].HeaderText = "$TOTAL";
+                        
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight; // Alinea a la derecha
-                        estiloCeldaNumerica.Format = "N0";
+                        //estiloCeldaNumerica.Format = "N0";
                         columna.DefaultCellStyle = estiloCeldaNumerica;
                         DbDatos.OcultarIds(dgvManoObra);
-                        dgvManoObra.Columns[columna.Name].Width = 200;
-                        
+                        dgvManoObra.Columns[columna.Name].Width = 100;
+
+                    }
+                    else if (columna.Name == "nombre_tipo")
+                    {
+                        dgvManoObra.Columns["nombre_tipo"].HeaderText = "TIPO";
+                        dgvManoObra.Columns[columna.Name].Width = 152;
+                        dgvManoObra.Columns["nombre_tipo"].DisplayIndex = 0;
+                        DbDatos.OcultarIds(dgvManoObra);
                     }
                     ConfigurarCabeceraColumna(columna, columna.HeaderText);
 

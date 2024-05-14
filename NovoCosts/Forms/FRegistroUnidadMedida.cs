@@ -39,9 +39,11 @@ namespace NovoCosts.Forms
             }
             else
                 if (!Guardar()) return;
+            MessageBox.Show("Proceso Exitoso.");
 
             Finalizar();
-        }        private void btnEliminar_Click(object sender, EventArgs e)
+        }        
+        private void btnEliminar_Click(object sender, EventArgs e)
         {
             if (dgvRegistroUnidades.SelectedRows.Count == 0 || dgvRegistroUnidades.CurrentRow == null)
             {
@@ -56,6 +58,7 @@ namespace NovoCosts.Forms
                 IdUnidadMedia = id_unidades_medida;
                 Eliminar();
                 Finalizar();
+                MessageBox.Show("Proceso Exitoso.");
             }
         }
 
@@ -106,7 +109,7 @@ namespace NovoCosts.Forms
                     Nombre = txtNombre.Text,
                     CantidadParametros = Convert.ToInt32(comboBoxP.Text),
                 };
-                MessageBox.Show("Proceso Exitoso.");
+                
                 return UnidadesMedida.Guardar(unidadesMedida, Editar);
             }
             catch (Exception)
@@ -214,28 +217,16 @@ namespace NovoCosts.Forms
             {
                 if (!string.IsNullOrEmpty(columna.Name))                {
                     
-                    if (columna.Name == "Precio" || columna.Name == "Cantidad" || columna.Name == "Total")
+                    if (columna.Name == "cantidad_parametros")
                     {
-                        dgvRegistroUnidades.Columns["Precio"].HeaderText = "Precio por Unidad";
+                        dgvRegistroUnidades.Columns["cantidad_parametros"].HeaderText = "PARAMETROS";
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight; // Alinea a la derecha
                         estiloCeldaNumerica.Format = "N0";
                         columna.DefaultCellStyle = estiloCeldaNumerica;
                         DbDatos.OcultarIds(dgvRegistroUnidades);
                     }
-                    else if (columna.Name == "fecha_compra")
-                    {
-                        dgvRegistroUnidades.Columns["fecha_compra"].HeaderText = "Fecha";
-                        DbDatos.OcultarIds(dgvRegistroUnidades);
-                    }
-                    else if (columna.Name == "Comentarios")
-                    {
-                        // Configurar la columna "Comentarios"
-                        //columna.HeaderText = "Comentarios";  // Puedes personalizar el encabezado
-                        columna.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-                        columna.DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopLeft;
-                        columna.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                    }
+                    
                 }
                 ConfigurarCabeceraColumna(columna, columna.HeaderText);
             }
