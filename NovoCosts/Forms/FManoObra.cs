@@ -22,9 +22,9 @@ namespace NovoCosts.Forms
         }
         private void FManoObra_Load(object sender, EventArgs e)
         {
-            //ListarTodo();
             ListarProductos();
             MostrarFechaActual();
+
         }
 
         bool Editar;
@@ -32,7 +32,10 @@ namespace NovoCosts.Forms
         int IdManoObra;
         int IdProducto;
         int IdTipoManoObra;
+        decimal Porcentaje = 0.12m;
         decimal ResultadoValorTotal;
+        decimal CostoPorcentaje;
+        decimal ValorTotalPorcentaje;
 
         private void btnInicio_Click(object sender, EventArgs e)
         {
@@ -82,8 +85,8 @@ namespace NovoCosts.Forms
                 else
                     if (!Guardar()) return;
                 else
-                    MessageBox.Show("Guardado con Exito.!");
-                ListarTodoPorProducto(IdProducto);
+
+                    ListarTodoPorProducto(IdProducto);
                 Finalizar();
 
             }
@@ -143,6 +146,8 @@ namespace NovoCosts.Forms
 
                 Editar = true;
                 Modificar = true;
+
+                ListarProductoId(IdProducto);
             }
             catch (Exception ex)
             {
@@ -170,6 +175,7 @@ namespace NovoCosts.Forms
                         txtCantidad.Text = Convert.ToString(selectedRow.Cells["Cantidad"].Value);
                         comboBoxTMO.Text = Convert.ToString(selectedRow.Cells["Nombre"].Value);
 
+
                         DataGridViewCell fechaCell = selectedRow.Cells["fecha"];
                         if (fechaCell != null && fechaCell.Value != null)
                             txtFecha.Text = fechaCell.Value.ToString();
@@ -178,10 +184,8 @@ namespace NovoCosts.Forms
                             MessageBox.Show("Valor nulo!");
                             return;
                         }
-
                         Editar = true;
                         Modificar = true;
-
                     }
 
                 }
@@ -235,8 +239,8 @@ namespace NovoCosts.Forms
                             MessageBox.Show("Valor nulo!");
                             return;
                         }
-
                     }
+                    BuscarPorcentajeEnTabla();
                 }
             }
             catch (Exception)
@@ -282,13 +286,7 @@ namespace NovoCosts.Forms
                     TotalCantidad = Convert.ToDecimal(txtCantidad.Text),
                     ValorTotal = ResultadoValorTotal,
                 };
-                Console.WriteLine("IdManoObra: " + manoobra.IdManoObra);
-                Console.WriteLine("IdProducto: " + manoobra.IdProducto);
-                Console.WriteLine("IdTipoManoObra: " + manoobra.IdTipoManoObra);
-                Console.WriteLine("Costo: " + manoobra.Costo);
-                Console.WriteLine("Fecha: " + manoobra.Fecha);
-                Console.WriteLine("TotalCantidad: " + manoobra.TotalCantidad);
-                Console.WriteLine("ValorTotal: " + manoobra.ValorTotal);
+                MessageBox.Show("Guardado con Exito.!");
                 return ManoObra.Guardar(manoobra, Editar);
             }
             catch (Exception ex)
@@ -301,25 +299,67 @@ namespace NovoCosts.Forms
         }
         private bool GuardarEditado()
         {
-            if (IdManoObra > 0)
+            try
+            {
+                if (IdManoObra > 0)
+                {
+                    ManoObra manoobra = new ManoObra()
+                    {
+                        IdManoObra = IdManoObra,
+                        IdProducto = IdProducto,
+                        IdTipoManoObra = IdTipoManoObra,
+                        Costo = Convert.ToDecimal(txtCosto.Text),
+                        Fecha = DateTime.Parse(txtFecha.Text),
+                        TotalCantidad = Convert.ToDecimal(txtCantidad.Text),
+                        ValorTotal = ResultadoValorTotal,
+                    };
+
+                    return ManoObra.Guardar(manoobra, true);
+                }
+                else
+                {
+                    MessageBox.Show("Selecciona una mano de obra antes de guardar editado.", "Mano de Obra no seleccionada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al guardar Editado!.");
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+        private bool GuardarPorcentaje()
+        {
+            try
             {
                 ManoObra manoobra = new ManoObra()
                 {
                     IdManoObra = IdManoObra,
                     IdProducto = IdProducto,
-                    IdTipoManoObra = IdTipoManoObra,
-                    Costo = Convert.ToInt32(txtCosto.Text),
+                    IdTipoManoObra = 4,
+                    Costo = CostoPorcentaje,
                     Fecha = DateTime.Parse(txtFecha.Text),
+                    TotalCantidad = Porcentaje,
+                    ValorTotal = ValorTotalPorcentaje,
                 };
-
-                return ManoObra.Guardar(manoobra, true);
+                MessageBox.Show("Porcentaje Guardado con Exito.!");
+                Console.WriteLine("IdManoObra: " + manoobra.IdManoObra);
+                Console.WriteLine("IdProducto: " + manoobra.IdProducto);
+                Console.WriteLine("IdTipoManoObra: " + manoobra.IdTipoManoObra);
+                Console.WriteLine("Costo: " + manoobra.Costo);
+                Console.WriteLine("Fecha: " + manoobra.Fecha);
+                Console.WriteLine("TotalCantidad: " + manoobra.TotalCantidad);
+                Console.WriteLine("ValorTotal: " + manoobra.ValorTotal);
+                return ManoObra.Guardar(manoobra, Editar);
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Selecciona una mano de obra antes de guardar editado.", "Mano de Obra no seleccionada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Error al guardar Porcentaje!.");
+                Console.WriteLine(ex.Message);
                 return false;
             }
-        }
+        }       
         private bool Eliminar()
         {
             try
@@ -362,8 +402,9 @@ namespace NovoCosts.Forms
             txtCantidad.Text = "";
             Editar = false;
             MostrarFechaActual();
-            IdManoObra = 0;
-            IdTipoManoObra = 0;
+            //IdManoObra = 0;
+            //IdTipoManoObra = 0;
+            ListarTodoPorProducto(IdProducto);
         }
         private void ListarTodoPorProducto(int IdProducto)
         {
@@ -399,6 +440,16 @@ namespace NovoCosts.Forms
                 return;
             }
 
+        }
+        private void ListarProductoId(int idProducto)
+        {
+            DataTable dataTable = Producto.ListarProducto(idProducto);
+
+            if (dataTable.Rows.Count > 0)
+            {
+                txtReferencia.Text = dataTable.Rows[0]["referencia"].ToString();
+                txtDescripcion.Text = dataTable.Rows[0]["descripcion"].ToString();
+            }
         }
         private string ObtenerNombreTipoManoObra(int idTipoManoObra)
         {
@@ -465,10 +516,10 @@ namespace NovoCosts.Forms
                         dgvManoObra.Columns["fecha"].HeaderText = "FECHA";
                         DbDatos.OcultarIds(dgvManoObra);
                     }
-                    else if (columna.Name == "total_cantidad" )
+                    else if (columna.Name == "total_cantidad")
                     {
                         dgvManoObra.Columns["total_cantidad"].HeaderText = "CANTIDAD";
-                        
+
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight; // Alinea a la derecha
                         //estiloCeldaNumerica.Format = "N0";
@@ -522,5 +573,53 @@ namespace NovoCosts.Forms
 
             return ResultadoValorTotal;
         }
+        private decimal CalcularCostoPorcentaje()
+        {
+            foreach (DataGridViewRow fila in dgvManoObra.Rows)
+            {
+                if (!fila.IsNewRow && fila.Cells["costo"].Value != null)
+                {
+                    if (fila.Cells["nombre_tipo"].Value != null && fila.Cells["nombre_tipo"].Value.ToString() == "PINTURA")
+                    {
+                        continue;
+                    }
+                    decimal costo = Convert.ToDecimal(fila.Cells["costo"].Value);
+
+                    CostoPorcentaje += costo;
+                }
+            }
+            return CostoPorcentaje;
+        }
+        private decimal CalcularValorTotalPorcentaje()
+        {
+            ValorTotalPorcentaje = Porcentaje * CostoPorcentaje;
+            return ValorTotalPorcentaje;
+        }
+        private void BuscarPorcentajeEnTabla()
+        {
+            string valorBuscado = "PORCENTAJE";
+            bool encontrado = false;
+
+            foreach (DataGridViewRow fila in dgvManoObra.Rows)
+            {
+                if (!fila.IsNewRow && fila.Cells[0].Value != null)
+                {
+                    string nombreTipo = fila.Cells["nombre_tipo"].Value.ToString();
+
+                    if (nombreTipo.Equals(valorBuscado))
+                    {
+                        encontrado = true;
+                        break;
+                    }
+                }
+            }
+            if (!encontrado)
+            {
+                CalcularCostoPorcentaje();
+                CalcularValorTotalPorcentaje();
+                GuardarPorcentaje();
+            }
+        }
+
     }
 }

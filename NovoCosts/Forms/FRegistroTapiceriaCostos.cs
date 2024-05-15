@@ -87,18 +87,30 @@ namespace NovoCosts.Forms
         }
         private void editarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IdTapiceria = Convert.ToInt32(dgvTapiceria.CurrentRow.Cells["id_costo_tapiceria"].Value);
-            IdProducto = Convert.ToInt32(dgvTapiceria.CurrentRow.Cells["id_producto"].Value);
-            txtCorte.Text = dgvTapiceria.CurrentRow.Cells["corte_alistado"].Value.ToString();
-            txtBlanco.Text = dgvTapiceria.CurrentRow.Cells["blanco"].Value.ToString();
-            txtCostura.Text = dgvTapiceria.CurrentRow.Cells["costura"].Value.ToString();
-            txtForrado.Text = dgvTapiceria.CurrentRow.Cells["forrado"].Value.ToString();
+            try
+            {
+                IdTapiceria = Convert.ToInt32(dgvTapiceria.CurrentRow.Cells["id_costo_tapiceria"].Value);
+                IdProducto = Convert.ToInt32(dgvTapiceria.CurrentRow.Cells["id_producto"].Value);
+                txtCorte.Text = dgvTapiceria.CurrentRow.Cells["corte_alistado"].Value.ToString();
+                txtBlanco.Text = dgvTapiceria.CurrentRow.Cells["blanco"].Value.ToString();
+                txtCostura.Text = dgvTapiceria.CurrentRow.Cells["costura"].Value.ToString();
+                txtForrado.Text = dgvTapiceria.CurrentRow.Cells["forrado"].Value.ToString();
 
-            DateTime fechaOriginal = DateTime.Parse(dgvTapiceria.CurrentRow.Cells["fecha"].Value.ToString());
-            txtFecha.Text = fechaOriginal.ToString("yyyy-MM-dd");
+                DateTime fechaOriginal = DateTime.Parse(dgvTapiceria.CurrentRow.Cells["fecha"].Value.ToString());
+                txtFecha.Text = fechaOriginal.ToString("yyyy-MM-dd");
 
-            Editar = true;
-            Modificar = true;
+                ListarProductoId(IdProducto);
+
+                Editar = true;
+                Modificar = true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show("Error en editado.!");
+                return;
+            }
+            
         }
         private void dgvProductos_SelectionChanged(object sender, EventArgs e)
         {
@@ -200,10 +212,13 @@ namespace NovoCosts.Forms
                     IdTapiceria = IdTapiceria,
                     IdProducto = IdProducto,
                     CorteAlistado = Convert.ToInt32(txtCorte.Text),
-                    Blanco = Convert.ToInt32(txtBlanco.Text),
-                    Costura = Convert.ToInt32(txtCostura.Text),
-                    Forrado = Convert.ToInt32(txtForrado.Text),
-                    Fecha = fechaOriginal,
+                    Blanco = Convert.ToDecimal(txtBlanco.Text),
+                    Costura = Convert.ToDecimal(txtCostura.Text),
+                    Forrado = Convert.ToDecimal(txtForrado.Text),
+                    ValorUnitario = ResultadoSuma,
+                    Cantidad = Convert.ToDecimal(txtCantidad.Text),
+                    ValorTotal = ResultadoTotal,
+                    Fecha = DateTime.Parse(txtFecha.Text),
                 };
 
                 return Tapiceria.Guardar(tapiceria, true);
@@ -280,6 +295,16 @@ namespace NovoCosts.Forms
             dgvProductos.DataSource = Producto.ListarTodo();
             DbDatos.OcultarIds(dgvProductos);
             PersonalizarColumnasGrid();
+        }
+        private void ListarProductoId(int idProducto)
+        {
+            DataTable dataTable = Producto.ListarProducto(idProducto);
+
+            if (dataTable.Rows.Count > 0)
+            {
+                txtReferencia.Text = dataTable.Rows[0]["referencia"].ToString();
+                txtDescripcion.Text = dataTable.Rows[0]["descripcion"].ToString();
+            }
         }
         private void ToUpperText()//El upperText para los comboBox esta en comboBox_TextChanged
         {

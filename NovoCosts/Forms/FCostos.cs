@@ -103,7 +103,7 @@ namespace NovoCosts.Forms
 
                 ListarProductos();
                 Finalizar();
-                MessageBox.Show("Guardado con Exito.!");
+
             }
             catch (Exception ex)
             {
@@ -175,9 +175,9 @@ namespace NovoCosts.Forms
                 txtCantidadDesperdicio.Text = dgvCosto.CurrentRow.Cells["cantidad_desperdicio"].Value.ToString();
                 txtDesperdicioTotal.Text = dgvCosto.CurrentRow.Cells["total_cantidad"].Value.ToString();
                 IdTipoCosto = Convert.ToInt32(dgvCosto.CurrentRow.Cells["id_tipo_costo"].Value);
+                comboBoxTC.Text = ObtenerTipoCosto(IdTipoCosto);
 
-                DateTime fechaOriginal = DateTime.Parse(dgvCosto.CurrentRow.Cells["fecha"].Value.ToString());
-                txtFecha.Text = fechaOriginal.ToString("yyyy-MM-dd");
+                txtFecha.Text = dgvManoObra.CurrentRow.Cells["fecha"].Value.ToString();
 
                 ListarProductoId(IdProducto);
                 ListarMaterialId(IdMateriaPrima);
@@ -211,6 +211,7 @@ namespace NovoCosts.Forms
                 txtCantidadDesperdicio.Text = dgvCosto.CurrentRow.Cells["cantidad_desperdicio"].Value.ToString();
                 txtDesperdicioTotal.Text = dgvCosto.CurrentRow.Cells["total_cantidad"].Value.ToString();
                 IdTipoCosto = Convert.ToInt32(dgvCosto.CurrentRow.Cells["id_tipo_costo"].Value);
+                comboBoxTC.Text = ObtenerTipoCosto(IdTipoCosto);
 
                 DateTime fechaOriginal = DateTime.Parse(dgvCosto.CurrentRow.Cells["fecha"].Value.ToString());
                 txtFecha.Text = fechaOriginal.ToString("yyyy-MM-dd");
@@ -223,9 +224,10 @@ namespace NovoCosts.Forms
                 Editar = true;
                 Modificar = true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 MessageBox.Show("Error al Editar 2.!");
+                Console.WriteLine(ex.Message);
                 return;
             }
 
@@ -453,7 +455,7 @@ namespace NovoCosts.Forms
                     Fecha = DateTime.Parse(txtFecha.Text),
                 };
                 Modificar = false;
-                Console.WriteLine($"ResultadoValorTotal :" + ResultadoValorTotal);
+                MessageBox.Show("Guardado con Exito.!");
                 return Models.Costos.Guardar(costos, Editar);
             }
             catch (Exception ex)
@@ -464,7 +466,6 @@ namespace NovoCosts.Forms
         }
         private bool GuardarEditado()
         {
-
             if (IdCosto > 0)
             {
                 Costos costos = new Costos()
@@ -488,7 +489,6 @@ namespace NovoCosts.Forms
                     Fecha = DateTime.Parse(txtFecha.Text),
                 };
                 Modificar = true;
-                Console.WriteLine($"ResultadoValorTotal :" +  ResultadoValorTotal);
 
                 MessageBox.Show("Editado con Exito.!");
                 return Models.Costos.Guardar(costos, true);
@@ -569,7 +569,7 @@ namespace NovoCosts.Forms
             txtD1.Text = "0";
             txtD2.Text = "0";
             txtD3.Text = "0";
-            comboBoxTC.Text = "";
+            comboBoxTC.Text = null;
             txtFecha.Text = "";
             Editar = false;
             Modificar = false;
@@ -592,11 +592,10 @@ namespace NovoCosts.Forms
             txtCantidadDesperdicio.Text = "0";
             txtDesperdicioTotal.Text = "0";
             txtValorU.Text = "0";
-            comboBoxTC.Text = "";
+            comboBoxTC.Text = null;
 
             IdProducto = 0;
             IdMateriaPrima = 0;
-            IdTipoCosto = 0;
             MostrarFechaActual();
         }
         /*
@@ -682,6 +681,17 @@ namespace NovoCosts.Forms
             dgvManoObra.DataSource = ManoObra.ListarPorProducto(IdProducto);
             DbDatos.OcultarIds(dgvManoObra);
             PersonalizarColumnasManoObra();
+        }
+        private string ObtenerTipoCosto(int idTipoCosto)
+        {
+            DataTable dataTable = TipoCosto.ListarTipoPorId(idTipoCosto);
+
+            if (dataTable.Rows.Count > 0)
+            {
+                return dataTable.Rows[0]["nombre"].ToString();
+            }
+            return "Error al cargar los datos de tipo de mano de obra";
+
         }
         private void ToUpperText()//El upperText para los comboBox esta en comboBox_TextChanged
         {
@@ -890,43 +900,44 @@ namespace NovoCosts.Forms
         }
         private decimal CalcularTotalCantidad(decimal cantidad, decimal d1, decimal d2, decimal d3, decimal cm)
         {
+
             int selectedIndex = comboBox1.SelectedIndex;
-            if (Modificar == true)
+            if (cm == 0)
+            {
+                cm = Convert.ToDecimal(txtCantidad.Text);
+                Console.WriteLine($"CM 1 :" + cm);
+            }
+
+            if (selectedIndex == 1)
+            {
+                ResultadoTotalCantidad = (cantidad * d1) / cm;
+                Console.WriteLine($"ResultadoTotalCantidad :" + cantidad + "*" + d1 + "/" + cm + ":" + ResultadoTotalCantidad);
+                return ResultadoTotalCantidad;
+            }
+            else if (selectedIndex == 2)
+            {
+                ResultadoTotalCantidad = (cantidad * d1 * d2) / cm;
+                Console.WriteLine($"ResultadoTotalCantidad :" + cantidad + "*" + d1 + "*" + d2 + "/" + cm + ResultadoTotalCantidad);
+                return ResultadoTotalCantidad;
+            }
+            else if (selectedIndex == 3)
             {
                 ResultadoTotalCantidad = (cantidad * d1 * d2 * d3) / cm;
+                Console.WriteLine($"ResultadoTotalCantidad :" + cantidad + "*" + d1 + "*" + d2 + "*" + d3 + "/" + cm + ":" + ResultadoTotalCantidad);
                 return ResultadoTotalCantidad;
             }
             else
             {
-                if (selectedIndex == 1)
-                {
-                    ResultadoTotalCantidad = (cantidad * d1) / cm;
-                    Console.WriteLine($"ResultadoTotalCantidad :" + cantidad + "*" + d1 + "/" + cm + ":" + ResultadoTotalCantidad);
-                    return ResultadoTotalCantidad;
-                }
-                else if (selectedIndex == 2)
-                {
-                    ResultadoTotalCantidad = (cantidad * d1 * d2) / cm;
-                    Console.WriteLine($"ResultadoTotalCantidad :" + cantidad + "*" + d1 + "*" + d2 + "/" + cm + ResultadoTotalCantidad);
-                    return ResultadoTotalCantidad;
-                }
-                else if (selectedIndex == 3)
-                {
-                    ResultadoTotalCantidad = (cantidad * d1 * d2 * d3) / cm;
-                    Console.WriteLine($"ResultadoTotalCantidad :" + cantidad + "*" + d1 + "*" + d2 + "*" + d3 + "/" + cm + ":" + ResultadoTotalCantidad);
-                    return ResultadoTotalCantidad;
-                }
-                else
-                {
-                    ResultadoTotalCantidad = Convert.ToDecimal(txtCantidad.Text);
-                    Console.WriteLine($"ResultadoTotalCantidad :" + ResultadoTotalCantidad);
-                    return ResultadoTotalCantidad;
-                }
+                ResultadoTotalCantidad = Convert.ToDecimal(txtCantidad.Text);
+                Console.WriteLine($"ResultadoTotalCantidad :" + ResultadoTotalCantidad);
+                return ResultadoTotalCantidad;
             }
+
         }
         private decimal CalcularDesperdicio(decimal totalDesperdicio, decimal totalCantidad)
         {
             ResultadoDesperdicio = totalDesperdicio * totalCantidad;
+
             Console.WriteLine($"ResultadoDesperdicio :" + totalDesperdicio + " * " + totalCantidad + " = " + ResultadoDesperdicio);
             return ResultadoDesperdicio;
         }
@@ -940,7 +951,8 @@ namespace NovoCosts.Forms
             }
             else
             {
-                ResultadoValorTotal = 0;
+                ResultadoValorTotal = (ResultadoTotalCantidad + ResultadoDesperdicio) * ValorU;
+                Console.WriteLine($"ResultadoValorTotal :" + ResultadoValorTotal);
             }
 
             return ResultadoValorTotal;
