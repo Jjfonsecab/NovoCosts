@@ -32,14 +32,12 @@
             this.btnProducto = new System.Windows.Forms.PictureBox();
             this.btnMateriaPrima = new System.Windows.Forms.PictureBox();
             this.btnManoObra = new System.Windows.Forms.PictureBox();
-            this.btnTapiceria = new System.Windows.Forms.PictureBox();
             this.btnCostos = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.btnProducto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMateriaPrima)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnManoObra)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnTapiceria)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCostos)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -49,7 +47,7 @@
             // 
             this.btnProducto.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnProducto.Image = ((System.Drawing.Image)(resources.GetObject("btnProducto.Image")));
-            this.btnProducto.Location = new System.Drawing.Point(105, 75);
+            this.btnProducto.Location = new System.Drawing.Point(111, 76);
             this.btnProducto.Name = "btnProducto";
             this.btnProducto.Size = new System.Drawing.Size(66, 61);
             this.btnProducto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -61,7 +59,7 @@
             // 
             this.btnMateriaPrima.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMateriaPrima.Image = ((System.Drawing.Image)(resources.GetObject("btnMateriaPrima.Image")));
-            this.btnMateriaPrima.Location = new System.Drawing.Point(294, 75);
+            this.btnMateriaPrima.Location = new System.Drawing.Point(215, 38);
             this.btnMateriaPrima.Name = "btnMateriaPrima";
             this.btnMateriaPrima.Size = new System.Drawing.Size(66, 61);
             this.btnMateriaPrima.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -82,23 +80,11 @@
             this.btnManoObra.Tag = "Mano de Obra";
             this.btnManoObra.Click += new System.EventHandler(this.btnManoObra_Click);
             // 
-            // btnTapiceria
-            // 
-            this.btnTapiceria.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTapiceria.Image = ((System.Drawing.Image)(resources.GetObject("btnTapiceria.Image")));
-            this.btnTapiceria.Location = new System.Drawing.Point(197, 38);
-            this.btnTapiceria.Name = "btnTapiceria";
-            this.btnTapiceria.Size = new System.Drawing.Size(66, 61);
-            this.btnTapiceria.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.btnTapiceria.TabIndex = 3;
-            this.btnTapiceria.TabStop = false;
-            this.btnTapiceria.Click += new System.EventHandler(this.btnTapiceria_Click);
-            // 
             // btnCostos
             // 
             this.btnCostos.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCostos.Image = ((System.Drawing.Image)(resources.GetObject("btnCostos.Image")));
-            this.btnCostos.Location = new System.Drawing.Point(387, 25);
+            this.btnCostos.Location = new System.Drawing.Point(391, 38);
             this.btnCostos.Name = "btnCostos";
             this.btnCostos.Size = new System.Drawing.Size(81, 84);
             this.btnCostos.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -109,7 +95,6 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.groupBox1.Controls.Add(this.btnTapiceria);
             this.groupBox1.Controls.Add(this.btnManoObra);
             this.groupBox1.Controls.Add(this.btnCostos);
             this.groupBox1.Controls.Add(this.btnMateriaPrima);
@@ -145,7 +130,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnProducto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMateriaPrima)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnManoObra)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnTapiceria)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCostos)).EndInit();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -158,7 +142,6 @@
         private System.Windows.Forms.PictureBox btnProducto;
         private System.Windows.Forms.PictureBox btnMateriaPrima;
         private System.Windows.Forms.PictureBox btnManoObra;
-        private System.Windows.Forms.PictureBox btnTapiceria;
         private System.Windows.Forms.PictureBox btnCostos;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.PictureBox pictureBox1;

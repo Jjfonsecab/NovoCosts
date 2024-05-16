@@ -83,11 +83,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvManoObra.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgvManoObra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvManoObra.Location = new System.Drawing.Point(24, 413);
+            this.dgvManoObra.Location = new System.Drawing.Point(24, 375);
             this.dgvManoObra.Name = "dgvManoObra";
             this.dgvManoObra.RowHeadersWidth = 62;
             this.dgvManoObra.RowTemplate.Height = 28;
-            this.dgvManoObra.Size = new System.Drawing.Size(310, 204);
+            this.dgvManoObra.Size = new System.Drawing.Size(310, 242);
             this.dgvManoObra.TabIndex = 61;
             // 
             // lblResultado
@@ -163,7 +163,7 @@
             this.dgvCostos.Name = "dgvCostos";
             this.dgvCostos.RowHeadersWidth = 62;
             this.dgvCostos.RowTemplate.Height = 28;
-            this.dgvCostos.Size = new System.Drawing.Size(1402, 286);
+            this.dgvCostos.Size = new System.Drawing.Size(1402, 242);
             this.dgvCostos.TabIndex = 71;
             // 
             // txtAnotaciones
@@ -338,10 +338,10 @@
             // 
             // btnPdf
             // 
-            this.btnPdf.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnPdf.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPdf.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnPdf.Image = ((System.Drawing.Image)(resources.GetObject("btnPdf.Image")));
-            this.btnPdf.Location = new System.Drawing.Point(1357, 22);
+            this.btnPdf.Location = new System.Drawing.Point(1408, 22);
             this.btnPdf.Name = "btnPdf";
             this.btnPdf.Size = new System.Drawing.Size(64, 55);
             this.btnPdf.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;

@@ -24,7 +24,6 @@ namespace NovoCosts.Forms
         {
             ListarProductos();
             MostrarFechaActual();
-
         }
 
         bool Editar;
@@ -218,6 +217,7 @@ namespace NovoCosts.Forms
                         {
                             IdProducto = Convert.ToInt32(idProductoCell.Value);
                             ListarTodoPorProducto(IdProducto);
+                            
                         }
                         else
                         {
@@ -240,7 +240,7 @@ namespace NovoCosts.Forms
                             return;
                         }
                     }
-                    BuscarPorcentajeEnTabla();
+                    
                 }
             }
             catch (Exception)
@@ -313,7 +313,8 @@ namespace NovoCosts.Forms
                         TotalCantidad = Convert.ToDecimal(txtCantidad.Text),
                         ValorTotal = ResultadoValorTotal,
                     };
-
+                    EliminarPorcentaje();
+                    CostoPorcentaje = 0;
                     return ManoObra.Guardar(manoobra, true);
                 }
                 else
@@ -343,14 +344,8 @@ namespace NovoCosts.Forms
                     TotalCantidad = Porcentaje,
                     ValorTotal = ValorTotalPorcentaje,
                 };
-                MessageBox.Show("Porcentaje Guardado con Exito.!");
-                Console.WriteLine("IdManoObra: " + manoobra.IdManoObra);
-                Console.WriteLine("IdProducto: " + manoobra.IdProducto);
-                Console.WriteLine("IdTipoManoObra: " + manoobra.IdTipoManoObra);
-                Console.WriteLine("Costo: " + manoobra.Costo);
-                Console.WriteLine("Fecha: " + manoobra.Fecha);
-                Console.WriteLine("TotalCantidad: " + manoobra.TotalCantidad);
-                Console.WriteLine("ValorTotal: " + manoobra.ValorTotal);
+                ListarProductoId(IdProducto);
+
                 return ManoObra.Guardar(manoobra, Editar);
             }
             catch (Exception ex)
@@ -359,7 +354,7 @@ namespace NovoCosts.Forms
                 Console.WriteLine(ex.Message);
                 return false;
             }
-        }       
+        }
         private bool Eliminar()
         {
             try
@@ -387,9 +382,24 @@ namespace NovoCosts.Forms
                 return false;
             }
         }
+        private bool EliminarPorcentaje()
+        {
+            try
+            {
+                MessageBox.Show("Eliminando Porcentaje");
+                int idTipoManoObra = 4;
+
+                return ManoObra.EliminarPorIdProductoYTipoManoObra(IdProducto, idTipoManoObra);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Se produjo un error al intentar eliminar. Detalles: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
         private void Finalizar()
         {
-            //ListarTodo();
             Limpiar();
         }
         private void Limpiar()
@@ -402,8 +412,6 @@ namespace NovoCosts.Forms
             txtCantidad.Text = "";
             Editar = false;
             MostrarFechaActual();
-            //IdManoObra = 0;
-            //IdTipoManoObra = 0;
             ListarTodoPorProducto(IdProducto);
         }
         private void ListarTodoPorProducto(int IdProducto)
@@ -411,6 +419,7 @@ namespace NovoCosts.Forms
             dgvManoObra.DataSource = ManoObra.ListarPorProducto(IdProducto);
             DbDatos.OcultarIds(dgvManoObra);
             PersonalizarColumnasGrid();
+            BuscarPorcentajeEnTabla();
         }
         private void ListarProductos()
         {
@@ -425,7 +434,7 @@ namespace NovoCosts.Forms
                 DataTable dataTable = TipoManoObra.ListarTodo();
 
                 var filteredRows = dataTable.AsEnumerable()
-                                    .Where(row => row.Field<string>("nombre_tipo") != "PORCENTAJE" && row.Field<string>("nombre_tipo") != "TAPICERIA")//Ocultamos los datos del combobox
+                                    .Where(row => row.Field<string>("nombre_tipo") != "PORCENTAJE")//Ocultamos los datos del combobox
                                     .CopyToDataTable();
 
                 comboBoxTMO.DataSource = filteredRows;
@@ -584,7 +593,7 @@ namespace NovoCosts.Forms
                         continue;
                     }
                     decimal costo = Convert.ToDecimal(fila.Cells["costo"].Value);
-
+                    Console.WriteLine("Costo :" + costo);
                     CostoPorcentaje += costo;
                 }
             }
@@ -593,6 +602,9 @@ namespace NovoCosts.Forms
         private decimal CalcularValorTotalPorcentaje()
         {
             ValorTotalPorcentaje = Porcentaje * CostoPorcentaje;
+            Console.WriteLine("Porcentaje :" + Porcentaje);
+            Console.WriteLine("CostoPorcentaje :" + CostoPorcentaje);
+            Console.WriteLine("ValorTotalPorcentaje :" + ValorTotalPorcentaje);
             return ValorTotalPorcentaje;
         }
         private void BuscarPorcentajeEnTabla()
@@ -615,11 +627,15 @@ namespace NovoCosts.Forms
             }
             if (!encontrado)
             {
-                CalcularCostoPorcentaje();
-                CalcularValorTotalPorcentaje();
-                GuardarPorcentaje();
+                CrearPorcentaje();                   
             }
         }
 
+        private void CrearPorcentaje()
+        {
+            CalcularCostoPorcentaje();
+            CalcularValorTotalPorcentaje();
+            GuardarPorcentaje();
+        }
     }
 }

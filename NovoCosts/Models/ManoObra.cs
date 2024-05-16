@@ -16,7 +16,7 @@ namespace NovoCosts.Models
         public decimal Costo { get; set; }
         public DateTime Fecha { get; set; }
         public decimal TotalCantidad { get; set; }
-        public decimal ValorTotal {  get; set; }
+        public decimal ValorTotal { get; set; }
 
         public static bool Guardar(ManoObra manoObra, bool editar)
         {
@@ -61,6 +61,16 @@ namespace NovoCosts.Models
             };
             return DbDatos.Listar("SumarCostoPorID", parametros);
         }
+        public static bool EliminarPorIdProductoYTipoManoObra(int idProducto, int idTipoManoObra)
+        {
+            List<Parametro> parametros = new List<Parametro>
+            {
+                new Parametro("@id_producto", idProducto),
+                new Parametro("@id_tipo_mano_obra", idTipoManoObra)
+            };
+            return DbDatos.Ejecutar("ManoObra_EliminarPorIdProductoYTipoManoObra", parametros);
+        }
+
 
     }
 }

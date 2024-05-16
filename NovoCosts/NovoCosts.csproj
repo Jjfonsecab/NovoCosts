@@ -95,12 +95,6 @@
     <Compile Include="Forms\FRegistroProductos.Designer.cs">
       <DependentUpon>FRegistroProductos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FRegistroTapiceriaCostos.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FRegistroTapiceriaCostos.Designer.cs">
-      <DependentUpon>FRegistroTapiceriaCostos.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FRegistroTipoCosto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,7 +118,6 @@
     <Compile Include="Models\ManoObra.cs" />
     <Compile Include="Models\MateriasPrimas.cs" />
     <Compile Include="Models\Producto.cs" />
-    <Compile Include="Models\Tapiceria.cs" />
     <Compile Include="Models\TipoCosto.cs" />
     <Compile Include="Models\TipoManoObra.cs" />
     <Compile Include="Models\UnidadesMedida.cs" />
@@ -147,9 +140,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FRegistroProductos.resx">
       <DependentUpon>FRegistroProductos.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FRegistroTapiceriaCostos.resx">
-      <DependentUpon>FRegistroTapiceriaCostos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FRegistroTipoCosto.resx">
       <DependentUpon>FRegistroTipoCosto.cs</DependentUpon>
