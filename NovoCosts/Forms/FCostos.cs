@@ -375,6 +375,14 @@ namespace NovoCosts.Forms
                 if (selectedRow != null)
                 {
                     IdTipoCosto = Convert.ToInt32(selectedRow["id_tipo_costo"]);
+
+                    string nombreTipoCosto = selectedRow["nombre"].ToString();
+                    
+                    if (nombreTipoCosto == "PINTURA")
+                    {
+                        txtValorU.Enabled = true;
+                        comboBox1.Enabled = false;
+                    }
                 }
             }
             catch (Exception)
@@ -382,7 +390,6 @@ namespace NovoCosts.Forms
                 MessageBox.Show("Fila vacia");
                 return;
             }
-
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -752,9 +759,7 @@ namespace NovoCosts.Forms
                     }
                     else if (columna.Name == "fecha")
                     {
-                        dgvActual.Columns["fecha"].HeaderText = "Fecha";
-                        dgvActual.Columns[columna.Name].Width = 80;
-                        DbDatos.OcultarIds(dgvActual);
+                        dgvActual.Columns["fecha"].Visible = false;
                     }
                     else if (columna.Name == "desempeño")
                     {

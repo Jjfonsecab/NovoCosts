@@ -79,13 +79,14 @@ namespace NovoCosts.Forms
                 {
                     if (!GuardarEditado())
                         return;
+                    
                     MessageBox.Show("Editado con Exito.!");
                 }
                 else
                     if (!Guardar()) return;
                 else
-
-                    ListarTodoPorProducto(IdProducto);
+                    
+                ListarTodoPorProducto(IdProducto);
                 Finalizar();
 
             }
@@ -217,7 +218,7 @@ namespace NovoCosts.Forms
                         {
                             IdProducto = Convert.ToInt32(idProductoCell.Value);
                             ListarTodoPorProducto(IdProducto);
-                            
+                            BuscarPorcentajeEnTabla();
                         }
                         else
                         {
@@ -240,7 +241,6 @@ namespace NovoCosts.Forms
                             return;
                         }
                     }
-                    
                 }
             }
             catch (Exception)
@@ -315,6 +315,8 @@ namespace NovoCosts.Forms
                     };
                     EliminarPorcentaje();
                     CostoPorcentaje = 0;
+                    LimpiarDataGridView();
+
                     return ManoObra.Guardar(manoobra, true);
                 }
                 else
@@ -344,8 +346,8 @@ namespace NovoCosts.Forms
                     TotalCantidad = Porcentaje,
                     ValorTotal = ValorTotalPorcentaje,
                 };
-                ListarProductoId(IdProducto);
-
+                MessageBox.Show("Guardado Porcentaje!.");
+                LimpiarDataGridView();
                 return ManoObra.Guardar(manoobra, Editar);
             }
             catch (Exception ex)
@@ -386,9 +388,7 @@ namespace NovoCosts.Forms
         {
             try
             {
-                MessageBox.Show("Eliminando Porcentaje");
-                int idTipoManoObra = 4;
-
+                int idTipoManoObra = 4;                
                 return ManoObra.EliminarPorIdProductoYTipoManoObra(IdProducto, idTipoManoObra);
             }
             catch (Exception ex)
@@ -397,7 +397,6 @@ namespace NovoCosts.Forms
                 return false;
             }
         }
-
         private void Finalizar()
         {
             Limpiar();
@@ -412,14 +411,13 @@ namespace NovoCosts.Forms
             txtCantidad.Text = "";
             Editar = false;
             MostrarFechaActual();
-            ListarTodoPorProducto(IdProducto);
+            IdProducto = 0;
         }
         private void ListarTodoPorProducto(int IdProducto)
         {
             dgvManoObra.DataSource = ManoObra.ListarPorProducto(IdProducto);
             DbDatos.OcultarIds(dgvManoObra);
-            PersonalizarColumnasGrid();
-            BuscarPorcentajeEnTabla();
+            PersonalizarColumnasGrid();            
         }
         private void ListarProductos()
         {
@@ -582,6 +580,32 @@ namespace NovoCosts.Forms
 
             return ResultadoValorTotal;
         }
+        private void BuscarPorcentajeEnTabla()
+        {
+            string valorBuscado = "PORCENTAJE";
+            bool encontrado = false;
+
+            foreach (DataGridViewRow fila in dgvManoObra.Rows)
+            {
+                if (!fila.IsNewRow && fila.Cells[0].Value != null)
+                {
+                    string nombreTipo = fila.Cells["nombre_tipo"].Value.ToString();
+
+                    if (nombreTipo.Equals(valorBuscado))
+                    {
+                        encontrado = true;
+                        break;
+                    }
+                }
+            }
+            if (!encontrado)
+            {
+                CalcularCostoPorcentaje();
+                CalcularValorTotalPorcentaje();
+                GuardarPorcentaje();
+                ListarProductoId(IdProducto);
+            }
+        }
         private decimal CalcularCostoPorcentaje()
         {
             foreach (DataGridViewRow fila in dgvManoObra.Rows)
@@ -606,36 +630,12 @@ namespace NovoCosts.Forms
             Console.WriteLine("CostoPorcentaje :" + CostoPorcentaje);
             Console.WriteLine("ValorTotalPorcentaje :" + ValorTotalPorcentaje);
             return ValorTotalPorcentaje;
-        }
-        private void BuscarPorcentajeEnTabla()
+        }        
+        private void LimpiarDataGridView()
         {
-            string valorBuscado = "PORCENTAJE";
-            bool encontrado = false;
+            dgvManoObra.DataSource = null; // Desvincula el origen de datos
+            dgvManoObra.Columns.Clear(); // Borra las columnas restantes
 
-            foreach (DataGridViewRow fila in dgvManoObra.Rows)
-            {
-                if (!fila.IsNewRow && fila.Cells[0].Value != null)
-                {
-                    string nombreTipo = fila.Cells["nombre_tipo"].Value.ToString();
-
-                    if (nombreTipo.Equals(valorBuscado))
-                    {
-                        encontrado = true;
-                        break;
-                    }
-                }
-            }
-            if (!encontrado)
-            {
-                CrearPorcentaje();                   
-            }
-        }
-
-        private void CrearPorcentaje()
-        {
-            CalcularCostoPorcentaje();
-            CalcularValorTotalPorcentaje();
-            GuardarPorcentaje();
         }
     }
 }

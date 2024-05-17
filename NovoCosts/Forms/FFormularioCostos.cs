@@ -107,8 +107,8 @@ namespace NovoCosts.Forms
                         filasCostos += "<td>" + (row.Cells["dimension2"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["dimension2"].Value)).ToString() : "") + "</td>";
                         filasCostos += "<td>" + (row.Cells["dimension3"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["dimension3"].Value)).ToString() : "") + "</td>";
                         filasCostos += "<td>" + (row.Cells["cm"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["cm"].Value)).ToString("#,##0", CultureInfo.InvariantCulture) : "") + "</td>";
-                        filasCostos += "<td>" + (row.Cells["desperdicio"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["desperdicio"].Value)).ToString() : "") + "</td>";
-                        filasCostos += "<td>" + (row.Cells["total_cantidad"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["total_cantidad"].Value)).ToString("#,##0", CultureInfo.InvariantCulture) : "") + "</td>";
+                        filasCostos += "<td>" + (row.Cells["desperdicio"].Value != null ? Convert.ToDouble(row.Cells["desperdicio"].Value).ToString("#,##0.##", CultureInfo.InvariantCulture) : "") + "</td>";
+                        filasCostos += "<td>" + (row.Cells["total_cantidad"].Value != null ? Convert.ToDouble(row.Cells["total_cantidad"].Value).ToString("#,##0.##", CultureInfo.InvariantCulture) : "") + "</td>";
                         filasCostos += "<td>" + (row.Cells["valor_unitario"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["valor_unitario"].Value)).ToString("#,##0", CultureInfo.InvariantCulture) : "") + "</td>";
                         filasCostos += "<td>" + (row.Cells["valor_total"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["valor_total"].Value)).ToString("#,##0", CultureInfo.InvariantCulture) : "") + "</td>";                        
                         filasCostos += "</tr>";
@@ -226,7 +226,7 @@ namespace NovoCosts.Forms
         }
         private void ToUpperText()//El upperText para los comboBox esta en comboBox_TextChanged
         {
-            txtFecha.CharacterCasing = CharacterCasing.Upper;
+            txtAnotaciones.CharacterCasing = CharacterCasing.Upper;
             txtAnotaciones.Click += TextBox_Click;
             txtPorcentaje.Click += TextBox_Click;
         }
@@ -263,18 +263,8 @@ namespace NovoCosts.Forms
                 dgvManoObra.DataSource = ManoObra.ListarPorProducto(IdProducto);
                 DbDatos.OcultarIds(dgvManoObra);
                 PersonalizarColumnasManoObra();
-            }
-
-            DataTable dataTable = ManoObra.CalcularCostoManoObra(IdProducto);
-            if (dataTable.Rows.Count > 0)
-            {
-                // Verificar si la columna "costo" existe y no es nula antes de asignarla a la variable global
-                if (dataTable.Rows[0]["total_costo"] != DBNull.Value)
-                {
-                    CostoManoObra = Convert.ToDecimal(dataTable.Rows[0]["total_costo"]);
-                }
-
-            }
+            }            
+            CostoManoObra = SumarColumna(dgvManoObra, "valor_total");
         }
         private void ConsultarProductoId(int idProducto)
         {
@@ -287,7 +277,6 @@ namespace NovoCosts.Forms
                 {
                     CostoProducto = Convert.ToDecimal(dataTable.Rows[0]["costo"]);
                 }
-
             }
         }
         private void PersonalizarColumnasCostos(DataGridView dgvActual)
@@ -335,7 +324,6 @@ namespace NovoCosts.Forms
                         dgvActual.Columns[columna.Name].Width = 100;
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleCenter; // Alinea aL CENTRO
-                        estiloCeldaNumerica.Format = "N0";
                         columna.DefaultCellStyle = estiloCeldaNumerica;
 
                     }
@@ -382,10 +370,10 @@ namespace NovoCosts.Forms
                     {
                         dgvManoObra.Columns["nombre_tipo"].HeaderText = "NOMBRE";
                         dgvManoObra.Columns["nombre_tipo"].DisplayIndex = 0;
-                    }
+                    }   
                     else if (columna.Name == "fecha")
                         columna.Visible = false;
-                    else if (columna.Name == "costo" || columna.Name == "total_cantidad" || columna.Name == "valor_total")
+                    else if (columna.Name == "costo"  || columna.Name == "valor_total")
                     {
                         dgvManoObra.Columns["total_cantidad"].HeaderText = "CANTIDAD TOTAL";
                         dgvManoObra.Columns["valor_total"].HeaderText = "VALOR TOTAL";
@@ -395,6 +383,7 @@ namespace NovoCosts.Forms
                         estiloCeldaNumerica.Format = "N0";
                         columna.DefaultCellStyle = estiloCeldaNumerica;
                     }
+                    
                 }
                 ConfigurarCabeceraColumna(columna, columna.HeaderText);
             }
@@ -409,40 +398,45 @@ namespace NovoCosts.Forms
             columna.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
         }
-        private void Imprimir(object sender, PrintPageEventArgs e)
-        {
-            if (comboBox1.SelectedItem != null)
-            {
-                string textoComboBox = comboBox1.SelectedItem.ToString();
-
-                // Definir la fuente y el pincel para dibujar el texto
-                System.Drawing.Font fuente = new System.Drawing.Font("Arial", 12);
-                SolidBrush pincel = new SolidBrush(Color.Black);
-
-                PointF posicion = new PointF(100, 100);
-
-                e.Graphics.DrawString(textoComboBox, fuente, pincel, posicion);
-            }
-
-        }
+        
 
         //Definir costo, utilidad y precio de fabrica:
         private void calcularCosto()
         {
             Costo = CostoManoObra + CostoProducto;
+            Console.WriteLine("CostoManoObra : " + CostoManoObra);
+            Console.WriteLine("Costo : " + Costo);
             txtCosto.Text = Convert.ToString(Costo);
+            Console.WriteLine("Costo : " + Costo);
+            Console.WriteLine("-----");
         }
         private void calcularPorcentajeGanancia()
         {
             Porcentaje = Convert.ToDecimal(txtPorcentaje.Text) / 100;
-
+            Console.WriteLine("Porcentaje : " + Porcentaje);
             PrecioFabrica = Costo * (1 + Porcentaje);
+            Console.WriteLine("PrecioFabrica : " + PrecioFabrica);
             Utilidad = PrecioFabrica - Costo;
+            Console.WriteLine("Utilidad : " + Utilidad);
 
             txtUtilidad.Text = Convert.ToString(Utilidad);
             txtPrecioFabrica.Text = Convert.ToString(PrecioFabrica);
+            Console.WriteLine("Costo : " + Costo);
         }
+        private decimal SumarColumna(DataGridView dataGridView, string nombreColumna)
+        {
+            decimal suma = 0;
 
+            if (dataGridView.Rows.Count > 0 && dataGridView.Columns.Contains(nombreColumna))
+            {
+                foreach (DataGridViewRow fila in dataGridView.Rows)
+                {
+                    suma += Convert.ToDecimal(fila.Cells[nombreColumna].Value);
+                }
+            }
+
+            return suma;
+        }
 
     }
 }

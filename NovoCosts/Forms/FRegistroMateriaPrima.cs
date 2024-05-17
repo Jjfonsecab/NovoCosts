@@ -382,22 +382,23 @@ namespace NovoCosts.Forms
                         dgvMateriaPrima.Columns["comentarios"].HeaderText = "COMENTARIOS";
                         dgvMateriaPrima.Columns[columna.Name].Width = 170;
                     }
-                    else if (columna.Name == "medida" || columna.Name == "valor")
+                    else if (columna.Name == "medida" )
                     {
-                        dgvMateriaPrima.Columns["medida"].HeaderText = "MEDIDA";
-                        dgvMateriaPrima.Columns["valor"].HeaderText = "VALOR";                        
+                        dgvMateriaPrima.Columns["medida"].HeaderText = "MEDIDA";                     
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight;
                         estiloCeldaNumerica.Format = "N0";
                         columna.DefaultCellStyle = estiloCeldaNumerica;
+                        dgvMateriaPrima.Columns[columna.Name].Width = 80;
                     }
                     else if (columna.Name == "fecha")
                     {                        
                         dgvMateriaPrima.Columns["fecha"].Visible = false;
                     }
-                    else if (columna.Name == "desperdicio_cantidad")
+                    else if (columna.Name == "desperdicio_cantidad" || columna.Name == "valor")
                     {
                         dgvMateriaPrima.Columns["desperdicio_cantidad"].HeaderText = "DESPERDICIO";
+                        dgvMateriaPrima.Columns["valor"].HeaderText = "VALOR";
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight;
                         columna.DefaultCellStyle = estiloCeldaNumerica;

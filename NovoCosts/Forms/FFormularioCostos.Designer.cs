@@ -341,7 +341,7 @@
             this.btnPdf.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPdf.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnPdf.Image = ((System.Drawing.Image)(resources.GetObject("btnPdf.Image")));
-            this.btnPdf.Location = new System.Drawing.Point(1408, 22);
+            this.btnPdf.Location = new System.Drawing.Point(1343, 22);
             this.btnPdf.Name = "btnPdf";
             this.btnPdf.Size = new System.Drawing.Size(64, 55);
             this.btnPdf.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
