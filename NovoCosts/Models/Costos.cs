@@ -70,6 +70,7 @@ namespace NovoCosts.Models
             {
                 new Parametro("@id_producto", IdProducto)
             };
+
             return DbDatos.Listar("ObtenerCostosPorProducto", parametros);
         }
     }

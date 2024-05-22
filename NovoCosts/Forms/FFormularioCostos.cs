@@ -54,6 +54,8 @@ namespace NovoCosts.Forms
             }
             else
                 fcostos.BringToFront();
+
+            this.Close();
         }
         private void btnLimpiar_Click(object sender, EventArgs e)//toDos
         {

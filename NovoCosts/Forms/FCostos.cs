@@ -37,6 +37,7 @@ namespace NovoCosts.Forms
         decimal ResultadoDesperdicio;
         decimal ResultadoTotalCantidad;
         decimal ResultadoValorTotal;
+        string valorCombo;
 
         private void btnInicio_Click_1(object sender, EventArgs e)
         {
@@ -158,44 +159,9 @@ namespace NovoCosts.Forms
             ListarMaterial();
             Modificar = false;
         }
-        private void editarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                IdCosto = Convert.ToInt32(dgvCosto.CurrentRow.Cells["id_costos"].Value);
-                IdProducto = Convert.ToInt32(dgvCosto.CurrentRow.Cells["id_producto"].Value);
-                IdMateriaPrima = Convert.ToInt32(dgvCosto.CurrentRow.Cells["id_materia_prima"].Value);
-                txtDesempeño.Text = dgvCosto.CurrentRow.Cells["desempeño"].Value.ToString();
-                txtCantidad.Text = dgvCosto.CurrentRow.Cells["cantidad"].Value.ToString();
-                txtValorU.Text = dgvCosto.CurrentRow.Cells["valor_unitario"].Value.ToString();
-                txtD1.Text = dgvCosto.CurrentRow.Cells["dimension1"].Value.ToString();
-                txtD2.Text = dgvCosto.CurrentRow.Cells["dimension2"].Value.ToString();
-                txtD3.Text = dgvCosto.CurrentRow.Cells["dimension3"].Value.ToString();
-                txtCM.Text = dgvCosto.CurrentRow.Cells["cm"].Value.ToString();
-                txtCantidadDesperdicio.Text = dgvCosto.CurrentRow.Cells["cantidad_desperdicio"].Value.ToString();
-                txtDesperdicioTotal.Text = dgvCosto.CurrentRow.Cells["total_cantidad"].Value.ToString();
-                IdTipoCosto = Convert.ToInt32(dgvCosto.CurrentRow.Cells["id_tipo_costo"].Value);
-                comboBoxTC.Text = ObtenerTipoCosto(IdTipoCosto);
-
-                txtFecha.Text = dgvManoObra.CurrentRow.Cells["fecha"].Value.ToString();
-
-                ListarProductoId(IdProducto);
-                ListarMaterialId(IdMateriaPrima);
-                ListarTipoCostoId(IdTipoCosto);
-                ListarCosto(IdProducto);
-
-                Editar = true;
-                Modificar = true;
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Error al Editar 1.!");
-                return;
-            }
-
-        }
         private void editarToolStripMenuItem1_Click(object sender, EventArgs e)//Se creo otro metodo copiando el anterior, no encontre como hacerlo mas versatil.
         {
+
             try
             {
                 IdCosto = Convert.ToInt32(dgvCosto.CurrentRow.Cells["id_costos"].Value);
@@ -211,7 +177,10 @@ namespace NovoCosts.Forms
                 txtCantidadDesperdicio.Text = dgvCosto.CurrentRow.Cells["cantidad_desperdicio"].Value.ToString();
                 txtDesperdicioTotal.Text = dgvCosto.CurrentRow.Cells["total_cantidad"].Value.ToString();
                 IdTipoCosto = Convert.ToInt32(dgvCosto.CurrentRow.Cells["id_tipo_costo"].Value);
-                comboBoxTC.Text = ObtenerTipoCosto(IdTipoCosto);
+                ObtenerTipoCosto(IdTipoCosto);
+                comboBoxTC.Text = valorCombo;
+                string valorDimensiones = VerificarDimensiones();
+                comboBox1.Text = valorDimensiones;
 
                 DateTime fechaOriginal = DateTime.Parse(dgvCosto.CurrentRow.Cells["fecha"].Value.ToString());
                 txtFecha.Text = fechaOriginal.ToString("yyyy-MM-dd");
@@ -377,7 +346,7 @@ namespace NovoCosts.Forms
                     IdTipoCosto = Convert.ToInt32(selectedRow["id_tipo_costo"]);
 
                     string nombreTipoCosto = selectedRow["nombre"].ToString();
-                    
+
                     if (nombreTipoCosto == "PINTURA")
                     {
                         txtValorU.Enabled = true;
@@ -681,7 +650,6 @@ namespace NovoCosts.Forms
             dgvCosto.DataSource = Models.Costos.ListarCostoProducto(IdProducto);
             DbDatos.OcultarIds(dgvCosto);
             PersonalizarColumnasCostos(dgvCosto);
-
         }
         private void ListarManoObra(int IdProducto)
         {
@@ -695,7 +663,8 @@ namespace NovoCosts.Forms
 
             if (dataTable.Rows.Count > 0)
             {
-                return dataTable.Rows[0]["nombre"].ToString();
+                valorCombo = dataTable.Rows[0]["nombre"].ToString();
+                return valorCombo;
             }
             return "Error al cargar los datos de tipo de mano de obra";
 
@@ -728,6 +697,8 @@ namespace NovoCosts.Forms
         {
             foreach (DataGridViewColumn columna in dgvActual.Columns)
             {
+
+                
                 if (!string.IsNullOrEmpty(columna.Name))
                 {
                     if (columna.Name == "dimension1" || columna.Name == "dimension2" || columna.Name == "dimension3" || columna.Name == "cantidad")
@@ -743,10 +714,9 @@ namespace NovoCosts.Forms
                         columna.DefaultCellStyle = estiloCeldaNumerica;
                         DbDatos.OcultarIds(dgvActual);
                     }
-                    else if (columna.Name == "total_cantidad" || columna.Name == "valor_unitario")
+                    else if (columna.Name == "total_cantidad")
                     {
                         dgvActual.Columns["total_cantidad"].HeaderText = "TOTAL CANT.";
-                        dgvActual.Columns["valor_unitario"].HeaderText = "VALOR UNIT.";
                         dgvActual.Columns[columna.Name].Width = 62;
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleCenter; // Alinea aL CENTRO
@@ -766,12 +736,12 @@ namespace NovoCosts.Forms
                         dgvActual.Columns[columna.Name].Width = 180;
                         DbDatos.OcultarIds(dgvActual);
                     }
-                    else if (columna.Name == "desper")
+                    else if (columna.Name == "desperdicio")
                     {
-                        dgvActual.Columns[columna.Name].Width = 60;
+                        dgvActual.Columns["desperdicio"].HeaderText = "DESPER.";
+                        dgvActual.Columns[columna.Name].Width = 80;
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
-                        estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleCenter; // Alinea aL CENTRO
-                        estiloCeldaNumerica.Format = "N0";
+                        estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleCenter; // Alinea aL CENTRO                       
                         columna.DefaultCellStyle = estiloCeldaNumerica;
                         DbDatos.OcultarIds(dgvActual);
                     }
@@ -783,9 +753,10 @@ namespace NovoCosts.Forms
                         columna.DefaultCellStyle = estiloCeldaNumerica;
                         DbDatos.OcultarIds(dgvActual);
                     }
-                    else if (columna.Name == "valor_total")
+                    else if (columna.Name == "valor_total" || columna.Name == "valor_unitario")
                     {
                         dgvActual.Columns["valor_total"].HeaderText = "VALOR TOTAL";
+                        dgvActual.Columns["valor_unitario"].HeaderText = "VALOR UNIT.";
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleCenter; // Alinea aL CENTRO
                         estiloCeldaNumerica.Format = "N0";
@@ -804,7 +775,6 @@ namespace NovoCosts.Forms
                         dgvActual.Columns[columna.Name].Width = 220;
                         DbDatos.OcultarIds(dgvActual);
                     }
-
                 }
                 ConfigurarCabeceraColumna(columna, columna.HeaderText);
             }
@@ -910,31 +880,26 @@ namespace NovoCosts.Forms
             if (cm == 0)
             {
                 cm = Convert.ToDecimal(txtCantidad.Text);
-                Console.WriteLine($"CM 1 :" + cm);
             }
 
             if (selectedIndex == 1)
             {
                 ResultadoTotalCantidad = (cantidad * d1) / cm;
-                Console.WriteLine($"ResultadoTotalCantidad :" + cantidad + "*" + d1 + "/" + cm + ":" + ResultadoTotalCantidad);
                 return ResultadoTotalCantidad;
             }
             else if (selectedIndex == 2)
             {
                 ResultadoTotalCantidad = (cantidad * d1 * d2) / cm;
-                Console.WriteLine($"ResultadoTotalCantidad :" + cantidad + "*" + d1 + "*" + d2 + "/" + cm + ResultadoTotalCantidad);
-                return ResultadoTotalCantidad;
+               return ResultadoTotalCantidad;
             }
             else if (selectedIndex == 3)
             {
                 ResultadoTotalCantidad = (cantidad * d1 * d2 * d3) / cm;
-                Console.WriteLine($"ResultadoTotalCantidad :" + cantidad + "*" + d1 + "*" + d2 + "*" + d3 + "/" + cm + ":" + ResultadoTotalCantidad);
                 return ResultadoTotalCantidad;
             }
             else
             {
                 ResultadoTotalCantidad = Convert.ToDecimal(txtCantidad.Text);
-                Console.WriteLine($"ResultadoTotalCantidad :" + ResultadoTotalCantidad);
                 return ResultadoTotalCantidad;
             }
 
@@ -961,6 +926,28 @@ namespace NovoCosts.Forms
             }
 
             return ResultadoValorTotal;
+        }
+        private String VerificarDimensiones()
+        {
+            string valorDimensiones;
+
+            if (txtD3.Text == "0,00" && txtD2.Text == "0,00"& txtD1.Text == "0,00")
+            {
+                valorDimensiones = "0";
+            }
+            else if (txtD3.Text == "0,00" && txtD2.Text == "0,00" )
+            {
+                valorDimensiones = "1";
+            }
+            else if (txtD3.Text == "0,00" )
+            {
+                valorDimensiones = "2";
+            }
+            else
+            {
+                valorDimensiones = "3";
+            }
+            return valorDimensiones;
         }
     }
 }

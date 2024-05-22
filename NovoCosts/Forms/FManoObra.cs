@@ -388,7 +388,8 @@ namespace NovoCosts.Forms
         {
             try
             {
-                int idTipoManoObra = 4;                
+                int idTipoManoObra = 4;
+                MessageBox.Show($"Actualizando informacion, seleccione nuevamente el producto a consultar.");
                 return ManoObra.EliminarPorIdProductoYTipoManoObra(IdProducto, idTipoManoObra);
             }
             catch (Exception ex)
@@ -603,8 +604,9 @@ namespace NovoCosts.Forms
                 CalcularCostoPorcentaje();
                 CalcularValorTotalPorcentaje();
                 GuardarPorcentaje();
-                ListarProductoId(IdProducto);
             }
+
+            ListarTodoPorProducto(IdProducto);
         }
         private decimal CalcularCostoPorcentaje()
         {
@@ -633,9 +635,8 @@ namespace NovoCosts.Forms
         }        
         private void LimpiarDataGridView()
         {
-            dgvManoObra.DataSource = null; // Desvincula el origen de datos
-            dgvManoObra.Columns.Clear(); // Borra las columnas restantes
-
+            dgvManoObra.DataSource = null; 
+            dgvManoObra.Columns.Clear(); 
         }
     }
 }

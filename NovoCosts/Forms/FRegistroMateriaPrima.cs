@@ -271,7 +271,7 @@ namespace NovoCosts.Forms
                     Fecha = fechaOriginal,
                     Comentarios = txtComentarios.Text,
                 };
-
+                MessageBox.Show("Actualizando costos.!");
                 return MateriasPrimas.Guardar(materiasPrimasEditado, true);
             }
             else
