@@ -55,7 +55,7 @@
             this.dgvTipoCosto.RowHeadersWidth = 62;
             this.dgvTipoCosto.RowTemplate.Height = 28;
             this.dgvTipoCosto.Size = new System.Drawing.Size(285, 386);
-            this.dgvTipoCosto.TabIndex = 1;
+            this.dgvTipoCosto.TabIndex = 2;
             this.dgvTipoCosto.SelectionChanged += new System.EventHandler(this.dgvTipoCosto_SelectionChanged);
             // 
             // groupBox1
@@ -121,7 +121,7 @@
             this.txtNombre.Location = new System.Drawing.Point(130, 73);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(196, 26);
-            this.txtNombre.TabIndex = 0;
+            this.txtNombre.TabIndex = 1;
             this.txtNombre.TextChanged += new System.EventHandler(this.txtNombre_TextChanged);
             this.txtNombre.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtNombre_KeyUp);
             // 

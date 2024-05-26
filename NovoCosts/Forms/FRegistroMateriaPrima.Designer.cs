@@ -93,7 +93,7 @@
             this.txtDetalle.Multiline = true;
             this.txtDetalle.Name = "txtDetalle";
             this.txtDetalle.Size = new System.Drawing.Size(305, 26);
-            this.txtDetalle.TabIndex = 7;
+            this.txtDetalle.TabIndex = 1;
             this.txtDetalle.TextChanged += new System.EventHandler(this.txtDetalle_TextChanged);
             this.txtDetalle.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDetalle_KeyUp);
             // 
@@ -112,7 +112,7 @@
             this.txtProveedor.Location = new System.Drawing.Point(160, 78);
             this.txtProveedor.Name = "txtProveedor";
             this.txtProveedor.Size = new System.Drawing.Size(305, 26);
-            this.txtProveedor.TabIndex = 11;
+            this.txtProveedor.TabIndex = 2;
             this.txtProveedor.TextChanged += new System.EventHandler(this.txtProveedor_TextChanged);
             this.txtProveedor.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtProveedor_KeyUp);
             // 
@@ -131,12 +131,13 @@
             this.comboBoxUnidadMedida.Location = new System.Drawing.Point(196, 41);
             this.comboBoxUnidadMedida.Name = "comboBoxUnidadMedida";
             this.comboBoxUnidadMedida.Size = new System.Drawing.Size(196, 28);
-            this.comboBoxUnidadMedida.TabIndex = 12;
+            this.comboBoxUnidadMedida.TabIndex = 5;
             this.comboBoxUnidadMedida.DropDown += new System.EventHandler(this.comboBoxUnidadMedida_DropDown);
             this.comboBoxUnidadMedida.SelectedIndexChanged += new System.EventHandler(this.comboBoxUnidadMedida_SelectedIndexChanged);
             // 
             // txtFecha
             // 
+            this.txtFecha.Enabled = false;
             this.txtFecha.Location = new System.Drawing.Point(250, 25);
             this.txtFecha.Name = "txtFecha";
             this.txtFecha.Size = new System.Drawing.Size(120, 26);
@@ -174,7 +175,7 @@
             this.txtValorUnitario.Location = new System.Drawing.Point(463, 175);
             this.txtValorUnitario.Name = "txtValorUnitario";
             this.txtValorUnitario.Size = new System.Drawing.Size(127, 26);
-            this.txtValorUnitario.TabIndex = 85;
+            this.txtValorUnitario.TabIndex = 3;
             // 
             // label4
             // 
@@ -190,7 +191,7 @@
             this.txtCantidadDesperdicio.Location = new System.Drawing.Point(465, 226);
             this.txtCantidadDesperdicio.Name = "txtCantidadDesperdicio";
             this.txtCantidadDesperdicio.Size = new System.Drawing.Size(59, 26);
-            this.txtCantidadDesperdicio.TabIndex = 83;
+            this.txtCantidadDesperdicio.TabIndex = 4;
             // 
             // label12
             // 
@@ -204,7 +205,7 @@
             // btnLimpiar
             // 
             this.btnLimpiar.Image = ((System.Drawing.Image)(resources.GetObject("btnLimpiar.Image")));
-            this.btnLimpiar.Location = new System.Drawing.Point(539, 810);
+            this.btnLimpiar.Location = new System.Drawing.Point(517, 808);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(64, 55);
             this.btnLimpiar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -240,7 +241,7 @@
             this.txtComentarios.Multiline = true;
             this.txtComentarios.Name = "txtComentarios";
             this.txtComentarios.Size = new System.Drawing.Size(320, 55);
-            this.txtComentarios.TabIndex = 47;
+            this.txtComentarios.TabIndex = 11;
             this.txtComentarios.Text = "N.A.";
             // 
             // label1
@@ -255,7 +256,7 @@
             // btnEliminar
             // 
             this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
-            this.btnEliminar.Location = new System.Drawing.Point(554, 621);
+            this.btnEliminar.Location = new System.Drawing.Point(544, 621);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(49, 43);
             this.btnEliminar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -266,7 +267,7 @@
             // btnGuardar
             // 
             this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
-            this.btnGuardar.Location = new System.Drawing.Point(488, 621);
+            this.btnGuardar.Location = new System.Drawing.Point(473, 621);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(51, 43);
             this.btnGuardar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -311,7 +312,7 @@
             this.txtDividir.Location = new System.Drawing.Point(429, 124);
             this.txtDividir.Name = "txtDividir";
             this.txtDividir.Size = new System.Drawing.Size(40, 26);
-            this.txtDividir.TabIndex = 50;
+            this.txtDividir.TabIndex = 10;
             // 
             // label7
             // 
@@ -327,7 +328,7 @@
             this.txtLargo.Location = new System.Drawing.Point(13, 124);
             this.txtLargo.Name = "txtLargo";
             this.txtLargo.Size = new System.Drawing.Size(69, 26);
-            this.txtLargo.TabIndex = 5;
+            this.txtLargo.TabIndex = 6;
             // 
             // label13
             // 
@@ -343,7 +344,7 @@
             this.txtOtros.Location = new System.Drawing.Point(307, 124);
             this.txtOtros.Name = "txtOtros";
             this.txtOtros.Size = new System.Drawing.Size(85, 26);
-            this.txtOtros.TabIndex = 39;
+            this.txtOtros.TabIndex = 9;
             // 
             // label8
             // 
@@ -359,7 +360,7 @@
             this.txtAncho.Location = new System.Drawing.Point(110, 124);
             this.txtAncho.Name = "txtAncho";
             this.txtAncho.Size = new System.Drawing.Size(69, 26);
-            this.txtAncho.TabIndex = 16;
+            this.txtAncho.TabIndex = 7;
             // 
             // label9
             // 
@@ -375,7 +376,7 @@
             this.txtAlto.Location = new System.Drawing.Point(214, 124);
             this.txtAlto.Name = "txtAlto";
             this.txtAlto.Size = new System.Drawing.Size(69, 26);
-            this.txtAlto.TabIndex = 15;
+            this.txtAlto.TabIndex = 8;
             // 
             // groupBox3
             // 
@@ -393,7 +394,7 @@
             // 
             this.monthCalendar.Location = new System.Drawing.Point(23, 59);
             this.monthCalendar.Name = "monthCalendar";
-            this.monthCalendar.TabIndex = 50;
+            this.monthCalendar.TabIndex = 12;
             // 
             // btnInicio
             // 
@@ -419,7 +420,7 @@
             this.dgvMateriaPrima.RowHeadersWidth = 62;
             this.dgvMateriaPrima.RowTemplate.Height = 28;
             this.dgvMateriaPrima.Size = new System.Drawing.Size(1112, 963);
-            this.dgvMateriaPrima.TabIndex = 19;
+            this.dgvMateriaPrima.TabIndex = 13;
             // 
             // contextMenuStrip1
             // 

@@ -1,0 +1,78 @@
+CREATE TABLE Costos (
+    id_costos INT NOT NULL PRIMARY KEY,
+    id_producto INT NOT NULL,
+    id_materia_prima INT NOT NULL,
+    desempeño VARCHAR(100) NOT NULL,
+    cantidad DECIMAL(18, 2) NOT NULL,
+    dimension1 DECIMAL(18, 2) NOT NULL,
+    dimension2 DECIMAL(18, 2) NOT NULL,
+    dimension3 DECIMAL(18, 2) NOT NULL,
+    cm DECIMAL(18, 2) NOT NULL,
+    cantidad_desperdicio DECIMAL(18, 2) NOT NULL,
+    desperdicio DECIMAL(18, 2) NOT NULL,
+    total_cantidad DECIMAL(18, 2) NOT NULL,
+    valor_unitario DECIMAL(18, 2) NOT NULL,
+    valor_total DECIMAL(18, 2) NOT NULL,
+    id_tipo_costo INT NOT NULL,
+    fecha DATE NOT NULL
+);
+
+
+CREATE TABLE Productos (
+    id_producto INT NOT NULL PRIMARY KEY,
+    referencia VARCHAR(100) NOT NULL,
+    descripcion VARCHAR(100) NOT NULL,
+    costo DECIMAL(18, 2) NOT NULL
+);
+
+
+
+CREATE TABLE CostosMateriaPrima (
+    id_materia_prima INT NOT NULL PRIMARY KEY,
+    detalle_mp VARCHAR(100) NOT NULL,
+    id_unidad_medida INT NOT NULL,
+    medida DECIMAL(18, 2) NOT NULL,
+    valor DECIMAL(18, 2) NOT NULL,
+    proveedor VARCHAR(100) NOT NULL,
+    fecha DATE NOT NULL,
+    comentarios VARCHAR(150) NOT NULL,
+    desperdicio_cantidad DECIMAL(18, 2) NOT NULL
+);
+
+CREATE TABLE FormularioCostos (
+    id_formulario_costos INT NOT NULL PRIMARY KEY,
+    id_producto INT NOT NULL,
+    porcentaje_ganancia DECIMAL(18, 2) NOT NULL,
+    utilidad DECIMAL(18, 2) NOT NULL,
+    precio_fabrica DECIMAL(18, 2) NOT NULL,
+    anotaciones VARCHAR(150) NOT NULL,
+    fecha DATE NOT NULL
+);
+
+CREATE TABLE ManoObra (
+    id_mano_obra INT NOT NULL PRIMARY KEY,
+    id_producto INT NOT NULL,
+    id_tipo_mano_obra INT NOT NULL,
+    costo DECIMAL(18, 0) NOT NULL,
+    fecha DATE NOT NULL,
+    total_cantidad DECIMAL(18, 2) NOT NULL,
+    valor_total DECIMAL(18, 2) NOT NULL
+);
+
+
+CREATE TABLE TipoCosto (
+    id_tipo_costo INT NOT NULL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE UnidadesMedida (
+    id_unidad_medida INT NOT NULL PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    cantidad_parametros INT NOT NULL
+);
+
+
+CREATE TABLE TipoManoObra (
+    id_tipo_mano_obra INT NOT NULL PRIMARY KEY,
+    nombre_tipo VARCHAR(150) NOT NULL
+);

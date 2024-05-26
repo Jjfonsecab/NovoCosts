@@ -103,7 +103,7 @@
             this.comboBoxP.Location = new System.Drawing.Point(164, 112);
             this.comboBoxP.Name = "comboBoxP";
             this.comboBoxP.Size = new System.Drawing.Size(62, 28);
-            this.comboBoxP.TabIndex = 50;
+            this.comboBoxP.TabIndex = 2;
             // 
             // btnEliminar
             // 

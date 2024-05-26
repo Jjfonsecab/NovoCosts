@@ -88,7 +88,7 @@
             this.dgvManoObra.RowHeadersWidth = 62;
             this.dgvManoObra.RowTemplate.Height = 28;
             this.dgvManoObra.Size = new System.Drawing.Size(310, 242);
-            this.dgvManoObra.TabIndex = 61;
+            this.dgvManoObra.TabIndex = 6;
             // 
             // lblResultado
             // 
@@ -124,7 +124,7 @@
             this.comboBox1.Location = new System.Drawing.Point(352, 32);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(668, 28);
-            this.comboBox1.TabIndex = 68;
+            this.comboBox1.TabIndex = 1;
             this.comboBox1.DropDown += new System.EventHandler(this.comboBox1_DropDown);
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -164,7 +164,7 @@
             this.dgvCostos.RowHeadersWidth = 62;
             this.dgvCostos.RowTemplate.Height = 28;
             this.dgvCostos.Size = new System.Drawing.Size(1402, 242);
-            this.dgvCostos.TabIndex = 71;
+            this.dgvCostos.TabIndex = 5;
             // 
             // txtAnotaciones
             // 
@@ -172,7 +172,7 @@
             this.txtAnotaciones.Location = new System.Drawing.Point(910, 426);
             this.txtAnotaciones.Name = "txtAnotaciones";
             this.txtAnotaciones.Size = new System.Drawing.Size(511, 26);
-            this.txtAnotaciones.TabIndex = 72;
+            this.txtAnotaciones.TabIndex = 2;
             this.txtAnotaciones.Text = "N.A.";
             // 
             // label1
@@ -192,7 +192,7 @@
             this.txtPorcentaje.Location = new System.Drawing.Point(1331, 474);
             this.txtPorcentaje.Name = "txtPorcentaje";
             this.txtPorcentaje.Size = new System.Drawing.Size(50, 26);
-            this.txtPorcentaje.TabIndex = 73;
+            this.txtPorcentaje.TabIndex = 3;
             // 
             // label3
             // 
@@ -234,7 +234,7 @@
             this.txtUtilidad.Location = new System.Drawing.Point(932, 518);
             this.txtUtilidad.Name = "txtUtilidad";
             this.txtUtilidad.Size = new System.Drawing.Size(188, 26);
-            this.txtUtilidad.TabIndex = 76;
+            this.txtUtilidad.TabIndex = 4;
             // 
             // label7
             // 
@@ -296,7 +296,7 @@
             this.txtCosto.Location = new System.Drawing.Point(932, 474);
             this.txtCosto.Name = "txtCosto";
             this.txtCosto.Size = new System.Drawing.Size(188, 26);
-            this.txtCosto.TabIndex = 82;
+            this.txtCosto.TabIndex = 3;
             // 
             // label11
             // 
@@ -331,7 +331,7 @@
             this.btnCalcular.Location = new System.Drawing.Point(1315, 537);
             this.btnCalcular.Name = "btnCalcular";
             this.btnCalcular.Size = new System.Drawing.Size(106, 62);
-            this.btnCalcular.TabIndex = 87;
+            this.btnCalcular.TabIndex = 4;
             this.btnCalcular.Text = "Calcular ";
             this.btnCalcular.UseVisualStyleBackColor = false;
             this.btnCalcular.Click += new System.EventHandler(this.btnCalcular_Click);

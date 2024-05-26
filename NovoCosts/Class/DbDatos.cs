@@ -65,6 +65,7 @@ namespace NovoCosts.Class
             }
             catch (Exception ex)
             {
+                MessageBox.Show("Error imprevisto, contacte a su tecnico.!");
                 Console.WriteLine(ex.Message);
                 throw;
             }
@@ -96,7 +97,7 @@ namespace NovoCosts.Class
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Error imprevisto, contacte a su tecnico.!");
                 return null;
             }
             finally { CerrarConexion(); }

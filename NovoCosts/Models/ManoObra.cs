@@ -69,8 +69,14 @@ namespace NovoCosts.Models
                 new Parametro("@id_tipo_mano_obra", idTipoManoObra)
             };
             return DbDatos.Ejecutar("ManoObra_EliminarPorIdProductoYTipoManoObra", parametros);
+        }        
+        public static bool  ActualizarPorcentaje (int idProducto)
+        {
+            List<Parametro> parametros = new List<Parametro>
+            {
+                new Parametro("@id_producto", idProducto)
+            };
+            return DbDatos.Ejecutar("ActualizarPorcentaje", parametros);
         }
-
-
     }
 }

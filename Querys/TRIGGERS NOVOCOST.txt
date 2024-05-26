@@ -1,0 +1,46 @@
+Triggers:
+
+Costo ->
+
+CREATE TRIGGER [dbo].[trigger_actualizar_costo]
+ON [dbo].[Costos]
+AFTER INSERT, UPDATE, DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Actualizar valor_total en la tabla Costos
+    UPDATE Costos
+    SET valor_total = (desperdicio + total_cantidad) * valor_unitario
+    WHERE id_producto IN (SELECT id_producto FROM inserted);
+
+    -- Actualizar costo en la tabla Productos
+    UPDATE Productos
+    SET costo = (
+        SELECT SUM(c.valor_total)
+        FROM Costos AS c
+        WHERE c.id_producto = Productos.id_producto
+    )
+    WHERE Productos.id_producto IN (SELECT id_producto FROM inserted);
+END;
+
+
+CostoMateriasPrimas ->
+
+CREATE TRIGGER [dbo].[trg_actualizar_costos]
+ON [dbo].[CostosMateriasPrimas]
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    UPDATE costos
+    SET valor_unitario = i.valor,
+        cantidad_desperdicio = i.desperdicio_cantidad,
+		cm = i.medida
+    FROM costos c
+    INNER JOIN inserted i ON c.id_materia_prima = i.id_materia_prima;
+END;
+
+
+

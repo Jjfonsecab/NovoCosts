@@ -68,6 +68,11 @@ namespace NovoCosts.Forms
         {
             try
             {
+                if (!ValidarCamposString(comboBox1,txtAnotaciones))
+                    return;
+                else if (!ValidarCamposNumericos(txtPorcentaje))
+                    return;
+
                 if (comboBox1.SelectedItem == null)
                 {
                     MessageBox.Show("Seleccione un producto.");
@@ -440,5 +445,37 @@ namespace NovoCosts.Forms
             return suma;
         }
 
+        private bool EsNumero(string texto)
+        {
+            return double.TryParse(texto, out _);
+        }
+        private bool ValidarCamposString(params Control[] controles)
+        {
+            foreach (var control in controles)
+            {
+                if (control is System.Windows.Forms.TextBox textBox && string.IsNullOrEmpty(textBox.Text))
+                {
+                    MessageBox.Show("Por favor, complete o verifique todos los campos antes de guardar.", "Campos Vacíos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+            }
+            return true;
+        }
+        private bool ValidarCamposNumericos(params Control[] controles)
+        {
+            foreach (var control in controles)
+            {
+                if (control is System.Windows.Forms.TextBox textBox)
+                {
+                    if (!EsNumero(textBox.Text))
+                    {
+                        MessageBox.Show("Por favor, verifique los campos numericos antes de seguir.", "Formato Inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        
     }
 }

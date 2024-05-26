@@ -55,8 +55,11 @@ namespace NovoCosts.Forms
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             RealizarCalculo();
-            if (!ValidarCampos(txtDetalle, comboBoxUnidadMedida, txtValorUnitario, txtProveedor, txtCantidadDesperdicio,txtFecha))
+            if (!ValidarCamposString(txtDetalle, comboBoxUnidadMedida, txtProveedor, txtFecha))
                 return;
+            else if (!ValidarCamposNumericos(txtValorUnitario, txtCantidadDesperdicio, txtCantidadDesperdicio,txtLargo,txtAlto,txtAncho,txtOtros,txtDividir))
+                return;
+
             if (Modificar)
             {
                 if (!GuardarEditado())
@@ -157,7 +160,6 @@ namespace NovoCosts.Forms
             Editar = true;
             Modificar = true;
         }
-        //private System.Windows.Forms.TextBox campoSeleccionado;
         private void monthCalendar_DateChanged(object sender, DateRangeEventArgs e)
         {
             DateTime fechaSeleccionada = monthCalendar.SelectionStart;
@@ -192,40 +194,24 @@ namespace NovoCosts.Forms
             //string searchText = txtProveedor.Text;
             //BuscarYMostrarResultados("RetornarMateriaPrimaPorProveedor", txtProveedor, listBox1, "@NombreBuscado", "proveedor");
         }
-        /*
-        private void txtBuscar_KeyUp(object sender, KeyEventArgs e)
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBoxBuscar.SelectedIndex == -1)
+            try
             {
-                MessageBox.Show("Por favor seleccione una opción de búsqueda.");
+                if (listBox1.SelectedIndex != -1 && ultimoTextBoxModificado != null)
+                {
+                    string selectedText = listBox1.SelectedItem.ToString();
+                    ultimoTextBoxModificado.Text = selectedText;
+                }
+                else
+                    MessageBox.Show("No se pudo determinar el TextBox correspondiente.");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Fila vacia");
                 return;
             }
-
-            string opcionCombo = comboBoxBuscar.SelectedItem.ToString();
-
-            switch (opcionCombo)
-            {
-                case "DETALLE":
-                    opcionSeleccionada = "detalle_mp";
-                    break;
-                case "MEDIDA":
-                    opcionSeleccionada = "medida";
-                    break;
-                case "VALOR":
-                    opcionSeleccionada = "valor";
-                    break;
-                case "PROVEEDOR":
-                    opcionSeleccionada = "proveedor";
-                    break;
-                case "FECHA":
-                    opcionSeleccionada = "fecha";
-                    break;
-            }
-
-            ultimoTextBoxModificado = txtBuscar;
-            MostrarResultados("BuscarMateriaPrimaPorColumnaYValor", txtBuscar, listBox1, opcionSeleccionada, "@ValorBuscado");
-            Console.WriteLine("Se selecciono " + opcionCombo);
-        }*/
+        }       
 
         //Metodos       
         private bool Guardar()
@@ -337,18 +323,6 @@ namespace NovoCosts.Forms
             searchText = ""; 
             Editar = false;
             MostrarFechaActual();
-        }
-        private bool ValidarCampos(params Control[] controles)
-        {
-            foreach (var control in controles)
-            {
-                if (control is System.Windows.Forms.TextBox textBox && string.IsNullOrEmpty(textBox.Text))
-                {
-                    MessageBox.Show("Por favor, complete todos los campos antes de guardar.", "Campos Vacíos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return false;
-                }
-            }
-            return true;
         }
         private void ListarTodo()
         {
@@ -496,25 +470,7 @@ namespace NovoCosts.Forms
                 }
             }
             Console.WriteLine("ResultadoMedida: " + ResultadoMedida);
-        }
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (listBox1.SelectedIndex != -1 && ultimoTextBoxModificado != null)
-                {
-                    string selectedText = listBox1.SelectedItem.ToString();
-                    ultimoTextBoxModificado.Text = selectedText;
-                }
-                else
-                    MessageBox.Show("No se pudo determinar el TextBox correspondiente.");
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Fila vacia");
-                return;
-            }
-        }
+        }        
         private void BuscarYMostrarResultados(string nombreProcedimiento, System.Windows.Forms.TextBox textBox, ListBox listBox, string parametroNombre, string nombreColumna)
         {
             string searchText = textBox.Text;
@@ -542,11 +498,8 @@ namespace NovoCosts.Forms
             List<Parametro> parametros = new List<Parametro>
             {
                 new Parametro(parametroNombre, searchText),
-                new Parametro("@NombreColumna", columna)  // Asegúrate de agregar este parámetro
+                new Parametro("@NombreColumna", columna)  
             };
-
-            Console.WriteLine($"Valor de {parametroNombre}: {searchText}");
-            Console.WriteLine($"Valor de @NombreColumna: {columna}");
 
             DataTable result = DbDatos.Listar(nombreProcedimiento, parametros);
 
@@ -559,6 +512,36 @@ namespace NovoCosts.Forms
                 
             }
         }
-        
+        private bool EsNumero(string texto)
+        {
+            return double.TryParse(texto, out _);
+        }
+        private bool ValidarCamposString(params Control[] controles)
+        {
+            foreach (var control in controles)
+            {
+                if (control is System.Windows.Forms.TextBox textBox && string.IsNullOrEmpty(textBox.Text))
+                {
+                    MessageBox.Show("Por favor, complete o verifique todos los campos antes de guardar.", "Campos Vacíos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+            }
+            return true;
+        }
+        private bool ValidarCamposNumericos(params Control[] controles)
+        {
+            foreach (var control in controles)
+            {
+                if (control is System.Windows.Forms.TextBox textBox)
+                {
+                    if (!EsNumero(textBox.Text))
+                    {
+                        MessageBox.Show("Por favor, ingrese solo números en todos los campos antes de guardar.", "Formato Inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
     }
 }

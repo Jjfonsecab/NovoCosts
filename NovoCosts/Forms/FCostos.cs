@@ -22,7 +22,6 @@ namespace NovoCosts.Forms
         }
         private void FCostos_Load(object sender, EventArgs e)
         {
-            //ListarTodo();
             ListarProductos();
             ListarMaterial();
             MostrarFechaActual();
@@ -501,6 +500,10 @@ namespace NovoCosts.Forms
                 return false;
             }
         }
+        private bool EsNumero(string texto)
+        {
+            return double.TryParse(texto, out _);
+        }
         private bool ValidarCamposString(params Control[] controles)
         {
             foreach (var control in controles)
@@ -521,17 +524,13 @@ namespace NovoCosts.Forms
                 {
                     if (!EsNumero(textBox.Text))
                     {
-                        MessageBox.Show("Por favor, ingrese solo números en todos los campos antes de guardar.", "Formato Inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Por favor, verifique los campos numericos antes de continuar.", "Formato Inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return false;
                     }
                 }
             }
             return true;
-        }
-        private bool EsNumero(string texto)
-        {
-            return double.TryParse(texto, out _);
-        }
+        }        
         private void Finalizar()
         {
             //ListarTodo();
@@ -574,13 +573,6 @@ namespace NovoCosts.Forms
             IdMateriaPrima = 0;
             MostrarFechaActual();
         }
-        /*
-        private void ListarTodo()
-        {
-            dgvCostos.DataSource = Models.Costos.ListarTodo();
-            DbDatos.OcultarIds(dgvCostos);
-            PersonalizarColumnasCostos(dgvCostos);
-        }*/
         private void ListarProductos()
         {
             dgvProductos.DataSource = Producto.ListarTodo();
@@ -795,6 +787,14 @@ namespace NovoCosts.Forms
                     }
                     ConfigurarCabeceraColumna(columna, columna.HeaderText);
                 }
+                else if (columna.Name == "costo" )
+                {
+                    columna.Width = 107;
+                    DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
+                    estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    estiloCeldaNumerica.Format = "N0";
+                    columna.DefaultCellStyle = estiloCeldaNumerica;
+                }
             }
         }
         private void PersonalizarColumnaMateriales()
@@ -816,17 +816,13 @@ namespace NovoCosts.Forms
                         dgvMateriasPrimas.Columns["medida"].HeaderText = "MEDIDA";
                         dgvMateriasPrimas.Columns["valor"].HeaderText = "VALOR";
                         dgvMateriasPrimas.Columns["desperdicio_cantidad"].HeaderText = "DESPERDICIO";
-                        //dgvCostos.Columns[columna.Name].Width = 35;
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
-                        estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight;
+                        estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleCenter;
                         DbDatos.OcultarIds(dgvMateriasPrimas);
                     }
                     else if (columna.Name == "fecha")
                     {
                         columna.Visible = false;
-                        //dgvMateriasPrimas.Columns["fecha"].HeaderText = "Fecha";
-                        //dgvMateriasPrimas.Columns[columna.Name].Width = 80;
-                        //DbDatos.OcultarIds(dgvMateriasPrimas);
                     }
                     ConfigurarCabeceraColumna(columna, columna.HeaderText);
                 }

@@ -102,7 +102,7 @@
             this.txtCantidad.Location = new System.Drawing.Point(438, 197);
             this.txtCantidad.Name = "txtCantidad";
             this.txtCantidad.Size = new System.Drawing.Size(42, 26);
-            this.txtCantidad.TabIndex = 58;
+            this.txtCantidad.TabIndex = 3;
             // 
             // label7
             // 
@@ -199,7 +199,7 @@
             this.txtCosto.Location = new System.Drawing.Point(137, 197);
             this.txtCosto.Name = "txtCosto";
             this.txtCosto.Size = new System.Drawing.Size(120, 26);
-            this.txtCosto.TabIndex = 7;
+            this.txtCosto.TabIndex = 2;
             // 
             // txtReferencia
             // 
@@ -215,7 +215,7 @@
             this.comboBoxTMO.Location = new System.Drawing.Point(213, 154);
             this.comboBoxTMO.Name = "comboBoxTMO";
             this.comboBoxTMO.Size = new System.Drawing.Size(154, 28);
-            this.comboBoxTMO.TabIndex = 4;
+            this.comboBoxTMO.TabIndex = 1;
             this.comboBoxTMO.DropDown += new System.EventHandler(this.comboBoxMO_DropDown);
             this.comboBoxTMO.SelectedIndexChanged += new System.EventHandler(this.comboBoxMO_SelectedIndexChanged);
             // 
@@ -294,7 +294,7 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(742, 561);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.tabControl1.TabIndex = 54;
+            this.tabControl1.TabIndex = 4;
             // 
             // tabPage2
             // 

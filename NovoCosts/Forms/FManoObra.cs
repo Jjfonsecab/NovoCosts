@@ -69,7 +69,9 @@ namespace NovoCosts.Forms
         {
             try
             {
-                if (!ValidarCampos(txtReferencia, txtDescripcion, comboBoxTMO, txtCosto, txtFecha, txtCantidad))
+                if (!ValidarCamposString(txtReferencia, txtDescripcion, comboBoxTMO, txtFecha))
+                    return;
+                else if (!ValidarCamposNumericos(txtCosto, txtCantidad))
                     return;
                 else
                 {
@@ -79,16 +81,16 @@ namespace NovoCosts.Forms
                 {
                     if (!GuardarEditado())
                         return;
-                    
+
                     MessageBox.Show("Editado con Exito.!");
                 }
                 else
                     if (!Guardar()) return;
-                else
-                    
-                ListarTodoPorProducto(IdProducto);
-                Finalizar();
 
+                //ActualizarPorcentaje(IdProducto);
+
+                Finalizar();
+                ListarTodoPorProducto(IdProducto);
             }
             catch (Exception ex)
             {
@@ -96,7 +98,6 @@ namespace NovoCosts.Forms
                 Console.WriteLine(ex.Message);
                 return;
             }
-
         }
         private void btnEliminar_Click(object sender, EventArgs e)
         {
@@ -117,6 +118,7 @@ namespace NovoCosts.Forms
                     Finalizar();
                 }
                 MessageBox.Show("Eliminado con Exito.!");
+                //ActualizarPorcentaje(IdProducto);
                 ListarTodoPorProducto(IdProducto);
             }
             catch (Exception)
@@ -146,8 +148,6 @@ namespace NovoCosts.Forms
 
                 Editar = true;
                 Modificar = true;
-
-                ListarProductoId(IdProducto);
             }
             catch (Exception ex)
             {
@@ -301,6 +301,11 @@ namespace NovoCosts.Forms
         {
             try
             {
+                if (IdTipoManoObra == 4)
+                {
+                    MessageBox.Show("Porcentaje no puede ser modificado manualmente.!");
+                    return false;
+                }
                 if (IdManoObra > 0)
                 {
                     ManoObra manoobra = new ManoObra()
@@ -313,10 +318,7 @@ namespace NovoCosts.Forms
                         TotalCantidad = Convert.ToDecimal(txtCantidad.Text),
                         ValorTotal = ResultadoValorTotal,
                     };
-                    EliminarPorcentaje();
-                    CostoPorcentaje = 0;
                     LimpiarDataGridView();
-
                     return ManoObra.Guardar(manoobra, true);
                 }
                 else
@@ -346,7 +348,6 @@ namespace NovoCosts.Forms
                     TotalCantidad = Porcentaje,
                     ValorTotal = ValorTotalPorcentaje,
                 };
-                MessageBox.Show("Guardado Porcentaje!.");
                 LimpiarDataGridView();
                 return ManoObra.Guardar(manoobra, Editar);
             }
@@ -384,20 +385,6 @@ namespace NovoCosts.Forms
                 return false;
             }
         }
-        private bool EliminarPorcentaje()
-        {
-            try
-            {
-                int idTipoManoObra = 4;
-                MessageBox.Show($"Actualizando informacion, seleccione nuevamente el producto a consultar.");
-                return ManoObra.EliminarPorIdProductoYTipoManoObra(IdProducto, idTipoManoObra);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Se produjo un error al intentar eliminar. Detalles: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-        }
         private void Finalizar()
         {
             Limpiar();
@@ -412,13 +399,13 @@ namespace NovoCosts.Forms
             txtCantidad.Text = "";
             Editar = false;
             MostrarFechaActual();
-            IdProducto = 0;
+            ListarProductoId(IdProducto);
         }
         private void ListarTodoPorProducto(int IdProducto)
         {
             dgvManoObra.DataSource = ManoObra.ListarPorProducto(IdProducto);
             DbDatos.OcultarIds(dgvManoObra);
-            PersonalizarColumnasGrid();            
+            PersonalizarColumnasGrid();
         }
         private void ListarProductos()
         {
@@ -469,18 +456,6 @@ namespace NovoCosts.Forms
             }
             return "Error al cargar los datos de tipo de mano de obra";
 
-        }
-        private bool ValidarCampos(params Control[] controles)
-        {
-            foreach (var control in controles)
-            {
-                if (control is System.Windows.Forms.TextBox textBox && string.IsNullOrEmpty(textBox.Text))
-                {
-                    MessageBox.Show("Por favor, complete todos los campos antes de guardar.", "Campos Vacíos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return false;
-                }
-            }
-            return true;
         }
         private void ToUpperText()//El upperText para los comboBox esta en comboBox_TextChanged
         {
@@ -581,6 +556,13 @@ namespace NovoCosts.Forms
 
             return ResultadoValorTotal;
         }
+        private void ActualizarPorcentaje(int IdProducto)
+        {
+            if (IdProducto > 0)
+            {
+                ManoObra.ActualizarPorcentaje(IdProducto);
+            }
+        }
         private void BuscarPorcentajeEnTabla()
         {
             string valorBuscado = "PORCENTAJE";
@@ -601,42 +583,47 @@ namespace NovoCosts.Forms
             }
             if (!encontrado)
             {
-                CalcularCostoPorcentaje();
-                CalcularValorTotalPorcentaje();
                 GuardarPorcentaje();
             }
 
             ListarTodoPorProducto(IdProducto);
         }
-        private decimal CalcularCostoPorcentaje()
-        {
-            foreach (DataGridViewRow fila in dgvManoObra.Rows)
-            {
-                if (!fila.IsNewRow && fila.Cells["costo"].Value != null)
-                {
-                    if (fila.Cells["nombre_tipo"].Value != null && fila.Cells["nombre_tipo"].Value.ToString() == "PINTURA")
-                    {
-                        continue;
-                    }
-                    decimal costo = Convert.ToDecimal(fila.Cells["costo"].Value);
-                    Console.WriteLine("Costo :" + costo);
-                    CostoPorcentaje += costo;
-                }
-            }
-            return CostoPorcentaje;
-        }
-        private decimal CalcularValorTotalPorcentaje()
-        {
-            ValorTotalPorcentaje = Porcentaje * CostoPorcentaje;
-            Console.WriteLine("Porcentaje :" + Porcentaje);
-            Console.WriteLine("CostoPorcentaje :" + CostoPorcentaje);
-            Console.WriteLine("ValorTotalPorcentaje :" + ValorTotalPorcentaje);
-            return ValorTotalPorcentaje;
-        }        
         private void LimpiarDataGridView()
         {
-            dgvManoObra.DataSource = null; 
-            dgvManoObra.Columns.Clear(); 
+            //ActualizarPorcentaje(IdProducto);
+            ListarProductoId(IdProducto);
+            IdProducto = 0;
+        }
+        private bool EsNumero(string texto)
+        {
+            return double.TryParse(texto, out _);
+        }
+        private bool ValidarCamposString(params Control[] controles)
+        {
+            foreach (var control in controles)
+            {
+                if (control is System.Windows.Forms.TextBox textBox && string.IsNullOrEmpty(textBox.Text))
+                {
+                    MessageBox.Show("Por favor, complete o verifique todos los campos antes de guardar.", "Campos Vacíos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+            }
+            return true;
+        }
+        private bool ValidarCamposNumericos(params Control[] controles)
+        {
+            foreach (var control in controles)
+            {
+                if (control is System.Windows.Forms.TextBox textBox)
+                {
+                    if (!EsNumero(textBox.Text))
+                    {
+                        MessageBox.Show("Por favor, verifique los campos numericos antes de continuar.", "Formato Inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
     }
 }
