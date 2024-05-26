@@ -1,5 +1,39 @@
 STORED PROCEDURES:
 
+alter PROCEDURE ActualizarPorcentaje
+    @id_producto INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @costo_total DECIMAL(18, 2);
+
+    -- Calcular el costo total excluyendo las filas con id_tipo_mano_obra = 1 y 4
+    SELECT @costo_total = ISNULL(SUM(costo), 0)
+    FROM ManoObra
+    WHERE id_producto = @id_producto 
+        AND id_tipo_mano_obra NOT IN (1, 4);
+
+    -- Actualizar la fila con id_tipo_mano_obra = 4
+    UPDATE ManoObra
+    SET costo = @costo_total,
+        total_cantidad = 0.12,
+        valor_total = 0.12 * @costo_total,
+        fecha = GETDATE()
+    WHERE id_producto = @id_producto AND id_tipo_mano_obra = 4;
+
+    -- Si no hay ninguna fila con id_tipo_mano_obra = 4, insertar una nueva fila
+    IF @@ROWCOUNT = 0
+    BEGIN
+        INSERT INTO ManoObra (id_producto, id_tipo_mano_obra, costo, total_cantidad, valor_total, fecha)
+        VALUES (@id_producto, 4, @costo_total, 0.12, 0.12 * @costo_total, GETDATE());
+    END
+END;
+GO
+
+
+
+
 ALTER PROCEDURE [dbo].[BuscarCostosPorDetalleMP]
     @detalleMP NVARCHAR(100)
 AS

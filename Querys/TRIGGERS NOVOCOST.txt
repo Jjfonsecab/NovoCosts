@@ -44,3 +44,34 @@ END;
 
 
 
+MANO OBRA ->
+
+CREATE TRIGGER trg_ActualizarPorcentaje
+ON ManoObra
+AFTER UPDATE
+AS
+BEGIN
+    IF UPDATE(costo) OR UPDATE(total_cantidad) -- Verifica si se han actualizado las columnas relevantes
+    BEGIN
+        DECLARE @id_producto INT;
+
+        -- Obtiene el ID del producto que se ha actualizado
+        SELECT @id_producto = id_producto FROM inserted;
+
+        -- Actualiza el porcentaje para el producto actualizado
+        UPDATE ManoObra
+        SET costo = (SELECT ISNULL(SUM(costo), 0) FROM ManoObra WHERE id_producto = @id_producto AND id_tipo_mano_obra NOT IN (1, 4)),
+            total_cantidad = 0.12,
+            valor_total = 0.12 * (SELECT ISNULL(SUM(costo), 0) FROM ManoObra WHERE id_producto = @id_producto AND id_tipo_mano_obra NOT IN (1, 4)),
+            fecha = GETDATE()
+        WHERE id_producto = @id_producto AND id_tipo_mano_obra = 4;
+
+        -- Si no hay ninguna fila con id_tipo_mano_obra = 4, insertar una nueva fila
+        IF @@ROWCOUNT = 0
+        BEGIN
+            INSERT INTO ManoObra (id_producto, id_tipo_mano_obra, costo, total_cantidad, valor_total, fecha)
+            VALUES (@id_producto, 4, (SELECT ISNULL(SUM(costo), 0) FROM ManoObra WHERE id_producto = @id_producto AND id_tipo_mano_obra NOT IN (1, 4)), 0.12, 0.12 * (SELECT ISNULL(SUM(costo), 0) FROM ManoObra WHERE id_producto = @id_producto AND id_tipo_mano_obra NOT IN (1, 4)), GETDATE());
+        END
+    END
+END;
+
