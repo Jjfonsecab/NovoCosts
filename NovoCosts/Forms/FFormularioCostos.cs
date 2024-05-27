@@ -201,7 +201,6 @@ namespace NovoCosts.Forms
                 IdProducto = Convert.ToInt32(selectedRow["id_producto"]);
                 NombreProdcucto = Convert.ToString(selectedRow["nombre"]);
             }
-
             ListarCostosProductoPorId();
             ListarManoObraProductoPorId();
             ConsultarProductoId(IdProducto);
@@ -279,7 +278,6 @@ namespace NovoCosts.Forms
 
             if (dataTable.Rows.Count > 0)
             {
-                // Verificar si la columna "costo" existe y no es nula antes de asignarla a la variable global
                 if (dataTable.Rows[0]["costo"] != DBNull.Value)
                 {
                     CostoProducto = Convert.ToDecimal(dataTable.Rows[0]["costo"]);
@@ -295,7 +293,6 @@ namespace NovoCosts.Forms
                     DbDatos.OcultarIds(dgvActual);
                     if (columna.Name == "dimension1" || columna.Name == "dimension2" || columna.Name == "dimension3" || columna.Name == "cantidad")
                     {
-
                         dgvActual.Columns["dimension1"].HeaderText = "D1";
                         dgvActual.Columns["dimension2"].HeaderText = "D2";
                         dgvActual.Columns["dimension3"].HeaderText = "D3";
@@ -303,7 +300,6 @@ namespace NovoCosts.Forms
                         dgvActual.Columns[columna.Name].Width = 35;
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight; // Alinea a la derecha
-                        //estiloCeldaNumerica.Format = "N0";
                         columna.DefaultCellStyle = estiloCeldaNumerica;
                     }
                     else if (columna.Name == "total_cantidad")
@@ -362,7 +358,6 @@ namespace NovoCosts.Forms
                         dgvActual.Columns[columna.Name].Width = 180;
                         dgvActual.Columns[columna.Name].DisplayIndex = 0;
                     }
-
                 }
                 ConfigurarCabeceraColumna(columna, columna.HeaderText);
             }
@@ -389,8 +384,7 @@ namespace NovoCosts.Forms
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight;
                         estiloCeldaNumerica.Format = "N0";
                         columna.DefaultCellStyle = estiloCeldaNumerica;
-                    }
-                    
+                    }                    
                 }
                 ConfigurarCabeceraColumna(columna, columna.HeaderText);
             }
@@ -403,9 +397,7 @@ namespace NovoCosts.Forms
             columna.HeaderCell.Style.Font = new System.Drawing.Font(columna.DataGridView.Font, FontStyle.Bold);
             columna.HeaderCell.Style.Font = new System.Drawing.Font(columna.HeaderCell.Style.Font, FontStyle.Bold);
             columna.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-        }
-        
+        }        
 
         //Definir costo, utilidad y precio de fabrica:
         private void calcularCosto()
@@ -441,10 +433,8 @@ namespace NovoCosts.Forms
                     suma += Convert.ToDecimal(fila.Cells[nombreColumna].Value);
                 }
             }
-
             return suma;
         }
-
         private bool EsNumero(string texto)
         {
             return double.TryParse(texto, out _);
@@ -475,7 +465,6 @@ namespace NovoCosts.Forms
                 }
             }
             return true;
-        }
-        
+        }        
     }
 }

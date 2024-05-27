@@ -43,7 +43,6 @@ namespace NovoCosts.Forms
                     MessageBox.Show("ERROR!. Dato Existente.");
                     return;
                 }
-
             Finalizar();
         }
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -89,14 +88,12 @@ namespace NovoCosts.Forms
             string searchText = txtNombre.Text;
 
             BuscarYMostrarResultados("RetornarNombreTipo", txtNombre, listBox1, "@NombreBuscado", "nombre_tipo");
-
         }
         private void txtNombre_KeyUp(object sender, KeyEventArgs e)
         {
             string searchText = txtNombre.Text;
 
             BuscarYMostrarResultados("RetornarNombreTipo", txtNombre, listBox1, "@NombreBuscado", "nombre_tipo");
-
         }
         private void editarToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -135,7 +132,7 @@ namespace NovoCosts.Forms
                 return;
             }
         }
-        private void ToUpperText()//El upperText para los comboBox esta en comboBox_TextChanged
+        private void ToUpperText()
         {
             txtNombre.CharacterCasing = CharacterCasing.Upper;
             txtNombre.Click += TextBox_Click;
@@ -197,8 +194,6 @@ namespace NovoCosts.Forms
                     IdTipoManoObra = IdTipoManoObra,
                     NombreTipo = txtNombre.Text,
                 };
-
-
                 return TipoManoObra.Guardar(tipo, Editar);
             }
             catch (Exception)
@@ -216,7 +211,6 @@ namespace NovoCosts.Forms
                     IdTipoManoObra = IdTipoManoObra,
                     NombreTipo = txtNombre.Text,
                 };
-
                 return TipoManoObra.Guardar(tipo, true);
             }
             else
@@ -252,7 +246,6 @@ namespace NovoCosts.Forms
             }
             catch (Exception)
             {
-                // Mensaje genérico para otras excepciones
                 MessageBox.Show($"Se produjo un error al intentar eliminar la amteria prima. Consulta los detalles en la consola.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
@@ -266,8 +259,7 @@ namespace NovoCosts.Forms
         private void Limpiar()
         {
             txtNombre.Text = "";
-        }
-       
+        }       
         private void BuscarYMostrarResultados(string nombreProcedimiento, System.Windows.Forms.TextBox textBox, ListBox listBox, string parametroNombre, string nombreColumna)
         {
             string searchText = textBox.Text;
@@ -278,7 +270,6 @@ namespace NovoCosts.Forms
             };
 
             DataTable result = DbDatos.Listar(nombreProcedimiento, parametros);
-
             listBox.Items.Clear();
 
             if (result != null && result.Rows.Count > 0)
@@ -286,7 +277,6 @@ namespace NovoCosts.Forms
                 foreach (DataRow row in result.Rows)
                     listBox.Items.Add(row[nombreColumna].ToString());
             }
-        }        
-        
+        }            
     }
 }

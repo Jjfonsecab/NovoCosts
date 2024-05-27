@@ -20,7 +20,6 @@ namespace NovoCosts.Models
         public DateTime Fecha { get; set; }
         public string Comentarios { get; set; }
 
-
         public static bool Guardar(MateriasPrimas materiasPrimas, bool editar)
         {
             List<Parametro> parametros = new List<Parametro>()
@@ -62,7 +61,5 @@ namespace NovoCosts.Models
         {
             return DbDatos.Listar("MateriaPrima_Listar_Actualizado");
         }
-
-
     }
 }

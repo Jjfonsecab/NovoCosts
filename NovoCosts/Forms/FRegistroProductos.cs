@@ -100,30 +100,7 @@ namespace NovoCosts.Forms
         private void txtDescripcion_KeyUp(object sender, KeyEventArgs e)
         {
             ultimoTextBoxModificado = txtDescripcion;
-        }
-        /*
-        private void txtBuscar_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (comboBoxBuscar.SelectedIndex == -1)
-            {
-                MessageBox.Show("Por favor seleccione una opción de búsqueda.");
-                return;
-            }
-
-            string opcionCombo = comboBoxBuscar.SelectedItem.ToString();
-
-            switch (opcionCombo)
-            {
-                case "REFERENCIA":
-                    opcionSeleccionada = "referencia";
-                    break;
-                case "DESCRIPCION":
-                    opcionSeleccionada = "descripcion";
-                    break;
-            }
-            ultimoTextBoxModificado = txtBuscar;
-            MostrarResultados("BuscarProducto", txtBuscar, listBox1, opcionSeleccionada, "@ValorBuscado", opcionSeleccionada);
-        }*/
+        }       
         private void dgvRegistroProductos_SelectionChanged(object sender, EventArgs e)
         {
             try
@@ -166,21 +143,18 @@ namespace NovoCosts.Forms
                     ReferenciaProducto = txtReferencia.Text,
                     DescripcionProducto = txtDescripcion.Text,
                 };
-
                 return Producto.Guardar(producto, Editar);
             }
             catch (Exception )
             {
                 MessageBox.Show("Error al Guardar!");
                 return false;
-            }
-            
+            }            
         }
         private bool GuardarEditado()
         {
             if (IdProducto > 0)
             {
-                // Obtén la fecha original almacenada
                 DateTime fechaOriginal = DateTime.Parse(dgvRegistroProductos.CurrentRow.Cells["fecha"].Value.ToString());
 
                 Producto productoEditado = new Producto()
@@ -222,7 +196,6 @@ namespace NovoCosts.Forms
             }
             catch (Exception)
             {
-                // Mensaje genérico para otras excepciones
                 MessageBox.Show($"Se produjo un error al intentar eliminar el producto. Consulta los detalles en la consola.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
@@ -252,23 +225,18 @@ namespace NovoCosts.Forms
         }
         private void Limpiar()
         {
-            //txtBuscar.Text = "";
-            //txtBuscar.Text = "";
             txtDescripcion.Text = "";
             txtDescripcion.Text = "";
             txtReferencia.Text = "";
             txtReferencia.Text = "";
             Editar = false;
         }
-        private void ToUpperText()//El upperText para los comboBox esta en comboBox_TextChanged
+        private void ToUpperText()
         {
             txtDescripcion.CharacterCasing = CharacterCasing.Upper;
             txtDescripcion.Click += TextBox_Click;
             txtReferencia.CharacterCasing = CharacterCasing.Upper;
             txtReferencia.Click += TextBox_Click;
-            //txtBuscar.CharacterCasing = CharacterCasing.Upper;
-            //txtBuscar.Click += TextBox_Click;
-
         }
         private void TextBox_Click(object sender, EventArgs e)
         {
@@ -333,36 +301,6 @@ namespace NovoCosts.Forms
                     listBox.Items.Add(row[nombreColumna].ToString());
             }
         }
-        private void MostrarResultados(string nombreProcedimiento, System.Windows.Forms.TextBox textBox, ListBox listBox, string columna, string parametroNombre, string nombreColumna)
-        {
-            string searchText = textBox.Text;
-
-            List<Parametro> parametros = new List<Parametro>
-            {
-                new Parametro(parametroNombre, searchText),
-                new Parametro("@NombreColumna", columna)  // Asegúrate de agregar este parámetro
-            };
-
-            Console.WriteLine($"Valor de {parametroNombre}: {searchText}");
-            Console.WriteLine($"Valor de @NombreColumna: {columna}");
-
-            // Llama al método Listar para obtener los resultados de la consulta
-            DataTable result = DbDatos.Listar(nombreProcedimiento, parametros);
-
-            // Limpia el ListBox antes de agregar nuevos elementos
-            listBox.Items.Clear();
-
-            // Verifica si hay resultados y llena el ListBox
-            if (result != null && result.Rows.Count > 0)
-            {
-                foreach (DataRow row in result.Rows)
-                {
-                    // Agrega los elementos al ListBox
-                    listBox.Items.Add(row[nombreColumna].ToString());
-                }
-            }
-        }
-
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             try

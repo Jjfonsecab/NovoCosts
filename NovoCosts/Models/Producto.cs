@@ -49,7 +49,6 @@ namespace NovoCosts.Models
         public static DataTable ListarProductos()
         {
             return DbDatos.Listar("Productos_Listar");
-        }
-        
+        }        
     }
 }

@@ -57,7 +57,7 @@ namespace NovoCosts.Forms
             RealizarCalculo();
             if (!ValidarCamposString(txtDetalle, comboBoxUnidadMedida, txtProveedor, txtFecha))
                 return;
-            else if (!ValidarCamposNumericos(txtValorUnitario, txtCantidadDesperdicio, txtCantidadDesperdicio,txtLargo,txtAlto,txtAncho,txtOtros,txtDividir))
+            else if (!ValidarCamposNumericos(txtValorUnitario, txtCantidadDesperdicio))
                 return;
 
             if (Modificar)
@@ -184,15 +184,10 @@ namespace NovoCosts.Forms
         private void txtDetalle_KeyUp(object sender, KeyEventArgs e)
         {
             ultimoTextBoxModificado = txtDetalle;
-            //string searchText = txtDetalle.Text;
-            //BuscarYMostrarResultados("RetornarMateriaPrimaPorDetalle", txtDetalle, listBox1, "@NombreBuscado", "detalle_mp");
-
         }
         private void txtProveedor_KeyUp(object sender, KeyEventArgs e)
         {
             ultimoTextBoxModificado = txtProveedor;
-            //string searchText = txtProveedor.Text;
-            //BuscarYMostrarResultados("RetornarMateriaPrimaPorProveedor", txtProveedor, listBox1, "@NombreBuscado", "proveedor");
         }
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -293,7 +288,6 @@ namespace NovoCosts.Forms
             }
             catch (Exception)
             {
-                // Mensaje genérico para otras excepciones
                 MessageBox.Show($"Se produjo un error al intentar eliminar la amteria prima. Consulta los detalles en la consola.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
@@ -378,8 +372,7 @@ namespace NovoCosts.Forms
                         columna.DefaultCellStyle = estiloCeldaNumerica;
                         dgvMateriaPrima.Columns[columna.Name].Width = 100;
                     }
-                }                    
-
+                }            
                 ConfigurarCabeceraColumna(columna, columna.HeaderText);
             }
             
@@ -397,9 +390,6 @@ namespace NovoCosts.Forms
             txtProveedor.Click += TextBox_Click;
             txtComentarios.CharacterCasing = CharacterCasing.Upper;
             txtComentarios.Click += TextBox_Click;
-            //txtBuscar.CharacterCasing = CharacterCasing.Upper;
-            //txtBuscar.Click += TextBox_Click;
-            //txtCantidadDesperdicio.CharacterCasing = CharacterCasing.Upper;
             txtCantidadDesperdicio.Click += TextBox_Click;
 
             txtFecha.CharacterCasing = CharacterCasing.Upper;
@@ -440,10 +430,7 @@ namespace NovoCosts.Forms
             {
                 if (decimal.TryParse(txtOtros.Text, out decimal otros) && decimal.TryParse(txtDividir.Text, out decimal divisor))
                 {
-                    Console.WriteLine("Valor de txtOtros: " + otros);
-                    Console.WriteLine("Valor de txtDividir: " + divisor);
                     ResultadoMedida = otros / divisor;
-                    Console.WriteLine("Resultado: " + ResultadoMedida);
                 }
             }
             else if (txtOtros.Enabled)
@@ -464,12 +451,9 @@ namespace NovoCosts.Forms
             {
                 if (decimal.TryParse(txtLargo.Text, out decimal largo) && decimal.TryParse(txtAncho.Text, out decimal ancho))
                 {
-                    Console.WriteLine("largo: " + largo);
-                    Console.WriteLine("ancho: " + ancho);
                     ResultadoMedida = largo * ancho;
                 }
             }
-            Console.WriteLine("ResultadoMedida: " + ResultadoMedida);
         }        
         private void BuscarYMostrarResultados(string nombreProcedimiento, System.Windows.Forms.TextBox textBox, ListBox listBox, string parametroNombre, string nombreColumna)
         {
@@ -491,27 +475,6 @@ namespace NovoCosts.Forms
             }
         }
         string opcionSeleccionada;
-        private void MostrarResultados(string nombreProcedimiento, System.Windows.Forms.TextBox textBox, ListBox listBox,string columna, string parametroNombre)
-        {            
-            string searchText = textBox.Text;
-
-            List<Parametro> parametros = new List<Parametro>
-            {
-                new Parametro(parametroNombre, searchText),
-                new Parametro("@NombreColumna", columna)  
-            };
-
-            DataTable result = DbDatos.Listar(nombreProcedimiento, parametros);
-
-            listBox.Items.Clear();
-
-            if (result != null && result.Rows.Count > 0)
-            {
-                foreach (DataRow row in result.Rows)                
-                    listBox.Items.Add(row[columna].ToString());
-                
-            }
-        }
         private bool EsNumero(string texto)
         {
             return double.TryParse(texto, out _);

@@ -61,7 +61,6 @@ namespace NovoCosts.Forms
                 MessageBox.Show("Proceso Exitoso.");
             }
         }
-
         private System.Windows.Forms.TextBox ultimoTextBoxModificado = null;
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -116,8 +115,7 @@ namespace NovoCosts.Forms
             {
                 MessageBox.Show("Error al Guardar.");
                 return false;
-            }
-                     
+            }                     
         }
         private bool GuardarEditado()
         {
@@ -169,7 +167,6 @@ namespace NovoCosts.Forms
                 MessageBox.Show($"Se produjo un error al intentar eliminar la Unidad de Medida. Consulta los detalles en la consola.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-
         }
         private void Finalizar()
         {
@@ -183,7 +180,7 @@ namespace NovoCosts.Forms
 
             Editar = false;
         }
-        private void ToUpperText()//El upperText para los comboBox esta en comboBox_TextChanged
+        private void ToUpperText()
         {
             txtNombre.CharacterCasing = CharacterCasing.Upper;
             txtNombre.Click += TextBox_Click;
@@ -225,8 +222,7 @@ namespace NovoCosts.Forms
                         estiloCeldaNumerica.Format = "N0";
                         columna.DefaultCellStyle = estiloCeldaNumerica;
                         DbDatos.OcultarIds(dgvRegistroUnidades);
-                    }
-                    
+                    }                    
                 }
                 ConfigurarCabeceraColumna(columna, columna.HeaderText);
             }
@@ -257,7 +253,6 @@ namespace NovoCosts.Forms
                 foreach (DataRow row in result.Rows)                
                     listBox.Items.Add(row[nombreColumna].ToString());                
             }
-        }
-        
+        }        
     }
 }

@@ -115,6 +115,7 @@
             // 
             // btnLimpiar
             // 
+            this.btnLimpiar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLimpiar.Image = ((System.Drawing.Image)(resources.GetObject("btnLimpiar.Image")));
             this.btnLimpiar.Location = new System.Drawing.Point(438, 346);
             this.btnLimpiar.Name = "btnLimpiar";

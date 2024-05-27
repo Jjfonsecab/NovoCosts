@@ -127,6 +127,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "FInicio";
             this.Text = "Inicio";
+            this.Load += new System.EventHandler(this.FInicio_Load);
             ((System.ComponentModel.ISupportInitialize)(this.btnProducto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMateriaPrima)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnManoObra)).EndInit();

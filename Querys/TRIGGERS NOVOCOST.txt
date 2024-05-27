@@ -1,33 +1,10 @@
 Triggers:
 
-Costo ->
-
-CREATE TRIGGER [dbo].[trigger_actualizar_costo]
-ON [dbo].[Costos]
-AFTER INSERT, UPDATE, DELETE
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    -- Actualizar valor_total en la tabla Costos
-    UPDATE Costos
-    SET valor_total = (desperdicio + total_cantidad) * valor_unitario
-    WHERE id_producto IN (SELECT id_producto FROM inserted);
-
-    -- Actualizar costo en la tabla Productos
-    UPDATE Productos
-    SET costo = (
-        SELECT SUM(c.valor_total)
-        FROM Costos AS c
-        WHERE c.id_producto = Productos.id_producto
-    )
-    WHERE Productos.id_producto IN (SELECT id_producto FROM inserted);
-END;
 
 
 CostoMateriasPrimas ->
 
-CREATE TRIGGER [dbo].[trg_actualizar_costos]
+ALTER TRIGGER [dbo].[trg_actualizar_costos]
 ON [dbo].[CostosMateriasPrimas]
 AFTER UPDATE
 AS
@@ -37,17 +14,18 @@ BEGIN
     UPDATE costos
     SET valor_unitario = i.valor,
         cantidad_desperdicio = i.desperdicio_cantidad,
-		cm = i.medida
+        cm = i.medida,
+        valor_total = 0  -- Establece la columna valor_total a 0
     FROM costos c
     INNER JOIN inserted i ON c.id_materia_prima = i.id_materia_prima;
 END;
 
 
-
 MANO OBRA ->
 
-CREATE TRIGGER trg_ActualizarPorcentaje
-ON ManoObra
+
+ALTER TRIGGER [dbo].[trg_ActualizarPorcentaje]
+ON [dbo].[ManoObra]
 AFTER UPDATE
 AS
 BEGIN
@@ -74,4 +52,27 @@ BEGIN
         END
     END
 END;
+
+
+
+PRODUCTO ->
+
+
+ALTER TRIGGER [dbo].[trigger_actualizar_costo]
+ON [dbo].[Productos]
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    IF UPDATE(costo)
+    BEGIN
+        -- Actualizar valor_total en la tabla Costos
+        UPDATE c
+        SET c.valor_total = (CAST(c.desperdicio AS DECIMAL(18,4)) + CAST(c.total_cantidad AS DECIMAL(18,4))) * CAST(c.valor_unitario AS DECIMAL(18,4))
+        FROM Costos c
+        INNER JOIN inserted i ON c.id_producto = i.id_producto;
+    END
+END;
+
 

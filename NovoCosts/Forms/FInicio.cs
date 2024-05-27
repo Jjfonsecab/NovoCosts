@@ -16,7 +16,10 @@ namespace NovoCosts.Forms
         {
             InitializeComponent();
         }
+        private void FInicio_Load(object sender, EventArgs e)
+        {
 
+        }
         private void btnProducto_Click(object sender, EventArgs e)
         {
             FRegistroProductos fproductos = Application.OpenForms.OfType<FRegistroProductos>().FirstOrDefault();
@@ -30,7 +33,6 @@ namespace NovoCosts.Forms
                 fproductos.BringToFront();
             
         }
-
         private void btnMateriaPrima_Click(object sender, EventArgs e)
         {
             FRegistroMateriaPrima fmateriaprima = Application.OpenForms.OfType<FRegistroMateriaPrima>().FirstOrDefault();
@@ -43,7 +45,6 @@ namespace NovoCosts.Forms
             else
                 fmateriaprima.BringToFront();
         }
-
         private void btnManoObra_Click(object sender, EventArgs e)
         {
             FManoObra fmanoobra = Application.OpenForms.OfType<FManoObra>().FirstOrDefault();
@@ -56,7 +57,6 @@ namespace NovoCosts.Forms
             else
                 fmanoobra.BringToFront();
         }
-
         private void btnCostos_Click(object sender, EventArgs e)
         {
             FCostos fcostos = Application.OpenForms.OfType<FCostos>().FirstOrDefault();
@@ -68,6 +68,6 @@ namespace NovoCosts.Forms
             }
             else
                 fcostos.BringToFront();
-        }
+        }        
     }
 }

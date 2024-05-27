@@ -188,11 +188,9 @@ namespace NovoCosts.Forms
             }
             catch (Exception)
             {
-                // Mensaje genérico para otras excepciones
                 MessageBox.Show($"Se produjo un error al intentar eliminar la amteria prima. Consulta los detalles en la consola.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-
         }
         private void Finalizar()
         {
@@ -203,7 +201,7 @@ namespace NovoCosts.Forms
         {
             txtNombre.Text = "";
         }
-        private void ToUpperText()//El upperText para los comboBox esta en comboBox_TextChanged
+        private void ToUpperText()
         {
             txtNombre.CharacterCasing = CharacterCasing.Upper;
             txtNombre.Click += TextBox_Click;
@@ -254,14 +252,12 @@ namespace NovoCosts.Forms
             string searchText = txtNombre.Text;
 
             BuscarYMostrarResultados("RetornarNombreTipoCosto", txtNombre, listBox1, "@NombreBuscado", "nombre");
-
         }
         private void txtNombre_KeyUp(object sender, KeyEventArgs e)
         {
             string searchText = txtNombre.Text;
 
             BuscarYMostrarResultados("RetornarNombreTipoCosto", txtNombre, listBox1, "@NombreBuscado", "nombre");
-
         }
         private void BuscarYMostrarResultados(string nombreProcedimiento, System.Windows.Forms.TextBox textBox, ListBox listBox, string parametroNombre, string nombreColumna)
         {
@@ -271,7 +267,6 @@ namespace NovoCosts.Forms
             {
                 new Parametro(parametroNombre, searchText)
             };
-
             DataTable result = DbDatos.Listar(nombreProcedimiento, parametros);
 
             listBox.Items.Clear();

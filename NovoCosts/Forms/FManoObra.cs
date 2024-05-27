@@ -87,8 +87,6 @@ namespace NovoCosts.Forms
                 else
                     if (!Guardar()) return;
 
-                //ActualizarPorcentaje(IdProducto);
-
                 Finalizar();
                 ListarTodoPorProducto(IdProducto);
             }
@@ -118,7 +116,6 @@ namespace NovoCosts.Forms
                     Finalizar();
                 }
                 MessageBox.Show("Eliminado con Exito.!");
-                //ActualizarPorcentaje(IdProducto);
                 ListarTodoPorProducto(IdProducto);
             }
             catch (Exception)
@@ -156,50 +153,6 @@ namespace NovoCosts.Forms
                 return;
             }
 
-        }
-        private void dgvManoObra_SelectionChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (dgvManoObra.SelectedRows.Count > 0)
-                {
-                    DataGridViewRow selectedRow = dgvManoObra.SelectedRows[0];
-                    if (selectedRow != null)
-                    {
-                        IdManoObra = Convert.ToInt32(selectedRow.Cells["id_mano_obra"].Value);
-                        IdProducto = Convert.ToInt32(selectedRow.Cells["id_producto"].Value);
-                        IdTipoManoObra = Convert.ToInt32(selectedRow.Cells["id_tipo_mano_obra"].Value);
-                        txtCosto.Text = Convert.ToString(selectedRow.Cells["costo"].Value);
-                        txtDescripcion.Text = Convert.ToString(selectedRow.Cells["Descripcion"].Value);
-                        txtReferencia.Text = Convert.ToString(selectedRow.Cells["Referencia"].Value);
-                        txtCantidad.Text = Convert.ToString(selectedRow.Cells["Cantidad"].Value);
-                        comboBoxTMO.Text = Convert.ToString(selectedRow.Cells["Nombre"].Value);
-
-
-                        DataGridViewCell fechaCell = selectedRow.Cells["fecha"];
-                        if (fechaCell != null && fechaCell.Value != null)
-                            txtFecha.Text = fechaCell.Value.ToString();
-                        else
-                        {
-                            MessageBox.Show("Valor nulo!");
-                            return;
-                        }
-                        Editar = true;
-                        Modificar = true;
-                    }
-
-                }
-            }
-            catch (System.NullReferenceException)
-            {
-                MessageBox.Show("Fila vacia");
-                return;
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Error al Guardar");
-                return;
-            }
         }
         private void dgvProductos_SelectionChanged(object sender, EventArgs e)
         {
@@ -295,7 +248,6 @@ namespace NovoCosts.Forms
                 Console.WriteLine(ex.Message);
                 return false;
             }
-
         }
         private bool GuardarEditado()
         {
@@ -372,7 +324,6 @@ namespace NovoCosts.Forms
                 }
                 MessageBox.Show("Selecciona una mano de obra antes de eliminar.", "Mano de Obra no seleccionada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
-
             }
             catch (System.Data.SqlClient.SqlException)
             {
@@ -455,7 +406,6 @@ namespace NovoCosts.Forms
                 return dataTable.Rows[0]["nombre_tipo"].ToString();
             }
             return "Error al cargar los datos de tipo de mano de obra";
-
         }
         private void ToUpperText()//El upperText para los comboBox esta en comboBox_TextChanged
         {
@@ -464,6 +414,7 @@ namespace NovoCosts.Forms
             txtDescripcion.CharacterCasing = CharacterCasing.Upper;
             txtDescripcion.Click += TextBox_Click;
             txtCantidad.Click += TextBox_Click;
+            txtCosto.Click += TextBox_Click;
 
             txtFecha.CharacterCasing = CharacterCasing.Upper;
         }
@@ -482,7 +433,6 @@ namespace NovoCosts.Forms
             {
                 if (!string.IsNullOrEmpty(columna.Name))
                 {
-
                     if (columna.Name == "costo" || columna.Name == "valor_total")
                     {
                         dgvManoObra.Columns["costo"].HeaderText = "COSTO";
@@ -496,8 +446,7 @@ namespace NovoCosts.Forms
                     }
                     else if (columna.Name == "fecha")
                     {
-                        dgvManoObra.Columns["fecha"].HeaderText = "FECHA";
-                        DbDatos.OcultarIds(dgvManoObra);
+                        dgvManoObra.Columns["fecha"].Visible = false;
                     }
                     else if (columna.Name == "total_cantidad")
                     {
@@ -505,11 +454,9 @@ namespace NovoCosts.Forms
 
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight; // Alinea a la derecha
-                        //estiloCeldaNumerica.Format = "N0";
                         columna.DefaultCellStyle = estiloCeldaNumerica;
                         DbDatos.OcultarIds(dgvManoObra);
                         dgvManoObra.Columns[columna.Name].Width = 100;
-
                     }
                     else if (columna.Name == "nombre_tipo")
                     {
@@ -519,7 +466,6 @@ namespace NovoCosts.Forms
                         DbDatos.OcultarIds(dgvManoObra);
                     }
                     ConfigurarCabeceraColumna(columna, columna.HeaderText);
-
                 }
             }
             foreach (DataGridViewColumn columna in dgvProductos.Columns)
@@ -553,15 +499,7 @@ namespace NovoCosts.Forms
         private decimal CalcularValorTotal(decimal vCantidad, decimal vUnitario)
         {
             ResultadoValorTotal = vCantidad * vUnitario;
-
             return ResultadoValorTotal;
-        }
-        private void ActualizarPorcentaje(int IdProducto)
-        {
-            if (IdProducto > 0)
-            {
-                ManoObra.ActualizarPorcentaje(IdProducto);
-            }
         }
         private void BuscarPorcentajeEnTabla()
         {
@@ -585,12 +523,10 @@ namespace NovoCosts.Forms
             {
                 GuardarPorcentaje();
             }
-
             ListarTodoPorProducto(IdProducto);
         }
         private void LimpiarDataGridView()
         {
-            //ActualizarPorcentaje(IdProducto);
             ListarProductoId(IdProducto);
             IdProducto = 0;
         }

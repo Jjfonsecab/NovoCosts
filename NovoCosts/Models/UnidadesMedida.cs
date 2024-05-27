@@ -37,7 +37,6 @@ namespace NovoCosts.Models
         public static DataTable Listar()
         {
             return DbDatos.Listar("UnidadesMedida_Listar");
-        }
-        
+        }        
     }
 }

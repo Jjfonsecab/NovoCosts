@@ -1,86 +1,6 @@
-STORED PROCEDURES:
+STORED PROCEDURE
 
-alter PROCEDURE ActualizarPorcentaje
-    @id_producto INT
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    DECLARE @costo_total DECIMAL(18, 2);
-
-    -- Calcular el costo total excluyendo las filas con id_tipo_mano_obra = 1 y 4
-    SELECT @costo_total = ISNULL(SUM(costo), 0)
-    FROM ManoObra
-    WHERE id_producto = @id_producto 
-        AND id_tipo_mano_obra NOT IN (1, 4);
-
-    -- Actualizar la fila con id_tipo_mano_obra = 4
-    UPDATE ManoObra
-    SET costo = @costo_total,
-        total_cantidad = 0.12,
-        valor_total = 0.12 * @costo_total,
-        fecha = GETDATE()
-    WHERE id_producto = @id_producto AND id_tipo_mano_obra = 4;
-
-    -- Si no hay ninguna fila con id_tipo_mano_obra = 4, insertar una nueva fila
-    IF @@ROWCOUNT = 0
-    BEGIN
-        INSERT INTO ManoObra (id_producto, id_tipo_mano_obra, costo, total_cantidad, valor_total, fecha)
-        VALUES (@id_producto, 4, @costo_total, 0.12, 0.12 * @costo_total, GETDATE());
-    END
-END;
-GO
-
-
-
-
-ALTER PROCEDURE [dbo].[BuscarCostosPorDetalleMP]
-    @detalleMP NVARCHAR(100)
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    SELECT *
-    FROM CostosMateriasPrimas
-    WHERE detalle_mp LIKE '%' + @detalleMP + '%';
-END;
-
-
-ALTER PROCEDURE [dbo].[BuscarMateriaPrimaPorColumnaYValor]
-    @NombreColumna VARCHAR(200),  
-    @ValorBuscado VARCHAR(200)  
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    DECLARE @Query NVARCHAR(MAX) = N'
-        SELECT [' + @NombreColumna + ']
-        FROM [dbo].[CostosMateriasPrimas]
-        WHERE [' + @NombreColumna + '] LIKE ''%'' + @ValorBuscado + ''%'';
-    ';
-
-    EXEC sp_executesql @Query, N'@ValorBuscado VARCHAR(200)', @ValorBuscado;
-END
-
-
-ALTER PROCEDURE [dbo].[BuscarProducto]
-    @NombreColumna VARCHAR(200),  -- Ajusta el tamaño según tus necesidades
-    @ValorBuscado VARCHAR(200)  -- Ajusta el tamaño según tus necesidades
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    -- Selecciona solo la columna específica desde la tabla CostosMateriasPrimas
-    DECLARE @Query NVARCHAR(MAX) = N'
-        SELECT [' + @NombreColumna + ']
-        FROM [dbo].[Productos]
-        WHERE [' + @NombreColumna + '] LIKE ''%'' + @ValorBuscado + ''%'';
-    ';
-
-    EXEC sp_executesql @Query, N'@ValorBuscado VARCHAR(200)', @ValorBuscado;
-END
-
-
+-> COSTO:
 
 ALTER PROCEDURE [dbo].[Costos_Agregar]
 (
@@ -171,68 +91,32 @@ BEGIN
 END;
 
 
-
-ALTER PROCEDURE [dbo].[Costos_Listar]
-AS
-BEGIN
-    SELECT p.descripcion AS descripcion , p.referencia AS referencia, c.*
-    FROM Costos c
-    INNER JOIN Productos p ON c.id_producto = p.id_producto
-END
-
-
-
-
-ALTER PROCEDURE [dbo].[Costos_ListarPorID]
-    @id_costos INT
-AS
-BEGIN
-    SELECT p.descripcion AS DESCRIPCION, p.referencia AS REFERENCIA,
-           mp.detalle_mp AS DETALLE, c.*
-    FROM dbo.Costos c
-    INNER JOIN dbo.Productos p ON c.id_producto = p.id_producto
-    INNER JOIN dbo.CostosMateriasPrimas mp ON c.id_materia_prima = mp.id_materia_prima
-    WHERE c.id_costos = @id_costos
-END
-
-
-
-
-ALTER PROCEDURE [dbo].[CrearFormularioProducto]
+ALTER PROCEDURE [dbo].[ObtenerCostosPorProducto]
     @id_producto INT
 AS
 BEGIN
+    SET NOCOUNT ON;
+
     SELECT 
-        c.id_costos,
-        c.id_producto,
-        c.id_materia_prima,
-        (CASE WHEN c.id_materia_prima IS NOT NULL THEN m.nombre ELSE 'Mano de obra' END) AS materia_prima,
-        c.desempeño,
-        c.cantidad,
-        c.dimension1,
-        c.dimension2,
-        c.dimension3,
-        c.cm,
-        c.cantidad_desperdicio,
-        c.desperdicio,
-        c.total_cantidad,
-        COALESCE(m.costo, m.costo_manodeobra) AS valor_unitario,
-        c.total_cantidad AS total_cantidad,
-        c.valor_total,
-        c.id_tipo_costo,
-        c.fecha
+        c.*,
+        cmp.detalle_mp AS MateriaPrima
     FROM 
         Costos c
-    LEFT JOIN 
-        ManoObra mo ON c.id_producto = mo.id_producto
-    LEFT JOIN 
-        DetalleMateriaPrima m ON c.id_materia_prima = m.id_materia_prima
+    INNER JOIN 
+        CostosMateriasPrimas cmp ON c.id_materia_prima = cmp.id_materia_prima
     WHERE 
-        c.id_producto = @id_producto;
+        c.id_producto = @id_producto
+    ORDER BY
+        CASE 
+            WHEN c.id_tipo_costo = 1 THEN 0 -- Priorizar id_tipo_ccosto = 1
+            WHEN c.id_tipo_costo = 3 THEN 2 -- Poner id_tipo_ccosto = 3 al final
+            ELSE 1 -- Todos los demás valores
+        END,
+        MateriaPrima; -- Orden alfabético por MateriaPrima
 END;
 
 
-
+->FORMULARIO COSTO:
 
 ALTER PROCEDURE [dbo].[Formulario_Costos_Agregar]
 (
@@ -278,241 +162,7 @@ BEGIN
 END
 
 
-
-
-ALTER PROCEDURE [dbo].[Formulario_Costos_Eliminar]
-    @id_formulario_costos INT
-AS
-BEGIN
-    DELETE FROM FormularioCostos WHERE id_formulario_costos = @id_formulario_costos;
-END;
-
-
-
-
-ALTER PROCEDURE [dbo].[Formulario_Costos_Listar]
-AS
-BEGIN
-    SELECT fc.id_formulario_costos,
-           fc.precio_fabrica,
-           p.descripcion,
-           p.referencia
-    FROM FormularioCostos fc
-    INNER JOIN Productos p ON fc.id_producto = p.id_producto;
-END
-
-
-
-
-ALTER PROCEDURE [dbo].[Listar_FormCostos]
-    @id_producto INT
-AS
-BEGIN
-    SELECT mo.id_mano_obra, mo.id_producto, mo.id_tipo_mano_obra, mo.costo AS costo_mano_obra, mo.total_cantidad, mo.valor_total, tm.nombre_tipo AS nombre_tipo_mano_obra,
-           p.descripcion AS DESCRIPCION, p.referencia AS REFERENCIA,
-           mp.detalle_mp AS DETALLE, tc.nombre AS TIPO_COSTO, c.*
-    FROM ManoObra mo
-    INNER JOIN TipoManoObra tm ON mo.id_tipo_mano_obra = tm.id_tipo_mano_obra
-    INNER JOIN Productos p ON mo.id_producto = p.id_producto
-    INNER JOIN Costos c ON mo.id_producto = c.id_producto
-    INNER JOIN CostosMateriasPrimas mp ON c.id_materia_prima = mp.id_materia_prima
-    INNER JOIN TipoCosto tc ON c.id_tipo_costo = tc.id_tipo_costo
-    WHERE mo.id_producto = @id_producto;
-END
-
-
-ALTER PROCEDURE [dbo].[Listar_MaterialId]
-    @id_material INT
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    SELECT detalle_mp
-    FROM CostosMateriasPrimas
-    WHERE id_materia_prima = @id_material;
-END;
-
-
-
-ALTER PROCEDURE [dbo].[Listar_ProductoId]
-    @id_producto INT
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    SELECT referencia, descripcion, costo
-    FROM Productos
-    WHERE id_producto = @id_producto;
-END;
-
-
-
-ALTER PROCEDURE [dbo].[CrearFormularioProducto]
-    @id_producto INT
-AS
-BEGIN
-    SELECT 
-        c.id_costos,
-        c.id_producto,
-        c.id_materia_prima,
-        (CASE WHEN c.id_materia_prima IS NOT NULL THEN m.nombre ELSE 'Mano de obra' END) AS materia_prima,
-        c.desempeño,
-        c.cantidad,
-        c.dimension1,
-        c.dimension2,
-        c.dimension3,
-        c.cm,
-        c.cantidad_desperdicio,
-        c.desperdicio,
-        c.total_cantidad,
-        COALESCE(m.costo, m.costo_manodeobra) AS valor_unitario,
-        c.total_cantidad AS total_cantidad,
-        c.valor_total,
-        c.id_tipo_costo,
-        c.fecha
-    FROM 
-        Costos c
-    LEFT JOIN 
-        ManoObra mo ON c.id_producto = mo.id_producto
-    LEFT JOIN 
-        DetalleMateriaPrima m ON c.id_materia_prima = m.id_materia_prima
-    WHERE 
-        c.id_producto = @id_producto;
-END;
-
-
-
-
-ALTER PROCEDURE [dbo].[Formulario_Costos_Agregar]
-(
-	@id_formulario_costos INT,
-    @id_producto INT,
-	@porcentaje_ganancia DECIMAL(18, 2),
-    @utilidad DECIMAL(18, 2),
-	@precio_fabrica DECIMAL(18, 2),
-	@anotaciones varchar(150),
-    @fecha DATE,
-	@Editar bit
-)
-AS
-BEGIN
-	IF(@Editar = 0)
-	BEGIN
-		INSERT INTO [dbo].[FormularioCostos]
-				   ([id_producto]
-				   ,[porcentaje_ganancia]
-				   ,[utilidad]
-				   ,[precio_fabrica]
-				   ,[anotaciones]
-				   ,[fecha])
-			 VALUES
-				   (@id_producto,
-				   @porcentaje_ganancia,
-				   @utilidad,
-				   @precio_fabrica,
-				   @anotaciones,
-				   @fecha)
-	END
-	ELSE
-	BEGIN
-		UPDATE [dbo].[FormularioCostos]
-		SET [id_producto] = @id_producto
-			  ,[porcentaje_ganancia] = @porcentaje_ganancia
-			  ,[utilidad] = @utilidad	
-			  ,[precio_fabrica] = @precio_fabrica
-			  ,[anotaciones] = @anotaciones
-			  ,[fecha] = @fecha
-		WHERE id_formulario_costos = @id_formulario_costos
-	END
-END
-
-
-
-
-ALTER PROCEDURE [dbo].[Formulario_Costos_Eliminar]
-    @id_formulario_costos INT
-AS
-BEGIN
-    DELETE FROM FormularioCostos WHERE id_formulario_costos = @id_formulario_costos;
-END;
-
-
-
-
-ALTER PROCEDURE [dbo].[Formulario_Costos_Listar]
-AS
-BEGIN
-    SELECT fc.id_formulario_costos,
-           fc.precio_fabrica,
-           p.descripcion,
-           p.referencia
-    FROM FormularioCostos fc
-    INNER JOIN Productos p ON fc.id_producto = p.id_producto;
-END
-
-
-
-
-ALTER PROCEDURE [dbo].[Listar_FormCostos]
-    @id_producto INT
-AS
-BEGIN
-    SELECT mo.id_mano_obra, mo.id_producto, mo.id_tipo_mano_obra, mo.costo AS costo_mano_obra, mo.total_cantidad, mo.valor_total, tm.nombre_tipo AS nombre_tipo_mano_obra,
-           p.descripcion AS DESCRIPCION, p.referencia AS REFERENCIA,
-           mp.detalle_mp AS DETALLE, tc.nombre AS TIPO_COSTO, c.*
-    FROM ManoObra mo
-    INNER JOIN TipoManoObra tm ON mo.id_tipo_mano_obra = tm.id_tipo_mano_obra
-    INNER JOIN Productos p ON mo.id_producto = p.id_producto
-    INNER JOIN Costos c ON mo.id_producto = c.id_producto
-    INNER JOIN CostosMateriasPrimas mp ON c.id_materia_prima = mp.id_materia_prima
-    INNER JOIN TipoCosto tc ON c.id_tipo_costo = tc.id_tipo_costo
-    WHERE mo.id_producto = @id_producto;
-END
-
-
-
-
-
-ALTER PROCEDURE [dbo].[Listar_MaterialId]
-    @id_material INT
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    SELECT detalle_mp
-    FROM CostosMateriasPrimas
-    WHERE id_materia_prima = @id_material;
-END;
-
-
-
-
-GO
-ALTER PROCEDURE [dbo].[Listar_ProductoId]
-    @id_producto INT
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    SELECT referencia, descripcion, costo
-    FROM Productos
-    WHERE id_producto = @id_producto;
-END;
-
-
-
-
-
-ALTER PROCEDURE [dbo].[Listar_TipoCostoId]
-    @id_tipo_costo INT
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    SELECT nombre
-    FROM TipoCosto
-    WHERE id_tipo_costo = @id_tipo_costo;
-END;
+-> MANO OBRA:
 
 
 
@@ -562,7 +212,6 @@ END
 
 
 
-
 ALTER PROCEDURE [dbo].[ManoObra_Eliminar]
     @id_mano_obra INT
 AS
@@ -572,26 +221,28 @@ END;
 
 
 
-
-ALTER PROCEDURE [dbo].[ManoObra_EliminarPorIdProductoYTipoManoObra]
-   
-    @id_producto INT,
-    @id_tipo_mano_obra INT
+ALTER PROCEDURE [dbo].[ObtenerManoObraPorProducto]
+    @id_producto INT
 AS
 BEGIN
-    DELETE FROM ManoObra WHERE  id_producto = @id_producto AND id_tipo_mano_obra = @id_tipo_mano_obra;
+    SET NOCOUNT ON;
+
+    SELECT 
+        MO.*,
+        TM.nombre_tipo
+    FROM 
+        ManoObra MO
+    INNER JOIN
+        TipoManoObra TM ON MO.id_tipo_mano_obra = TM.id_tipo_mano_obra
+    WHERE 
+        MO.id_producto = @id_producto
+    ORDER BY
+        CASE WHEN MO.id_tipo_mano_obra = 4 THEN 1 ELSE 0 END; -- Filas con id_tipo_mano_obra = 4 al final
 END;
 
 
 
-
-ALTER PROCEDURE [dbo].[ManoObra_Listar]
-AS
-BEGIN
-	SELECT * FROM ManoObra
-END
-
-
+-> MATERIAS PRIMAS:
 
 
 ALTER PROCEDURE [dbo].[MateriaPrima_Agregar]
@@ -647,9 +298,6 @@ BEGIN
 END
 
 
-
-
-
 ALTER PROCEDURE [dbo].[MateriaPrima_Eliminar]
     @id_materia_prima INT
 AS
@@ -659,6 +307,16 @@ END;
 
 
 
+ALTER PROCEDURE [dbo].[Listar_MaterialId]
+    @id_material INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT detalle_mp
+    FROM CostosMateriasPrimas
+    WHERE id_materia_prima = @id_material;
+END;
 
 
 ALTER PROCEDURE [dbo].[MateriaPrima_Listar]
@@ -666,8 +324,6 @@ AS
 BEGIN
 	SELECT * FROM CostosMateriasPrimas
 END
-
-
 
 
 ALTER PROCEDURE [dbo].[MateriaPrima_Listar_Actualizado]
@@ -683,132 +339,7 @@ BEGIN
 END
 
 
-
-
-ALTER PROCEDURE [dbo].[ObtenerCostosPorProducto]
-    @id_producto INT
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    SELECT 
-        c.*,
-        cmp.detalle_mp AS MateriaPrima
-    FROM 
-        Costos c
-    INNER JOIN 
-        CostosMateriasPrimas cmp ON c.id_materia_prima = cmp.id_materia_prima
-    WHERE 
-        c.id_producto = @id_producto;
-END;
-
-
-
-
-
-ALTER PROCEDURE [dbo].[ObtenerDatosCosto](@id_costo int)
-AS
-BEGIN
-    SELECT 
-        c.*,
-        p.referencia AS referencia,
-        p.descripcion AS descripcion,
-        mp.detalle_mp AS DETALLE,
-        mp.valor AS valor,
-        mp.proveedor AS proveedor,
-        mp.fecha AS fecha,
-        mp.comentarios AS comentarios
-    FROM 
-        costos c
-    INNER JOIN 
-        productos p ON c.id_producto = p.id_producto
-    INNER JOIN 
-        CostosMateriasPrimas mp ON c.id_materia_prima = mp.id_materia_prima
-    WHERE 
-        c.id_costos = @id_costo;
-END
-
-
-
-
-
-ALTER PROCEDURE [dbo].[ObtenerInformacionManoObra]
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    SELECT
-        mo.id_mano_obra,
-        mo.id_producto,
-        mo.id_tipo_mano_obra,
-        CONVERT(NVARCHAR, mo.fecha, 103) AS fecha,
-        mo.costo,
-		mo.total_cantidad AS CANTIDAD,
-		mo.valor_total AS TOTAL,
-        p.referencia AS Referencia,
-        p.descripcion AS Descripcion,
-        tmo.nombre_tipo AS Nombre
-    FROM
-        ManoObra mo
-        LEFT JOIN Productos p ON mo.id_producto = p.id_producto
-        LEFT JOIN TipoManoObra tmo ON mo.id_tipo_mano_obra = tmo.id_tipo_mano_obra;
-END
-
-
-
-
-ALTER PROCEDURE [dbo].[ObtenerManoObraPorProducto]
-    @id_producto INT
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    SELECT 
-        MO.*,
-        TM.nombre_tipo
-    FROM 
-        ManoObra MO
-    INNER JOIN
-        TipoManoObra TM ON MO.id_tipo_mano_obra = TM.id_tipo_mano_obra
-    WHERE 
-        MO.id_producto = @id_producto;
-END;
-
-
-
-
-
-ALTER PROCEDURE [dbo].[ObtenerTipoCostoPorId]
-    @id_tipo_costo INT
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    SELECT nombre
-    FROM TipoCosto
-    WHERE id_tipo_costo = @id_tipo_costo;
-END;
-
-
-
-
-
-ALTER PROCEDURE [dbo].[ObtenerTipoManoObraPorId]
-    @id_tipo_mano_obra INT
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    SELECT nombre_tipo
-    FROM TipoManoObra
-    WHERE id_tipo_mano_obra = @id_tipo_mano_obra;
-END;
-
-
-
-
-
-
+-> PRODUCTO : 
 ALTER PROCEDURE [dbo].[Producto_Agregar]
 (	
     @id_producto INT,
@@ -863,8 +394,6 @@ END;
 
 
 
-
-
 ALTER PROCEDURE [dbo].[Producto_Listar]
 AS
 BEGIN
@@ -873,161 +402,29 @@ END
 
 
 
-
-ALTER PROCEDURE [dbo].[RetornarMateriaPrimaPorDescripcion]
-    @NombreBuscado VARCHAR(200) = NULL
+ALTER PROCEDURE [dbo].[Listar_ProductoId]
+    @id_producto INT
 AS
 BEGIN
     SET NOCOUNT ON;
 
-    -- Selecciona los nombres únicos desde la tabla MateriasPrimas
-    SELECT DISTINCT [descripcion]
-    FROM [dbo].[Productos]
-    WHERE ([descripcion] LIKE '%' + ISNULL(@NombreBuscado, '') + '%');
-END
-
-
-
-
-ALTER PROCEDURE [dbo].[RetornarMateriaPrimaPorDetalle]
-    @NombreBuscado VARCHAR(200) = NULL
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    -- Selecciona los nombres únicos desde la tabla MateriasPrimas
-    SELECT DISTINCT [detalle_mp]
-    FROM [dbo].[CostosMateriasPrimas]
-    WHERE ([detalle_mp] LIKE '%' + ISNULL(@NombreBuscado, '') + '%');
-END
-
-
-
-
-ALTER PROCEDURE [dbo].[RetornarMateriaPrimaPorProveedor]
-    @NombreBuscado VARCHAR(200) = NULL
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    -- Selecciona los nombres únicos desde la tabla MateriasPrimas
-    SELECT DISTINCT [proveedor]
-    FROM [dbo].[CostosMateriasPrimas]
-    WHERE ([proveedor] LIKE '%' + ISNULL(@NombreBuscado, '') + '%');
-END
-
-
-
-
-ALTER PROCEDURE [dbo].[RetornarMateriaPrimaPorReferencia]
-    @NombreBuscado VARCHAR(200) = NULL
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    -- Selecciona los nombres únicos desde la tabla MateriasPrimas
-    SELECT DISTINCT [referencia]
-    FROM [dbo].[Productos]
-    WHERE ([referencia] LIKE '%' + ISNULL(@NombreBuscado, '') + '%');
-END
-
-
-
-
-ALTER PROCEDURE [dbo].[RetornarNombreTipo]
-    @NombreBuscado NVARCHAR(200) = NULL
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    -- Selecciona los nombres únicos desde la tabla TipoManoObra
-    SELECT DISTINCT [nombre_tipo]
-    FROM [dbo].[TipoManoObra]
-    WHERE [nombre_tipo] LIKE '%' + ISNULL(@NombreBuscado, '') + '%';
-END
-
-
-
-
-ALTER PROCEDURE [dbo].[RetornarNombreTipoCosto]
-    @NombreBuscado NVARCHAR(200) = NULL
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    -- Selecciona los nombres únicos desde la tabla TipoManoObra
-    SELECT DISTINCT [nombre]
-    FROM [dbo].[TipoCosto]
-    WHERE [nombre] LIKE '%' + ISNULL(@NombreBuscado, '') + '%';
-END
-
-
-
-
-
-ALTER PROCEDURE [dbo].[RetornarProductoPorDescripcion]
-    @NombreBuscado VARCHAR(200) = NULL
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    -- Selecciona los nombres únicos desde la tabla Productos
-    SELECT DISTINCT [descripcion]
-    FROM [dbo].[Productos]
-    WHERE (descripcion LIKE '%' + ISNULL(@NombreBuscado, '') + '%');
-END
-
-
-
-
-
-
-ALTER PROCEDURE [dbo].[RetornarProductoPorReferencia]
-    @NombreBuscado VARCHAR(200) = NULL
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    -- Selecciona los nombres únicos desde la tabla Productos
-    SELECT DISTINCT [referencia]
-    FROM [dbo].[Productos]
-    WHERE (referencia LIKE '%' + ISNULL(@NombreBuscado, '') + '%');
-END
-
-
-
-
-
-ALTER PROCEDURE [dbo].[RetornarUnidadesPorNombre]
-    @NombreBuscado VARCHAR(200) = NULL
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    -- Selecciona los nombres únicos desde la tabla MateriasPrimas
-    SELECT DISTINCT [nombre]
-    FROM [dbo].[UnidadesMedida]
-    WHERE ([nombre] LIKE '%' + ISNULL(@NombreBuscado, '') + '%');
-END
-
-
-
-
-
-ALTER PROCEDURE [dbo].[SumarCostoPorID]
-    @idProducto INT
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    SELECT SUM(valor_total) AS total_valor_total
-    FROM ManoObra
-    WHERE id_producto = @idProducto;
+    SELECT referencia, descripcion, costo
+    FROM Productos
+    WHERE id_producto = @id_producto;
 END;
 
-EXEC [dbo].[SumarCostoPorID] @idProducto = 2;
+
+ALTER PROCEDURE [dbo].[Productos_Listar]
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT id_producto, referencia + ' - ' + descripcion AS nombre
+    FROM Productos;
+END;
 
 
+-> TIPO COSTO
 
 
 ALTER PROCEDURE [dbo].[TipoCosto_Agregar]
@@ -1065,16 +462,12 @@ END
 
 
 
-
-
 ALTER PROCEDURE [dbo].[TipoCosto_Eliminar]
     @id_tipo_costo INT
 AS
 BEGIN
     DELETE FROM TipoCosto WHERE id_tipo_costo = @id_tipo_costo;
 END;
-
-
 
 
 
@@ -1085,6 +478,33 @@ BEGIN
 END
 
 
+ALTER PROCEDURE [dbo].[Listar_TipoCostoId]
+    @id_tipo_costo INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT nombre
+    FROM TipoCosto
+    WHERE id_tipo_costo = @id_tipo_costo;
+END;
+
+
+
+ALTER PROCEDURE [dbo].[ObtenerTipoCostoPorId]
+    @id_tipo_costo INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT nombre
+    FROM TipoCosto
+    WHERE id_tipo_costo = @id_tipo_costo;
+END;
+
+
+
+-> TIPO MANO OBRA:
 
 
 
@@ -1123,13 +543,24 @@ END
 
 
 
-
-
 ALTER PROCEDURE [dbo].[TipoManoObra_Eliminar]
     @id_tipo_mano_obra INT
 AS
 BEGIN
     DELETE FROM TipoManoObra WHERE id_tipo_mano_obra = @id_tipo_mano_obra;
+END;
+
+
+
+ALTER PROCEDURE [dbo].[ObtenerTipoManoObraPorId]
+    @id_tipo_mano_obra INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT nombre_tipo
+    FROM TipoManoObra
+    WHERE id_tipo_mano_obra = @id_tipo_mano_obra;
 END;
 
 
@@ -1142,15 +573,7 @@ BEGIN
 END
 
 
-
-
-ALTER PROCEDURE [dbo].[UnidadesMedida_Listar]
-AS
-BEGIN
-    SELECT * FROM UnidadesMedida
-    ORDER BY nombre ASC; -- Ordenar alfabéticamente por el nombre de la unidad de medida
-END
-
+-> UNIDADES DE MEDIDA
 
 
 
@@ -1184,8 +607,6 @@ END
 
 
 
-
-
 ALTER PROCEDURE [dbo].[UnidadMedida_Eliminar]
     @id_unidad_medida INT
 AS
@@ -1195,11 +616,16 @@ END;
 
 
 
-ALTER PROCEDURE [dbo].[Productos_Listar]
+
+ALTER PROCEDURE [dbo].[UnidadesMedida_Listar]
 AS
 BEGIN
-    SET NOCOUNT ON;
+    SELECT * FROM UnidadesMedida
+    ORDER BY nombre ASC; -- Ordenar alfabéticamente por el nombre de la unidad de medida
+END
 
-    SELECT id_producto, referencia + ' - ' + descripcion AS nombre
-    FROM Productos;
-END;
+
+
+
+
+

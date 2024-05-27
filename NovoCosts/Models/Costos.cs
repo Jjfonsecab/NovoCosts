@@ -49,7 +49,7 @@ namespace NovoCosts.Models
                 new Parametro("@fecha", costos.Fecha),
                 new Parametro("@Editar", editar)
             };
-            Console.WriteLine("@valor_total" + costos.ValorTotal);
+            Console.WriteLine("@valor_total =" + costos.ValorTotal);
             return DbDatos.Ejecutar("Costos_Agregar", parametros);
         }
         public static bool Eliminar(int idCosto)
@@ -59,11 +59,7 @@ namespace NovoCosts.Models
                 new Parametro("@id_costos", idCosto)
             };
             return DbDatos.Ejecutar("Costos_Eliminar", parametros);
-        }
-        public static DataTable ListarTodo()
-        {
-            return DbDatos.Listar("Costos_Listar");
-        }
+        }        
         public static DataTable ListarCostoProducto(int IdProducto)
         {
             List<Parametro> parametros = new List<Parametro>
