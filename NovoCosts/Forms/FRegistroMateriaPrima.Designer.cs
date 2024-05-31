@@ -92,7 +92,7 @@
             this.txtDetalle.Location = new System.Drawing.Point(160, 30);
             this.txtDetalle.Multiline = true;
             this.txtDetalle.Name = "txtDetalle";
-            this.txtDetalle.Size = new System.Drawing.Size(305, 26);
+            this.txtDetalle.Size = new System.Drawing.Size(421, 26);
             this.txtDetalle.TabIndex = 1;
             this.txtDetalle.TextChanged += new System.EventHandler(this.txtDetalle_TextChanged);
             this.txtDetalle.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDetalle_KeyUp);

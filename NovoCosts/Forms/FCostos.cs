@@ -132,6 +132,13 @@ namespace NovoCosts.Forms
                 return;
             }
         }
+        private void btnPorcentaje_Click(object sender, EventArgs e)
+        {
+            if (txtCantidadDesperdicio.Enabled)            
+                txtCantidadDesperdicio.Enabled = false;
+            else
+                txtCantidadDesperdicio.Enabled = true;
+        }
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             LimpiarTodo();
@@ -238,7 +245,6 @@ namespace NovoCosts.Forms
                 MessageBox.Show("Fila vacia");
                 return;
             }
-
 
         }
         private void mensaje()
@@ -936,7 +942,6 @@ namespace NovoCosts.Forms
                 valorDimensiones = "3";
             }
             return valorDimensiones;
-        }
-
+        }        
     }
 }

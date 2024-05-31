@@ -37,6 +37,7 @@
             this.dgvCosto = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.actualizarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.dgvManoObra = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -84,7 +85,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtBuscar = new System.Windows.Forms.TextBox();
-            this.actualizarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnPorcentaje = new System.Windows.Forms.PictureBox();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCosto)).BeginInit();
             this.contextMenuStrip2.SuspendLayout();
@@ -104,6 +105,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnGuardar)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnPorcentaje)).BeginInit();
             this.SuspendLayout();
             // 
             // tabPage4
@@ -163,14 +165,21 @@
             this.editarToolStripMenuItem1,
             this.actualizarToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(241, 101);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(161, 68);
             // 
             // editarToolStripMenuItem1
             // 
             this.editarToolStripMenuItem1.Name = "editarToolStripMenuItem1";
-            this.editarToolStripMenuItem1.Size = new System.Drawing.Size(240, 32);
+            this.editarToolStripMenuItem1.Size = new System.Drawing.Size(160, 32);
             this.editarToolStripMenuItem1.Text = "Editar";
             this.editarToolStripMenuItem1.Click += new System.EventHandler(this.editarToolStripMenuItem1_Click);
+            // 
+            // actualizarToolStripMenuItem
+            // 
+            this.actualizarToolStripMenuItem.Name = "actualizarToolStripMenuItem";
+            this.actualizarToolStripMenuItem.Size = new System.Drawing.Size(160, 32);
+            this.actualizarToolStripMenuItem.Text = "Actualizar";
+            this.actualizarToolStripMenuItem.Click += new System.EventHandler(this.actualizarToolStripMenuItem_Click);
             // 
             // tabPage5
             // 
@@ -270,6 +279,7 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.BackColor = System.Drawing.Color.SkyBlue;
+            this.groupBox1.Controls.Add(this.btnPorcentaje);
             this.groupBox1.Controls.Add(this.btnFCostos);
             this.groupBox1.Controls.Add(this.btnLimpiar);
             this.groupBox1.Controls.Add(this.label14);
@@ -324,7 +334,7 @@
             // 
             this.btnLimpiar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLimpiar.Image = ((System.Drawing.Image)(resources.GetObject("btnLimpiar.Image")));
-            this.btnLimpiar.Location = new System.Drawing.Point(800, 163);
+            this.btnLimpiar.Location = new System.Drawing.Point(630, 167);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(64, 55);
             this.btnLimpiar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -353,7 +363,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(1512, 158);
+            this.label9.Location = new System.Drawing.Point(1428, 158);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(41, 20);
             this.label9.TabIndex = 124;
@@ -362,7 +372,7 @@
             // txtCM
             // 
             this.txtCM.Enabled = false;
-            this.txtCM.Location = new System.Drawing.Point(1585, 154);
+            this.txtCM.Location = new System.Drawing.Point(1501, 154);
             this.txtCM.Name = "txtCM";
             this.txtCM.Size = new System.Drawing.Size(73, 26);
             this.txtCM.TabIndex = 10;
@@ -373,7 +383,7 @@
             // 
             this.btnTipoCostos.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTipoCostos.Image = ((System.Drawing.Image)(resources.GetObject("btnTipoCostos.Image")));
-            this.btnTipoCostos.Location = new System.Drawing.Point(800, 25);
+            this.btnTipoCostos.Location = new System.Drawing.Point(751, 174);
             this.btnTipoCostos.Name = "btnTipoCostos";
             this.btnTipoCostos.Size = new System.Drawing.Size(50, 44);
             this.btnTipoCostos.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -420,7 +430,7 @@
             // txtDesperdicioTotal
             // 
             this.txtDesperdicioTotal.Enabled = false;
-            this.txtDesperdicioTotal.Location = new System.Drawing.Point(1585, 114);
+            this.txtDesperdicioTotal.Location = new System.Drawing.Point(1501, 114);
             this.txtDesperdicioTotal.Name = "txtDesperdicioTotal";
             this.txtDesperdicioTotal.Size = new System.Drawing.Size(59, 26);
             this.txtDesperdicioTotal.TabIndex = 9;
@@ -430,7 +440,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(1460, 114);
+            this.label16.Location = new System.Drawing.Point(1376, 114);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(101, 20);
             this.label16.TabIndex = 110;
@@ -465,7 +475,7 @@
             // txtCantidadDesperdicio
             // 
             this.txtCantidadDesperdicio.Enabled = false;
-            this.txtCantidadDesperdicio.Location = new System.Drawing.Point(1585, 76);
+            this.txtCantidadDesperdicio.Location = new System.Drawing.Point(1501, 76);
             this.txtCantidadDesperdicio.Name = "txtCantidadDesperdicio";
             this.txtCantidadDesperdicio.Size = new System.Drawing.Size(59, 26);
             this.txtCantidadDesperdicio.TabIndex = 8;
@@ -475,7 +485,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(1448, 77);
+            this.label11.Location = new System.Drawing.Point(1364, 77);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(119, 20);
             this.label11.TabIndex = 104;
@@ -483,7 +493,7 @@
             // 
             // txtCantidad
             // 
-            this.txtCantidad.Location = new System.Drawing.Point(1586, 40);
+            this.txtCantidad.Location = new System.Drawing.Point(1502, 40);
             this.txtCantidad.Name = "txtCantidad";
             this.txtCantidad.Size = new System.Drawing.Size(59, 26);
             this.txtCantidad.TabIndex = 7;
@@ -493,7 +503,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1480, 43);
+            this.label2.Location = new System.Drawing.Point(1396, 43);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(81, 20);
             this.label2.TabIndex = 100;
@@ -595,7 +605,7 @@
             this.groupBox2.Controls.Add(this.txtD1);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Location = new System.Drawing.Point(881, 16);
+            this.groupBox2.Location = new System.Drawing.Point(800, 16);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(531, 127);
             this.groupBox2.TabIndex = 72;
@@ -678,7 +688,7 @@
             // 
             this.groupBox3.BackColor = System.Drawing.Color.PowderBlue;
             this.groupBox3.Controls.Add(this.txtBuscar);
-            this.groupBox3.Location = new System.Drawing.Point(954, 158);
+            this.groupBox3.Location = new System.Drawing.Point(929, 158);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(402, 68);
             this.groupBox3.TabIndex = 129;
@@ -693,12 +703,17 @@
             this.txtBuscar.TabIndex = 12;
             this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
             // 
-            // actualizarToolStripMenuItem
+            // btnPorcentaje
             // 
-            this.actualizarToolStripMenuItem.Name = "actualizarToolStripMenuItem";
-            this.actualizarToolStripMenuItem.Size = new System.Drawing.Size(240, 32);
-            this.actualizarToolStripMenuItem.Text = "Actualizar";
-            this.actualizarToolStripMenuItem.Click += new System.EventHandler(this.actualizarToolStripMenuItem_Click);
+            this.btnPorcentaje.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPorcentaje.Image = ((System.Drawing.Image)(resources.GetObject("btnPorcentaje.Image")));
+            this.btnPorcentaje.Location = new System.Drawing.Point(1600, 89);
+            this.btnPorcentaje.Name = "btnPorcentaje";
+            this.btnPorcentaje.Size = new System.Drawing.Size(34, 36);
+            this.btnPorcentaje.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.btnPorcentaje.TabIndex = 131;
+            this.btnPorcentaje.TabStop = false;
+            this.btnPorcentaje.Click += new System.EventHandler(this.btnPorcentaje_Click);
             // 
             // FCostos
             // 
@@ -734,6 +749,7 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnPorcentaje)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -791,5 +807,6 @@
         private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.PictureBox btnFCostos;
         private System.Windows.Forms.ToolStripMenuItem actualizarToolStripMenuItem;
+        private System.Windows.Forms.PictureBox btnPorcentaje;
     }
 }

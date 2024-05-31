@@ -108,9 +108,9 @@ BEGIN
         c.id_producto = @id_producto
     ORDER BY
         CASE 
-            WHEN c.id_tipo_costo = 1 THEN 0 -- Priorizar id_tipo_ccosto = 1
-            WHEN c.id_tipo_costo = 3 THEN 2 -- Poner id_tipo_ccosto = 3 al final
-            ELSE 1 -- Todos los demás valores
+            WHEN c.id_tipo_costo = 1 THEN 0  -- Priorizar id_tipo_costo = 1
+			WHEN c.id_tipo_costo = 4 THEN 1  -- Priorizar id_tipo_costo = 4 después de 1
+			ELSE 2 
         END,
         MateriaPrima; -- Orden alfabético por MateriaPrima
 END;
