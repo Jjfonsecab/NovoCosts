@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FCostos));
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.dgvCosto = new System.Windows.Forms.DataGridView();
@@ -46,6 +46,7 @@
             this.dgvProductos = new System.Windows.Forms.DataGridView();
             this.Costos = new System.Windows.Forms.TabControl();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnPorcentaje = new System.Windows.Forms.PictureBox();
             this.btnFCostos = new System.Windows.Forms.PictureBox();
             this.btnLimpiar = new System.Windows.Forms.PictureBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -58,7 +59,6 @@
             this.btnGuardar = new System.Windows.Forms.PictureBox();
             this.txtDesperdicioTotal = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
             this.txtMaterial = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.txtCantidadDesperdicio = new System.Windows.Forms.TextBox();
@@ -85,7 +85,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtBuscar = new System.Windows.Forms.TextBox();
-            this.btnPorcentaje = new System.Windows.Forms.PictureBox();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCosto)).BeginInit();
             this.contextMenuStrip2.SuspendLayout();
@@ -97,6 +96,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.Costos.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnPorcentaje)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnFCostos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnLimpiar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnTipoCostos)).BeginInit();
@@ -105,7 +105,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnGuardar)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnPorcentaje)).BeginInit();
             this.SuspendLayout();
             // 
             // tabPage4
@@ -125,34 +124,34 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvCosto.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCosto.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCosto.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvCosto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCosto.ContextMenuStrip = this.contextMenuStrip2;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCosto.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCosto.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvCosto.Location = new System.Drawing.Point(6, 5);
             this.dgvCosto.Name = "dgvCosto";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCosto.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCosto.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvCosto.RowHeadersWidth = 62;
             this.dgvCosto.RowTemplate.Height = 28;
             this.dgvCosto.Size = new System.Drawing.Size(1715, 444);
@@ -276,8 +275,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.BackColor = System.Drawing.Color.SkyBlue;
             this.groupBox1.Controls.Add(this.btnPorcentaje);
             this.groupBox1.Controls.Add(this.btnFCostos);
@@ -292,7 +289,6 @@
             this.groupBox1.Controls.Add(this.btnGuardar);
             this.groupBox1.Controls.Add(this.txtDesperdicioTotal);
             this.groupBox1.Controls.Add(this.label16);
-            this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.txtMaterial);
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.txtCantidadDesperdicio);
@@ -311,18 +307,29 @@
             this.groupBox1.Controls.Add(this.txtFecha);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.groupBox3);
-            this.groupBox1.Location = new System.Drawing.Point(21, 7);
+            this.groupBox1.Location = new System.Drawing.Point(20, 8);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1741, 242);
+            this.groupBox1.Size = new System.Drawing.Size(1848, 242);
             this.groupBox1.TabIndex = 81;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "`";
+            // 
+            // btnPorcentaje
+            // 
+            this.btnPorcentaje.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPorcentaje.Image = ((System.Drawing.Image)(resources.GetObject("btnPorcentaje.Image")));
+            this.btnPorcentaje.Location = new System.Drawing.Point(1635, 177);
+            this.btnPorcentaje.Name = "btnPorcentaje";
+            this.btnPorcentaje.Size = new System.Drawing.Size(34, 36);
+            this.btnPorcentaje.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.btnPorcentaje.TabIndex = 131;
+            this.btnPorcentaje.TabStop = false;
+            this.btnPorcentaje.Click += new System.EventHandler(this.btnPorcentaje_Click);
             // 
             // btnFCostos
             // 
             this.btnFCostos.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnFCostos.Image = ((System.Drawing.Image)(resources.GetObject("btnFCostos.Image")));
-            this.btnFCostos.Location = new System.Drawing.Point(1698, 55);
+            this.btnFCostos.Location = new System.Drawing.Point(1644, 31);
             this.btnFCostos.Name = "btnFCostos";
             this.btnFCostos.Size = new System.Drawing.Size(64, 55);
             this.btnFCostos.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -445,15 +452,6 @@
             this.label16.Size = new System.Drawing.Size(101, 20);
             this.label16.TabIndex = 110;
             this.label16.Text = "Desperdicio: ";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(2234, 118);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(113, 20);
-            this.label13.TabIndex = 108;
-            this.label13.Text = "Valor Unitario :";
             // 
             // txtMaterial
             // 
@@ -703,18 +701,6 @@
             this.txtBuscar.TabIndex = 12;
             this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
             // 
-            // btnPorcentaje
-            // 
-            this.btnPorcentaje.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnPorcentaje.Image = ((System.Drawing.Image)(resources.GetObject("btnPorcentaje.Image")));
-            this.btnPorcentaje.Location = new System.Drawing.Point(1600, 89);
-            this.btnPorcentaje.Name = "btnPorcentaje";
-            this.btnPorcentaje.Size = new System.Drawing.Size(34, 36);
-            this.btnPorcentaje.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.btnPorcentaje.TabIndex = 131;
-            this.btnPorcentaje.TabStop = false;
-            this.btnPorcentaje.Click += new System.EventHandler(this.btnPorcentaje_Click);
-            // 
             // FCostos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -739,6 +725,7 @@
             this.Costos.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnPorcentaje)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnFCostos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnLimpiar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnTipoCostos)).EndInit();
@@ -749,7 +736,6 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnPorcentaje)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -770,7 +756,6 @@
         private System.Windows.Forms.PictureBox btnGuardar;
         private System.Windows.Forms.TextBox txtDesperdicioTotal;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox txtMaterial;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtCantidadDesperdicio;
