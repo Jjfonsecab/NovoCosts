@@ -1,5 +1,36 @@
+CREATE TABLE Productos (
+    id_producto INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+    referencia VARCHAR(100) NOT NULL,
+    descripcion VARCHAR(100) NOT NULL,
+    costo DECIMAL(18, 2) NOT NULL
+);
+
+CREATE TABLE UnidadesMedida (
+    id_unidad_medida INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+    nombre VARCHAR(50) NOT NULL,
+    cantidad_parametros INT NOT NULL
+);
+
+CREATE TABLE CostosMateriaPrima (
+    id_materia_prima INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+    detalle_mp VARCHAR(100) NOT NULL,
+    id_unidad_medida INT NOT NULL,
+    medida DECIMAL(18, 2) NOT NULL,
+    valor DECIMAL(18, 2) NOT NULL,
+    proveedor VARCHAR(100) NOT NULL,
+    fecha DATE NOT NULL,
+    comentarios VARCHAR(150) NOT NULL,
+    desperdicio_cantidad DECIMAL(18, 2) NOT NULL,
+    FOREIGN KEY (id_unidad_medida) REFERENCES UnidadesMedida(id_unidad_medida)
+);
+
+CREATE TABLE TipoCosto (
+    id_tipo_costo INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+    nombre VARCHAR(100) NOT NULL
+);
+
 CREATE TABLE Costos (
-    id_costos INT NOT NULL PRIMARY KEY,
+    id_costos INT NOT NULL PRIMARY KEY IDENTITY(1,1),
     id_producto INT NOT NULL,
     id_materia_prima INT NOT NULL,
     desempeño VARCHAR(100) NOT NULL,
@@ -14,65 +45,37 @@ CREATE TABLE Costos (
     valor_unitario DECIMAL(18, 2) NOT NULL,
     valor_total DECIMAL(18, 2) NOT NULL,
     id_tipo_costo INT NOT NULL,
-    fecha DATE NOT NULL
-);
-
-
-CREATE TABLE Productos (
-    id_producto INT NOT NULL PRIMARY KEY,
-    referencia VARCHAR(100) NOT NULL,
-    descripcion VARCHAR(100) NOT NULL,
-    costo DECIMAL(18, 2) NOT NULL
-);
-
-
-
-CREATE TABLE CostosMateriaPrima (
-    id_materia_prima INT NOT NULL PRIMARY KEY,
-    detalle_mp VARCHAR(100) NOT NULL,
-    id_unidad_medida INT NOT NULL,
-    medida DECIMAL(18, 2) NOT NULL,
-    valor DECIMAL(18, 2) NOT NULL,
-    proveedor VARCHAR(100) NOT NULL,
     fecha DATE NOT NULL,
-    comentarios VARCHAR(150) NOT NULL,
-    desperdicio_cantidad DECIMAL(18, 2) NOT NULL
+    FOREIGN KEY (id_producto) REFERENCES Productos(id_producto),
+    FOREIGN KEY (id_materia_prima) REFERENCES CostosMateriaPrima(id_materia_prima),
+    FOREIGN KEY (id_tipo_costo) REFERENCES TipoCosto(id_tipo_costo)
 );
 
 CREATE TABLE FormularioCostos (
-    id_formulario_costos INT NOT NULL PRIMARY KEY,
+    id_formulario_costos INT NOT NULL PRIMARY KEY IDENTITY(1,1),
     id_producto INT NOT NULL,
     porcentaje_ganancia DECIMAL(18, 2) NOT NULL,
     utilidad DECIMAL(18, 2) NOT NULL,
     precio_fabrica DECIMAL(18, 2) NOT NULL,
     anotaciones VARCHAR(150) NOT NULL,
-    fecha DATE NOT NULL
+    fecha DATE NOT NULL,
+    FOREIGN KEY (id_producto) REFERENCES Productos(id_producto)
+);
+
+CREATE TABLE TipoManoObra (
+    id_tipo_mano_obra INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+    nombre_tipo VARCHAR(150) NOT NULL
 );
 
 CREATE TABLE ManoObra (
-    id_mano_obra INT NOT NULL PRIMARY KEY,
+    id_mano_obra INT NOT NULL PRIMARY KEY IDENTITY(1,1),
     id_producto INT NOT NULL,
     id_tipo_mano_obra INT NOT NULL,
     costo DECIMAL(18, 0) NOT NULL,
     fecha DATE NOT NULL,
     total_cantidad DECIMAL(18, 2) NOT NULL,
-    valor_total DECIMAL(18, 2) NOT NULL
+    valor_total DECIMAL(18, 2) NOT NULL,
+    FOREIGN KEY (id_producto) REFERENCES Productos(id_producto),
+    FOREIGN KEY (id_tipo_mano_obra) REFERENCES TipoManoObra(id_tipo_mano_obra)
 );
 
-
-CREATE TABLE TipoCosto (
-    id_tipo_costo INT NOT NULL PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL
-);
-
-CREATE TABLE UnidadesMedida (
-    id_unidad_medida INT NOT NULL PRIMARY KEY,
-    nombre VARCHAR(50) NOT NULL,
-    cantidad_parametros INT NOT NULL
-);
-
-
-CREATE TABLE TipoManoObra (
-    id_tipo_mano_obra INT NOT NULL PRIMARY KEY,
-    nombre_tipo VARCHAR(150) NOT NULL
-);

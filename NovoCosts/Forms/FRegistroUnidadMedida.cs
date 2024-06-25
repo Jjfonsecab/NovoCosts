@@ -14,6 +14,7 @@ namespace NovoCosts.Forms
 {
     public partial class FRegistroUnidadMedida : Form
     {
+        private ToolTip toolTip;
         public FRegistroUnidadMedida()
         {
             InitializeComponent();
@@ -22,6 +23,7 @@ namespace NovoCosts.Forms
         private void FRegistroUnidadMedida_Load(object sender, EventArgs e)
         {
             Listar();
+            ToolTipInitialicer();
         }
 
         bool Editar;
@@ -253,6 +255,13 @@ namespace NovoCosts.Forms
                 foreach (DataRow row in result.Rows)                
                     listBox.Items.Add(row[nombreColumna].ToString());                
             }
-        }        
+        }
+        private void ToolTipInitialicer()
+        {
+            toolTip = new System.Windows.Forms.ToolTip();
+
+            toolTip.SetToolTip(btnGuardar, "GUARDAR");
+            toolTip.SetToolTip(btnEliminar, "ELIMINAR");
+        }
     }
 }

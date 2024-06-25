@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FInicio));
             this.btnProducto = new System.Windows.Forms.PictureBox();
             this.btnMateriaPrima = new System.Windows.Forms.PictureBox();
@@ -35,6 +36,7 @@
             this.btnCostos = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnNombre = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.btnProducto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMateriaPrima)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnManoObra)).BeginInit();
@@ -146,5 +148,6 @@
         private System.Windows.Forms.PictureBox btnCostos;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ToolTip btnNombre;
     }
 }

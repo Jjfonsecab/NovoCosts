@@ -1,0 +1,104 @@
+ALTER PROCEDURE [dbo].[RetornarUnidadesPorNombre]
+    @NombreBuscado VARCHAR(200) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Selecciona los nombres únicos desde la tabla MateriasPrimas
+    SELECT DISTINCT [nombre]
+    FROM [dbo].[UnidadesMedida]
+    WHERE ([nombre] LIKE '%' + ISNULL(@NombreBuscado, '') + '%');
+END
+
+ALTER PROCEDURE [dbo].[RetornarProductoPorReferencia]
+    @NombreBuscado VARCHAR(200) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Selecciona los nombres únicos desde la tabla Productos
+    SELECT DISTINCT [referencia]
+    FROM [dbo].[Productos]
+    WHERE (referencia LIKE '%' + ISNULL(@NombreBuscado, '') + '%');
+END
+
+ALTER PROCEDURE [dbo].[RetornarProductoPorDescripcion]
+    @NombreBuscado VARCHAR(200) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Selecciona los nombres únicos desde la tabla Productos
+    SELECT DISTINCT [descripcion]
+    FROM [dbo].[Productos]
+    WHERE (descripcion LIKE '%' + ISNULL(@NombreBuscado, '') + '%');
+END
+
+ALTER PROCEDURE [dbo].[RetornarNombreTipoCosto]
+    @NombreBuscado NVARCHAR(200) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Selecciona los nombres únicos desde la tabla TipoManoObra
+    SELECT DISTINCT [nombre]
+    FROM [dbo].[TipoCosto]
+    WHERE [nombre] LIKE '%' + ISNULL(@NombreBuscado, '') + '%';
+END
+
+ALTER PROCEDURE [dbo].[RetornarNombreTipo]
+    @NombreBuscado NVARCHAR(200) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Selecciona los nombres únicos desde la tabla TipoManoObra
+    SELECT DISTINCT [nombre_tipo]
+    FROM [dbo].[TipoManoObra]
+    WHERE [nombre_tipo] LIKE '%' + ISNULL(@NombreBuscado, '') + '%';
+END
+
+ALTER PROCEDURE [dbo].[RetornarMateriaPrimaPorReferencia]
+    @NombreBuscado VARCHAR(200) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Selecciona los nombres únicos desde la tabla MateriasPrimas
+    SELECT DISTINCT [referencia]
+    FROM [dbo].[Productos]
+    WHERE ([referencia] LIKE '%' + ISNULL(@NombreBuscado, '') + '%');
+END
+ALTER PROCEDURE [dbo].[RetornarMateriaPrimaPorProveedor]
+    @NombreBuscado VARCHAR(200) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Selecciona los nombres únicos desde la tabla MateriasPrimas
+    SELECT DISTINCT [proveedor]
+    FROM [dbo].[CostosMateriasPrimas]
+    WHERE ([proveedor] LIKE '%' + ISNULL(@NombreBuscado, '') + '%');
+END
+ALTER PROCEDURE [dbo].[RetornarMateriaPrimaPorDetalle]
+    @NombreBuscado VARCHAR(200) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Selecciona los nombres únicos desde la tabla MateriasPrimas
+    SELECT DISTINCT [detalle_mp]
+    FROM [dbo].[CostosMateriasPrimas]
+    WHERE ([detalle_mp] LIKE '%' + ISNULL(@NombreBuscado, '') + '%');
+END
+ALTER PROCEDURE [dbo].[RetornarMateriaPrimaPorDescripcion]
+    @NombreBuscado VARCHAR(200) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Selecciona los nombres únicos desde la tabla MateriasPrimas
+    SELECT DISTINCT [descripcion]
+    FROM [dbo].[Productos]
+    WHERE ([descripcion] LIKE '%' + ISNULL(@NombreBuscado, '') + '%');
+END

@@ -15,6 +15,7 @@ namespace NovoCosts.Forms
 {
     public partial class FManoObra : Form
     {
+        private System.Windows.Forms.ToolTip toolTip;
         public FManoObra()
         {
             InitializeComponent();
@@ -24,6 +25,7 @@ namespace NovoCosts.Forms
         {
             ListarProductos();
             MostrarFechaActual();
+            ToolTipInitialicer();
         }
 
         bool Editar;
@@ -560,6 +562,16 @@ namespace NovoCosts.Forms
                 }
             }
             return true;
+        }
+        private void ToolTipInitialicer()
+        {
+            toolTip = new System.Windows.Forms.ToolTip();
+
+            toolTip.SetToolTip(btnLimpiar, "LIMPIAR");
+            toolTip.SetToolTip(btnInicio, "INICIO");
+            toolTip.SetToolTip(btnTipo, "TIPO MANO DE OBRA");
+            toolTip.SetToolTip(btnGuardar, "GUARDAR");
+            toolTip.SetToolTip(btnEliminar, "ELIMINAR");
         }
     }
 }

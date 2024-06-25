@@ -15,6 +15,7 @@ namespace NovoCosts.Forms
 {
     public partial class FRegistroTipoManoObra : Form
     {
+        private System.Windows.Forms.ToolTip toolTip;
         public FRegistroTipoManoObra()
         {
             InitializeComponent();
@@ -23,6 +24,7 @@ namespace NovoCosts.Forms
         private void FRegistroTipoManoObra_Load(object sender, EventArgs e)
         {
             ListarTodo();
+            ToolTipInitialicer();
         }
 
         bool Editar;
@@ -277,6 +279,13 @@ namespace NovoCosts.Forms
                 foreach (DataRow row in result.Rows)
                     listBox.Items.Add(row[nombreColumna].ToString());
             }
-        }            
+        }
+        private void ToolTipInitialicer()
+        {
+            toolTip = new System.Windows.Forms.ToolTip();
+
+            toolTip.SetToolTip(btnGuardar, "GUARDAR");
+            toolTip.SetToolTip(btnEliminar, "ELIMINAR");
+        }
     }
 }

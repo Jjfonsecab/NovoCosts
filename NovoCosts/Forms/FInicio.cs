@@ -12,9 +12,11 @@ namespace NovoCosts.Forms
 {
     public partial class FInicio : Form
     {
+        private ToolTip toolTip;
         public FInicio()
         {
             InitializeComponent();
+            ToolTipInitialicer();
         }
         private void FInicio_Load(object sender, EventArgs e)
         {
@@ -68,6 +70,15 @@ namespace NovoCosts.Forms
             }
             else
                 fcostos.BringToFront();
-        }        
+        }
+        private void ToolTipInitialicer()
+        {
+            toolTip = new ToolTip();
+
+            toolTip.SetToolTip(btnManoObra, "MANO DED OBRA");
+            toolTip.SetToolTip(btnProducto, "PRODUCTO");
+            toolTip.SetToolTip(btnMateriaPrima, "MATERIA PRIMA");
+            toolTip.SetToolTip(btnCostos, "COSTOS");
+        }
     }
 }

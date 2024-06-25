@@ -17,6 +17,7 @@ namespace NovoCosts.Forms
 {
     public partial class FRegistroMateriaPrima : Form
     {
+        private System.Windows.Forms.ToolTip toolTip;
         public FRegistroMateriaPrima()
         {
             InitializeComponent();
@@ -26,6 +27,7 @@ namespace NovoCosts.Forms
         {
             ListarTodo();
             monthCalendar.DateChanged += monthCalendar_DateChanged;
+            ToolTipInitialicer();
         }
 
         bool Editar;
@@ -505,6 +507,16 @@ namespace NovoCosts.Forms
                 }
             }
             return true;
+        }
+        private void ToolTipInitialicer()
+        {
+            toolTip = new System.Windows.Forms.ToolTip();
+
+            toolTip.SetToolTip(btnLimpiar, "LIMPIAR");
+            toolTip.SetToolTip(btnInicio, "INICIO");
+            toolTip.SetToolTip(btnRegistroUnidades, "UNIDADES DE MEDIDA");
+            toolTip.SetToolTip(btnGuardar, "GUARDAR");
+            toolTip.SetToolTip(btnEliminar, "ELIMINAR");
         }
     }
 }

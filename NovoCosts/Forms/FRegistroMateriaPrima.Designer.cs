@@ -66,6 +66,7 @@
             this.dgvMateriaPrima = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnLimpiar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnRegistroUnidades)).BeginInit();
@@ -505,5 +506,6 @@
         private System.Windows.Forms.TextBox txtValorUnitario;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

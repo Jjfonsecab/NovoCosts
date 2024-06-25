@@ -22,6 +22,7 @@ namespace NovoCosts.Forms
 {
     public partial class FFormularioCostos : Form
     {
+        private System.Windows.Forms.ToolTip toolTip;
         public FFormularioCostos()
         {
             InitializeComponent();
@@ -30,6 +31,7 @@ namespace NovoCosts.Forms
         private void FFormularioCostos_Load(object sender, EventArgs e)
         {
             MostrarFechaActual();
+            ToolTipInitialicer();
         }
 
         bool Editar;
@@ -465,6 +467,15 @@ namespace NovoCosts.Forms
                 }
             }
             return true;
-        }        
+        }
+        private void ToolTipInitialicer()
+        {
+            toolTip = new System.Windows.Forms.ToolTip();
+
+            toolTip.SetToolTip(btnLimpiar, "LIMPIAR");
+            toolTip.SetToolTip(btnCostos, "COSTOS");
+            toolTip.SetToolTip(btnPdf, "GENERAR PDF");
+            toolTip.SetToolTip(btnCalcular, "CALCULAR");
+        }
     }
 }

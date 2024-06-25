@@ -9,11 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace NovoCosts.Forms
 {
     public partial class FRegistroTipoCosto : Form
     {
+        private System.Windows.Forms.ToolTip toolTip;
         public FRegistroTipoCosto()
         {
             InitializeComponent();
@@ -22,6 +24,7 @@ namespace NovoCosts.Forms
         private void FRegistroTipoCosto_Load(object sender, EventArgs e)
         {
             ListarTodo();
+            ToolTipInitialicer();
         }
 
         bool Editar;
@@ -277,6 +280,13 @@ namespace NovoCosts.Forms
                     listBox.Items.Add(row[nombreColumna].ToString());
             }
         }
-        
+        private void ToolTipInitialicer()
+        {
+            toolTip = new System.Windows.Forms.ToolTip();
+            
+            toolTip.SetToolTip(btnGuardar, "GUARDAR");
+            toolTip.SetToolTip(btnEliminar, "ELIMINAR");
+        }
+
     }
 }

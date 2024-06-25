@@ -15,6 +15,7 @@ namespace NovoCosts.Forms
 {
     public partial class FCostos : Form
     {
+        private System.Windows.Forms.ToolTip toolTip;
         public FCostos()
         {
             InitializeComponent();
@@ -27,6 +28,7 @@ namespace NovoCosts.Forms
             ListarProductos();
             ListarMaterial();
             MostrarFechaActual();
+            ToolTipInitialicer();
         }
 
         bool Editar;
@@ -942,6 +944,18 @@ namespace NovoCosts.Forms
                 valorDimensiones = "3";
             }
             return valorDimensiones;
-        }        
+        }
+        private void ToolTipInitialicer()
+        {
+            toolTip = new System.Windows.Forms.ToolTip();
+
+            toolTip.SetToolTip(btnLimpiar, "LIMPIAR");
+            toolTip.SetToolTip(btnTipoCostos, "TIPO DE COSTOS");
+            toolTip.SetToolTip(btnPorcentaje, "ACTIVAR PORVENTAJE");
+            toolTip.SetToolTip(btnGuardar, "GUARDAR");
+            toolTip.SetToolTip(btnEliminar, "ELIMINAR");
+            toolTip.SetToolTip(btnFCostos, "FORMULARIO");
+            toolTip.SetToolTip(btnInicio, "INICIO");
+        }
     }
 }

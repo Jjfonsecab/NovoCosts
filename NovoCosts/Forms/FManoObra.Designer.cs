@@ -56,6 +56,7 @@
             this.dgvProductos = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.dgvManoObra = new System.Windows.Forms.DataGridView();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnLimpiar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnTipo)).BeginInit();
@@ -407,5 +408,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.DataGridView dgvManoObra;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

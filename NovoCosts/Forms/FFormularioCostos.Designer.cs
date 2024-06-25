@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FFormularioCostos));
             this.btnLimpiar = new System.Windows.Forms.PictureBox();
             this.dgvManoObra = new System.Windows.Forms.DataGridView();
@@ -56,6 +57,7 @@
             this.btnCalcular = new System.Windows.Forms.Button();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.btnPdf = new System.Windows.Forms.PictureBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.btnLimpiar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvManoObra)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -83,7 +85,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvManoObra.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgvManoObra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvManoObra.Location = new System.Drawing.Point(24, 375);
+            this.dgvManoObra.Location = new System.Drawing.Point(24, 229);
             this.dgvManoObra.Name = "dgvManoObra";
             this.dgvManoObra.RowHeadersWidth = 62;
             this.dgvManoObra.RowTemplate.Height = 28;
@@ -163,13 +165,13 @@
             this.dgvCostos.Name = "dgvCostos";
             this.dgvCostos.RowHeadersWidth = 62;
             this.dgvCostos.RowTemplate.Height = 28;
-            this.dgvCostos.Size = new System.Drawing.Size(1402, 242);
+            this.dgvCostos.Size = new System.Drawing.Size(1402, 96);
             this.dgvCostos.TabIndex = 5;
             // 
             // txtAnotaciones
             // 
             this.txtAnotaciones.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtAnotaciones.Location = new System.Drawing.Point(910, 426);
+            this.txtAnotaciones.Location = new System.Drawing.Point(910, 280);
             this.txtAnotaciones.Name = "txtAnotaciones";
             this.txtAnotaciones.Size = new System.Drawing.Size(511, 26);
             this.txtAnotaciones.TabIndex = 2;
@@ -180,7 +182,7 @@
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(755, 426);
+            this.label1.Location = new System.Drawing.Point(755, 280);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(119, 20);
             this.label1.TabIndex = 70;
@@ -189,7 +191,7 @@
             // txtPorcentaje
             // 
             this.txtPorcentaje.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPorcentaje.Location = new System.Drawing.Point(1331, 474);
+            this.txtPorcentaje.Location = new System.Drawing.Point(1331, 328);
             this.txtPorcentaje.Name = "txtPorcentaje";
             this.txtPorcentaje.Size = new System.Drawing.Size(50, 26);
             this.txtPorcentaje.TabIndex = 3;
@@ -199,7 +201,7 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(1187, 474);
+            this.label3.Location = new System.Drawing.Point(1187, 328);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(105, 20);
             this.label3.TabIndex = 74;
@@ -210,7 +212,7 @@
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(1397, 474);
+            this.label5.Location = new System.Drawing.Point(1397, 328);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(24, 20);
             this.label5.TabIndex = 75;
@@ -221,7 +223,7 @@
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(756, 518);
+            this.label6.Location = new System.Drawing.Point(756, 372);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(80, 20);
             this.label6.TabIndex = 77;
@@ -231,7 +233,7 @@
             // 
             this.txtUtilidad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.txtUtilidad.Enabled = false;
-            this.txtUtilidad.Location = new System.Drawing.Point(932, 518);
+            this.txtUtilidad.Location = new System.Drawing.Point(932, 372);
             this.txtUtilidad.Name = "txtUtilidad";
             this.txtUtilidad.Size = new System.Drawing.Size(188, 26);
             this.txtUtilidad.TabIndex = 4;
@@ -241,7 +243,7 @@
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(907, 518);
+            this.label7.Location = new System.Drawing.Point(907, 372);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(21, 22);
             this.label7.TabIndex = 78;
@@ -252,7 +254,7 @@
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(757, 558);
+            this.label8.Location = new System.Drawing.Point(757, 412);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(134, 20);
             this.label8.TabIndex = 79;
@@ -263,7 +265,7 @@
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(907, 558);
+            this.label9.Location = new System.Drawing.Point(907, 412);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(21, 22);
             this.label9.TabIndex = 81;
@@ -273,7 +275,7 @@
             // 
             this.txtPrecioFabrica.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPrecioFabrica.Enabled = false;
-            this.txtPrecioFabrica.Location = new System.Drawing.Point(932, 558);
+            this.txtPrecioFabrica.Location = new System.Drawing.Point(932, 412);
             this.txtPrecioFabrica.Name = "txtPrecioFabrica";
             this.txtPrecioFabrica.Size = new System.Drawing.Size(188, 26);
             this.txtPrecioFabrica.TabIndex = 80;
@@ -283,7 +285,7 @@
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(907, 474);
+            this.label10.Location = new System.Drawing.Point(907, 328);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(21, 22);
             this.label10.TabIndex = 84;
@@ -293,7 +295,7 @@
             // 
             this.txtCosto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCosto.Enabled = false;
-            this.txtCosto.Location = new System.Drawing.Point(932, 474);
+            this.txtCosto.Location = new System.Drawing.Point(932, 328);
             this.txtCosto.Name = "txtCosto";
             this.txtCosto.Size = new System.Drawing.Size(188, 26);
             this.txtCosto.TabIndex = 3;
@@ -303,7 +305,7 @@
             this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(756, 474);
+            this.label11.Location = new System.Drawing.Point(756, 328);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(66, 20);
             this.label11.TabIndex = 83;
@@ -328,7 +330,7 @@
             this.btnCalcular.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnCalcular.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCalcular.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCalcular.Location = new System.Drawing.Point(1315, 537);
+            this.btnCalcular.Location = new System.Drawing.Point(1315, 391);
             this.btnCalcular.Name = "btnCalcular";
             this.btnCalcular.Size = new System.Drawing.Size(106, 62);
             this.btnCalcular.TabIndex = 4;
@@ -354,7 +356,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.ClientSize = new System.Drawing.Size(1450, 629);
+            this.ClientSize = new System.Drawing.Size(1450, 483);
             this.Controls.Add(this.btnPdf);
             this.Controls.Add(this.btnCalcular);
             this.Controls.Add(this.btnCostos);
@@ -421,5 +423,6 @@
         private System.Windows.Forms.Button btnCalcular;
         private System.Drawing.Printing.PrintDocument printDocument1;
         private System.Windows.Forms.PictureBox btnPdf;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
