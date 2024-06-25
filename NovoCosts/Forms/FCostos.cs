@@ -878,7 +878,6 @@ namespace NovoCosts.Forms
             {
                 cm = Convert.ToDecimal(txtCantidad.Text);
             }
-
             if (selectedIndex == 1)
             {
                 ResultadoTotalCantidad = (cantidad * d1) / cm;
@@ -901,11 +900,12 @@ namespace NovoCosts.Forms
             }
 
         }
-        private decimal CalcularDesperdicio(decimal totalDesperdicio, decimal totalCantidad)
+        private decimal CalcularDesperdicio(decimal totalCantidad, decimal totalDesperdicio)
         {
-            ResultadoDesperdicio = totalDesperdicio * totalCantidad;
+            decimal porcentaje = totalDesperdicio / 100;
+            ResultadoDesperdicio = totalCantidad * porcentaje;
+            Console.WriteLine("Calculo Desperdicio = " + totalCantidad + " * " + totalDesperdicio + $"( {porcentaje}) =" + ResultadoDesperdicio);
 
-            Console.WriteLine($"ResultadoDesperdicio :" + totalDesperdicio + " * " + totalCantidad + " = " + ResultadoDesperdicio);
             return ResultadoDesperdicio;
         }
         private decimal CalcularValorTotal(decimal ValorU)
@@ -913,12 +913,10 @@ namespace NovoCosts.Forms
             if (ResultadoDesperdicio != 0 && ResultadoTotalCantidad != 0)
             {
                 ResultadoValorTotal = (ResultadoDesperdicio + ResultadoTotalCantidad) * ValorU;
-                Console.WriteLine($"ResultadoValorTotal :" + ResultadoDesperdicio + " + " + ResultadoTotalCantidad + " * " + ValorU + " = " + ResultadoValorTotal);
             }
             else
             {
                 ResultadoValorTotal = (ResultadoTotalCantidad + ResultadoDesperdicio) * ValorU;
-                Console.WriteLine($"ResultadoValorTotal :" + ResultadoValorTotal);
             }
 
             return ResultadoValorTotal;
