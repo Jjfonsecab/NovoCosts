@@ -17,6 +17,7 @@ namespace NovoCosts.Forms
         {
             InitializeComponent();
             ToolTipInitialicer();
+            this.FormClosing += new FormClosingEventHandler(FInicio_FormClosing);
         }
         private void FInicio_Load(object sender, EventArgs e)
         {
@@ -79,6 +80,18 @@ namespace NovoCosts.Forms
             toolTip.SetToolTip(btnProducto, "PRODUCTO");
             toolTip.SetToolTip(btnMateriaPrima, "MATERIA PRIMA");
             toolTip.SetToolTip(btnCostos, "COSTOS");
+        }
+        private void FInicio_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            var result = MessageBox.Show("¿Deseas salir de la aplicación?", "Confirmar salida", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.No)
+            {
+                e.Cancel = true; 
+            }
+            else
+            {
+                Application.Exit(); 
+            }
         }
     }
 }

@@ -20,7 +20,6 @@ namespace NovoCosts.Class
         {
             if (connection.State == System.Data.ConnectionState.Closed) connection.Open();
         }
-
         static void CerrarConexion()
         {
             if (connection.State == System.Data.ConnectionState.Open) connection.Close();
@@ -73,7 +72,7 @@ namespace NovoCosts.Class
             {
                 CerrarConexion();
             }
-        }
+        }        
         public static DataTable Listar(string nombreProcedimiento, List<Parametro> parametros = null)
         {
 
@@ -102,6 +101,57 @@ namespace NovoCosts.Class
             }
             finally { CerrarConexion(); }
         }
+        public static string ObtenerPasswordHash(string nombreUsuario)
+        {
+            try
+            {
+                AbrirConexion();
+                SqlCommand cmd = new SqlCommand("ObtenerPasswordHash", connection);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@NombreUsuario", nombreUsuario);
+
+                object resultado = cmd.ExecuteScalar();
+                return resultado != null ? resultado.ToString() : null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener el hash de la contraseña. " + ex.Message);
+                throw;
+            }
+            finally
+            {
+                CerrarConexion();
+            }
+        }
+        internal static int ObtenerUserId(string usuario)
+        {
+            try
+            {
+                AbrirConexion();
+                SqlCommand cmd = new SqlCommand("ObtenerUsuarioId", connection);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@NombreUsuario", usuario);
+
+                object resultado = cmd.ExecuteScalar();
+                if (resultado != null && int.TryParse(resultado.ToString(), out int userId))
+                {
+                    return userId;
+                }
+                else
+                {
+                    throw new Exception("No se encontró el ID del usuario.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener el hash de la contraseña. " + ex.Message);
+                throw;
+            }
+            finally
+            {
+                CerrarConexion();
+            }
+        }
         public static void OcultarIds(DataGridView dataGrid)
         {
             foreach (DataGridViewColumn column in dataGrid.Columns)
@@ -112,5 +162,7 @@ namespace NovoCosts.Class
                 }
             }
         }
+
+       
     }
 }

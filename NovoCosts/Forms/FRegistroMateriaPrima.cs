@@ -88,7 +88,7 @@ namespace NovoCosts.Forms
                 int id_materia_prima = Convert.ToInt32(cell.Value);
                 IdMateriaPrima = id_materia_prima;
                 Eliminar();
-                MessageBox.Show("Proceso Exitoso.");
+                MessageBox.Show("Eliminacion Exitosa.");
                 Finalizar();
             }
         }
@@ -352,8 +352,9 @@ namespace NovoCosts.Forms
                         dgvMateriaPrima.Columns["comentarios"].HeaderText = "COMENTARIOS";
                         dgvMateriaPrima.Columns[columna.Name].Width = 170;
                     }
-                    else if (columna.Name == "medida" )
+                    else if (columna.Name == "medida" || columna.Name == "desperdicio_cantidad" )
                     {
+                        dgvMateriaPrima.Columns["desperdicio_cantidad"].HeaderText = "DESPER";
                         dgvMateriaPrima.Columns["medida"].HeaderText = "MEDIDA";                     
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -365,9 +366,8 @@ namespace NovoCosts.Forms
                     {                        
                         dgvMateriaPrima.Columns["fecha"].Visible = false;
                     }
-                    else if (columna.Name == "desperdicio_cantidad" || columna.Name == "valor")
+                    else if (columna.Name == "valor")
                     {
-                        dgvMateriaPrima.Columns["desperdicio_cantidad"].HeaderText = "DESPERDICIO";
                         dgvMateriaPrima.Columns["valor"].HeaderText = "VALOR";
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight;
