@@ -15,6 +15,7 @@ namespace NovoCosts.Forms
 {
     public partial class FManoObra : Form
     {
+        int usuarioIdActual = CurrentUser.UserId;
         private System.Windows.Forms.ToolTip toolTip;
         public FManoObra()
         {
@@ -240,6 +241,7 @@ namespace NovoCosts.Forms
                     Fecha = DateTime.Parse(txtFecha.Text),
                     TotalCantidad = Convert.ToDecimal(txtCantidad.Text),
                     ValorTotal = ResultadoValorTotal,
+                    IdUser = usuarioIdActual,
                 };
                 MessageBox.Show("Guardado con Exito.!");
                 return ManoObra.Guardar(manoobra, Editar);
@@ -271,6 +273,7 @@ namespace NovoCosts.Forms
                         Fecha = DateTime.Parse(txtFecha.Text),
                         TotalCantidad = Convert.ToDecimal(txtCantidad.Text),
                         ValorTotal = ResultadoValorTotal,
+                        IdUser = usuarioIdActual,
                     };
                     LimpiarDataGridView();
                     return ManoObra.Guardar(manoobra, true);

@@ -1,4 +1,4 @@
-ALTER PROCEDURE [dbo].[RetornarUnidadesPorNombre]
+CREATE PROCEDURE [dbo].[RetornarUnidadesPorNombre]
     @NombreBuscado VARCHAR(200) = NULL
 AS
 BEGIN
@@ -10,7 +10,7 @@ BEGIN
     WHERE ([nombre] LIKE '%' + ISNULL(@NombreBuscado, '') + '%');
 END
 
-ALTER PROCEDURE [dbo].[RetornarProductoPorReferencia]
+CREATE PROCEDURE [dbo].[RetornarProductoPorReferencia]
     @NombreBuscado VARCHAR(200) = NULL
 AS
 BEGIN
@@ -22,7 +22,7 @@ BEGIN
     WHERE (referencia LIKE '%' + ISNULL(@NombreBuscado, '') + '%');
 END
 
-ALTER PROCEDURE [dbo].[RetornarProductoPorDescripcion]
+CREATE PROCEDURE [dbo].[RetornarProductoPorDescripcion]
     @NombreBuscado VARCHAR(200) = NULL
 AS
 BEGIN
@@ -34,7 +34,7 @@ BEGIN
     WHERE (descripcion LIKE '%' + ISNULL(@NombreBuscado, '') + '%');
 END
 
-ALTER PROCEDURE [dbo].[RetornarNombreTipoCosto]
+CREATE PROCEDURE [dbo].[RetornarNombreTipoCosto]
     @NombreBuscado NVARCHAR(200) = NULL
 AS
 BEGIN
@@ -46,7 +46,7 @@ BEGIN
     WHERE [nombre] LIKE '%' + ISNULL(@NombreBuscado, '') + '%';
 END
 
-ALTER PROCEDURE [dbo].[RetornarNombreTipo]
+CREATE PROCEDURE [dbo].[RetornarNombreTipo]
     @NombreBuscado NVARCHAR(200) = NULL
 AS
 BEGIN
@@ -58,7 +58,7 @@ BEGIN
     WHERE [nombre_tipo] LIKE '%' + ISNULL(@NombreBuscado, '') + '%';
 END
 
-ALTER PROCEDURE [dbo].[RetornarMateriaPrimaPorReferencia]
+CREATE PROCEDURE [dbo].[RetornarMateriaPrimaPorReferencia]
     @NombreBuscado VARCHAR(200) = NULL
 AS
 BEGIN
@@ -69,7 +69,8 @@ BEGIN
     FROM [dbo].[Productos]
     WHERE ([referencia] LIKE '%' + ISNULL(@NombreBuscado, '') + '%');
 END
-ALTER PROCEDURE [dbo].[RetornarMateriaPrimaPorProveedor]
+
+CREATE PROCEDURE [dbo].[RetornarMateriaPrimaPorProveedor]
     @NombreBuscado VARCHAR(200) = NULL
 AS
 BEGIN
@@ -80,7 +81,8 @@ BEGIN
     FROM [dbo].[CostosMateriasPrimas]
     WHERE ([proveedor] LIKE '%' + ISNULL(@NombreBuscado, '') + '%');
 END
-ALTER PROCEDURE [dbo].[RetornarMateriaPrimaPorDetalle]
+
+CREATE PROCEDURE [dbo].[RetornarMateriaPrimaPorDetalle]
     @NombreBuscado VARCHAR(200) = NULL
 AS
 BEGIN
@@ -91,7 +93,8 @@ BEGIN
     FROM [dbo].[CostosMateriasPrimas]
     WHERE ([detalle_mp] LIKE '%' + ISNULL(@NombreBuscado, '') + '%');
 END
-ALTER PROCEDURE [dbo].[RetornarMateriaPrimaPorDescripcion]
+
+CREATE PROCEDURE [dbo].[RetornarMateriaPrimaPorDescripcion]
     @NombreBuscado VARCHAR(200) = NULL
 AS
 BEGIN

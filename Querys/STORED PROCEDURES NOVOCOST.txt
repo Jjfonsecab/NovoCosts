@@ -2,7 +2,7 @@ STORED PROCEDURE
 
 -> COSTO:
 
-ALTER PROCEDURE [dbo].[Costos_Agregar]
+CREATE PROCEDURE [dbo].[Costos_Agregar]
 (
 	@id_costos INT,
     @id_producto INT,
@@ -19,7 +19,8 @@ ALTER PROCEDURE [dbo].[Costos_Agregar]
 	@valor_unitario DECIMAL(18, 2),
 	@valor_total DECIMAL(18, 8),
 	@id_tipo_costo INT,
-    @fecha DATE,
+    	@fecha DATE,
+	@id_usuario INT,
 	@Editar bit
 )
 AS
@@ -40,8 +41,9 @@ BEGIN
 				   ,[total_cantidad]
 				   ,[valor_unitario]
 				   ,[valor_total]
-				   ,[id_tipo_costo]
-				   ,[fecha])
+				   ,[id_tipo_costo]				   
+				   ,[fecha]
+				   ,[id_usuario])
 			 VALUES
 				   (@id_producto,
 				   @id_materia_prima,
@@ -57,7 +59,8 @@ BEGIN
 				   @valor_unitario,
 				   @valor_total,
 				   @id_tipo_costo,
-				   @fecha)
+				   @fecha,
+				   @id_usuario )
 	END
 	ELSE
 	BEGIN
@@ -77,13 +80,14 @@ BEGIN
 			  ,[valor_total] = @valor_total
 			  ,[id_tipo_costo] = @id_tipo_costo
 			  ,[fecha] = @fecha
+			  ,[id_usuario] = @id_usuario
 		WHERE id_costos = @id_costos
 	END
 END
 
 
 
-ALTER PROCEDURE [dbo].[Costos_Eliminar]
+CREATE PROCEDURE [dbo].[Costos_Eliminar]
     @id_costos INT
 AS
 BEGIN
@@ -91,7 +95,7 @@ BEGIN
 END;
 
 
-ALTER PROCEDURE [dbo].[ObtenerCostosPorProducto]
+CREATE PROCEDURE [dbo].[ObtenerCostosPorProducto]
     @id_producto INT
 AS
 BEGIN
@@ -118,15 +122,16 @@ END;
 
 ->FORMULARIO COSTO:
 
-ALTER PROCEDURE [dbo].[Formulario_Costos_Agregar]
+CREATE PROCEDURE [dbo].[Formulario_Costos_Agregar]
 (
 	@id_formulario_costos INT,
-    @id_producto INT,
+    	@id_producto INT,
 	@porcentaje_ganancia DECIMAL(18, 2),
-    @utilidad DECIMAL(18, 2),
+    	@utilidad DECIMAL(18, 2),
 	@precio_fabrica DECIMAL(18, 2),
 	@anotaciones varchar(150),
-    @fecha DATE,
+    	@fecha DATE,
+	@id_usuario INT,
 	@Editar bit
 )
 AS
@@ -138,15 +143,17 @@ BEGIN
 				   ,[porcentaje_ganancia]
 				   ,[utilidad]
 				   ,[precio_fabrica]
-				   ,[anotaciones]
-				   ,[fecha])
+				   ,[anotaciones]				   
+				   ,[fecha]
+				   ,[id_usuario])
 			 VALUES
 				   (@id_producto,
 				   @porcentaje_ganancia,
 				   @utilidad,
 				   @precio_fabrica,
 				   @anotaciones,
-				   @fecha)
+				   @fecha,
+				   @id_usuario)
 	END
 	ELSE
 	BEGIN
@@ -157,6 +164,8 @@ BEGIN
 			  ,[precio_fabrica] = @precio_fabrica
 			  ,[anotaciones] = @anotaciones
 			  ,[fecha] = @fecha
+			  ,[id_usuario] = @id_usuario
+
 		WHERE id_formulario_costos = @id_formulario_costos
 	END
 END
@@ -166,15 +175,16 @@ END
 
 
 
-ALTER PROCEDURE [dbo].[ManoObra_Agregar]
+CREATE PROCEDURE [dbo].[ManoObra_Agregar]
 (	
 	@id_mano_obra int,
 	@id_producto int,
-    @id_tipo_mano_obra INT,
-    @costo decimal(18,0),	
+    	@id_tipo_mano_obra INT,
+    	@costo decimal(18,0),	
 	@fecha date,
 	@total_cantidad decimal(18,2),
 	@valor_total decimal(18,2),
+	@id_usuario int,
 	@Editar bit
 )
 AS
@@ -187,14 +197,16 @@ BEGIN
 					[costo],	
 					[fecha],
 					[total_cantidad],
-					[valor_total])
+					[valor_total],
+					[id_usuario])
 			 VALUES
 				   (@id_producto,
 					@id_tipo_mano_obra ,
 					@costo,	
 					@fecha,
 					@total_cantidad,
-					@valor_total)
+					@valor_total,
+					@id_usuario)
 	END
 	ELSE
 	BEGIN
@@ -204,7 +216,8 @@ BEGIN
 					[costo] = @costo,	
 					[fecha] = @fecha,
 					[total_cantidad] = @total_cantidad,
-					[valor_total] =@valor_total
+					[valor_total] =@valor_total,
+					[id_usuario] = @id_usuario
 		WHERE id_mano_obra = @id_mano_obra
 	END
 END
@@ -212,7 +225,7 @@ END
 
 
 
-ALTER PROCEDURE [dbo].[ManoObra_Eliminar]
+CREATE PROCEDURE [dbo].[ManoObra_Eliminar]
     @id_mano_obra INT
 AS
 BEGIN
@@ -221,7 +234,7 @@ END;
 
 
 
-ALTER PROCEDURE [dbo].[ObtenerManoObraPorProducto]
+CREATE PROCEDURE [dbo].[ObtenerManoObraPorProducto]
     @id_producto INT
 AS
 BEGIN
@@ -245,7 +258,7 @@ END;
 -> MATERIAS PRIMAS:
 
 
-ALTER PROCEDURE [dbo].[MateriaPrima_Agregar]
+CREATE PROCEDURE [dbo].[MateriaPrima_Agregar]
 (
 
 	@detalle_mp VARCHAR(100),
@@ -257,6 +270,7 @@ ALTER PROCEDURE [dbo].[MateriaPrima_Agregar]
 	@desperdicio_cantidad DECIMAL(18, 2),
     @fecha DATE,
     @comentarios VARCHAR(150),
+@id_usuario INT,
 	@Editar bit
 )
 AS
@@ -271,7 +285,8 @@ BEGIN
 				   ,[proveedor]
 				   ,[desperdicio_cantidad]
 				   ,[fecha]
-				   ,[comentarios])
+				   ,[comentarios]
+				   ,[id_usuario])
 			 VALUES
 				   (@detalle_mp
 				   ,@id_unidad_medida
@@ -280,7 +295,8 @@ BEGIN
 				   ,@proveedor
 				   ,@desperdicio_cantidad
 				   ,@fecha
-				   ,@comentarios)
+				   ,@comentarios
+				   ,@id_usuario)
 	END
 	ELSE
 	BEGIN
@@ -293,12 +309,13 @@ BEGIN
 			  ,[desperdicio_cantidad] = @desperdicio_cantidad
 			  ,[fecha] = @fecha
 			  ,[comentarios] = @Comentarios
+			  ,[id_usuario] = @id_usuario
 		WHERE id_materia_prima = @id_materia_prima
 	END
 END
 
 
-ALTER PROCEDURE [dbo].[MateriaPrima_Eliminar]
+CREATE PROCEDURE [dbo].[MateriaPrima_Eliminar]
     @id_materia_prima INT
 AS
 BEGIN
@@ -307,7 +324,7 @@ END;
 
 
 
-ALTER PROCEDURE [dbo].[Listar_MaterialId]
+CREATE PROCEDURE [dbo].[Listar_MaterialId]
     @id_material INT
 AS
 BEGIN
@@ -319,14 +336,14 @@ BEGIN
 END;
 
 
-ALTER PROCEDURE [dbo].[MateriaPrima_Listar]
+CREATE PROCEDURE [dbo].[MateriaPrima_Listar]
 AS
 BEGIN
 	SELECT * FROM CostosMateriasPrimas
 END
 
 
-ALTER PROCEDURE [dbo].[MateriaPrima_Listar_Actualizado]
+CREATE PROCEDURE [dbo].[MateriaPrima_Listar_Actualizado]
 AS
 BEGIN
     SELECT cmp.*
@@ -340,7 +357,7 @@ END
 
 
 -> PRODUCTO : 
-ALTER PROCEDURE [dbo].[Producto_Agregar]
+CREATE PROCEDURE [dbo].[Producto_Agregar]
 (	
     @id_producto INT,
     @referencia VARCHAR(100),
@@ -385,7 +402,7 @@ END
 
 
 
-ALTER PROCEDURE [dbo].[Producto_Eliminar]
+CREATE PROCEDURE [dbo].[Producto_Eliminar]
     @id_producto INT
 AS
 BEGIN
@@ -394,7 +411,7 @@ END;
 
 
 
-ALTER PROCEDURE [dbo].[Producto_Listar]
+CREATE PROCEDURE [dbo].[Producto_Listar]
 AS
 BEGIN
 	SELECT * FROM Productos
@@ -402,7 +419,7 @@ END
 
 
 
-ALTER PROCEDURE [dbo].[Listar_ProductoId]
+CREATE PROCEDURE [dbo].[Listar_ProductoId]
     @id_producto INT
 AS
 BEGIN
@@ -414,7 +431,7 @@ BEGIN
 END;
 
 
-ALTER PROCEDURE [dbo].[Productos_Listar]
+CREATE PROCEDURE [dbo].[Productos_Listar]
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -427,7 +444,7 @@ END;
 -> TIPO COSTO
 
 
-ALTER PROCEDURE [dbo].[TipoCosto_Agregar]
+CREATE PROCEDURE [dbo].[TipoCosto_Agregar]
 (	
     @id_tipo_costo INT,
     @nombre VARCHAR(100),
@@ -462,7 +479,7 @@ END
 
 
 
-ALTER PROCEDURE [dbo].[TipoCosto_Eliminar]
+CREATE PROCEDURE [dbo].[TipoCosto_Eliminar]
     @id_tipo_costo INT
 AS
 BEGIN
@@ -471,14 +488,14 @@ END;
 
 
 
-ALTER PROCEDURE [dbo].[TipoCosto_Listar]
+CREATE PROCEDURE [dbo].[TipoCosto_Listar]
 AS
 BEGIN
 	SELECT * FROM TipoCosto
 END
 
 
-ALTER PROCEDURE [dbo].[Listar_TipoCostoId]
+CREATE PROCEDURE [dbo].[Listar_TipoCostoId]
     @id_tipo_costo INT
 AS
 BEGIN
@@ -491,7 +508,7 @@ END;
 
 
 
-ALTER PROCEDURE [dbo].[ObtenerTipoCostoPorId]
+CREATE PROCEDURE [dbo].[ObtenerTipoCostoPorId]
     @id_tipo_costo INT
 AS
 BEGIN
@@ -508,7 +525,7 @@ END;
 
 
 
-ALTER PROCEDURE [dbo].[TipoManoObra_Agregar]
+CREATE PROCEDURE [dbo].[TipoManoObra_Agregar]
 (	
     @id_tipo_mano_obra INT,
     @nombre_tipo VARCHAR(100),
@@ -543,7 +560,7 @@ END
 
 
 
-ALTER PROCEDURE [dbo].[TipoManoObra_Eliminar]
+CREATE PROCEDURE [dbo].[TipoManoObra_Eliminar]
     @id_tipo_mano_obra INT
 AS
 BEGIN
@@ -552,7 +569,7 @@ END;
 
 
 
-ALTER PROCEDURE [dbo].[ObtenerTipoManoObraPorId]
+CREATE PROCEDURE [dbo].[ObtenerTipoManoObraPorId]
     @id_tipo_mano_obra INT
 AS
 BEGIN
@@ -566,7 +583,7 @@ END;
 
 
 
-ALTER PROCEDURE [dbo].[TipoManoObra_Listar]
+CREATE PROCEDURE [dbo].[TipoManoObra_Listar]
 AS
 BEGIN
 	SELECT * FROM TipoManoObra
@@ -577,7 +594,7 @@ END
 
 
 
-ALTER PROCEDURE [dbo].[UnidadMedida_Agregar]
+CREATE PROCEDURE [dbo].[UnidadMedida_Agregar]
 (
     @id_unidad_medida INT,
 	@nombre VARCHAR(100),
@@ -607,7 +624,7 @@ END
 
 
 
-ALTER PROCEDURE [dbo].[UnidadMedida_Eliminar]
+CREATE PROCEDURE [dbo].[UnidadMedida_Eliminar]
     @id_unidad_medida INT
 AS
 BEGIN
@@ -617,7 +634,7 @@ END;
 
 
 
-ALTER PROCEDURE [dbo].[UnidadesMedida_Listar]
+CREATE PROCEDURE [dbo].[UnidadesMedida_Listar]
 AS
 BEGIN
     SELECT * FROM UnidadesMedida

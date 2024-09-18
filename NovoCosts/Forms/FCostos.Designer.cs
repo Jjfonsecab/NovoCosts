@@ -201,6 +201,7 @@
             this.dgvManoObra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvManoObra.Location = new System.Drawing.Point(3, 6);
             this.dgvManoObra.Name = "dgvManoObra";
+            this.dgvManoObra.ReadOnly = true;
             this.dgvManoObra.RowHeadersWidth = 62;
             this.dgvManoObra.RowTemplate.Height = 28;
             this.dgvManoObra.Size = new System.Drawing.Size(1729, 443);

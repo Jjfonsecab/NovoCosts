@@ -9,15 +9,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace NovoCosts.Forms
 {
     public partial class FUser : Form
     {
+        private System.Windows.Forms.ToolTip toolTip;
         public FUser()
         {
             InitializeComponent();
+            ToolTipInitialicer();
+            ToUpperText();
         }
 
         private void FUser_Load(object sender, EventArgs e)
@@ -68,13 +72,35 @@ namespace NovoCosts.Forms
                 MessageBox.Show("Error de verificacion!. " + ex);
             }
 
-        }
-       
+        }       
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             txtUsuario.Text = "";
             txtContraseña.Text = "";
+        }
+        private void ToolTipInitialicer()
+        {
+            toolTip = new System.Windows.Forms.ToolTip();
+
+            toolTip.SetToolTip(BtnOk, "OK");
+            toolTip.SetToolTip(BtnCancel, "CANCELAR");
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                txtContraseña.PasswordChar = '\0'; 
+            }
+            else
+            {
+                txtContraseña.PasswordChar = '*';
+            }
+        }
+        private void ToUpperText()
+        {
+            txtUsuario.CharacterCasing = CharacterCasing.Upper;
         }
     }
 }

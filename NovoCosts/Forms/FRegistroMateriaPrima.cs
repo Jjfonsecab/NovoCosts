@@ -17,6 +17,7 @@ namespace NovoCosts.Forms
 {
     public partial class FRegistroMateriaPrima : Form
     {
+        int usuarioIdActual = CurrentUser.UserId;
         private System.Windows.Forms.ToolTip toolTip;
         public FRegistroMateriaPrima()
         {
@@ -226,6 +227,7 @@ namespace NovoCosts.Forms
                     Fecha = DateTime.Parse(txtFecha.Text),
                     Comentarios = txtComentarios.Text,
                     IdMateriaPrima = IdMateriaPrima,
+                    IdUser = usuarioIdActual,
                 };
 
                 return MateriasPrimas.Guardar(materiasPrimas, Editar);
@@ -253,6 +255,7 @@ namespace NovoCosts.Forms
                     Desperdicio = Convert.ToDecimal(txtCantidadDesperdicio.Text),
                     Fecha = fechaOriginal,
                     Comentarios = txtComentarios.Text,
+                    IdUser = usuarioIdActual,
                 };
                 MessageBox.Show("Actualizando costos.!");
                 return MateriasPrimas.Guardar(materiasPrimasEditado, true);

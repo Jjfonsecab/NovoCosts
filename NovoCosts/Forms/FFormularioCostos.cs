@@ -22,6 +22,7 @@ namespace NovoCosts.Forms
 {
     public partial class FFormularioCostos : Form
     {
+        int usuarioIdActual = CurrentUser.UserId;
         private System.Windows.Forms.ToolTip toolTip;
         public FFormularioCostos()
         {
@@ -59,7 +60,7 @@ namespace NovoCosts.Forms
 
             this.Close();
         }
-        private void btnLimpiar_Click(object sender, EventArgs e)//toDos
+        private void btnLimpiar_Click(object sender, EventArgs e)
         {
             comboBox1.Text = "";
             txtAnotaciones.Text = "N.A.";
@@ -101,7 +102,7 @@ namespace NovoCosts.Forms
                     paginaHtml_texto = paginaHtml_texto.Replace("@porcentaje", Convert.ToDouble(txtPorcentaje.Text).ToString());
                     paginaHtml_texto = paginaHtml_texto.Replace("@precioFabrica", Convert.ToDouble(txtPrecioFabrica.Text).ToString("#,##0", CultureInfo.InvariantCulture));
                     paginaHtml_texto = paginaHtml_texto.Replace("@utilidad", Convert.ToDouble(txtUtilidad.Text).ToString("#,##0", CultureInfo.InvariantCulture));
-
+                    
 
                     string filasCostos = string.Empty;
                     string filasManoObra = string.Empty;
@@ -221,6 +222,7 @@ namespace NovoCosts.Forms
                     Utilidad = Convert.ToDecimal(txtUtilidad.Text),
                     PrecioFabrica = Convert.ToDecimal(txtPrecioFabrica.Text),                    
                     Anotaciones = txtAnotaciones.Text,
+                    IdUser = usuarioIdActual,
 
                     Fecha = DateTime.Parse(txtFecha.Text),
                 };

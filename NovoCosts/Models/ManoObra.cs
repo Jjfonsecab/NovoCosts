@@ -17,6 +17,7 @@ namespace NovoCosts.Models
         public DateTime Fecha { get; set; }
         public decimal TotalCantidad { get; set; }
         public decimal ValorTotal { get; set; }
+        public int IdUser { get; set; }
 
         public static bool Guardar(ManoObra manoObra, bool editar)
         {
@@ -29,6 +30,7 @@ namespace NovoCosts.Models
                 new Parametro("@fecha", manoObra.Fecha),
                 new Parametro("@total_cantidad", manoObra.TotalCantidad),
                 new Parametro("@valor_total", manoObra.ValorTotal),
+                new Parametro("@id_usuario", manoObra.IdUser),
                 new Parametro("@Editar", editar)
             };
             return DbDatos.Ejecutar("ManoObra_Agregar", parametros);

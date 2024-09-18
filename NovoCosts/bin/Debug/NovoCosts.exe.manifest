@@ -79,14 +79,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NovoCosts.exe" size="5954536">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NovoCosts.exe" size="5955560">
       <assemblyIdentity name="NovoCosts" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Wtg8ZQo6WN5W58QOJM7+8ng4glEtayXWTvnJEO2Yl8w=</dsig:DigestValue>
+        <dsig:DigestValue>TcbC8Ni5U9Rp4TNpLuhVvaZRpeddzeTTck1MwUrGVe0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -19,6 +19,7 @@ namespace NovoCosts.Models
         public decimal Desperdicio {  get; set; }
         public DateTime Fecha { get; set; }
         public string Comentarios { get; set; }
+        public int IdUser { get; set; }
 
         public static bool Guardar(MateriasPrimas materiasPrimas, bool editar)
         {
@@ -33,6 +34,7 @@ namespace NovoCosts.Models
                 new Parametro("@desperdicio_cantidad", materiasPrimas.Desperdicio),
                 new Parametro("@fecha", materiasPrimas.Fecha),
                 new Parametro("@Comentarios", materiasPrimas.Comentarios),
+                new Parametro("@id_usuario", materiasPrimas.IdUser),
                 new Parametro("@Editar", editar)
             };
             return DbDatos.Ejecutar("MateriaPrima_Agregar", parametros);

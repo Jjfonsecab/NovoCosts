@@ -3,20 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\novocosts\\forms\\fuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\forms\\fuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|c:\\users\\jeison\\documents\\code\u0027s\\.net\\novocosts\\novocosts\\forms\\fmanoobra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\forms\\fmanoobra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|c:\\users\\jeison\\documents\\code\u0027s\\.net\\novocosts\\novocosts\\forms\\fmanoobra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\forms\\fmanoobra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\novocosts\\forms\\fuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\forms\\fuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|c:\\users\\jeison\\documents\\code\u0027s\\.net\\novocosts\\novocosts\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 324,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,53 +22,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "FManoObra.cs",
-              "DocumentMoniker": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FManoObra.cs",
-              "RelativeDocumentMoniker": "NovoCosts\\Forms\\FManoObra.cs",
-              "ToolTip": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FManoObra.cs",
-              "RelativeToolTip": "NovoCosts\\Forms\\FManoObra.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAkwBAAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-17T20:02:03.529Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "FManoObra.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FManoObra.cs",
-              "RelativeDocumentMoniker": "NovoCosts\\Forms\\FManoObra.cs",
-              "ToolTip": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FManoObra.cs [Design]",
-              "RelativeToolTip": "NovoCosts\\Forms\\FManoObra.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-17T20:02:01.499Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "FUser.cs",
-              "DocumentMoniker": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FUser.cs",
-              "RelativeDocumentMoniker": "NovoCosts\\Forms\\FUser.cs",
-              "ToolTip": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FUser.cs*",
-              "RelativeToolTip": "NovoCosts\\Forms\\FUser.cs*",
-              "ViewState": "AgIAACoAAAAAAAAAAADwvzUAAAA6AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-16T17:32:42.582Z",
+              "Title": "App.config",
+              "DocumentMoniker": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\App.config",
+              "RelativeDocumentMoniker": "NovoCosts\\App.config",
+              "ToolTip": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\App.config",
+              "RelativeToolTip": "NovoCosts\\App.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2024-09-18T16:25:01.423Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "FUser.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FUser.cs",
-              "RelativeDocumentMoniker": "NovoCosts\\Forms\\FUser.cs",
-              "ToolTip": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FUser.cs [Design]*",
-              "RelativeToolTip": "NovoCosts\\Forms\\FUser.cs [Design]*",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-16T17:27:28.207Z",
-              "EditorCaption": " [Design]"
             }
           ]
         }

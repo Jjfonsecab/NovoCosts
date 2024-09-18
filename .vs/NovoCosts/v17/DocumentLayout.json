@@ -7,12 +7,12 @@
       "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|c:\\users\\jeison\\documents\\code\u0027s\\.net\\novocosts\\novocosts\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|c:\\users\\jeison\\documents\\code\u0027s\\.net\\novocosts\\novocosts\\forms\\fuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\forms\\fuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|c:\\users\\jeison\\documents\\code\u0027s\\.net\\novocosts\\novocosts\\class\\dbdatos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\class\\dbdatos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|c:\\users\\jeison\\documents\\code\u0027s\\.net\\novocosts\\novocosts\\forms\\finicio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{EE5F67FD-00AB-45A7-9068-6D32E9AA6034}|NovoCosts\\NovoCosts.csproj|solutionrelative:novocosts\\forms\\finicio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,11 +22,35 @@
       "DocumentGroups": [
         {
           "DockedWidth": 324,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FUser.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FUser.cs",
+              "RelativeDocumentMoniker": "NovoCosts\\Forms\\FUser.cs",
+              "ToolTip": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FUser.cs [Design]",
+              "RelativeToolTip": "NovoCosts\\Forms\\FUser.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-18T19:34:25.681Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FInicio.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FInicio.cs",
+              "RelativeDocumentMoniker": "NovoCosts\\Forms\\FInicio.cs",
+              "ToolTip": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Forms\\FInicio.cs [Design]",
+              "RelativeToolTip": "NovoCosts\\Forms\\FInicio.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-18T19:34:24.319Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
@@ -38,33 +62,7 @@
               "RelativeToolTip": "NovoCosts\\App.config",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2024-09-17T20:23:05.399Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DbDatos.cs",
-              "DocumentMoniker": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Class\\DbDatos.cs",
-              "RelativeDocumentMoniker": "NovoCosts\\Class\\DbDatos.cs",
-              "ToolTip": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Class\\DbDatos.cs",
-              "RelativeToolTip": "NovoCosts\\Class\\DbDatos.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAAwJkAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-17T20:22:41.815Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Program.cs",
-              "RelativeDocumentMoniker": "NovoCosts\\Program.cs",
-              "ToolTip": "C:\\Users\\Jeison\\Documents\\CODE\u0027S\\.NET\\NovoCosts\\NovoCosts\\Program.cs",
-              "RelativeToolTip": "NovoCosts\\Program.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-17T20:22:37.571Z",
+              "WhenOpened": "2024-09-18T16:25:01.423Z",
               "EditorCaption": ""
             }
           ]

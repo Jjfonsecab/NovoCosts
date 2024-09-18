@@ -17,6 +17,7 @@ namespace NovoCosts.Models
         public decimal PrecioFabrica { get; set; }
         public String Anotaciones { get; set; }
         public DateTime Fecha { get; set; }
+        public int IdUser { get; set; }
 
         public static bool Guardar(FormularioCostos fcostos, bool editar)
         {
@@ -29,6 +30,7 @@ namespace NovoCosts.Models
                 new Parametro("@precio_fabrica", fcostos.PrecioFabrica),
                 new Parametro("@anotaciones", fcostos.Anotaciones),
                 new Parametro("@fecha", fcostos.Fecha),
+                new Parametro("@id_usuario", fcostos.IdUser),
                 new Parametro("@Editar", editar)
             };
             return DbDatos.Ejecutar("Formulario_Costos_Agregar", parametros);

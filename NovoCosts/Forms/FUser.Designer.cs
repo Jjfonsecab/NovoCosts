@@ -35,6 +35,7 @@
             this.txtContraseña = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.BtnCancel = new System.Windows.Forms.PictureBox();
             this.BtnOk = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -95,7 +96,8 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.groupBox1.BackColor = System.Drawing.Color.ForestGreen;
+            this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Controls.Add(this.BtnCancel);
             this.groupBox1.Controls.Add(this.BtnOk);
             this.groupBox1.Controls.Add(this.label1);
@@ -105,16 +107,27 @@
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.groupBox1.Location = new System.Drawing.Point(12, 159);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(414, 175);
+            this.groupBox1.Size = new System.Drawing.Size(414, 217);
             this.groupBox1.TabIndex = 84;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Inicio de Sesion";
+            this.groupBox1.Text = "Credenciales";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(215, 126);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(173, 24);
+            this.checkBox1.TabIndex = 87;
+            this.checkBox1.Text = "Mostrar contraseña";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // BtnCancel
             // 
             this.BtnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnCancel.Image = ((System.Drawing.Image)(resources.GetObject("BtnCancel.Image")));
-            this.BtnCancel.Location = new System.Drawing.Point(259, 117);
+            this.BtnCancel.Location = new System.Drawing.Point(263, 156);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(46, 41);
             this.BtnCancel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -126,7 +139,7 @@
             // 
             this.BtnOk.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnOk.Image = ((System.Drawing.Image)(resources.GetObject("BtnOk.Image")));
-            this.BtnOk.Location = new System.Drawing.Point(329, 117);
+            this.BtnOk.Location = new System.Drawing.Point(340, 156);
             this.BtnOk.Name = "BtnOk";
             this.BtnOk.Size = new System.Drawing.Size(48, 41);
             this.BtnOk.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -139,7 +152,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Lavender;
-            this.ClientSize = new System.Drawing.Size(443, 350);
+            this.ClientSize = new System.Drawing.Size(443, 381);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -166,5 +179,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.PictureBox BtnOk;
         private System.Windows.Forms.PictureBox BtnCancel;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
