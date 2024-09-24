@@ -513,7 +513,7 @@
             // 
             this.txtDesempeño.Location = new System.Drawing.Point(517, 43);
             this.txtDesempeño.Name = "txtDesempeño";
-            this.txtDesempeño.Size = new System.Drawing.Size(177, 26);
+            this.txtDesempeño.Size = new System.Drawing.Size(243, 26);
             this.txtDesempeño.TabIndex = 1;
             // 
             // label3

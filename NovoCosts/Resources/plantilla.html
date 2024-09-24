@@ -7,7 +7,7 @@
         table {
             border-collapse: collapse;
             width: 100%;
-            margin-bottom: 35px;
+            margin-top: 10%;
         }
 
         th, td {
@@ -33,15 +33,16 @@
         }
 
             .additional-info li span {
-                font-weight: bold; 
-                margin-right: 4px; 
+                font-weight: bold;
+                margin-right: 4px;
             }
     </style>
 </head>
 <body>
     <h1></h1>
-    <h2 style="margin-left: 10px; margin-top: 0; margin-bottom: 1px; font-size: 18px; text-align: right;">Producto :   @nombre</h2>
-    <h2 style="margin-left: 10px; margin-top: 0; font-size: 18px; text-align: right;">Fecha :   @fecha</h2>
+    <h2 style="margin-left: 0; margin-top: 0; margin-bottom: 1px; font-size: 15px; text-align: center;">Producto :   @nombre</h2>
+    <h2 style="margin-left: 0; margin-top: 0; font-size: 15px; text-align: center;">Fecha :   @fecha</h2>
+
     <table>
         <thead>
             <tr>
@@ -83,14 +84,17 @@
                 <div class="additional-info">
                     <ul>
                         <li><span>Anotaciones:</span> @anotaciones</li>
-                        <li><span>Costo:</span> $ @costo"</li>
+                        <li><span>Costo:</span> $ @costo</li>
                         <li><span>Porcentaje:</span> @porcentaje %</li>
                         <li><span>Precio Fabrica:</span> $ @precioFabrica</li>
-                        <li><span>Utilidad:</span> $ @utilidad"</li>
+                        <li><span>Utilidad:</span> $ @utilidad</li>                        
                     </ul>
                 </div>
             </td>
         </tr>
+
     </table>
+    <img src="data:image/png;base64,@imagenBase64" alt="Logo" style="width: 80px; height: auto;" />
+
 </body>
 </html>

@@ -81,16 +81,21 @@ namespace NovoCosts.Forms
             toolTip.SetToolTip(btnMateriaPrima, "MATERIA PRIMA");
             toolTip.SetToolTip(btnCostos, "COSTOS");
         }
+        private bool isExiting = false;
         private void FInicio_FormClosing(object sender, FormClosingEventArgs e)
         {
-            var result = MessageBox.Show("¿Deseas salir de la aplicación?", "Confirmar salida", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.No)
+            if (!isExiting)
             {
-                e.Cancel = true; 
-            }
-            else
-            {
-                Application.Exit(); 
+                var result = MessageBox.Show("¿Deseas salir de la aplicación?", "Confirmar salida", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.No)
+                {
+                    e.Cancel = true; // Cancela el cierre si el usuario elige "No"
+                }
+                else
+                {
+                    isExiting = true; // Indica que se está cerrando para evitar la doble pregunta
+                    Application.Exit(); // Cierra la aplicación
+                }
             }
         }
     }

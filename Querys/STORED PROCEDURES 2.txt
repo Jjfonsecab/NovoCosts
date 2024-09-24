@@ -1,3 +1,21 @@
+CREATE PROCEDURE [dbo].[ObtenerPasswordHash]
+    @NombreUsuario NVARCHAR(50)
+AS
+BEGIN
+    SELECT contraseña
+    FROM Usuarios
+    WHERE nombre = @NombreUsuario;
+END
+
+CREATE PROCEDURE [dbo].[ObtenerUsuarioId]
+    @NombreUsuario NVARCHAR(50)
+AS
+BEGIN
+    SELECT id_usuario
+    FROM Usuarios
+    WHERE nombre = @NombreUsuario;
+END
+
 CREATE PROCEDURE [dbo].[RetornarUnidadesPorNombre]
     @NombreBuscado VARCHAR(200) = NULL
 AS

@@ -71,7 +71,7 @@ namespace NovoCosts.Forms
         {
             try
             {
-                if (!ValidarCamposString(comboBox1,txtAnotaciones))
+                if (!ValidarCamposString(comboBox1, txtAnotaciones))
                     return;
                 else if (!ValidarCamposNumericos(txtPorcentaje))
                     return;
@@ -102,7 +102,7 @@ namespace NovoCosts.Forms
                     paginaHtml_texto = paginaHtml_texto.Replace("@porcentaje", Convert.ToDouble(txtPorcentaje.Text).ToString());
                     paginaHtml_texto = paginaHtml_texto.Replace("@precioFabrica", Convert.ToDouble(txtPrecioFabrica.Text).ToString("#,##0", CultureInfo.InvariantCulture));
                     paginaHtml_texto = paginaHtml_texto.Replace("@utilidad", Convert.ToDouble(txtUtilidad.Text).ToString("#,##0", CultureInfo.InvariantCulture));
-                    
+
 
                     string filasCostos = string.Empty;
                     string filasManoObra = string.Empty;
@@ -120,7 +120,7 @@ namespace NovoCosts.Forms
                         filasCostos += "<td>" + (row.Cells["desperdicio"].Value != null ? Convert.ToDouble(row.Cells["desperdicio"].Value).ToString("#,##0.##", CultureInfo.InvariantCulture) : "") + "</td>";
                         filasCostos += "<td>" + (row.Cells["total_cantidad"].Value != null ? Convert.ToDouble(row.Cells["total_cantidad"].Value).ToString("#,##0.##", CultureInfo.InvariantCulture) : "") + "</td>";
                         filasCostos += "<td>" + (row.Cells["valor_unitario"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["valor_unitario"].Value)).ToString("#,##0", CultureInfo.InvariantCulture) : "") + "</td>";
-                        filasCostos += "<td>" + (row.Cells["valor_total"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["valor_total"].Value)).ToString("#,##0", CultureInfo.InvariantCulture) : "") + "</td>";                        
+                        filasCostos += "<td>" + (row.Cells["valor_total"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["valor_total"].Value)).ToString("#,##0", CultureInfo.InvariantCulture) : "") + "</td>";
                         filasCostos += "</tr>";
                     }
                     paginaHtml_texto = paginaHtml_texto.Replace("@filasCostos", filasCostos);
@@ -139,19 +139,40 @@ namespace NovoCosts.Forms
 
                     if (savePdf.ShowDialog() == DialogResult.OK)
                     {
+                        string imagenSeleccionada = string.Empty;
+                        OpenFileDialog openFileDialog = new OpenFileDialog();
+                        openFileDialog.Filter = "Archivos de Imagen (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg";
+
+                        if (openFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            imagenSeleccionada = openFileDialog.FileName; 
+                        }
+
                         using (FileStream stream = new FileStream(savePdf.FileName, FileMode.Create))
                         {
                             Document pdfDoc = new Document(PageSize.LETTER, 25, 25, 25, 25);
-
                             PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
-
                             pdfDoc.Open();
 
-                            iTextSharp.text.Image img = iTextSharp.text.Image.GetInstance(Properties.Resources.LogoNovo, System.Drawing.Imaging.ImageFormat.Png);
-                            img.ScaleToFit(80, 100);
-                            img.Alignment = iTextSharp.text.Image.UNDERLYING;
-                            img.SetAbsolutePosition(pdfDoc.LeftMargin, pdfDoc.Top - 30);
-                            pdfDoc.Add(img);
+                            iTextSharp.text.Image imgLogo = iTextSharp.text.Image.GetInstance(Properties.Resources.LogoNovo, System.Drawing.Imaging.ImageFormat.Png);
+                            imgLogo.ScaleToFit(80, 100);
+                            imgLogo.Alignment = iTextSharp.text.Image.UNDERLYING;
+                            imgLogo.SetAbsolutePosition(pdfDoc.LeftMargin, pdfDoc.Top - 30);
+                            pdfDoc.Add(imgLogo);
+
+                            if (!string.IsNullOrEmpty(imagenSeleccionada))
+                            {
+                                iTextSharp.text.Image imgSeleccionada = iTextSharp.text.Image.GetInstance(imagenSeleccionada);
+                                imgSeleccionada.ScaleToFit(80, 110);
+                                imgSeleccionada.Alignment = iTextSharp.text.Image.UNDERLYING;
+                                float imgWidth = imgSeleccionada.ScaledWidth;
+
+                                
+                                float xPosition = pdfDoc.PageSize.Width - pdfDoc.RightMargin - imgWidth; // Margen derecho menos el ancho de la imagen
+                                imgSeleccionada.SetAbsolutePosition(xPosition, pdfDoc.Top -26 ); // Ajusta la posición vertical según sea necesario
+
+                                pdfDoc.Add(imgSeleccionada);
+                            }
 
                             using (StringReader sr = new StringReader(paginaHtml_texto))
                             {
@@ -171,7 +192,7 @@ namespace NovoCosts.Forms
                 MessageBox.Show("Error al crear el PDF:");
                 Console.WriteLine(ex.Message);
                 return;
-            }
+            }        
         }
         private void btnCalcular_Click(object sender, EventArgs e)
         {
@@ -189,8 +210,8 @@ namespace NovoCosts.Forms
             {
                 MessageBox.Show("El porcentaje no ha sido definido.");
                 return;
-            }    
-        }
+            }
+        }    
         private void comboBox1_DropDown(object sender, EventArgs e)
         {
             ListarNombreProductos();
@@ -479,5 +500,7 @@ namespace NovoCosts.Forms
             toolTip.SetToolTip(btnPdf, "GENERAR PDF");
             toolTip.SetToolTip(btnCalcular, "CALCULAR");
         }
+
+        
     }
 }

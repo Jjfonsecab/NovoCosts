@@ -27,6 +27,7 @@ namespace NovoCosts.Forms
         private void Registro_Load(object sender, EventArgs e)
         {
             ListarTodo();
+            MostrarFechaActual();
             monthCalendar.DateChanged += monthCalendar_DateChanged;
             ToolTipInitialicer();
         }
@@ -131,7 +132,14 @@ namespace NovoCosts.Forms
 
                     string unidadMedida = selectedRow["nombre"].ToString();
 
-                    if (unidadMedida.Contains("TABLA"))
+                    if (unidadMedida.Contains("UNIDAD") )
+                    {
+                        txtOtros.Text = "1";
+                    }else if (unidadMedida.Contains("JUEGO"))
+                    {
+                        txtOtros.Text = "2";
+                    }
+                    if (unidadMedida.Contains("TABLA") || unidadMedida.Contains("GALON"))
                     {
                         txtOtros.Enabled = true;
                         txtDividir.Enabled = true;
@@ -308,9 +316,13 @@ namespace NovoCosts.Forms
             txtDetalle.Text = "";
             comboBoxUnidadMedida.Text = "";
             txtLargo.Text = "";
+            txtLargo.Enabled = false;
             txtAlto.Text = "";
+            txtAlto.Enabled = false;
             txtAncho.Text = "";
+            txtAncho.Enabled = false;
             txtOtros.Text = "";
+            txtOtros.Enabled = false;
             txtValorUnitario.Text = "";
             txtProveedor.Text = "";
             txtCantidadDesperdicio.Text = "";
@@ -319,7 +331,8 @@ namespace NovoCosts.Forms
             txtComentarios.Text = "N.A.";
             listBox1.Text = null;
             ultimoTextBoxModificado = null;
-            searchText = ""; 
+            searchText = "";
+            txtDividir.Enabled = false;
             Editar = false;
             MostrarFechaActual();
         }
@@ -348,12 +361,20 @@ namespace NovoCosts.Forms
                 if (!string.IsNullOrEmpty(columna.Name))
                 {
                     DbDatos.OcultarIds(dgvMateriaPrima);
-                    if (columna.Name == "detalle_mp" || columna.Name == "proveedor" || columna.Name == "comentarios")
+                    if (columna.Name == "detalle_mp")
                     {
                         dgvMateriaPrima.Columns["detalle_mp"].HeaderText = "DETALLE";
+                        dgvMateriaPrima.Columns[columna.Name].Width = 220;
+                    }
+                    else if ( columna.Name == "proveedor" )
+                    {
                         dgvMateriaPrima.Columns["proveedor"].HeaderText = "PROVEEDOR";
+                        dgvMateriaPrima.Columns[columna.Name].Width = 152;
+                    }
+                    else if (columna.Name == "comentarios")
+                    {
                         dgvMateriaPrima.Columns["comentarios"].HeaderText = "COMENTARIOS";
-                        dgvMateriaPrima.Columns[columna.Name].Width = 170;
+                        dgvMateriaPrima.Columns[columna.Name].Width = 150;
                     }
                     else if (columna.Name == "medida" || columna.Name == "desperdicio_cantidad" )
                     {
@@ -374,6 +395,7 @@ namespace NovoCosts.Forms
                         dgvMateriaPrima.Columns["valor"].HeaderText = "VALOR";
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight;
+                        estiloCeldaNumerica.Format = "N0";
                         columna.DefaultCellStyle = estiloCeldaNumerica;
                         dgvMateriaPrima.Columns[columna.Name].Width = 100;
                     }
@@ -504,7 +526,7 @@ namespace NovoCosts.Forms
                 {
                     if (!EsNumero(textBox.Text))
                     {
-                        MessageBox.Show("Por favor, ingrese solo números en todos los campos antes de guardar.", "Formato Inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Por favor, complete los campos numericos y ingrese solo números antes de guardar.", "Formato Inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return false;
                     }
                 }

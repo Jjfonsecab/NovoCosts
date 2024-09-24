@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -49,14 +50,13 @@ namespace NovoCosts.Forms
                     return;
                 }
                 string hash = DbDatos.ObtenerPasswordHash(usuario);
+
                 if (sPass == hash)
                 {
                     int userId = DbDatos.ObtenerUserId(usuario);
                     CurrentUser.UserId = userId;
                     CurrentUser.Username = usuario;
-                    Console.WriteLine("UserId: " + userId);
-                    Console.WriteLine("Username: " + usuario);
-                    MessageBox.Show("Inicio de sesión exitoso.");
+                    MessageBox.Show("Inicio de sesión exitoso. Hola " + usuario + "!");
                     FInicio fInicio = new FInicio();
                     fInicio.Show();
                     this.Hide();
@@ -67,13 +67,20 @@ namespace NovoCosts.Forms
                 };
 
             }
-            catch (Exception ex)
+            catch (SqlException ex) when (ex.Number == -1) // Error de conexión con la base de datos
             {
-                MessageBox.Show("Error de verificacion!. " + ex);
+                MessageBox.Show("No se pudo conectar con la base de datos. Prueba nuevamente.");
+            }
+            catch (SqlException ex) when (ex.Number == 18456) 
+            {
+                MessageBox.Show("Acceso no autorizado. La IP desde la que intentas conectarte no está habilitada.");
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show("Ocurrió un error inesperado: " + ex.Message);
             }
 
         }       
-
         private void btnCancel_Click(object sender, EventArgs e)
         {
             txtUsuario.Text = "";
@@ -86,7 +93,6 @@ namespace NovoCosts.Forms
             toolTip.SetToolTip(BtnOk, "OK");
             toolTip.SetToolTip(BtnCancel, "CANCELAR");
         }
-
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox1.Checked)

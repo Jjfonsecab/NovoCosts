@@ -62,7 +62,7 @@
             this.groupBox1.Controls.Add(this.btnGuardar);
             this.groupBox1.Location = new System.Drawing.Point(50, 82);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(492, 389);
+            this.groupBox1.Size = new System.Drawing.Size(712, 389);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos :";
@@ -76,7 +76,7 @@
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Location = new System.Drawing.Point(36, 47);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(421, 143);
+            this.groupBox2.Size = new System.Drawing.Size(663, 143);
             this.groupBox2.TabIndex = 48;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Producto";
@@ -85,7 +85,7 @@
             // 
             this.txtDescripcion.Location = new System.Drawing.Point(157, 77);
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(224, 26);
+            this.txtDescripcion.Size = new System.Drawing.Size(483, 26);
             this.txtDescripcion.TabIndex = 2;
             this.txtDescripcion.TextChanged += new System.EventHandler(this.txtDescripcion_TextChanged);
             this.txtDescripcion.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDescripcion_KeyUp);
@@ -94,7 +94,7 @@
             // 
             this.txtReferencia.Location = new System.Drawing.Point(157, 42);
             this.txtReferencia.Name = "txtReferencia";
-            this.txtReferencia.Size = new System.Drawing.Size(224, 26);
+            this.txtReferencia.Size = new System.Drawing.Size(483, 26);
             this.txtReferencia.TabIndex = 1;
             this.txtReferencia.TextChanged += new System.EventHandler(this.txtReferencia_TextChanged);
             this.txtReferencia.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtReferencia_KeyUp);
@@ -123,7 +123,7 @@
             this.listBox1.ItemHeight = 20;
             this.listBox1.Location = new System.Drawing.Point(36, 216);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(243, 144);
+            this.listBox1.Size = new System.Drawing.Size(525, 144);
             this.listBox1.TabIndex = 3;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -131,7 +131,7 @@
             // 
             this.btnEliminar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
-            this.btnEliminar.Location = new System.Drawing.Point(379, 306);
+            this.btnEliminar.Location = new System.Drawing.Point(627, 305);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(38, 36);
             this.btnEliminar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -143,7 +143,7 @@
             // 
             this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
-            this.btnGuardar.Location = new System.Drawing.Point(379, 253);
+            this.btnGuardar.Location = new System.Drawing.Point(625, 250);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(40, 36);
             this.btnGuardar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -168,11 +168,11 @@
             this.dgvRegistroProductos.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvRegistroProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRegistroProductos.ContextMenuStrip = this.contextMenuStrip1;
-            this.dgvRegistroProductos.Location = new System.Drawing.Point(607, 51);
+            this.dgvRegistroProductos.Location = new System.Drawing.Point(768, 60);
             this.dgvRegistroProductos.Name = "dgvRegistroProductos";
             this.dgvRegistroProductos.RowHeadersWidth = 62;
             this.dgvRegistroProductos.RowTemplate.Height = 28;
-            this.dgvRegistroProductos.Size = new System.Drawing.Size(576, 420);
+            this.dgvRegistroProductos.Size = new System.Drawing.Size(752, 420);
             this.dgvRegistroProductos.TabIndex = 4;
             this.dgvRegistroProductos.SelectionChanged += new System.EventHandler(this.dgvRegistroProductos_SelectionChanged);
             // 
@@ -196,7 +196,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightYellow;
-            this.ClientSize = new System.Drawing.Size(1242, 512);
+            this.ClientSize = new System.Drawing.Size(1532, 512);
             this.Controls.Add(this.btnInicio);
             this.Controls.Add(this.dgvRegistroProductos);
             this.Controls.Add(this.groupBox1);

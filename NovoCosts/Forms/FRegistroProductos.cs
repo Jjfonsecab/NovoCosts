@@ -145,6 +145,7 @@ namespace NovoCosts.Forms
                     IdProducto = IdProducto,
                     ReferenciaProducto = txtReferencia.Text,
                     DescripcionProducto = txtDescripcion.Text,
+                    Costo = 0
                 };
                 return Producto.Guardar(producto, Editar);
             }
@@ -157,8 +158,7 @@ namespace NovoCosts.Forms
         private bool GuardarEditado()
         {
             if (IdProducto > 0)
-            {
-                DateTime fechaOriginal = DateTime.Parse(dgvRegistroProductos.CurrentRow.Cells["fecha"].Value.ToString());
+            {                
 
                 Producto productoEditado = new Producto()
                 {
@@ -254,23 +254,19 @@ namespace NovoCosts.Forms
                 {
                     if (columna.Name == "valor_unitario")
                     {
-                        dgvRegistroProductos.Columns["valor_unitario"].HeaderText = "Valor Unitario";
+                        dgvRegistroProductos.Columns["costo"].HeaderText = "costo";
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight; // Alinea a la derecha
                         estiloCeldaNumerica.Format = "N0";
                         columna.DefaultCellStyle = estiloCeldaNumerica;
                         DbDatos.OcultarIds(dgvRegistroProductos);
                     }
-                    else if (columna.Name == "nombre_materia_prima")
+                    else if (columna.Name == "referencia")
                     {
-                        dgvRegistroProductos.Columns["nombre_materia_prima"].HeaderText = "Detalle";
+                        dgvRegistroProductos.Columns["referencia"].HeaderText = "Detalle";
+                        dgvRegistroProductos.Columns["referencia"].Width = 250;
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         columna.DefaultCellStyle = estiloCeldaNumerica;
-                        DbDatos.OcultarIds(dgvRegistroProductos);
-                    }
-                    else if (columna.Name == "fecha")
-                    {
-                        dgvRegistroProductos.Columns["fecha"].HeaderText = "Fecha";
                         DbDatos.OcultarIds(dgvRegistroProductos);
                     }
                 }

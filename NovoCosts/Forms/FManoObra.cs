@@ -173,6 +173,7 @@ namespace NovoCosts.Forms
                         if (idProductoCell != null && idProductoCell.Value != null)
                         {
                             IdProducto = Convert.ToInt32(idProductoCell.Value);
+                            Console.WriteLine("Producto en el metodo del dgv :" + IdProducto);
                             ListarTodoPorProducto(IdProducto);
                             BuscarPorcentajeEnTabla();
                         }
@@ -197,6 +198,7 @@ namespace NovoCosts.Forms
                             return;
                         }
                     }
+                    Console.WriteLine("Producto = " + IdProducto);
                 }
             }
             catch (Exception)
@@ -232,6 +234,8 @@ namespace NovoCosts.Forms
         {
             try
             {
+                Console.WriteLine("Usuario" + usuarioIdActual);
+                Console.WriteLine("Producto" + IdProducto);
                 ManoObra manoobra = new ManoObra()
                 {
                     IdManoObra = IdManoObra,
@@ -304,6 +308,7 @@ namespace NovoCosts.Forms
                     Fecha = DateTime.Parse(txtFecha.Text),
                     TotalCantidad = Porcentaje,
                     ValorTotal = ValorTotalPorcentaje,
+                    IdUser = usuarioIdActual
                 };
                 LimpiarDataGridView();
                 return ManoObra.Guardar(manoobra, Editar);
@@ -489,6 +494,12 @@ namespace NovoCosts.Forms
                     dgvProductos.Columns["descripcion"].HeaderText = "DESCRIPCION";
                     DbDatos.OcultarIds(dgvProductos);
                     dgvProductos.Columns[columna.Name].Width = 170;
+                }
+                else if (columna.Name == "referencia")
+                {
+                    dgvProductos.Columns["referencia"].HeaderText = "REFERENCIA";
+                    DbDatos.OcultarIds(dgvProductos);
+                    dgvProductos.Columns[columna.Name].Width = 260;
                 }
                 ConfigurarCabeceraColumna(columna, columna.HeaderText);
             }

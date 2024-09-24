@@ -13,6 +13,7 @@ namespace NovoCosts.Models
         public int IdProducto;
         public string ReferenciaProducto;
         public string DescripcionProducto;
+        public decimal Costo;
 
         public static bool Guardar(Producto producto, bool editar)
         {
@@ -21,6 +22,7 @@ namespace NovoCosts.Models
                 new Parametro("@id_producto", producto.IdProducto),
                 new Parametro("@referencia", producto.ReferenciaProducto),
                 new Parametro("@descripcion", producto.DescripcionProducto),
+                new Parametro("@costo", producto.Costo),
                 
                 new Parametro("@Editar", editar)
             };

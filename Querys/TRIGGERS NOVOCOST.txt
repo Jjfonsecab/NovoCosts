@@ -4,8 +4,8 @@ Triggers:
 
 CostoMateriasPrimas ->
 
-ALTER TRIGGER [dbo].[trg_actualizar_costos]
-ON [dbo].[CostosMateriasPrimas]
+CREATE TRIGGER [dbo].[trg_actualizar_costos]
+ON [dbo].[CostosMateriaPrima]
 AFTER UPDATE
 AS
 BEGIN
@@ -24,7 +24,7 @@ END;
 MANO OBRA ->
 
 
-ALTER TRIGGER [dbo].[trg_ActualizarPorcentaje]
+CREATE TRIGGER [dbo].[trg_ActualizarPorcentaje]
 ON [dbo].[ManoObra]
 AFTER UPDATE
 AS
@@ -58,7 +58,7 @@ END;
 PRODUCTO ->
 
 
-ALTER TRIGGER [dbo].[trigger_actualizar_costo]
+CREATE TRIGGER [dbo].[trigger_actualizar_costo]
 ON [dbo].[Productos]
 AFTER UPDATE
 AS

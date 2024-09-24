@@ -15,6 +15,7 @@ namespace NovoCosts.Forms
 {
     public partial class FCostos : Form
     {
+        int usuarioIdActual = CurrentUser.UserId;
         private System.Windows.Forms.ToolTip toolTip;
         public FCostos()
         {
@@ -405,7 +406,7 @@ namespace NovoCosts.Forms
                     ValorUnitario = Convert.ToDecimal(txtValorU.Text),
                     ValorTotal = ResultadoValorTotal,
                     IdTipoCosto = IdTipoCosto,
-
+                    IdUsuario = usuarioIdActual,
                     Fecha = DateTime.Parse(txtFecha.Text),
                 };
                 Modificar = false;
@@ -439,6 +440,7 @@ namespace NovoCosts.Forms
                     ValorUnitario = Convert.ToDecimal(txtValorU.Text),
                     ValorTotal = ResultadoValorTotal,
                     IdTipoCosto = IdTipoCosto,
+                    IdUsuario = usuarioIdActual,
 
                     Fecha = DateTime.Parse(txtFecha.Text),
                 };
@@ -786,7 +788,7 @@ namespace NovoCosts.Forms
                     {
                         dgvProductos.Columns["descripcion"].HeaderText = "DESCRIPCION";
                         dgvProductos.Columns["referencia"].HeaderText = "REFERENCIA";
-
+                        dgvProductos.Columns["referencia"].Width = 355;
                         dgvProductos.Columns["descripcion"].Width = 155;
                     }
                     ConfigurarCabeceraColumna(columna, columna.HeaderText);

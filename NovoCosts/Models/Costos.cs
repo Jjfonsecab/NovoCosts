@@ -26,6 +26,7 @@ namespace NovoCosts.Models
         public decimal ValorTotal { get; set; }
         public int IdTipoCosto { get; set; }
         public DateTime Fecha { get; set; }
+        public int IdUsuario { get; set; }
 
         public static bool Guardar(Costos costos, bool editar)
         {
@@ -47,6 +48,7 @@ namespace NovoCosts.Models
                 new Parametro("@valor_total", costos.ValorTotal),
                 new Parametro("@id_tipo_costo", costos.IdTipoCosto),
                 new Parametro("@fecha", costos.Fecha),
+                new Parametro("@id_usuario", costos.IdUsuario),
                 new Parametro("@Editar", editar)
             };
             Console.WriteLine("@valor_total =" + costos.ValorTotal);
