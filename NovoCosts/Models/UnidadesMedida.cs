@@ -37,6 +37,15 @@ namespace NovoCosts.Models
         public static DataTable Listar()
         {
             return DbDatos.Listar("UnidadesMedida_Listar");
-        }        
+        }
+
+        internal static DataTable ListarTipoPorId(int idUnidadMedida)
+        {
+            List<Parametro> parametros = new List<Parametro>
+            {
+                new Parametro("@id_unidad_medida", idUnidadMedida)
+            };
+            return DbDatos.Listar("ObtenerUnidadesPorId", parametros);
+        }
     }
 }

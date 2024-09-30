@@ -460,7 +460,7 @@
             this.txtMaterial.Enabled = false;
             this.txtMaterial.Location = new System.Drawing.Point(137, 167);
             this.txtMaterial.Name = "txtMaterial";
-            this.txtMaterial.Size = new System.Drawing.Size(337, 26);
+            this.txtMaterial.Size = new System.Drawing.Size(413, 26);
             this.txtMaterial.TabIndex = 107;
             // 
             // label12

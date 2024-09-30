@@ -63,24 +63,24 @@ namespace NovoCosts.Forms
                 }
                 else
                 {
-                    MessageBox.Show("Nombre de usuario o contraseña incorrectos.");
-                };
+                    // Si la contraseña no coincide, mostrar un mensaje de error
+                    MessageBox.Show("La contraseña es incorrecta.");
+                }
 
             }
             catch (SqlException ex) when (ex.Number == -1) // Error de conexión con la base de datos
             {
                 MessageBox.Show("No se pudo conectar con la base de datos. Prueba nuevamente.");
             }
-            catch (SqlException ex) when (ex.Number == 18456) 
+            catch (SqlException ex) when (ex.Number == 18456)
             {
                 MessageBox.Show("Acceso no autorizado. La IP desde la que intentas conectarte no está habilitada.");
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show("Ocurrió un error inesperado: " + ex.Message);
             }
-
-        }       
+        }
         private void btnCancel_Click(object sender, EventArgs e)
         {
             txtUsuario.Text = "";

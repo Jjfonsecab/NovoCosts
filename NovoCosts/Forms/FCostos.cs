@@ -80,14 +80,18 @@ namespace NovoCosts.Forms
                 MessageBox.Show("Porfavor, actuelice los valores en rojo para continuar.!");
                 return;
             }
-            FFormularioCostos fFormulario = Application.OpenForms.OfType<FFormularioCostos>().FirstOrDefault();
-            if (fFormulario == null)
-            {
-                fFormulario = new FFormularioCostos();
-                fFormulario.Show();
-            }
             else
-                fFormulario.BringToFront();
+            {
+                FFormularioCostos fFormulario = Application.OpenForms.OfType<FFormularioCostos>().FirstOrDefault();
+                if (fFormulario == null)
+                {
+                    fFormulario = new FFormularioCostos();
+                    fFormulario.Show();
+                }
+                else
+                    fFormulario.BringToFront();
+            }
+            
         }
         private void btnGuardar_Click_1(object sender, EventArgs e)
         {
@@ -353,11 +357,22 @@ namespace NovoCosts.Forms
         }
         private void dgvCostos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.Value != null && dgvCosto.Columns[e.ColumnIndex].Name == "valor_total" && Convert.ToDecimal(e.Value) == 0)
+            if (dgvCosto.Columns[e.ColumnIndex].Name == "valor_total")
             {
-                dgvCosto.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Red;
-                dgvCosto.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black;
-                Actualizar = true;
+                try
+                {
+                    if (e.Value != null && e.Value != DBNull.Value && Convert.ToDecimal(e.Value) == 0)
+                    {
+                        dgvCosto.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Red;
+                        dgvCosto.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black;
+                        Actualizar = true;
+                    }
+                }
+                catch (InvalidCastException)
+                {
+                    MessageBox.Show("Casilla vacia");
+                    return;
+                }
             }
         }
 
@@ -770,7 +785,7 @@ namespace NovoCosts.Forms
                     {
                         dgvActual.Columns["MateriaPrima"].DisplayIndex = 0;
                         dgvActual.Columns["MateriaPrima"].HeaderText = "MATERIA PRIMA";
-                        dgvActual.Columns[columna.Name].Width = 220;
+                        dgvActual.Columns[columna.Name].Width = 260;
                         DbDatos.OcultarIds(dgvActual);
                     }
                 }
@@ -809,12 +824,16 @@ namespace NovoCosts.Forms
             {
                 if (!string.IsNullOrEmpty(columna.Name))
                 {
-                    if (columna.Name == "detalle_mp" || columna.Name == "proveedor" || columna.Name == "comentarios")
+                    if (columna.Name == "detalle_mp")
                     {
                         dgvMateriasPrimas.Columns["detalle_mp"].HeaderText = "DETALLE";
+                        dgvMateriasPrimas.Columns[columna.Name].Width = 280;
+                    }
+                    if ( columna.Name == "proveedor" || columna.Name == "comentarios")
+                    {
                         dgvMateriasPrimas.Columns["proveedor"].HeaderText = "PROVEEDOR";
                         dgvMateriasPrimas.Columns["comentarios"].HeaderText = "COMENTARIOS";
-                        dgvMateriasPrimas.Columns[columna.Name].Width = 250;
+                        dgvMateriasPrimas.Columns[columna.Name].Width = 210;
                     }
                     else if (columna.Name == "medida" || columna.Name == "valor" || columna.Name == "desperdicio_cantidad")
                     {
@@ -904,9 +923,9 @@ namespace NovoCosts.Forms
         }
         private decimal CalcularDesperdicio(decimal totalCantidad, decimal totalDesperdicio)
         {
-            decimal porcentaje = totalDesperdicio / 100;
-            ResultadoDesperdicio = totalCantidad * porcentaje;
-            Console.WriteLine("Calculo Desperdicio = " + totalCantidad + " * " + totalDesperdicio + $"( {porcentaje}) =" + ResultadoDesperdicio);
+            
+            ResultadoDesperdicio = totalCantidad * totalDesperdicio;
+            Console.WriteLine("Calculo Desperdicio = " + totalCantidad + " * " + totalDesperdicio + "=" + ResultadoDesperdicio);
 
             return ResultadoDesperdicio;
         }
@@ -951,7 +970,7 @@ namespace NovoCosts.Forms
 
             toolTip.SetToolTip(btnLimpiar, "LIMPIAR");
             toolTip.SetToolTip(btnTipoCostos, "TIPO DE COSTOS");
-            toolTip.SetToolTip(btnPorcentaje, "ACTIVAR PORVENTAJE");
+            toolTip.SetToolTip(btnPorcentaje, "ACTIVAR PORCENTAJE");
             toolTip.SetToolTip(btnGuardar, "GUARDAR");
             toolTip.SetToolTip(btnEliminar, "ELIMINAR");
             toolTip.SetToolTip(btnFCostos, "FORMULARIO");

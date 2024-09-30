@@ -79,14 +79,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NovoCosts.exe" size="5957096">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NovoCosts.exe" size="5957608">
       <assemblyIdentity name="NovoCosts" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>XahvOgPIfvoGUnjCxJnaUBsMm4q4PVmU8pk2HbA/9t8=</dsig:DigestValue>
+        <dsig:DigestValue>IK4ITjquDzl/d2z9bLaZfK4vwOMMeeo/9iD3xwqrcxA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -147,13 +147,13 @@
       <dsig:DigestValue>GSmXz05Yb1AeMXgaYao80i82YmW8//m0QaCLS9BDeHE=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="NovoCosts.exe.config" size="460">
+  <file name="NovoCosts.exe.config" size="463">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>RiCkIOstfdB2TsaLmiuC0XkSUTbwYeJxt0mibrp2MWo=</dsig:DigestValue>
+      <dsig:DigestValue>vaxaKdxRVK6bdMihsmfd53j8LySu0s2IM6oFr0j6//U=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

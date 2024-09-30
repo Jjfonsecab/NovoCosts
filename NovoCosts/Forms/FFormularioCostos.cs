@@ -163,13 +163,13 @@ namespace NovoCosts.Forms
                             if (!string.IsNullOrEmpty(imagenSeleccionada))
                             {
                                 iTextSharp.text.Image imgSeleccionada = iTextSharp.text.Image.GetInstance(imagenSeleccionada);
-                                imgSeleccionada.ScaleToFit(80, 110);
+                                imgSeleccionada.ScaleToFit(70, 110);
                                 imgSeleccionada.Alignment = iTextSharp.text.Image.UNDERLYING;
                                 float imgWidth = imgSeleccionada.ScaledWidth;
 
                                 
                                 float xPosition = pdfDoc.PageSize.Width - pdfDoc.RightMargin - imgWidth; // Margen derecho menos el ancho de la imagen
-                                imgSeleccionada.SetAbsolutePosition(xPosition, pdfDoc.Top -26 ); // Ajusta la posición vertical según sea necesario
+                                imgSeleccionada.SetAbsolutePosition(xPosition, pdfDoc.Top -50 ); // Ajusta la posición vertical según sea necesario
 
                                 pdfDoc.Add(imgSeleccionada);
                             }
@@ -286,6 +286,7 @@ namespace NovoCosts.Forms
                 DbDatos.OcultarIds(dgvCostos);
                 PersonalizarColumnasCostos(dgvCostos);
             }
+            CostoProducto = SumarColumna(dgvCostos, "valor_total");
         }
         private void ListarManoObraProductoPorId()
         {
@@ -427,8 +428,10 @@ namespace NovoCosts.Forms
         //Definir costo, utilidad y precio de fabrica:
         private void calcularCosto()
         {
+            CostoProducto = SumarColumna(dgvCostos, "valor_total");
+            CostoManoObra = SumarColumna(dgvManoObra, "valor_total");
             Costo = CostoManoObra + CostoProducto;
-            Console.WriteLine("CostoManoObra : " + CostoManoObra);
+            
             Console.WriteLine("Costo : " + Costo);
             txtCosto.Text = Convert.ToString(Costo);
             Console.WriteLine("Costo : " + Costo);

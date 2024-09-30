@@ -139,7 +139,7 @@ namespace NovoCosts.Forms
                     {
                         txtOtros.Text = "2";
                     }
-                    if (unidadMedida.Contains("TABLA") || unidadMedida.Contains("GALON"))
+                    if (unidadMedida.Contains("TABLA") || unidadMedida.Contains("GALON/"))
                     {
                         txtOtros.Enabled = true;
                         txtDividir.Enabled = true;
@@ -164,13 +164,16 @@ namespace NovoCosts.Forms
             txtProveedor.Text = dgvMateriaPrima.CurrentRow.Cells["proveedor"].Value.ToString();
             txtCantidadDesperdicio.Text = dgvMateriaPrima.CurrentRow.Cells["desperdicio_cantidad"].Value.ToString();
             txtComentarios.Text = dgvMateriaPrima.CurrentRow.Cells["comentarios"].Value.ToString();
+            comboBoxUnidadMedida.Text = ObtenerNombreUnidadMedida(IdUnidadMedida);
 
             DateTime fechaOriginal = DateTime.Parse(dgvMateriaPrima.CurrentRow.Cells["fecha"].Value.ToString());
             txtFecha.Text = fechaOriginal.ToString("yyyy-MM-dd");
 
+
+
             Editar = true;
             Modificar = true;
-        }
+        }       
         private void monthCalendar_DateChanged(object sender, DateRangeEventArgs e)
         {
             DateTime fechaSeleccionada = monthCalendar.SelectionStart;
@@ -350,6 +353,16 @@ namespace NovoCosts.Forms
             comboBoxUnidadMedida.DisplayMember = "nombre";
             comboBoxUnidadMedida.ValueMember = "cantidad_parametros";
         }
+        private string ObtenerNombreUnidadMedida(int idUnidadMedida)
+        {
+            DataTable dataTable = UnidadesMedida.ListarTipoPorId(idUnidadMedida);
+
+            if (dataTable.Rows.Count > 0)
+            {
+                return dataTable.Rows[0]["nombre"].ToString();
+            }
+            return "Error al cargar los datos de unidad de medida";
+        }
         private void MostrarFechaActual()
         {
             txtFecha.Text = DateTime.Now.ToString("yyyy-MM-dd");
@@ -376,9 +389,8 @@ namespace NovoCosts.Forms
                         dgvMateriaPrima.Columns["comentarios"].HeaderText = "COMENTARIOS";
                         dgvMateriaPrima.Columns[columna.Name].Width = 150;
                     }
-                    else if (columna.Name == "medida" || columna.Name == "desperdicio_cantidad" )
-                    {
-                        dgvMateriaPrima.Columns["desperdicio_cantidad"].HeaderText = "DESPER";
+                    else if (columna.Name == "medida" )
+                    {                        
                         dgvMateriaPrima.Columns["medida"].HeaderText = "MEDIDA";                     
                         DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
                         estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -398,6 +410,14 @@ namespace NovoCosts.Forms
                         estiloCeldaNumerica.Format = "N0";
                         columna.DefaultCellStyle = estiloCeldaNumerica;
                         dgvMateriaPrima.Columns[columna.Name].Width = 100;
+                    }
+                    else if (columna.Name == "desperdicio_cantidad")
+                    {
+                        dgvMateriaPrima.Columns["desperdicio_cantidad"].HeaderText = "DESPER";
+                        DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
+                        estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleRight;
+                        columna.DefaultCellStyle = estiloCeldaNumerica;
+                        dgvMateriaPrima.Columns[columna.Name].Width = 70;
                     }
                 }            
                 ConfigurarCabeceraColumna(columna, columna.HeaderText);
