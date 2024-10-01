@@ -58,12 +58,14 @@
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.btnPdf = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.dgvTipos = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.btnLimpiar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvManoObra)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCostos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCostos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnPdf)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTipos)).BeginInit();
             this.SuspendLayout();
             // 
             // btnLimpiar
@@ -351,12 +353,25 @@
             this.btnPdf.TabStop = false;
             this.btnPdf.Click += new System.EventHandler(this.btnPdf_Click);
             // 
+            // dgvTipos
+            // 
+            this.dgvTipos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvTipos.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dgvTipos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTipos.Location = new System.Drawing.Point(340, 229);
+            this.dgvTipos.Name = "dgvTipos";
+            this.dgvTipos.RowHeadersWidth = 62;
+            this.dgvTipos.RowTemplate.Height = 28;
+            this.dgvTipos.Size = new System.Drawing.Size(410, 242);
+            this.dgvTipos.TabIndex = 89;
+            // 
             // FFormularioCostos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleTurquoise;
             this.ClientSize = new System.Drawing.Size(1450, 483);
+            this.Controls.Add(this.dgvTipos);
             this.Controls.Add(this.btnPdf);
             this.Controls.Add(this.btnCalcular);
             this.Controls.Add(this.btnCostos);
@@ -390,6 +405,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvCostos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCostos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnPdf)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTipos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -424,5 +440,6 @@
         private System.Drawing.Printing.PrintDocument printDocument1;
         private System.Windows.Forms.PictureBox btnPdf;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.DataGridView dgvTipos;
     }
 }

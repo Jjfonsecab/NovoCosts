@@ -89,12 +89,12 @@ namespace NovoCosts.Forms
                 var result = MessageBox.Show("¿Deseas salir de la aplicación?", "Confirmar salida", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.No)
                 {
-                    e.Cancel = true; // Cancela el cierre si el usuario elige "No"
+                    e.Cancel = true; 
                 }
                 else
                 {
-                    isExiting = true; // Indica que se está cerrando para evitar la doble pregunta
-                    Application.Exit(); // Cierra la aplicación
+                    isExiting = true; 
+                    Application.Exit(); 
                 }
             }
         }

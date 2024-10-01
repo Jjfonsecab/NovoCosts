@@ -68,13 +68,9 @@ namespace NovoCosts.Forms
                 }
 
             }
-            catch (SqlException ex) when (ex.Number == -1) // Error de conexión con la base de datos
+            catch (SqlException ex) when (ex.Number == -1) 
             {
                 MessageBox.Show("No se pudo conectar con la base de datos. Prueba nuevamente.");
-            }
-            catch (SqlException ex) when (ex.Number == 18456)
-            {
-                MessageBox.Show("Acceso no autorizado. La IP desde la que intentas conectarte no está habilitada.");
             }
             catch (Exception ex)
             {

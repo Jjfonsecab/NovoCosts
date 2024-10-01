@@ -88,100 +88,7 @@ namespace NovoCosts.Forms
                 }
                 else
                 {
-                    string defaultFileName = $"{NombreProdcucto}_{DateTime.Now.ToString("dd-MM-yyyy")}.pdf";
-
-                    SaveFileDialog savePdf = new SaveFileDialog();
-                    savePdf.FileName = defaultFileName;
-                    savePdf.Filter = "Archivos PDF (*.pdf)|*.pdf";
-
-                    string paginaHtml_texto = Properties.Resources.plantilla.ToString();
-                    paginaHtml_texto = paginaHtml_texto.Replace("@nombre", comboBox1.Text);
-                    paginaHtml_texto = paginaHtml_texto.Replace("@fecha", txtFecha.Text);
-                    paginaHtml_texto = paginaHtml_texto.Replace("@anotaciones", txtAnotaciones.Text);
-                    paginaHtml_texto = paginaHtml_texto.Replace("@costo", Convert.ToDouble(txtCosto.Text).ToString("#,##0", CultureInfo.InvariantCulture));
-                    paginaHtml_texto = paginaHtml_texto.Replace("@porcentaje", Convert.ToDouble(txtPorcentaje.Text).ToString());
-                    paginaHtml_texto = paginaHtml_texto.Replace("@precioFabrica", Convert.ToDouble(txtPrecioFabrica.Text).ToString("#,##0", CultureInfo.InvariantCulture));
-                    paginaHtml_texto = paginaHtml_texto.Replace("@utilidad", Convert.ToDouble(txtUtilidad.Text).ToString("#,##0", CultureInfo.InvariantCulture));
-
-
-                    string filasCostos = string.Empty;
-                    string filasManoObra = string.Empty;
-
-                    foreach (DataGridViewRow row in dgvCostos.Rows)
-                    {
-                        filasCostos += "<tr>";
-                        filasCostos += "<td>" + (row.Cells["MateriaPrima"].Value ?? "").ToString() + "</td>";
-                        filasCostos += "<td>" + (row.Cells["desempeño"].Value ?? "").ToString() + "</td>";
-                        filasCostos += "<td>" + (row.Cells["cantidad"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["cantidad"].Value)).ToString() : "") + "</td>";
-                        filasCostos += "<td>" + (row.Cells["dimension1"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["dimension1"].Value)).ToString() : "") + "</td>";
-                        filasCostos += "<td>" + (row.Cells["dimension2"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["dimension2"].Value)).ToString() : "") + "</td>";
-                        filasCostos += "<td>" + (row.Cells["dimension3"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["dimension3"].Value)).ToString() : "") + "</td>";
-                        filasCostos += "<td>" + (row.Cells["cm"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["cm"].Value)).ToString("#,##0", CultureInfo.InvariantCulture) : "") + "</td>";
-                        filasCostos += "<td>" + (row.Cells["desperdicio"].Value != null ? Convert.ToDouble(row.Cells["desperdicio"].Value).ToString("#,##0.##", CultureInfo.InvariantCulture) : "") + "</td>";
-                        filasCostos += "<td>" + (row.Cells["total_cantidad"].Value != null ? Convert.ToDouble(row.Cells["total_cantidad"].Value).ToString("#,##0.##", CultureInfo.InvariantCulture) : "") + "</td>";
-                        filasCostos += "<td>" + (row.Cells["valor_unitario"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["valor_unitario"].Value)).ToString("#,##0", CultureInfo.InvariantCulture) : "") + "</td>";
-                        filasCostos += "<td>" + (row.Cells["valor_total"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["valor_total"].Value)).ToString("#,##0", CultureInfo.InvariantCulture) : "") + "</td>";
-                        filasCostos += "</tr>";
-                    }
-                    paginaHtml_texto = paginaHtml_texto.Replace("@filasCostos", filasCostos);
-
-                    foreach (DataGridViewRow row in dgvManoObra.Rows)
-                    {
-                        filasManoObra += "<tr>";
-                        filasManoObra += "<td>" + (row.Cells["nombre_tipo"].Value ?? "").ToString() + "</td>";
-                        filasManoObra += "<td>" + (row.Cells["costo"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["costo"].Value)).ToString("#,##0", CultureInfo.InvariantCulture) : "") + "</td>";
-                        filasManoObra += "<td>" + (row.Cells["total_cantidad"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["total_cantidad"].Value)).ToString("#,##0", CultureInfo.InvariantCulture) : "") + "</td>";
-                        filasManoObra += "<td>" + (row.Cells["valor_total"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["valor_total"].Value)).ToString("#,##0", CultureInfo.InvariantCulture) : "") + "</td>";
-                        filasManoObra += "</tr>";
-                    }
-
-                    paginaHtml_texto = paginaHtml_texto.Replace("@filasManoObra", filasManoObra);
-
-                    if (savePdf.ShowDialog() == DialogResult.OK)
-                    {
-                        string imagenSeleccionada = string.Empty;
-                        OpenFileDialog openFileDialog = new OpenFileDialog();
-                        openFileDialog.Filter = "Archivos de Imagen (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg";
-
-                        if (openFileDialog.ShowDialog() == DialogResult.OK)
-                        {
-                            imagenSeleccionada = openFileDialog.FileName; 
-                        }
-
-                        using (FileStream stream = new FileStream(savePdf.FileName, FileMode.Create))
-                        {
-                            Document pdfDoc = new Document(PageSize.LETTER, 25, 25, 25, 25);
-                            PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
-                            pdfDoc.Open();
-
-                            iTextSharp.text.Image imgLogo = iTextSharp.text.Image.GetInstance(Properties.Resources.LogoNovo, System.Drawing.Imaging.ImageFormat.Png);
-                            imgLogo.ScaleToFit(80, 100);
-                            imgLogo.Alignment = iTextSharp.text.Image.UNDERLYING;
-                            imgLogo.SetAbsolutePosition(pdfDoc.LeftMargin, pdfDoc.Top - 30);
-                            pdfDoc.Add(imgLogo);
-
-                            if (!string.IsNullOrEmpty(imagenSeleccionada))
-                            {
-                                iTextSharp.text.Image imgSeleccionada = iTextSharp.text.Image.GetInstance(imagenSeleccionada);
-                                imgSeleccionada.ScaleToFit(70, 110);
-                                imgSeleccionada.Alignment = iTextSharp.text.Image.UNDERLYING;
-                                float imgWidth = imgSeleccionada.ScaledWidth;
-
-                                
-                                float xPosition = pdfDoc.PageSize.Width - pdfDoc.RightMargin - imgWidth; // Margen derecho menos el ancho de la imagen
-                                imgSeleccionada.SetAbsolutePosition(xPosition, pdfDoc.Top -50 ); // Ajusta la posición vertical según sea necesario
-
-                                pdfDoc.Add(imgSeleccionada);
-                            }
-
-                            using (StringReader sr = new StringReader(paginaHtml_texto))
-                            {
-                                XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
-                            }
-                            pdfDoc.Close();
-                            stream.Close();
-                        }
-                    }
+                    GenerarPdf();                    
                     Guardar();
                     MessageBox.Show("PDF creado con exito.");
                     Calcualdo = false;
@@ -227,6 +134,7 @@ namespace NovoCosts.Forms
             }
             ListarCostosProductoPorId();
             ListarManoObraProductoPorId();
+            ListarTipoCostoPorId();            
             ConsultarProductoId(IdProducto);
         }
 
@@ -253,6 +161,120 @@ namespace NovoCosts.Forms
             {
                 MessageBox.Show("Error al Guardar." + ex);
                 return false;
+            }
+        }
+        private void GenerarPdf()
+        {
+            string defaultFileName = $"{NombreProdcucto}_{DateTime.Now.ToString("dd-MM-yyyy")}.pdf";
+
+            SaveFileDialog savePdf = new SaveFileDialog();
+            savePdf.FileName = defaultFileName;
+            savePdf.Filter = "Archivos PDF (*.pdf)|*.pdf";
+
+            string paginaHtml_texto = Properties.Resources.plantilla.ToString();
+            paginaHtml_texto = paginaHtml_texto.Replace("@nombre", comboBox1.Text);
+            paginaHtml_texto = paginaHtml_texto.Replace("@fecha", txtFecha.Text);
+            paginaHtml_texto = paginaHtml_texto.Replace("@anotaciones", txtAnotaciones.Text);
+            paginaHtml_texto = paginaHtml_texto.Replace("@costo", Convert.ToDouble(txtCosto.Text).ToString("#,##0", CultureInfo.InvariantCulture));
+            paginaHtml_texto = paginaHtml_texto.Replace("@porcentaje", Convert.ToDouble(txtPorcentaje.Text).ToString());
+            paginaHtml_texto = paginaHtml_texto.Replace("@precioFabrica", Convert.ToDouble(txtPrecioFabrica.Text).ToString("#,##0", CultureInfo.InvariantCulture));
+            paginaHtml_texto = paginaHtml_texto.Replace("@utilidad", Convert.ToDouble(txtUtilidad.Text).ToString("#,##0", CultureInfo.InvariantCulture));
+
+            string filasTipoCosto = string.Empty;
+
+            foreach (DataGridViewRow row in dgvTipos.Rows)
+            {
+                if (row.Cells["nombre"].Value != null && row.Cells["suma_total"].Value != null)
+                {
+                    string nombre = row.Cells["nombre"].Value.ToString();
+                    double valorTotal = Convert.ToDouble(row.Cells["suma_total"].Value);
+
+                    filasTipoCosto += "<tr>";
+                    filasTipoCosto += $"<td>{nombre}</td>";
+                    filasTipoCosto += $"<td>{valorTotal.ToString("#,##0", CultureInfo.InvariantCulture)}</td>";
+                    filasTipoCosto += "</tr>";
+                }
+            }
+
+            paginaHtml_texto = paginaHtml_texto.Replace("@tipoCosto", filasTipoCosto);
+
+            string filasCostos = string.Empty;
+            string filasManoObra = string.Empty;
+
+            foreach (DataGridViewRow row in dgvCostos.Rows)
+            {
+                filasCostos += "<tr>";
+                filasCostos += "<td>" + (row.Cells["MateriaPrima"].Value ?? "").ToString() + "</td>";
+                filasCostos += "<td>" + (row.Cells["desempeño"].Value ?? "").ToString() + "</td>";
+                filasCostos += "<td>" + (row.Cells["cantidad"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["cantidad"].Value)).ToString() : "") + "</td>";
+                filasCostos += "<td>" + (row.Cells["dimension1"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["dimension1"].Value)).ToString() : "") + "</td>";
+                filasCostos += "<td>" + (row.Cells["dimension2"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["dimension2"].Value)).ToString() : "") + "</td>";
+                filasCostos += "<td>" + (row.Cells["dimension3"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["dimension3"].Value)).ToString() : "") + "</td>";
+                filasCostos += "<td>" + (row.Cells["cm"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["cm"].Value)).ToString("#,##0", CultureInfo.InvariantCulture) : "") + "</td>";
+                filasCostos += "<td>" + (row.Cells["desperdicio"].Value != null ? Convert.ToDouble(row.Cells["desperdicio"].Value).ToString("#,##0.##", CultureInfo.InvariantCulture) : "") + "</td>";
+                filasCostos += "<td>" + (row.Cells["total_cantidad"].Value != null ? Convert.ToDouble(row.Cells["total_cantidad"].Value).ToString("#,##0.##", CultureInfo.InvariantCulture) : "") + "</td>";
+                filasCostos += "<td>" + (row.Cells["valor_unitario"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["valor_unitario"].Value)).ToString("#,##0", CultureInfo.InvariantCulture) : "") + "</td>";
+                filasCostos += "<td>" + (row.Cells["valor_total"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["valor_total"].Value)).ToString("#,##0", CultureInfo.InvariantCulture) : "") + "</td>";
+                filasCostos += "</tr>";
+            }
+            paginaHtml_texto = paginaHtml_texto.Replace("@filasCostos", filasCostos);
+
+            foreach (DataGridViewRow row in dgvManoObra.Rows)
+            {
+                filasManoObra += "<tr>";
+                filasManoObra += "<td>" + (row.Cells["nombre_tipo"].Value ?? "").ToString() + "</td>";
+                filasManoObra += "<td>" + (row.Cells["costo"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["costo"].Value)).ToString("#,##0", CultureInfo.InvariantCulture) : "") + "</td>";
+                filasManoObra += "<td>" + (row.Cells["total_cantidad"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["total_cantidad"].Value)).ToString("#,##0", CultureInfo.InvariantCulture) : "") + "</td>";
+                filasManoObra += "<td>" + (row.Cells["valor_total"].Value != null ? Math.Round(Convert.ToDouble(row.Cells["valor_total"].Value)).ToString("#,##0", CultureInfo.InvariantCulture) : "") + "</td>";
+                filasManoObra += "</tr>";
+            }
+
+            paginaHtml_texto = paginaHtml_texto.Replace("@filasManoObra", filasManoObra);
+
+            if (savePdf.ShowDialog() == DialogResult.OK)
+            {
+                string imagenSeleccionada = string.Empty;
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Archivos de Imagen (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    imagenSeleccionada = openFileDialog.FileName;
+                }
+
+                using (FileStream stream = new FileStream(savePdf.FileName, FileMode.Create))
+                {
+                    Document pdfDoc = new Document(PageSize.LETTER, 25, 25, 25, 25);
+                    PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+                    pdfDoc.Open();
+
+                    iTextSharp.text.Image imgLogo = iTextSharp.text.Image.GetInstance(Properties.Resources.LogoNovo, System.Drawing.Imaging.ImageFormat.Png);
+                    imgLogo.ScaleToFit(80, 100);
+                    imgLogo.Alignment = iTextSharp.text.Image.UNDERLYING;
+                    imgLogo.SetAbsolutePosition(pdfDoc.LeftMargin, pdfDoc.Top - 30);
+                    pdfDoc.Add(imgLogo);
+
+                    if (!string.IsNullOrEmpty(imagenSeleccionada))
+                    {
+                        iTextSharp.text.Image imgSeleccionada = iTextSharp.text.Image.GetInstance(imagenSeleccionada);
+                        imgSeleccionada.ScaleToFit(70, 110);
+                        imgSeleccionada.Alignment = iTextSharp.text.Image.UNDERLYING;
+                        float imgWidth = imgSeleccionada.ScaledWidth;
+
+
+                        float xPosition = pdfDoc.PageSize.Width - pdfDoc.RightMargin - imgWidth; // Margen derecho menos el ancho de la imagen
+                        imgSeleccionada.SetAbsolutePosition(xPosition, pdfDoc.Top - 50); // Ajusta la posición vertical según sea necesario
+
+                        pdfDoc.Add(imgSeleccionada);
+                    }
+
+                    using (StringReader sr = new StringReader(paginaHtml_texto))
+                    {
+                        XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+                    }
+                    pdfDoc.Close();
+                    stream.Close();
+                }
             }
         }
         private void ToUpperText()//El upperText para los comboBox esta en comboBox_TextChanged
@@ -284,9 +306,9 @@ namespace NovoCosts.Forms
             {
                 dgvCostos.DataSource = Models.Costos.ListarCostoProducto(IdProducto);
                 DbDatos.OcultarIds(dgvCostos);
-                PersonalizarColumnasCostos(dgvCostos);
+                PersonalizarColumnasCostos(dgvCostos);               
             }
-            CostoProducto = SumarColumna(dgvCostos, "valor_total");
+            ColorearFilas(dgvCostos, "id_tipo_costo");
         }
         private void ListarManoObraProductoPorId()
         {
@@ -296,7 +318,16 @@ namespace NovoCosts.Forms
                 DbDatos.OcultarIds(dgvManoObra);
                 PersonalizarColumnasManoObra();
             }            
-            CostoManoObra = SumarColumna(dgvManoObra, "valor_total");
+        }
+        private void ListarTipoCostoPorId()
+        {
+            if (IdProducto != 0)
+            {
+                dgvTipos.DataSource = TipoCosto.ListarSumadoPorProducto(IdProducto);
+                DbDatos.OcultarIds(dgvTipos);
+                PersonalizarColumnasTipoCosto();
+            }
+            ColorearFilas(dgvTipos, "id_tipo_costo");
         }
         private void ConsultarProductoId(int idProducto)
         {
@@ -415,6 +446,29 @@ namespace NovoCosts.Forms
                 ConfigurarCabeceraColumna(columna, columna.HeaderText);
             }
         }
+        private void PersonalizarColumnasTipoCosto()
+        {
+            foreach (DataGridViewColumn columna in dgvTipos.Columns)
+            {
+                if (!string.IsNullOrEmpty(columna.Name))
+                {
+                    if (columna.Name == "nombre")
+                    {
+                        dgvTipos.Columns["nombre"].HeaderText = "NOMBRE";
+                        dgvTipos.Columns["nombre"].DisplayIndex = 0;
+                    }
+                    else if (columna.Name == "suma_total")
+                    {
+                        dgvTipos.Columns["suma_total"].HeaderText = "TOTAL";
+                        DataGridViewCellStyle estiloCeldaNumerica = new DataGridViewCellStyle();
+                        estiloCeldaNumerica.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                        estiloCeldaNumerica.Format = "N0";
+                        columna.DefaultCellStyle = estiloCeldaNumerica;
+                        dgvTipos.Columns[columna.Name].Width = 80;
+                    }
+                }
+            }
+        }
         private void ConfigurarCabeceraColumna(DataGridViewColumn columna, string nuevoHeaderText)
         {
             string nuevoHeaderTextMayusculas = nuevoHeaderText.ToUpper();
@@ -423,7 +477,25 @@ namespace NovoCosts.Forms
             columna.HeaderCell.Style.Font = new System.Drawing.Font(columna.DataGridView.Font, FontStyle.Bold);
             columna.HeaderCell.Style.Font = new System.Drawing.Font(columna.HeaderCell.Style.Font, FontStyle.Bold);
             columna.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-        }        
+        }
+        private void ColorearFilas(DataGridView dataGridView, string nombreColumnaTipoCosto)
+        {
+            foreach (DataGridViewRow fila in dataGridView.Rows)
+            {                
+                var tipoCosto = Convert.ToInt32(fila.Cells[nombreColumnaTipoCosto].Value);
+
+                if (tipoCosto == 1)                  
+                    fila.DefaultCellStyle.BackColor = Color.LightBlue;                
+                else if (tipoCosto == 2)                  
+                    fila.DefaultCellStyle.BackColor = Color.LightSeaGreen;                
+                else if (tipoCosto == 4)                 
+                    fila.DefaultCellStyle.BackColor = Color.LightSkyBlue;                
+                else if (tipoCosto == 5)                
+                    fila.DefaultCellStyle.BackColor = Color.LightSalmon;                
+                else                                    
+                    fila.DefaultCellStyle.BackColor = Color.White;                
+            }
+        }
 
         //Definir costo, utilidad y precio de fabrica:
         private void calcularCosto()
@@ -432,25 +504,32 @@ namespace NovoCosts.Forms
             CostoManoObra = SumarColumna(dgvManoObra, "valor_total");
             Costo = CostoManoObra + CostoProducto;
             
-            Console.WriteLine("Costo : " + Costo);
+            
             txtCosto.Text = Convert.ToString(Costo);
-            Console.WriteLine("Costo : " + Costo);
-            Console.WriteLine("-----");
         }
         private void calcularPorcentajeGanancia()
         {
             Porcentaje = Convert.ToDecimal(txtPorcentaje.Text) / 100;
-            Console.WriteLine("Porcentaje : " + Porcentaje);
             PrecioFabrica = Costo * (1 + Porcentaje);
-            Console.WriteLine("PrecioFabrica : " + PrecioFabrica);
             Utilidad = PrecioFabrica - Costo;
-            Console.WriteLine("Utilidad : " + Utilidad);
 
             txtUtilidad.Text = Convert.ToString(Utilidad);
             txtPrecioFabrica.Text = Convert.ToString(PrecioFabrica);
-            Console.WriteLine("Costo : " + Costo);
         }
         private decimal SumarColumna(DataGridView dataGridView, string nombreColumna)
+        {
+            decimal suma = 0;
+
+            if (dataGridView.Rows.Count > 0 && dataGridView.Columns.Contains(nombreColumna))
+            {
+                foreach (DataGridViewRow fila in dataGridView.Rows)
+                {
+                    suma += Convert.ToDecimal(fila.Cells[nombreColumna].Value);
+                }
+            }
+            return suma;
+        }
+        private decimal SumarTipoCosto(DataGridView dataGridView, string nombreColumna)
         {
             decimal suma = 0;
 

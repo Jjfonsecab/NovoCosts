@@ -55,14 +55,7 @@ namespace NovoCosts.Models
         {
             return DbDatos.Listar("ObtenerInformacionManoObra");
         }
-        public static DataTable CalcularCostoManoObra(int idProducto)
-        {
-            List<Parametro> parametros = new List<Parametro>
-            {
-                new Parametro("@idProducto", idProducto)
-            };
-            return DbDatos.Listar("SumarCostoPorID", parametros);
-        }
+        
         public static bool EliminarPorIdProductoYTipoManoObra(int idProducto, int idTipoManoObra)
         {
             List<Parametro> parametros = new List<Parametro>
@@ -72,13 +65,5 @@ namespace NovoCosts.Models
             };
             return DbDatos.Ejecutar("ManoObra_EliminarPorIdProductoYTipoManoObra", parametros);
         }        
-        public static bool  ActualizarPorcentaje (int idProducto)
-        {
-            List<Parametro> parametros = new List<Parametro>
-            {
-                new Parametro("@id_producto", idProducto)
-            };
-            return DbDatos.Ejecutar("ActualizarPorcentaje", parametros);
-        }
     }
 }

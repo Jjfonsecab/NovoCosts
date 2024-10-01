@@ -51,5 +51,14 @@ namespace NovoCosts.Models
             };
             return DbDatos.Listar("ObtenerTipoCostoPorId", parametros);
         }
+
+        internal static object ListarSumadoPorProducto(int idProducto)
+        {
+            List<Parametro> parametros = new List<Parametro>
+            {
+                new Parametro("@id_producto", idProducto)
+            };
+            return DbDatos.Listar("ObtenerSumaCostosPorProducto", parametros);
+        }
     }
 }
